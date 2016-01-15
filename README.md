@@ -6,7 +6,7 @@ A new TeX format (like LaTeX, Plain TeX, Lollipop, phyzzx and others) still unde
 
 Este é um novo formato TeX (como LaTeX, Plain TeX, Lollipop, phyzzx e outros) ainda em construção. Ele será parecido com Plain TeX, mas com suporte nativo à caracteres UTF-8 relevantes e ao idioma português. A ideia é fornecer um sistema muito mais simples e rápido que o LaTeX, o qual não precisará de preâmbulos e fornecerá comandos úteis sem precisar importar pacotes ou encher de coisas no preâmbulo.
 
-Para usá-lo, no mmento, pode-se compilá-lo com o make e isso gerará um magitex.fmt. Se este arquivo estiver em seu diretório atual, basta usar "tex \\&magitex [ARQUIVO]" para gerar um arquivo DVI à partir do arquivo-fonte. 
+Para usá-lo, no momento, pode-se compilá-lo com o make e isso gerará um magitex.fmt. Se este arquivo estiver em seu diretório atual, basta usar "tex \\&magitex [ARQUIVO]" para gerar um arquivo DVI à partir do arquivo-fonte. 
 
 Ele ainda está em desenvolvimento. O que já foi implementado:
 
