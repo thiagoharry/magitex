@@ -103,20 +103,11 @@
 % O comando para terminar um documento é \fim:
 \def\fim{\par\vfill\supereject\end}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
-% substituído por código novo (ou não) à medida que o MAgiTeX se       %%%
-% desenvolver                                                          %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% INITEX sets up \mathcode x=x, for x=0..255, except that
-% \mathcode x=x+"7100, for x = `A to `Z and `a to `z;
-% \mathcode x=x+"7000, for x = `0 to `9.
-% The following changes define internal codes as recommended
-% in Appendix C of The TeXbook:
+% Os códigos dos caracteres matemáticos não serão modificados. Como o
+% modo matemático do TeX e LaTeX são em si mesmo uma linguagem própria
+% já muito difundida, não pretendendo realizar nenhuma mudança nem
+% aqui e nem em nenhum outro lugar referente ao modo matemático. Os
+% caracteres definidos terão o mesmo código do Apêndice C do Texbook:
 \mathcode`\^^@="2201 % \cdot
 \mathcode`\^^A="3223 % \downarrow
 \mathcode`\^^B="010B % \alpha
@@ -174,6 +165,14 @@
 \mathcode`\|="026A
 \mathcode`\}="5267
 \mathcode`\^^?="1273 % \smallint
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
+% substituído por código novo (ou não) à medida que o MAgiTeX se       %%%
+% desenvolver                                                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Finally, INITEX sets all \delcode values to -1, except \delcode`.=0
 \delcode`\(="028300
