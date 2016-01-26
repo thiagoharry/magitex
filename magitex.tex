@@ -293,6 +293,7 @@
 \font\tenbf@=cmbx10 % boldface extended
 \font\tentt@=cmtt10 % typewriter
 \font\teni@=cmmi10 % math italic
+\font\tensy@=cmsy10 % math symbols
 % Comandos de estilo de escrita. TODO: Aplicar correção itálica
 % condicionalmente
 \def\italico#1{{\fam4\tenit@ #1\/}}
@@ -506,7 +507,6 @@
 \font\seveni=cmmi7
 \font\fivei=cmmi5
 
-\font\tensy=cmsy10 % math symbols
 \font\sevensy=cmsy7
 \font\fivesy=cmsy5
 
@@ -521,12 +521,12 @@
 % (And those that were \preloaded above can be eliminated.)
 
 \skewchar\teni@='177 \skewchar\seveni='177 \skewchar\fivei='177
-\skewchar\tensy='60 \skewchar\sevensy='60 \skewchar\fivesy='60
+\skewchar\tensy@='60 \skewchar\sevensy='60 \skewchar\fivesy='60
 
 \textfont0=\tenrm@ \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
 \textfont1=\teni@ \scriptfont1=\seveni \scriptscriptfont1=\fivei
 \def\mit{\fam\@ne} \def\oldstyle{\fam\@ne\teni@}
-\textfont2=\tensy \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
+\textfont2=\tensy@ \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
 \def\cal{\fam\tw@}
 \textfont3=\tenex \scriptfont3=\tenex \scriptscriptfont3=\tenex
 \newfam\itfam % \it is family 4
