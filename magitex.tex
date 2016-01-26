@@ -581,7 +581,7 @@
 \textfont\itfam=\tenit@
 \newfam\slfam \def\sl{\fam5\tensl@} % \sl is family 5
 \textfont\slfam=\tensl@
-\newfam\bffam \def\bf{\fam6\tenbf@} % \bf is family 6
+\newfam\bffam  % \bf is family 6
 \textfont\bffam=\tenbf@ \scriptfont\bffam=\sevenbf
 \scriptscriptfont\bffam=\fivebf
 \newfam\ttfam \def\tt{\fam7\tentt@} % \tt is family 7
@@ -733,9 +733,9 @@
 
 \outer\def\beginsection#1\par{\vskip\z@ plus.3\vsize\penalty-250
   \vskip\z@ plus-.3\vsize\bigskip\vskip\parskip
-  \message{#1}\leftline{\bf#1}\nobreak\smallskip\noindent}
+  \message{#1}\leftline{\fam6\tenbf@#1}\nobreak\smallskip\noindent}
 \outer\def\proclaim #1. #2\par{\medbreak
-  \noindent{\bf#1.\enspace}{\sl#2\par}%
+  \noindent{\fam6\tenbf@#1.\enspace}{\sl#2\par}%
   \ifdim\lastskip<\medskipamount \removelastskip\penalty55\medskip\fi}
 
 \def\raggedright{\rightskip\z@ plus2em \spaceskip.3333em \xspaceskip.5em\relax}
