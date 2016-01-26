@@ -292,6 +292,7 @@
 \font\tenrm@=cmr10 % roman text (mudar o nome \tenrm gera problemas)
 \font\tenbf@=cmbx10 % boldface extended
 \font\tentt@=cmtt10 % typewriter
+\font\teni@=cmmi10 % math italic
 % Comandos de estilo de escrita. TODO: Aplicar correção itálica
 % condicionalmente
 \def\italico#1{{\fam4\tenit@ #1\/}}
@@ -502,7 +503,6 @@
 \font\sevenrm=cmr7
 \font\fiverm=cmr5
 
-\font\teni=cmmi10 % math italic
 \font\seveni=cmmi7
 \font\fivei=cmmi5
 
@@ -520,12 +520,12 @@
 % Additional \preloaded fonts can be specified here.
 % (And those that were \preloaded above can be eliminated.)
 
-\skewchar\teni='177 \skewchar\seveni='177 \skewchar\fivei='177
+\skewchar\teni@='177 \skewchar\seveni='177 \skewchar\fivei='177
 \skewchar\tensy='60 \skewchar\sevensy='60 \skewchar\fivesy='60
 
 \textfont0=\tenrm@ \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
-\textfont1=\teni \scriptfont1=\seveni \scriptscriptfont1=\fivei
-\def\mit{\fam\@ne} \def\oldstyle{\fam\@ne\teni}
+\textfont1=\teni@ \scriptfont1=\seveni \scriptscriptfont1=\fivei
+\def\mit{\fam\@ne} \def\oldstyle{\fam\@ne\teni@}
 \textfont2=\tensy \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
 \def\cal{\fam\tw@}
 \textfont3=\tenex \scriptfont3=\tenex \scriptscriptfont3=\tenex
