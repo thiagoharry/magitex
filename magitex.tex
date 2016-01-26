@@ -282,13 +282,23 @@
 \def\MaGiTeX{M\kern-0.15em\lower0.5ex\hbox{A}\kern-0.25emG\lower
         0.5ex\hbox{I}\kern-0.1em\TeX}
 
+% Os nomes internos das fontes em magitex devem ser
+% reservados. Somente projetistas de formatos deveriam lidar com tais
+% modificações
+\defaulthyphenchar=`\- % O caractere de separação silábica deve ser
+                       % setado antes.
+\font\tenit@=cmti10 % text italic
+\font\tensl@=cmsl10 % slanted roman
+\font\tenrm@=cmr10 % roman text (mudar o nome \tenrm gera problemas)
+\font\tenbf@=cmbx10 % boldface extended
+\font\tentt@=cmtt10 % typewriter
 % Comandos de estilo de escrita. TODO: Aplicar correção itálica
 % condicionalmente
-\def\italico#1{{\it #1\/}}
-\def\romano#1{{\rm #1}}
-\def\negrito#1{{\bf #1}}
-\def\inclinado#1{{\sl #1\/}}
-\def\monoespaco#1{{\tt #1}}
+\def\italico#1{{\fam4\tenit@ #1\/}}
+\def\romano#1{{\fam0\tenrm@ #1}}
+\def\negrito#1{{\fam6\tenbf@ #1}}
+\def\inclinado#1{{\fam5\tensl@ #1\/}}
+\def\monoespaco#1{{\fam7\tentt@ #1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -422,7 +432,6 @@
 % \fam=0
 % \mag=1000 % INITEX does this
 % \escapechar=`\\ % INITEX does this
-\defaulthyphenchar=`\-
 \defaultskewchar=-1
 % \endlinechar=`\^^M % INITEX does this
 \newlinechar=-1
@@ -490,7 +499,6 @@
 
 \message{fonts,}
 
-\font\tenrm=cmr10 % roman text
 \font\preloaded=cmr9
 \font\preloaded=cmr8
 \font\sevenrm=cmr7
@@ -519,24 +527,20 @@
 \font\preloaded=cmssi10 % sans serif italic
 \font\preloaded=cmssqi8
 
-\font\tenbf=cmbx10 % boldface extended
 \font\preloaded=cmbx9
 \font\preloaded=cmbx8
 \font\sevenbf=cmbx7
 \font\preloaded=cmbx6
 \font\fivebf=cmbx5
 
-\font\tentt=cmtt10 % typewriter
 \font\preloaded=cmtt9
 \font\preloaded=cmtt8
 
 \font\preloaded=cmsltt10 % slanted typewriter
 
-\font\tensl=cmsl10 % slanted roman
 \font\preloaded=cmsl9
 \font\preloaded=cmsl8
 
-\font\tenit=cmti10 % text italic
 \font\preloaded=cmti9
 \font\preloaded=cmti8
 \font\preloaded=cmti7
@@ -567,22 +571,22 @@
 \skewchar\teni='177 \skewchar\seveni='177 \skewchar\fivei='177
 \skewchar\tensy='60 \skewchar\sevensy='60 \skewchar\fivesy='60
 
-\textfont0=\tenrm \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
-\def\rm{\fam\z@\tenrm}
+\textfont0=\tenrm@ \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
+\def\rm{\fam\z@\tenrm@}
 \textfont1=\teni \scriptfont1=\seveni \scriptscriptfont1=\fivei
 \def\mit{\fam\@ne} \def\oldstyle{\fam\@ne\teni}
 \textfont2=\tensy \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
 \def\cal{\fam\tw@}
 \textfont3=\tenex \scriptfont3=\tenex \scriptscriptfont3=\tenex
-\newfam\itfam \def\it{\fam\itfam\tenit} % \it is family 4
-\textfont\itfam=\tenit
-\newfam\slfam \def\sl{\fam\slfam\tensl} % \sl is family 5
-\textfont\slfam=\tensl
-\newfam\bffam \def\bf{\fam\bffam\tenbf} % \bf is family 6
-\textfont\bffam=\tenbf \scriptfont\bffam=\sevenbf
+\newfam\itfam \def\it{\fam4\tenit@} % \it is family 4
+\textfont\itfam=\tenit@
+\newfam\slfam \def\sl{\fam5\tensl@} % \sl is family 5
+\textfont\slfam=\tensl@
+\newfam\bffam \def\bf{\fam6\tenbf@} % \bf is family 6
+\textfont\bffam=\tenbf@ \scriptfont\bffam=\sevenbf
 \scriptscriptfont\bffam=\fivebf
-\newfam\ttfam \def\tt{\fam\ttfam\tentt} % \tt is family 7
-\textfont\ttfam=\tentt
+\newfam\ttfam \def\tt{\fam7\tentt@} % \tt is family 7
+\textfont\ttfam=\tentt@
 
 
 
@@ -1228,7 +1232,7 @@
 
 \countdef\pageno=0 \pageno=1 % first page is number 1
 \newtoks\headline \headline={\hfil} % headline is normally blank
-\newtoks\footline \footline={\hss\tenrm\folio\hss}
+\newtoks\footline \footline={\hss\tenrm@\folio\hss}
   % footline is normally a centered page number in font \tenrm
 \newif\ifr@ggedbottom
 \def\raggedbottom{\topskip 10\p@ plus60\p@ \r@ggedbottomtrue}
@@ -1319,7 +1323,7 @@
   \showboxbreadth\maxdimen\showboxdepth\maxdimen}
 \def\tracingall{\tracingonline\@ne\loggingall}
 
-\def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize\maxdimen\tenrm
+\def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize\maxdimen\tenrm@
   \pretolerance\m@ne\tolerance\m@ne\hbadness0\showboxdepth0\ #1}}
 
 
