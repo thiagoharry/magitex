@@ -295,6 +295,14 @@
 \font\teni@=cmmi10 % math italic
 \font\tensy@=cmsy10 % math symbols
 \font\tenex@=cmex10 % math extension
+\font\sevenrm@=cmr7 % Usado em subscritos e sobrescritos
+\font\fiverm@=cmr5 % Usado em subsubscritos e sobresobrescritos
+\font\seveni@=cmmi7 % Sobrescritos e subscritos matemáticos
+\font\fivei@=cmmi5 % Subsubscritos itálicos
+\font\sevensy@=cmsy7 % Símbolos subscritos
+\font\fivesy@=cmsy5 % Símbolos subsubscritos
+\font\sevenbf@=cmbx7 % Subscritos negritos
+\font\fivebf@=cmbx5 % Subsubscritos negritos
 % Comandos de estilo de escrita. TODO: Aplicar correção itálica
 % condicionalmente
 \def\italico#1{{\fam4\tenit@ #1\/}}
@@ -500,32 +508,18 @@
 % For example, if another set of macros says "\font\ninerm=cmr9",
 % TeX will not have to reload the font metric information for cmr9.
 
-\message{fonts,}
-
-\font\sevenrm=cmr7
-\font\fiverm=cmr5
-
-\font\seveni=cmmi7
-\font\fivei=cmmi5
-
-\font\sevensy=cmsy7
-\font\fivesy=cmsy5
-
-\font\sevenbf=cmbx7
-\font\fivebf=cmbx5
-
 
 \message{more fonts,}
 % Additional \preloaded fonts can be specified here.
 % (And those that were \preloaded above can be eliminated.)
 
-\skewchar\teni@='177 \skewchar\seveni='177 \skewchar\fivei='177
-\skewchar\tensy@='60 \skewchar\sevensy='60 \skewchar\fivesy='60
+\skewchar\teni@='177 \skewchar\seveni@='177 \skewchar\fivei@='177
+\skewchar\tensy@='60 \skewchar\sevensy@='60 \skewchar\fivesy@='60
 
-\textfont0=\tenrm@ \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
-\textfont1=\teni@ \scriptfont1=\seveni \scriptscriptfont1=\fivei
+\textfont0=\tenrm@ \scriptfont0=\sevenrm@ \scriptscriptfont0=\fiverm@
+\textfont1=\teni@ \scriptfont1=\seveni@ \scriptscriptfont1=\fivei@
 \def\mit{\fam\@ne} \def\oldstyle{\fam\@ne\teni@}
-\textfont2=\tensy@ \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
+\textfont2=\tensy@ \scriptfont2=\sevensy@ \scriptscriptfont2=\fivesy@
 \def\cal{\fam\tw@}
 \textfont3=\tenex@ \scriptfont3=\tenex@ \scriptscriptfont3=\tenex@
 \newfam\itfam % \it is family 4
@@ -533,8 +527,8 @@
 \newfam\slfam % \sl is family 5
 \textfont\slfam=\tensl@
 \newfam\bffam  % \bf is family 6
-\textfont\bffam=\tenbf@ \scriptfont\bffam=\sevenbf
-\scriptscriptfont\bffam=\fivebf
+\textfont\bffam=\tenbf@ \scriptfont\bffam=\sevenbf@
+\scriptscriptfont\bffam=\fivebf@
 \newfam\ttfam  % \tt is family 7
 \textfont\ttfam=\tentt@
 
