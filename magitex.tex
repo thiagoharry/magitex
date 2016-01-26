@@ -84,7 +84,7 @@
 \def^^c3#1{\ifx#1^^80{\accent18A}% À
         \else\ifx#1^^81{\accent19A}% Á
         \else\ifx#1^^82{\accent94A}% Â
-        $\else\ifx#1^^83\~A%
+        \else\ifx#1^^83{\accent"7EA}% Ã
         \else\ifx#1^^84\"A\else\ifx#1^^85\AA{}\else\ifx#1^^86\AE{}\else\ifx#1^^87%
   \c C{}\else\ifx#1^^88{\accent18E}%
   \else\ifx#1^^89{\accent19E}% É
@@ -94,17 +94,19 @@
   \else\ifx#1^^8d{\accent19I}% Í
   \else\ifx#1^^8e{\accent94I}% Î
   \else\ifx#1^^8f\"I%
-  \else\ifx#1^^91\~N\else\ifx#1^^92{\accent18O}% Ò
+  \else\ifx#1^^91{\accent"7EN}% Ñ
+  \else\ifx#1^^92{\accent18O}% Ò
   \else\ifx#1^^93{\accent19O}% Ó
   \else\ifx#1^^94{\accent94O}% Ô
-  \else\ifx#1^^95\~O\else\ifx#1^^96\"O\else\ifx#1^^98\O{}\else\ifx#1^^99{\accent18U}% Ù
+  \else\ifx#1^^95{\accent"7EO}% Õ
+  \else\ifx#1^^96\"O\else\ifx#1^^98\O{}\else\ifx#1^^99{\accent18U}% Ù
   \else\ifx#1^^9a{\accent19U}% Ú
   \else\ifx#1^^9b{\accent94U}% Û
   \else\ifx#1^^9c\"U\else\ifx#1^^9d{\accent19Y}% Ý
   \else\ifx#1^^a0{\accent18a}% à
   \else\ifx#1^^a1{\accent19a}% á
   \else\ifx#1^^a2{\accent94a}% â
-  \else\ifx#1^^a3\~a%
+  \else\ifx#1^^a3{\accent"7Ea}% ã
   \else\ifx#1^^a4\"a\else\ifx#1^^a5\aa{}\else\ifx#1^^a6\ae{}%
   \else\ifx#1^^a7\c c\else\ifx#1^^a8{\accent18e}% è
   \else\ifx#1^^a9{\accent19e}% é
@@ -112,10 +114,12 @@
   \else\ifx#1^^ab\"e\else\ifx#1^^ac{\accent18\i}% ì
   \else\ifx#1^^ad{\accent19\i}%
   \else\ifx#1^^ae{\accent94\i}% î
-  \else\ifx#1^^af\"\i{}\else\ifx#1^^b1\~n\else\ifx#1^^b2{\accent18o}% ò
+  \else\ifx#1^^af\"\i{}\else\ifx#1^^b1{\accent"7En}% ñ
+  \else\ifx#1^^b2{\accent18o}% ò
   \else\ifx#1^^b3{\accent19o}% ó
   \else\ifx#1^^b4{\accent94o}% ô
-  \else\ifx#1^^b5\~o\else\ifx#1^^b6\"o\else\ifx#1^^b8\o{}%
+  \else\ifx#1^^b5{\accent"7Eo}%
+  \else\ifx#1^^b6\"o\else\ifx#1^^b8\o{}%
   \else\ifx#1^^b9{\accent18u}% ù
   \else\ifx#1^^ba{\accent19u}% ú
   \else\ifx#1^^bb{\accent94u}% û
@@ -764,7 +768,6 @@
 \def\=#1{{\accent22 #1}}
 \def\.#1{{\accent95 #1}}
 \def\H#1{{\accent"7D #1}}
-\def\~#1{{\accent"7E #1}}
 \def\"#1{{\accent"7F #1}}
 \def\t#1{{\edef\next{\the\font}\the\textfont1\accent"7F\next#1}}
 
