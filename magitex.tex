@@ -584,7 +584,7 @@
 \newfam\bffam  % \bf is family 6
 \textfont\bffam=\tenbf@ \scriptfont\bffam=\sevenbf
 \scriptscriptfont\bffam=\fivebf
-\newfam\ttfam \def\tt{\fam7\tentt@} % \tt is family 7
+\newfam\ttfam  % \tt is family 7
 \textfont\ttfam=\tentt@
 
 
@@ -739,7 +739,7 @@
   \ifdim\lastskip<\medskipamount \removelastskip\penalty55\medskip\fi}
 
 \def\raggedright{\rightskip\z@ plus2em \spaceskip.3333em \xspaceskip.5em\relax}
-\def\ttraggedright{\tt\rightskip\z@ plus2em\relax} % for use with \tt only
+\def\ttraggedright{\fam7\tentt@\rightskip\z@ plus2em\relax} % for use with \tt only
 
 \chardef\%=`\%
 \chardef\&=`\&
