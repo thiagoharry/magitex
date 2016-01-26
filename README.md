@@ -12,4 +12,6 @@ Ele ainda está em desenvolvimento. O que já foi implementado:
 
 * Suporte à UTF-8
 * Separação silábica em português, ainda primitiva e com poucos padrões
+* Comandos de formatação \negrito{...}, \italico{...}, \inclinado{...}, \romano{...} e \monoespaco{...}
+* Comandos de modo matemático idênticos aos do Plain TeX
 * O comando \fim, que é usado para finalizar o documento.
