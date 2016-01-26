@@ -83,36 +83,43 @@
 \catcode`\^^c3=13
 \def^^c3#1{\ifx#1^^80{\accent18A}% À
         \else\ifx#1^^81{\accent19A}% Á
-        \else\ifx#1^^82\^A\else\ifx#1^^83\~A%
-  \else\ifx#1^^84\"A\else\ifx#1^^85\AA{}\else\ifx#1^^86\AE{}\else\ifx#1^^87%
+        \else\ifx#1^^82{\accent94A}% Â
+        $\else\ifx#1^^83\~A%
+        \else\ifx#1^^84\"A\else\ifx#1^^85\AA{}\else\ifx#1^^86\AE{}\else\ifx#1^^87%
   \c C{}\else\ifx#1^^88{\accent18E}%
   \else\ifx#1^^89{\accent19E}% É
-  \else\ifx#1^^8a\^E\else\ifx#1^^8b%
+  \else\ifx#1^^8a{\accent94E}% Ê
+  \else\ifx#1^^8b%
   \"E\else\ifx#1^^8c{\accent18I}% Ì
   \else\ifx#1^^8d{\accent19I}% Í
-  \else\ifx#1^^8e\^I\else\ifx#1^^8f\"I%
+  \else\ifx#1^^8e{\accent94I}% Î
+  \else\ifx#1^^8f\"I%
   \else\ifx#1^^91\~N\else\ifx#1^^92{\accent18O}% Ò
   \else\ifx#1^^93{\accent19O}% Ó
-  \else\ifx#1^^94\^O%
+  \else\ifx#1^^94{\accent94O}% Ô
   \else\ifx#1^^95\~O\else\ifx#1^^96\"O\else\ifx#1^^98\O{}\else\ifx#1^^99{\accent18U}% Ù
   \else\ifx#1^^9a{\accent19U}% Ú
-  \else\ifx#1^^9b\^U\else\ifx#1^^9c\"U\else\ifx#1^^9d{\accent19Y}% Ý
+  \else\ifx#1^^9b{\accent94U}% Û
+  \else\ifx#1^^9c\"U\else\ifx#1^^9d{\accent19Y}% Ý
   \else\ifx#1^^a0{\accent18a}% à
   \else\ifx#1^^a1{\accent19a}% á
-  \else\ifx#1^^a2\^a\else\ifx#1^^a3\~a%
+  \else\ifx#1^^a2{\accent94a}% â
+  \else\ifx#1^^a3\~a%
   \else\ifx#1^^a4\"a\else\ifx#1^^a5\aa{}\else\ifx#1^^a6\ae{}%
   \else\ifx#1^^a7\c c\else\ifx#1^^a8{\accent18e}% è
   \else\ifx#1^^a9{\accent19e}% é
-  \else\ifx#1^^aa\^e%
+  \else\ifx#1^^aa{\accent94e}% ê
   \else\ifx#1^^ab\"e\else\ifx#1^^ac{\accent18\i}% ì
   \else\ifx#1^^ad{\accent19\i}%
-  \else\ifx#1^^ae\^\i{}%
+  \else\ifx#1^^ae{\accent94\i}% î
   \else\ifx#1^^af\"\i{}\else\ifx#1^^b1\~n\else\ifx#1^^b2{\accent18o}% ò
   \else\ifx#1^^b3{\accent19o}% ó
-  \else\ifx#1^^b4\^o\else\ifx#1^^b5\~o\else\ifx#1^^b6\"o\else\ifx#1^^b8\o{}%
+  \else\ifx#1^^b4{\accent94o}% ô
+  \else\ifx#1^^b5\~o\else\ifx#1^^b6\"o\else\ifx#1^^b8\o{}%
   \else\ifx#1^^b9{\accent18u}% ù
   \else\ifx#1^^ba{\accent19u}% ú
-  \else\ifx#1^^bb\^u\else\ifx#1^^bc\"u%
+  \else\ifx#1^^bb{\accent94u}% û
+  \else\ifx#1^^bc\"u%
   \else\ifx#1^^bd{\accent19y}% ý
   \else\ifx#1^^bf\"Y\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
@@ -755,7 +762,6 @@
 \def\v#1{{\accent20 #1}} \let\^^_=\v
 \def\u#1{{\accent21 #1}} \let\^^S=\u
 \def\=#1{{\accent22 #1}}
-\def\^#1{{\accent94 #1}} \let\^^D=\^
 \def\.#1{{\accent95 #1}}
 \def\H#1{{\accent"7D #1}}
 \def\~#1{{\accent"7E #1}}
