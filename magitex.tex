@@ -311,6 +311,15 @@
 \def\inclinado#1{{\fam5\tensl@ #1\/}}
 \def\monoespaco#1{{\fam7\tentt@ #1}}
 
+% Comandos de justificação e texto:
+\def\alinhaesquerda{\rightskip 0em plus 2em \leftskip 0pt \spaceskip.3333em%
+     \xspaceskip.5em\relax}
+\def\alinhadireita{\leftskip 0em plus 2em \rightskip0pt \spaceskip.3333em%
+     \xspaceskip.5em\relax}
+\def\alinhacentro{\rightskip 0em plus 2em \leftskip 0em plus 2em%
+                  \spaceskip.3333em \xspaceskip.5em\relax}
+\def\alinhanormal{\leftskip0pt\rightskip0pt\spaceskip0pt\xspaceskip0pt\relax}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -613,11 +622,6 @@
 \def\bigbreak{\par\ifdim\lastskip<\bigskipamount
   \removelastskip\penalty-200\bigskip\fi}
 
-\def\line{\hbox to\hsize}
-\def\leftline#1{\line{#1\hss}}
-\def\rightline#1{\line{\hss#1}}
-\def\centerline#1{\line{\hss#1\hss}}
-
 \def\rlap#1{\hbox to\z@{#1\hss}}
 \def\llap#1{\hbox to\z@{\hss#1}}
 
@@ -678,7 +682,7 @@
 
 \outer\def\beginsection#1\par{\vskip\z@ plus.3\vsize\penalty-250
   \vskip\z@ plus-.3\vsize\bigskip\vskip\parskip
-  \message{#1}\leftline{\fam6\tenbf@#1}\nobreak\smallskip\noindent}
+  \message{#1}\line{{\fam6\tenbf@#1}\hss}\nobreak\smallskip\noindent}
 \outer\def\proclaim #1. #2\par{\medbreak
   \noindent{\fam6\tenbf@#1.\enspace}{\fam5\tensl@#2\par}%
   \ifdim\lastskip<\medskipamount \removelastskip\penalty55\medskip\fi}
@@ -1235,10 +1239,10 @@
   \ifnum\outputpenalty>-\@MM \else\dosupereject\fi}
 \def\pagebody{\vbox to\vsize{\boxmaxdepth\maxdepth \pagecontents}}
 \def\makeheadline{\vbox to\z@{\vskip-22.5\p@
-  \line{\vbox to8.5\p@{}\the\headline}\vss}\nointerlineskip}
-\def\makefootline{\baselineskip24\p@\lineskiplimit\z@\line{\the\footline}}
+  \hbox to\hsize{\vbox to8.5\p@{}\the\headline}\vss}\nointerlineskip}
+\def\makefootline{\baselineskip24\p@\lineskiplimit\z@\hbox to\hsize{\the\footline}}
 \def\dosupereject{\ifnum\insertpenalties>\z@ % something is being held over
-  \line{}\kern-\topskip\nobreak\vfill\supereject\fi}
+  \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi}
 
 \def\pagecontents{\ifvoid\topins\else\unvbox\topins\fi
   \dimen@=\dp\@cclv \unvbox\@cclv % open up \box255
