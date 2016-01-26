@@ -277,6 +277,10 @@
 % Comandos de espaçamento
 \def\espacinho{\kern .16667em } % Equivalente ao \thinspace do Plain TeX
 
+% Comandos \TeX e \MaGiTeX:
+\def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX}
+\def\MaGiTeX{M\kern-0.15em\lower0.5ex\hbox{A}\kern-0.25emG\lower
+        0.5ex\hbox{I}\kern-0.1em\TeX}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -769,7 +773,6 @@
 \def\copyright{{\ooalign{\hfil\raise.07ex\hbox{c}\hfil\crcr\Orb}}}
 
 \def\dots{\relax\ifmmode\ldots\else$\m@th\ldots\,$\fi}
-\def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX}
 
 \def\v#1{{\accent20 #1}} \let\^^_=\v
 \def\u#1{{\accent21 #1}} \let\^^S=\u
