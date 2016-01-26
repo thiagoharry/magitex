@@ -572,7 +572,6 @@
 \skewchar\tensy='60 \skewchar\sevensy='60 \skewchar\fivesy='60
 
 \textfont0=\tenrm@ \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
-\def\rm{\fam\z@\tenrm@}
 \textfont1=\teni \scriptfont1=\seveni \scriptscriptfont1=\fivei
 \def\mit{\fam\@ne} \def\oldstyle{\fam\@ne\teni}
 \textfont2=\tensy \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
@@ -1139,42 +1138,42 @@
 \def\buildrel#1\over#2{\mathrel{\mathop{\kern\z@#2}\limits^{#1}}}
 \def\doteq{\buildrel\textstyle.\over=}
 
-\def\log{\mathop{\rm log}\nolimits}
-\def\lg{\mathop{\rm lg}\nolimits}
-\def\ln{\mathop{\rm ln}\nolimits}
-\def\lim{\mathop{\rm lim}}
-\def\limsup{\mathop{\rm lim\,sup}}
-\def\liminf{\mathop{\rm lim\,inf}}
-\def\sin{\mathop{\rm sin}\nolimits}
-\def\arcsin{\mathop{\rm arcsin}\nolimits}
-\def\sinh{\mathop{\rm sinh}\nolimits}
-\def\cos{\mathop{\rm cos}\nolimits}
-\def\arccos{\mathop{\rm arccos}\nolimits}
-\def\cosh{\mathop{\rm cosh}\nolimits}
-\def\tan{\mathop{\rm tan}\nolimits}
-\def\arctan{\mathop{\rm arctan}\nolimits}
-\def\tanh{\mathop{\rm tanh}\nolimits}
-\def\cot{\mathop{\rm cot}\nolimits}
-\def\coth{\mathop{\rm coth}\nolimits}
-\def\sec{\mathop{\rm sec}\nolimits}
-\def\csc{\mathop{\rm csc}\nolimits}
-\def\max{\mathop{\rm max}}
-\def\min{\mathop{\rm min}}
-\def\sup{\mathop{\rm sup}}
-\def\inf{\mathop{\rm inf}}
-\def\arg{\mathop{\rm arg}\nolimits}
-\def\ker{\mathop{\rm ker}\nolimits}
-\def\dim{\mathop{\rm dim}\nolimits}
-\def\hom{\mathop{\rm hom}\nolimits}
-\def\det{\mathop{\rm det}}
-\def\exp{\mathop{\rm exp}\nolimits}
-\def\Pr{\mathop{\rm Pr}}
-\def\gcd{\mathop{\rm gcd}}
-\def\deg{\mathop{\rm deg}\nolimits}
+\def\log{\mathop{\fam0\tenrm@ log}\nolimits}
+\def\lg{\mathop{\fam0\tenrm@ lg}\nolimits}
+\def\ln{\mathop{\fam0\tenrm@ ln}\nolimits}
+\def\lim{\mathop{\fam0\tenrm@ lim}}
+\def\limsup{\mathop{\fam0\tenrm@ lim\,sup}}
+\def\liminf{\mathop{\fam0\tenrm@ lim\,inf}}
+\def\sin{\mathop{\fam0\tenrm@ sin}\nolimits}
+\def\arcsin{\mathop{\fam0\tenrm@ arcsin}\nolimits}
+\def\sinh{\mathop{\fam0\tenrm@ sinh}\nolimits}
+\def\cos{\mathop{\fam0\tenrm@ cos}\nolimits}
+\def\arccos{\mathop{\fam0\tenrm@ arccos}\nolimits}
+\def\cosh{\mathop{\fam0\tenrm@ cosh}\nolimits}
+\def\tan{\mathop{\fam0\tenrm@ tan}\nolimits}
+\def\arctan{\mathop{\fam0\tenrm@ arctan}\nolimits}
+\def\tanh{\mathop{\fam0\tenrm@ tanh}\nolimits}
+\def\cot{\mathop{\fam0\tenrm@ cot}\nolimits}
+\def\coth{\mathop{\fam0\tenrm@ coth}\nolimits}
+\def\sec{\mathop{\fam0\tenrm@ sec}\nolimits}
+\def\csc{\mathop{\fam0\tenrm@ csc}\nolimits}
+\def\max{\mathop{\fam0\tenrm@ max}}
+\def\min{\mathop{\fam0\tenrm@ min}}
+\def\sup{\mathop{\fam0\tenrm@ sup}}
+\def\inf{\mathop{\fam0\tenrm@ inf}}
+\def\arg{\mathop{\fam0\tenrm@ arg}\nolimits}
+\def\ker{\mathop{\fam0\tenrm@ ker}\nolimits}
+\def\dim{\mathop{\fam0\tenrm@ dim}\nolimits}
+\def\hom{\mathop{\fam0\tenrm@ hom}\nolimits}
+\def\det{\mathop{\fam0\tenrm@ det}}
+\def\exp{\mathop{\fam0\tenrm@ exp}\nolimits}
+\def\Pr{\mathop{\fam0\tenrm@ Pr}}
+\def\gcd{\mathop{\fam0\tenrm@ gcd}}
+\def\deg{\mathop{\fam0\tenrm@ deg}\nolimits}
 
 \def\bmod{\nonscript\mskip-\medmuskip\mkern5mu
-  \mathbin{\rm mod}\penalty900\mkern5mu\nonscript\mskip-\medmuskip}
-\def\pmod#1{\allowbreak\mkern18mu({\rm mod}\,\,#1)}
+  \mathbin{\fam0\tenrm@ mod}\penalty900\mkern5mu\nonscript\mskip-\medmuskip}
+\def\pmod#1{\allowbreak\mkern18mu({\fam0\tenrm@ mod}\,\,#1)}
 
 
 
@@ -1329,7 +1328,7 @@
 
 
 
-\normalbaselines\rm % select roman font
+\normalbaselines\fam0\tenrm@ % select roman font
 \nonfrenchspacing % punctuation affects the spacing
 \catcode`@=12 % at signs are no longer letters
 
