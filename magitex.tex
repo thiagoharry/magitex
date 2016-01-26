@@ -81,22 +81,31 @@
 % cedilhas. Em seguida, definimos o ``comando'' ^^c3 para olhar pelo
 % caractere seguinte e, baseado nele, inserir o caractere adequado.
 \catcode`\^^c3=13
-\def^^c3#1{\ifx#1^^80\`A\else\ifx#1^^81\'A\else\ifx#1^^82\^A\else\ifx#1^^83\~A%
+\def^^c3#1{\ifx#1^^80\`A\else\ifx#1^^81{\accent19A}% Á
+        \else\ifx#1^^82\^A\else\ifx#1^^83\~A%
   \else\ifx#1^^84\"A\else\ifx#1^^85\AA{}\else\ifx#1^^86\AE{}\else\ifx#1^^87%
-  \c C{}\else\ifx#1^^88\`E\else\ifx#1^^89\'E\else\ifx#1^^8a\^E\else\ifx#1^^8b%
-  \"E\else\ifx#1^^8c\`I\else\ifx#1^^8d\'I\else\ifx#1^^8e\^I\else\ifx#1^^8f\"I%
-  \else\ifx#1^^91\~N\else\ifx#1^^92\`O\else\ifx#1^^93\'O\else\ifx#1^^94\^O%
+  \c C{}\else\ifx#1^^88\`E\else\ifx#1^^89{\accent19E}% É
+  \else\ifx#1^^8a\^E\else\ifx#1^^8b%
+  \"E\else\ifx#1^^8c\`I\else\ifx#1^^8d{\accent19I}% Í
+  \else\ifx#1^^8e\^I\else\ifx#1^^8f\"I%
+  \else\ifx#1^^91\~N\else\ifx#1^^92\`O\else\ifx#1^^93{\accent19O}% Ó
+  \else\ifx#1^^94\^O%
   \else\ifx#1^^95\~O\else\ifx#1^^96\"O\else\ifx#1^^98\O{}\else\ifx#1^^99\`U%
-  \else\ifx#1^^9a\'U\else\ifx#1^^9b\^U\else\ifx#1^^9c\"U\else\ifx#1^^9d\'Y%
-  \else\ifx#1^^a0\`a\else\ifx#1^^a1\'a\else\ifx#1^^a2\^a\else\ifx#1^^a3\~a%
+  \else\ifx#1^^9a{\accent19U}% Ú
+  \else\ifx#1^^9b\^U\else\ifx#1^^9c\"U\else\ifx#1^^9d{\accent19Y}% Ý
+  \else\ifx#1^^a0\`a\else\ifx#1^^a1{\accent19a}% á
+  \else\ifx#1^^a2\^a\else\ifx#1^^a3\~a%
   \else\ifx#1^^a4\"a\else\ifx#1^^a5\aa{}\else\ifx#1^^a6\ae{}%
-  \else\ifx#1^^a7\c
-  c\else\ifx#1^^a8\`e\else\ifx#1^^a9\'e\else\ifx#1^^aa\^e%
-  \else\ifx#1^^ab\"e\else\ifx#1^^ac\`i\else\ifx#1^^ad\'\i{}\else\ifx#1^^ae\^\i{}%
-  \else\ifx#1^^af\"\i{}\else\ifx#1^^b1\~n\else\ifx#1^^b2\`o\else\ifx#1^^b3\'o%
+  \else\ifx#1^^a7\c c\else\ifx#1^^a8\`e\else\ifx#1^^a9{\accent19e}% é
+  \else\ifx#1^^aa\^e%
+  \else\ifx#1^^ab\"e\else\ifx#1^^ac\`i\else\ifx#1^^ad{\accent19\i}%
+  \else\ifx#1^^ae\^\i{}%
+  \else\ifx#1^^af\"\i{}\else\ifx#1^^b1\~n\else\ifx#1^^b2\`o\else\ifx#1^^b3{\accent19o}% ó
   \else\ifx#1^^b4\^o\else\ifx#1^^b5\~o\else\ifx#1^^b6\"o\else\ifx#1^^b8\o{}%
-  \else\ifx#1^^b9\`u\else\ifx#1^^ba\'u\else\ifx#1^^bb\^u\else\ifx#1^^bc\"u%
-  \else\ifx#1^^bd\'y\else\ifx#1^^bf\"Y\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \else\ifx#1^^b9\`u\else\ifx#1^^ba{\accent19u}% ú
+  \else\ifx#1^^bb\^u\else\ifx#1^^bc\"u%
+  \else\ifx#1^^bd{\accent19y}% ý
+  \else\ifx#1^^bf\"Y\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
@@ -107,7 +116,11 @@
 % modo matemático do TeX e LaTeX são em si mesmo uma linguagem própria
 % já muito difundida, não pretendendo realizar nenhuma mudança nem
 % aqui e nem em nenhum outro lugar referente ao modo matemático. Os
-% caracteres definidos terão o mesmo código do Apêndice C do Texbook:
+% caracteres definidos terão o mesmo código do Apêndice C do
+% Texbook. Tal \mathcode é usado para definir o comportamento da
+% tipografia de tais símbolos, a sua fonte e sua posição
+% específica. Alguns caracteres como ' também passam a ser
+% considerados caracteres especiais.
 \mathcode`\^^@="2201 % \cdot
 \mathcode`\^^A="3223 % \downarrow
 \mathcode`\^^B="010B % \alpha
@@ -166,15 +179,9 @@
 \mathcode`\}="5267
 \mathcode`\^^?="1273 % \smallint
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
-% substituído por código novo (ou não) à medida que o MAgiTeX se       %%%
-% desenvolver                                                          %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Finally, INITEX sets all \delcode values to -1, except \delcode`.=0
+% Assim como Plain TeX, usamos exatamente as mesmas escolhas de
+% caracteres como delimitadores em modo matemático. Tem também
+% o \delcode'.=0 que já está implícito pelo INITEX:
 \delcode`\(="028300
 \delcode`\)="029301
 \delcode`\[="05B302
@@ -184,7 +191,73 @@
 \delcode`\/="02F30E
 \delcode`\|="26A30C
 \delcode`\\="26E30F
-% N.B. { and } should NOT get delcodes; otherwise parameter grouping fails!
+
+% magitex assume que registradores devem ser tratados apenas por
+% escritores de formato e pessoas que sabem bem o que estão fazendo. E
+% que cada formato deve documentar quais registradores usa. Comandos
+% do Plain TeX como \newcount podem ser abusados e podem exaurir o
+% espaço de registradores. Então será proposital não
+% declararmos \newcount, \newskip e outros comandos para dar nomes à
+% registradores sem especificar os números.
+
+% Os registradores de contagem de 0 à 9 são reservados. O 0 é o número
+% da página. Os demais só são usados em formatos que de alguma forma
+% precisam numerar sub-páginas e não serão usados. Depois deles nós
+% temos:
+\countdef\interdisplaylinepenalty=10 \interdisplaylinepenalty=100
+\countdef\interfootnotelinepenalty=11 \interfootnotelinepenalty=100
+\countdef\mscount=12
+\countdef\count@=13
+
+% Não há nenhum registrador de dimensão alocado pelas primitivas
+% TeX. Desta forma, temos todos à nossa disposição:
+\dimendef\maxdimen=0 \maxdimen=16383.99999pt % A dimensão máxima
+\dimendef\normallineskiplimit=1 \normallineskiplimit=0pt
+\dimendef\p@=2 \p@=1pt % this saves macro space and time
+\dimendef\z@=3 \z@=0pt % can be used both for 0pt and 0
+\dimendef\jot=4 \jot=3pt
+\dimendef\p@renwd=5
+\dimendef\dimen@=6
+\dimendef\dimen@i=7
+\dimendef\dimen@ii=8
+
+
+% Os registradores de skip. Nenhum é reservado e todos estão à
+% disposição:
+\skipdef\hideskip=0 \hideskip=-1000pt plus 1fill % negative but can grow
+\skipdef\centering=1 \centering=0pt plus 1000pt minus 1000pt
+\skipdef\z@skip=2 \z@skip=0pt plus0pt minus0pt
+\skipdef\smallskipamount=3 \smallskipamount=3pt plus 1pt minus 1pt
+\skipdef\medskipamount=4 \medskipamount=6pt plus 2pt minus 2pt
+\skipdef\bigskipamount=5 \bigskipamount=12pt plus 4pt minus 4pt
+\skipdef\normalbaselineskip=6 \normalbaselineskip=12pt
+\skipdef\normallineskip=7 \normallineskip=1pt
+\skipdef\skip@=8
+
+% Nenhum registrador de muskip é usado
+
+% Registradores de caixa estão todos à disposição, exceto o de número
+% 255:
+\def\voidb@x{0} % permanently void box register
+\def\strutbox{1} \setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt
+  width\z@}
+\def\tabs{2}
+\def\tabsyet{3}
+\def\tabsdone{4}
+\def\rootbox{5}
+
+% Comandos de espaçamento
+\def\espacinho{\kern .16667em } % Equivalente ao \thinspace do Plain TeX
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
+% substituído por código novo (ou não) à medida que o MAgiTeX se       %%%
+% desenvolver                                                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 % To make the plain macros more efficient in time and space,
 % several constant values are declared here as control sequences.
@@ -201,56 +274,6 @@
 
 % Allocation of registers
 
-% Here are macros for the automatic allocation of \count, \box, \dimen,
-% \skip, \muskip, and \toks registers, as well as \read and \write
-% stream numbers, \fam codes, \language codes, and \insert numbers.
-
-\message{registers,}
-
-% When a register is used only temporarily, it need not be allocated;
-% grouping can be used, making the value previously in the register return
-% after the close of the group.  The main use of these macros is for
-% registers that are defined by one macro and used by others, possibly at
-% different nesting levels.  All such registers should be defined through
-% these macros; otherwise conflicts may occur, especially when two or more
-% macro packages are being used at once.
-
-% The following counters are reserved:
-%   0 to 9  page numbering
-%       10  count allocation
-%       11  dimen allocation
-%       12  skip allocation
-%       13  muskip allocation
-%       14  box allocation
-%       15  toks allocation
-%       16  read file allocation
-%       17  write file allocation
-%       18  math family allocation
-%       19  language allocation
-%       20  insert allocation
-%       21  the most recently allocated number
-%       22  constant -1
-% New counters are allocated starting with 23, 24, etc.  Other registers are
-% allocated starting with 10.  This leaves 0 through 9 for the user to play
-% with safely, except that counts 0 to 9 are considered to be the page and
-% subpage numbers (since they are displayed during output). In this scheme,
-% \count 10 always contains the number of the highest-numbered counter that
-% has been allocated, \count 14 the highest-numbered box, etc.
-% Inserts are given numbers 254, 253, etc., since they require a \count,
-% \dimen, \skip, and \box all with the same number; \count 20 contains the
-% lowest-numbered insert that has been allocated. Of course, \box255 is
-% reserved for \output; \count255, \dimen255, and \skip255 can be used freely.
-
-% It is recommended that macro designers always use
-% \global assignments with respect to registers numbered 1, 3, 5, 7, 9, and
-% always non-\global assignments with respect to registers 0, 2, 4, 6, 8, 255.
-% This will prevent ``save stack buildup'' that might otherwise occur.
-
-\count10=22 % allocates \count registers 23, 24, ...
-\count11=9 % allocates \dimen registers 10, 11, ...
-\count12=9 % allocates \skip registers 10, 11, ...
-\count13=9 % allocates \muskip registers 10, 11, ...
-\count14=9 % allocates \box registers 10, 11, ...
 \count15=9 % allocates \toks registers 10, 11, ...
 \count16=-1 % allocates input streams 0, 1, ...
 \count17=-1 % allocates output streams 0, 1, ...
@@ -265,11 +288,6 @@
 % Here are abbreviations for the names of scratch registers
 % that don't need to be allocated.
 
-\countdef\count@=255
-\dimendef\dimen@=0
-\dimendef\dimen@i=1 % global only
-\dimendef\dimen@ii=2
-\skipdef\skip@=0
 \toksdef\toks@=0
 
 % Now, we define \newcount, \newbox, etc. so that you can say \newcount\foo
@@ -277,12 +295,6 @@
 % To find out which counter \foo is, you can look at \allocationnumber.
 % Since there's no \boxdef command, \chardef is used to define a \newbox,
 % \newinsert, \newfam, and so on.
-
-\outer\def\newcount{\alloc@0\count\countdef\insc@unt}
-\outer\def\newdimen{\alloc@1\dimen\dimendef\insc@unt}
-\outer\def\newskip{\alloc@2\skip\skipdef\insc@unt}
-\outer\def\newmuskip{\alloc@3\muskip\muskipdef\@cclvi}
-\outer\def\newbox{\alloc@4\box\chardef\insc@unt}
 \let\newtoks=\relax % we do this to allow plain.tex to be read in twice
 \outer\def\newhelp#1#2{\newtoks#1#1\expandafter{\csname#2\endcsname}}
 \outer\def\newtoks{\alloc@5\toks\toksdef\@cclvi}
@@ -307,13 +319,7 @@
   \else\errmessage{No room for a new #3}\fi}
 
 % Here are some examples of allocation.
-\newdimen\maxdimen \maxdimen=16383.99999pt % the largest legal <dimen>
-\newskip\hideskip \hideskip=-1000pt plus 1fill % negative but can grow
-\newskip\centering \centering=0pt plus 1000pt minus 1000pt
-\newdimen\p@ \p@=1pt % this saves macro space and time
-\newdimen\z@ \z@=0pt % can be used both for 0pt and 0
-\newskip\z@skip \z@skip=0pt plus0pt minus0pt
-\newbox\voidb@x % permanently void box register
+
 
 % And here's a different sort of allocation:
 % For example, \newif\iffoo creates \footrue, \foofalse to go with \iffoo.
@@ -431,15 +437,6 @@
 \thickmuskip=5mu plus 5mu
 
 % We also define special registers that function like parameters:
-\newskip\smallskipamount \smallskipamount=3pt plus 1pt minus 1pt
-\newskip\medskipamount \medskipamount=6pt plus 2pt minus 2pt
-\newskip\bigskipamount \bigskipamount=12pt plus 4pt minus 4pt
-\newskip\normalbaselineskip \normalbaselineskip=12pt
-\newskip\normallineskip \normallineskip=1pt
-\newdimen\normallineskiplimit \normallineskiplimit=0pt
-\newdimen\jot \jot=3pt
-\newcount\interdisplaylinepenalty \interdisplaylinepenalty=100
-\newcount\interfootnotelinepenalty \interfootnotelinepenalty=100
 
 % Definitions for preloaded fonts
 
@@ -563,7 +560,6 @@
 \def\^^M{\ } % control <return> = control <space>
 \def\^^I{\ } % same for <tab>
 
-\def\lq{`} \def\rq{'}
 \def\lbrack{[} \def\rbrack{]}
 
 \let\endgraf=\par \let\endline=\cr
@@ -586,7 +582,6 @@
 \def\iterate{\body \let\next\iterate \else\let\next\relax\fi \next}
 \let\repeat=\fi % this makes \loop...\if...\repeat skippable
 
-\def\thinspace{\kern .16667em }
 \def\negthinspace{\kern-.16667em }
 \def\enspace{\kern.5em }
 
@@ -642,19 +637,17 @@
 \def\underbar#1{$\setbox\z@\hbox{#1}\dp\z@\z@
   \m@th \underline{\box\z@}$}
 
-\newbox\strutbox
-\setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt width\z@}
+
 \def\strut{\relax\ifmmode\copy\strutbox\else\unhcopy\strutbox\fi}
 
 \def\hidewidth{\hskip\hideskip} % for alignment entries that can stick out
 \def\ialign{\everycr{}\tabskip\z@skip\halign} % initialized \halign
-\newcount\mscount
 \def\multispan#1{\omit \mscount#1\relax
   \loop\ifnum\mscount>\@ne \sp@n\repeat}
 \def\sp@n{\span\omit\advance\mscount\m@ne}
 
 \newif\ifus@ \newif\if@cr
-\newbox\tabs \newbox\tabsyet \newbox\tabsdone
+
 
 \def\cleartabs{\global\setbox\tabsyet\null \setbox\tabs\null}
 \def\settabs{\setbox\tabs\null \futurelet\next\sett@b}
@@ -751,7 +744,6 @@
 \def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX}
 
 \def\`#1{{\accent18 #1}}
-\def\'#1{{\accent19 #1}}
 \def\v#1{{\accent20 #1}} \let\^^_=\v
 \def\u#1{{\accent21 #1}} \let\^^S=\u
 \def\=#1{{\accent22 #1}}
@@ -787,7 +779,7 @@
 \def\>{\mskip\medmuskip}
 \def\;{\mskip\thickmuskip}
 \def\!{\mskip-\thinmuskip}
-\def\*{\discretionary{\thinspace\the\textfont2\char2}{}{}}
+\def\*{\discretionary{\espacinho\the\textfont2\char2}{}{}}
 {\catcode`\'=13 \gdef'{^\bgroup\prim@s}}
 \def\prim@s{\prime\futurelet\next\pr@m@s}
 \def\pr@m@s{\ifx'\next\let\nxt\pr@@@s \else\ifx^\next\let\nxt\pr@@@t
@@ -1072,7 +1064,6 @@
 
 \def\mathpalette#1#2{\mathchoice{#1\displaystyle{#2}}%
   {#1\textstyle{#2}}{#1\scriptstyle{#2}}{#1\scriptscriptstyle{#2}}}
-\newbox\rootbox
 \def\root#1\of{\setbox\rootbox
   \hbox{$\m@th\scriptscriptstyle{#1}$}\mathpalette\r@@t}
 \def\r@@t#1#2{\setbox\z@\hbox{$\m@th#1\sqrt{#2}$}\dimen@\ht\z@
@@ -1155,11 +1146,10 @@
       \mathstrut\crcr\noalign{\kern-\baselineskip}
       #1\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}}}\,}
 \def\pmatrix#1{\left(\matrix{#1}\right)}
-\newdimen\p@renwd
 \setbox0=\hbox{\tenex B} \p@renwd=\wd0 % width of the big left (
 \def\bordermatrix#1{\begingroup \m@th
   \setbox\z@\vbox{\def\cr{\crcr\noalign{\kern2\p@\global\let\cr\endline}}%
-    \ialign{$##$\hfil\kern2\p@\kern\p@renwd&\thinspace\hfil$##$\hfil
+    \ialign{$##$\hfil\kern2\p@\kern\p@renwd&\espacinho\hfil$##$\hfil
       &&\quad\hfil$##$\hfil\crcr
       \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
       #1\crcr\omit\strut\cr}}%
@@ -1281,7 +1271,6 @@
 \message{hyphenation}
 
 \lefthyphenmin=2 \righthyphenmin=3 % disallow x- or -xx breaks
-%\input hyphen
 
 
 
