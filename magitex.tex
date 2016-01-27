@@ -80,6 +80,8 @@
 % caractere é o prefixo de tudo quanto é letra acentuada e Cs com
 % cedilhas. Em seguida, definimos o ``comando'' ^^c3 para olhar pelo
 % caractere seguinte e, baseado nele, inserir o caractere adequado.
+
+%TODO: ç e Ç sem \c
 \catcode`\^^c3=13
 \def^^c3#1{\ifx#1^^80{\accent18A}% À
         \else\ifx#1^^81{\accent19A}% Á
@@ -319,6 +321,9 @@
 \def\alinhacentro{\rightskip 0em plus 2em \leftskip 0em plus 2em%
                   \spaceskip.3333em \xspaceskip.5em\relax}
 \def\alinhanormal{\leftskip0pt\rightskip0pt\spaceskip0pt\xspaceskip0pt\relax}
+
+% Magitex não interage com usuário via prompt em caso de erro:
+\nonstopmode
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
