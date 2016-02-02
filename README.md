@@ -16,4 +16,5 @@ Ele ainda está em desenvolvimento. O que já foi implementado:
 * Comandos de alinhamento de texto \alinhaesquerda, \alinhadireita, \alinhacentro e \alinhanormal
 * Comandos de modo matemático idênticos aos do Plain TeX
 * Comandos de conversão maiúsculas/minúsculas: \maiusculo{...} e \minusculo{...}
+* Comandos de datas: \ano, \mes e \dia.
 * O comando \fim, que é usado para finalizar o documento.
