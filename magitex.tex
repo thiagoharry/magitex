@@ -139,6 +139,12 @@
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
+% Permitindo inserir acentos soltos, sem caracteres por meio
+% de \~, \^, etc. Estes comandos são diferentes do Plain TeX, pois não
+% receberão argumentos:
+\def\~{\accent"7E\ }\def\"{\accent"7F\ }\def\'{\accent19\ }
+\def\^{\accent94\ }\def\`{\accent18\ }
+
 % O comando para terminar um documento é \fim:
 \def\fim{\par\vfill\supereject\end}
 
