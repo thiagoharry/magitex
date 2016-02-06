@@ -311,13 +311,14 @@
 \font\fivesy@=cmsy5 % Símbolos subsubscritos
 \font\sevenbf@=cmbx7 % Subscritos negritos
 \font\fivebf@=cmbx5 % Subsubscritos negritos
-% Comandos de estilo de escrita. TODO: Aplicar correção itálica
-% condicionalmente
-\def\italico#1{{\fam4\tenit@ #1\/}}
-\def\romano#1{{\fam0\tenrm@ #1}}
-\def\negrito#1{{\fam6\tenbf@ #1}}
-\def\inclinado#1{{\fam5\tensl@ #1\/}}
-\def\monoespaco#1{{\fam7\tentt@ #1}}
+
+% Comandos de estilo de escrita. Colocando correção itálica
+% automaticamente se necessário.
+\long\def\italico#1#2{{\fam4\tenit@ #1\ifx#2.#2\else\ifx#2,#2\else\/#2\fi\fi}}
+\long\def\romano#1{{\fam0\tenrm@ #1}}
+\long\def\negrito#1{{\fam6\tenbf@ #1}}
+\long\def\inclinado#1#2{{\fam5\tensl@ #1\ifx#2.#2\else\ifx#2,#2\else\/#2\fi\fi}}
+\long\def\monoespaco#1{{\fam7\tentt@ #1}}
 
 % Comandos de justificação e texto:
 \def\alinhaesquerda{\rightskip 0em plus 2em \leftskip 0pt \spaceskip.3333em%
