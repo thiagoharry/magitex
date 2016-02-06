@@ -88,7 +88,7 @@
         \else\ifx#1^^82{\accent94A}% Â
         \else\ifx#1^^83{\accent"7EA}% Ã
         \else\ifx#1^^84{\accent"7FA}% Ä
-        \else\ifx#1^^85\AA{}\else\ifx#1^^86\AE{}\else\ifx#1^^87%
+        \else\ifx#1^^85\AA{}\else\ifx#1^^86\char"1D\else\ifx#1^^87%
   \c C{}\else\ifx#1^^88{\accent18E}%
   \else\ifx#1^^89{\accent19E}% É
   \else\ifx#1^^8a{\accent94E}% Ê
@@ -113,7 +113,7 @@
   \else\ifx#1^^a2{\accent94a}% â
   \else\ifx#1^^a3{\accent"7Ea}% ã
   \else\ifx#1^^a4{\accent"7Fa}% ä
-  \else\ifx#1^^a5\aa{}\else\ifx#1^^a6\ae{}%
+  \else\ifx#1^^a5\aa{}\else\ifx#1^^a6\char"1A%
   \else\ifx#1^^a7\c c\else\ifx#1^^a8{\accent18e}% è
   \else\ifx#1^^a9{\accent19e}% é
   \else\ifx#1^^aa{\accent94e}% ê
@@ -718,10 +718,8 @@
 \chardef\#=`\#
 \chardef\$=`\$
 \chardef\ss="19
-\chardef\ae="1A
 \chardef\oe="1B
 \chardef\o="1C
-\chardef\AE="1D
 \chardef\OE="1E
 \chardef\O="1F
 \chardef\i="10 \chardef\j="11 % dotless letters
