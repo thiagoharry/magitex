@@ -88,8 +88,10 @@
         \else\ifx#1^^82{\accent94A}% Â
         \else\ifx#1^^83{\accent"7EA}% Ã
         \else\ifx#1^^84{\accent"7FA}% Ä
-        \else\ifx#1^^85\AA{}\else\ifx#1^^86\char"1D\else\ifx#1^^87%
-  \c C{}\else\ifx#1^^88{\accent18E}%
+        \else\ifx#1^^85\AA{}
+  \else\ifx#1^^86\char"1D
+  \else\ifx#1^^87\c C{} % TODO
+  \else\ifx#1^^88{\accent18E}%
   \else\ifx#1^^89{\accent19E}% É
   \else\ifx#1^^8a{\accent94E}% Ê
   \else\ifx#1^^8b{\accent"7FE}% Ë
@@ -103,7 +105,8 @@
   \else\ifx#1^^94{\accent94O}% Ô
   \else\ifx#1^^95{\accent"7EO}% Õ
   \else\ifx#1^^96{\accent"7FO}% Ö
-  \else\ifx#1^^98\O{}\else\ifx#1^^99{\accent18U}% Ù
+  \else\ifx#1^^98\char"1F% \O
+  \else\ifx#1^^99{\accent18U}% Ù
   \else\ifx#1^^9a{\accent19U}% Ú
   \else\ifx#1^^9b{\accent94U}% Û
   \else\ifx#1^^9c{\accent"7FU}% Ü
@@ -128,7 +131,7 @@
   \else\ifx#1^^b4{\accent94o}% ô
   \else\ifx#1^^b5{\accent"7Eo}% õ
   \else\ifx#1^^b6{\accent"7Fo}% ö
-  \else\ifx#1^^b8\o{}%
+  \else\ifx#1^^b8\char"1C% \o
   \else\ifx#1^^b9{\accent18u}% ù
   \else\ifx#1^^ba{\accent19u}% ú
   \else\ifx#1^^bb{\accent94u}% û
@@ -240,6 +243,7 @@
 % da página. Os demais só são usados em formatos que de alguma forma
 % precisam numerar sub-páginas e não serão usados. Depois deles nós
 % temos:
+\countdef\pageno@=0 \pageno@=1 % O número de página
 \countdef\interdisplaylinepenalty=10 \interdisplaylinepenalty=100
 \countdef\interfootnotelinepenalty=11 \interfootnotelinepenalty=100
 \countdef\mscount=12
@@ -318,6 +322,7 @@
 
 % Comandos de estilo de escrita. Colocando correção itálica
 % automaticamente se necessário.
+% TODO: #2 precisa ser mesmo opcional abaixo:
 \long\def\italico#1#2{{\fam4\tenit@ #1\ifx#2.#2\else\ifx#2,#2\else\/#2\fi\fi}}
 \long\def\romano#1{{\fam0\tenrm@ #1}}
 \long\def\negrito#1{{\fam6\tenbf@ #1}}
@@ -347,6 +352,9 @@
 
 % Inserção de novos arquivos:
 \def\insere#1{\input #1}
+
+% O número da página:
+\def\pagina{\the\pageno@}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -719,9 +727,7 @@
 \chardef\$=`\$
 \chardef\ss="19
 \chardef\oe="1B
-\chardef\o="1C
 \chardef\OE="1E
-\chardef\O="1F
 \chardef\i="10 \chardef\j="11 % dotless letters
 \def\aa{\accent23a}
 \def\l{\char32l}
@@ -1199,14 +1205,13 @@
 
 \message{output routines,}
 
-\countdef\pageno=0 \pageno=1 % first page is number 1
 \newif\ifr@ggedbottom
 \def\raggedbottom{\topskip 10\p@ plus60\p@ \r@ggedbottomtrue}
 \def\normalbottom{\topskip 10\p@ \r@ggedbottomfalse} % undoes \raggedbottom
-\def\folio{\ifnum\pageno<\z@ \romannumeral-\pageno \else\number\pageno \fi}
+\def\folio{\ifnum\pageno@<\z@ \romannumeral-\pageno@ \else\number\pageno@ \fi}
 \def\nopagenumbers{\footline{\hfil}} % blank out the footline
-\def\advancepageno{\ifnum\pageno<\z@ \global\advance\pageno\m@ne
-  \else\global\advance\pageno\@ne \fi} % increase |pageno|
+\def\advancepageno{\ifnum\pageno@<\z@ \global\advance\pageno@\m@ne
+  \else\global\advance\pageno@\@ne \fi} % increase |pageno|
 
 \newinsert\footins
 \def\footnote#1{\let\@sf\empty % parameter #2 (the text) is read later
