@@ -282,6 +282,10 @@
 \def\tabsdone{4}
 \def\rootbox{5}
 
+% Agora reservamos os registradores de sequências de tokens:
+\toksdef\headline=0 \headline={\hfil} % Cabeçalho padrão em branco
+\toksdef\footline=1 \footline={\hss\tenrm@\folio\hss} % Rodapé padrão
+
 % Comandos de espaçamento
 \def\espacinho{\kern .16667em } % Equivalente ao \thinspace do Plain TeX
 
@@ -379,16 +383,13 @@
 % Here are abbreviations for the names of scratch registers
 % that don't need to be allocated.
 
-\toksdef\toks@=0
+
 
 % Now, we define \newcount, \newbox, etc. so that you can say \newcount\foo
 % and \foo will be defined (with \countdef) to be the next counter.
 % To find out which counter \foo is, you can look at \allocationnumber.
 % Since there's no \boxdef command, \chardef is used to define a \newbox,
 % \newinsert, \newfam, and so on.
-\let\newtoks=\relax % we do this to allow plain.tex to be read in twice
-\outer\def\newhelp#1#2{\newtoks#1#1\expandafter{\csname#2\endcsname}}
-\outer\def\newtoks{\alloc@5\toks\toksdef\@cclvi}
 \outer\def\newread{\alloc@6\read\chardef\sixt@@n}
 \outer\def\newwrite{\alloc@7\write\chardef\sixt@@n}
 \outer\def\newfam{\alloc@8\fam\chardef\sixt@@n}
@@ -1200,9 +1201,6 @@
 \message{output routines,}
 
 \countdef\pageno=0 \pageno=1 % first page is number 1
-\newtoks\headline \headline={\hfil} % headline is normally blank
-\newtoks\footline \footline={\hss\tenrm@\folio\hss}
-  % footline is normally a centered page number in font \tenrm
 \newif\ifr@ggedbottom
 \def\raggedbottom{\topskip 10\p@ plus60\p@ \r@ggedbottomtrue}
 \def\normalbottom{\topskip 10\p@ \r@ggedbottomfalse} % undoes \raggedbottom
