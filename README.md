@@ -17,4 +17,6 @@ Ele ainda está em desenvolvimento. O que já foi implementado:
 * Comandos de modo matemático idênticos aos do Plain TeX
 * Comandos de conversão maiúsculas/minúsculas: \maiusculo{...} e \minusculo{...}
 * Comandos de datas: \ano, \mes e \dia.
+* Comando \pagina para inserir o número da página atual.
+* Comando \insere{ARQUIVO} para inserir o cnteúdo de arquivo.
 * O comando \fim, que é usado para finalizar o documento.
