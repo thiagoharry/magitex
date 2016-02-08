@@ -297,7 +297,6 @@
 \def\espacinho{\vskip\smallskipamount}
 \def\espaco{\vskip\medskipamount}
 \def\espacao{\vskip\bigskipamount}
-
 \def\espacoh#1{\hskip#1}
 \def\espacov#1{\vskip#1}
 
@@ -395,7 +394,6 @@
 \countdef\allocationnumber=21 % the most recent allocation
 \countdef\m@ne=22 \m@ne=-1 % a handy constant
 
-
 % Now, we define \newcount, \newbox, etc. so that you can say \newcount\foo
 % and \foo will be defined (with \countdef) to be the next counter.
 % To find out which counter \foo is, you can look at \allocationnumber.
@@ -410,9 +408,6 @@
   \global\chardef#1=\allocationnumber}
 \def\ch@ck#1#2#3{\ifnum\count1#1<#2%
   \else\errmessage{No room for a new #3}\fi}
-
-% Here are some examples of allocation.
-
 
 % And here's a different sort of allocation:
 % For example, \newif\iffoo creates \footrue, \foofalse to go with \iffoo.
@@ -1260,9 +1255,6 @@
 
 \def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize\maxdimen\tenrm@
   \pretolerance\m@ne\tolerance\m@ne\hbadness0\showboxdepth0\ #1}}
-
-
-
 
 \fam0\tenrm@ % select roman font
 \catcode`@=12 % at signs are no longer letters
