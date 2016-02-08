@@ -256,14 +256,13 @@
 % Não há nenhum registrador de dimensão alocado pelas primitivas
 % TeX. Desta forma, temos todos à nossa disposição:
 \dimendef\maxdimen=0 \maxdimen=16383.99999pt % A dimensão máxima
-\dimendef\normallineskiplimit=1 \normallineskiplimit=0pt
-\dimendef\p@=2 \p@=1pt % this saves macro space and time
-\dimendef\z@=3 \z@=0pt % can be used both for 0pt and 0
-\dimendef\jot=4 \jot=3pt
-\dimendef\p@renwd=5
-\dimendef\dimen@=6
-\dimendef\dimen@i=7
-\dimendef\dimen@ii=8
+\dimendef\p@=1 \p@=1pt % this saves macro space and time
+\dimendef\z@=2 \z@=0pt % can be used both for 0pt and 0
+\dimendef\jot=3 \jot=3pt
+\dimendef\p@renwd=4
+\dimendef\dimen@=5
+\dimendef\dimen@i=6
+\dimendef\dimen@ii=7
 
 
 % Os registradores de skip. Nenhum é reservado e todos estão à
@@ -274,9 +273,7 @@
 \skipdef\smallskipamount=3 \smallskipamount=3pt plus 1pt minus 1pt
 \skipdef\medskipamount=4 \medskipamount=6pt plus 2pt minus 2pt
 \skipdef\bigskipamount=5 \bigskipamount=12pt plus 4pt minus 4pt
-\skipdef\normalbaselineskip=6 \normalbaselineskip=12pt
-\skipdef\normallineskip=7 \normallineskip=1pt
-\skipdef\skip@=8
+\skipdef\skip@=6
 
 % Nenhum registrador de muskip é usado
 
@@ -368,6 +365,11 @@
 
 % Gera uma linha horizontal:
 \def\linha{{\hrule}}
+
+% Constantes usadas:
+\lineskip1pt % Distância garantida entre palavras se limite for atingido
+\baselineskip12pt % Distância ideal entre linhas 
+\lineskiplimit0pt % Distância mínima entre palavras de linhas diferentes
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -586,9 +588,6 @@
 
 % Macros for setting ordinary text
 \message{macros,}
-
-\def\normalbaselines{\lineskip\normallineskip
-  \baselineskip\normalbaselineskip \lineskiplimit\normallineskiplimit}
 
 \def\^^M{\ } % control <return> = control <space>
 \def\^^I{\ } % same for <tab>
@@ -1155,9 +1154,11 @@
 
 
 
-\def\cases#1{\left\{\,\vcenter{\normalbaselines\m@th
+\def\cases#1{\left\{\,\vcenter{\lineskip1pt
+  \baselineskip12pt \lineskiplimit0pt\m@th
     \ialign{$##\hfil$&\quad##\hfil\crcr#1\crcr}}\right.}
-\def\matrix#1{\null\,\vcenter{\normalbaselines\m@th
+\def\matrix#1{\null\,\vcenter{\lineskip1pt
+  \baselineskip12pt \lineskiplimit0pt\m@th
     \ialign{\hfil$##$\hfil&&\quad\hfil$##$\hfil\crcr
       \mathstrut\crcr\noalign{\kern-\baselineskip}
       #1\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}}}\,}
@@ -1186,7 +1187,7 @@
 \newif\ifdt@p
 \def\displ@y{\global\dt@ptrue\openup\jot\m@th
   \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000\p@
-      \vskip-\lineskiplimit \vskip\normallineskiplimit \fi
+      \vskip-\lineskiplimit \vskip0pt \fi
       \else \penalty\interdisplaylinepenalty \fi}}}
 \def\@lign{\tabskip\z@skip\everycr{}} % restore inside \displ@y
 \def\displaylines#1{\displ@y \tabskip\z@skip
@@ -1296,7 +1297,7 @@
 
 
 
-\normalbaselines\fam0\tenrm@ % select roman font
+\fam0\tenrm@ % select roman font
 \catcode`@=12 % at signs are no longer letters
 
 \dump
