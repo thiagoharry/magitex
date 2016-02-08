@@ -387,16 +387,13 @@
 
 % Allocation of registers
 
-\count15=9 % allocates \toks registers 10, 11, ...
 \count16=-1 % allocates input streams 0, 1, ...
 \count17=-1 % allocates output streams 0, 1, ...
-\count18=3 % allocates math families 4, 5, ...
 \count19=0 % allocates \language codes 1, 2, ...
 \count20=255 % allocates insertions 254, 253, ...
 \countdef\insc@unt=20 % the insertion counter
 \countdef\allocationnumber=21 % the most recent allocation
 \countdef\m@ne=22 \m@ne=-1 % a handy constant
-\def\wlog{\immediate\write\m@ne} % write on log file (only)
 
 % Here are abbreviations for the names of scratch registers
 % that don't need to be allocated.
@@ -408,20 +405,17 @@
 % To find out which counter \foo is, you can look at \allocationnumber.
 % Since there's no \boxdef command, \chardef is used to define a \newbox,
 % \newinsert, \newfam, and so on.
-\outer\def\newlanguage{\alloc@9\language\chardef256}
 \def\alloc@#1#2#3#4#5{\global\advance\count1#1by1
   \ch@ck#1#4#2% make sure there's still room
   \allocationnumber=\count1#1%
-  \global#3#5=\allocationnumber
-  \wlog{\string#5=\string#2\the\allocationnumber}}
+  \global#3#5=\allocationnumber}
 \outer\def\newinsert#1{\global\advance\insc@unt by\m@ne
   \ch@ck0\insc@unt\count
   \ch@ck1\insc@unt\dimen
   \ch@ck2\insc@unt\skip
   \ch@ck4\insc@unt\box
   \allocationnumber=\insc@unt
-  \global\chardef#1=\allocationnumber
-  \wlog{\string#1=\string\insert\the\allocationnumber}}
+  \global\chardef#1=\allocationnumber}
 \def\ch@ck#1#2#3{\ifnum\count1#1<#2%
   \else\errmessage{No room for a new #3}\fi}
 
