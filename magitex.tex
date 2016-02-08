@@ -12,6 +12,7 @@
 \catcode`\_=8
 \catcode`\^^I=10
 \catcode`\~=13
+\def~{\penalty10000 \ }
 
 % Assim como na definição do Plain TeX, vamos reservar o @ para atuar
 % temporariamente como letra e assim podermos reservar comandos
@@ -384,13 +385,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% To make the plain macros more efficient in time and space,
-% several constant values are declared here as control sequences.
-% If they were changed, anything could happen; so they are private symbols.
-\mathchardef\@m=1000
-\mathchardef\@M=10000
-\mathchardef\@MM=20000
-
 % Allocation of registers
 
 \count15=9 % allocates \toks registers 10, 11, ...
@@ -622,17 +616,16 @@
 \def\hgl@{\leavevmode \count@\spacefactor \vrule width\z@
   \nobreak\hskip\skip@ \spacefactor\count@}
 
-\def~{\penalty\@M \ } % tie
 \def\slash{/\penalty\exhyphenpenalty} % a `/' that acts like a `-'
 
-\def\break{\penalty-\@M}
-\def\nobreak{\penalty \@M}
+\def\break{\penalty-10000}
+\def\nobreak{\penalty 10000}
 \def\allowbreak{\penalty \z@}
 
 \def\filbreak{\par\vfil\penalty-200\vfilneg}
 \def\goodbreak{\par\penalty-500 }
 \def\eject{\par\break}
-\def\supereject{\par\penalty-\@MM}
+\def\supereject{\par\penalty-20000}
 
 \def\removelastskip{\ifdim\lastskip=\z@\else\vskip-\lastskip\fi}
 \def\smallbreak{\par\ifdim\lastskip<\smallskipamount
@@ -1211,7 +1204,7 @@
 \def\vfootnote#1{\insert\footins\bgroup
   \interlinepenalty\interfootnotelinepenalty
   \splittopskip\ht\strutbox % top baseline for broken footnotes
-  \splitmaxdepth\dp\strutbox \floatingpenalty\@MM
+  \splitmaxdepth\dp\strutbox \floatingpenalty20000
   \leftskip\z@skip \rightskip\z@skip \spaceskip\z@skip \xspaceskip\z@skip
   \textindent{#1}\footstrut\futurelet\next\fo@t}
 \def\fo@t{\ifcat\bgroup\noexpand\next \let\next\f@@t
@@ -1250,7 +1243,7 @@
 \output{\plainoutput}
 \def\plainoutput{\shipout\vbox{\makeheadline\pagebody\makefootline}%
   \advancepageno
-  \ifnum\outputpenalty>-\@MM \else\dosupereject\fi}
+  \ifnum\outputpenalty>-20000 \else\dosupereject\fi}
 \def\pagebody{\vbox to\vsize{\boxmaxdepth\maxdepth \pagecontents}}
 \def\makeheadline{\vbox to\z@{\vskip-22.5\p@
   \hbox to\hsize{\vbox to8.5\p@{}\the\headline}\vss}\prevdepth-1000pt}
