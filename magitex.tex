@@ -293,7 +293,13 @@
 \toksdef\footline=1 \footline={\hss\tenrm@\folio\hss} % Rodapé padrão
 
 % Comandos de espaçamento
-\def\espacinho{\kern .16667em } % Equivalente ao \thinspace do Plain TeX
+\def\espacito{\kern .16667em } % Equivalente ao \thinspace do Plain TeX
+\def\espacinho{\vskip\smallskipamount}
+\def\espaco{\vskip\medskipamount}
+\def\espacao{\vskip\bigskipamount}
+
+\def\espacoh#1{\hskip#1}
+\def\espacov#1{\vskip#1}
 
 % Comandos \TeX e \MaGiTeX:
 \def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX}
@@ -619,9 +625,6 @@
 \def\quad{\hskip1em\relax}
 \def\qquad{\hskip2em\relax}
 
-\def\smallskip{\vskip\smallskipamount}
-\def\medskip{\vskip\medskipamount}
-\def\bigskip{\vskip\bigskipamount}
 
 \def\nointerlineskip{\prevdepth-1000\p@}
 \def\offinterlineskip{\baselineskip-1000\p@
