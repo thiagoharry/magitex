@@ -22,8 +22,10 @@
 
 % Usamos as mesmas configurações do fator de espaço que o Plain TeX. O
 % espaço após o ')' é igual ao espaço do que vem antes dele, e o mesmo
-% ocorre com aspas e fechamento de colchetes.
-\sfcode`\)=0 \sfcode`\'=0 \sfcode`\]=0
+% ocorre com aspas e fechamento de colchetes. Adotamos por padrão as
+% convenções do \nonfrenchspacing
+\sfcode`\)=0 \sfcode`\'=0 \sfcode`\]=0 \sfcode`\.3000 \sfcode`\?3000
+\sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500 \sfcode`\,1250
 
 % O Plain TeX não faz modificações na tabela padrão de conversão de
 % caracteres maiúsculos e minúsculos. Mas aqui é necessário
@@ -584,11 +586,6 @@
 
 % Macros for setting ordinary text
 \message{macros,}
-
-\def\frenchspacing{\sfcode`\.\@m \sfcode`\?\@m \sfcode`\!\@m
-  \sfcode`\:\@m \sfcode`\;\@m \sfcode`\,\@m}
-\def\nonfrenchspacing{\sfcode`\.3000\sfcode`\?3000\sfcode`\!3000%
-  \sfcode`\:2000\sfcode`\;1500\sfcode`\,1250 }
 
 \def\normalbaselines{\lineskip\normallineskip
   \baselineskip\normalbaselineskip \lineskiplimit\normallineskiplimit}
@@ -1300,7 +1297,6 @@
 
 
 \normalbaselines\fam0\tenrm@ % select roman font
-\nonfrenchspacing % punctuation affects the spacing
 \catcode`@=12 % at signs are no longer letters
 
 \dump
