@@ -83,61 +83,63 @@
 
 %TODO: ç e Ç sem \c
 \catcode`\^^c3=13
-\def^^c3#1{\ifx#1^^80{\accent18A}% À
-        \else\ifx#1^^81{\accent19A}% Á
-        \else\ifx#1^^82{\accent94A}% Â
-        \else\ifx#1^^83{\accent"7EA}% Ã
-        \else\ifx#1^^84{\accent"7FA}% Ä
-        \else\ifx#1^^85\AA{}
-  \else\ifx#1^^86\char"1D
-  \else\ifx#1^^87\c C{} % TODO
-  \else\ifx#1^^88{\accent18E}%
-  \else\ifx#1^^89{\accent19E}% É
-  \else\ifx#1^^8a{\accent94E}% Ê
-  \else\ifx#1^^8b{\accent"7FE}% Ë
-  \else\ifx#1^^8c{\accent18I}% Ì
-  \else\ifx#1^^8d{\accent19I}% Í
-  \else\ifx#1^^8e{\accent94I}% Î
-  \else\ifx#1^^8f{\accent"7FI}% Ï
-  \else\ifx#1^^91{\accent"7EN}% Ñ
-  \else\ifx#1^^92{\accent18O}% Ò
-  \else\ifx#1^^93{\accent19O}% Ó
-  \else\ifx#1^^94{\accent94O}% Ô
-  \else\ifx#1^^95{\accent"7EO}% Õ
-  \else\ifx#1^^96{\accent"7FO}% Ö
-  \else\ifx#1^^98\char"1F% \O
-  \else\ifx#1^^99{\accent18U}% Ù
-  \else\ifx#1^^9a{\accent19U}% Ú
-  \else\ifx#1^^9b{\accent94U}% Û
-  \else\ifx#1^^9c{\accent"7FU}% Ü
-  \else\ifx#1^^9d{\accent19Y}% Ý
-  \else\ifx#1^^a0{\accent18a}% à
-  \else\ifx#1^^a1{\accent19a}% á
-  \else\ifx#1^^a2{\accent94a}% â
-  \else\ifx#1^^a3{\accent"7Ea}% ã
-  \else\ifx#1^^a4{\accent"7Fa}% ä
-  \else\ifx#1^^a5\aa{}\else\ifx#1^^a6\char"1A%
-  \else\ifx#1^^a7\c c\else\ifx#1^^a8{\accent18e}% è
-  \else\ifx#1^^a9{\accent19e}% é
-  \else\ifx#1^^aa{\accent94e}% ê
-  \else\ifx#1^^ab{\accent"7Fe}% ë
-  \else\ifx#1^^ac{\accent18\i}% ì
-  \else\ifx#1^^ad{\accent19\i}% í
-  \else\ifx#1^^ae{\accent94\i}% î
-  \else\ifx#1^^af{\accent"7F\i}% ï
-  \else\ifx#1^^b1{\accent"7En}% ñ
-  \else\ifx#1^^b2{\accent18o}% ò
-  \else\ifx#1^^b3{\accent19o}% ó
-  \else\ifx#1^^b4{\accent94o}% ô
-  \else\ifx#1^^b5{\accent"7Eo}% õ
-  \else\ifx#1^^b6{\accent"7Fo}% ö
-  \else\ifx#1^^b8\char"1C% \o
-  \else\ifx#1^^b9{\accent18u}% ù
-  \else\ifx#1^^ba{\accent19u}% ú
-  \else\ifx#1^^bb{\accent94u}% û
-  \else\ifx#1^^bc{\accent"7Fu}% ü
-  \else\ifx#1^^bd{\accent19y}% ý
-  \else\ifx#1^^bf{\accent"7FY}% ÿ
+\def^^c3#1{\ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
+        \else\ifx#1^^81\ifmmode{\acute A}\else{\accent19A}\fi% Á
+        \else\ifx#1^^82\ifmmode{\hat A}\else{\accent94A}\fi% Â
+        \else\ifx#1^^83\ifmmode{\tilde A}\else{\accent"7EA}\fi% Ã
+        \else\ifx#1^^84\ifmmode{\ddot A}\else{\accent"7FA}\fi% Ä
+        \else\ifx#1^^85\ifmmode{\hbox{\tenit@\AA}}\else{\AA}\fi
+        \else\ifx#1^^86\ifmmode{\hbox{\tenit@\char"1D}}\else\char"1D\fi
+        \else\ifx#1^^87\ifmmode\hbox{\tenit@\c C}\else\c C{}\fi % TODO
+        \else\ifx#1^^88\ifmmode\hbox{\accent18E}\else{\accent18E}\fi%
+        \else\ifx#1^^89\ifmmode{\acute E}\else{\accent19E}\fi% É
+        \else\ifx#1^^8a\ifmmode{\hat E}\else{\accent94E}\fi% Ê
+        \else\ifx#1^^8b\ifmmode{\ddot E}\else{\accent"7FE}\fi% Ë
+        \else\ifx#1^^8c\ifmmode\hbox{\tenit@\accent18I}\else{\accent18I}\fi% Ì
+        \else\ifx#1^^8d\ifmmode{\acute I}\else{\accent19I}\fi% Í
+        \else\ifx#1^^8e\ifmmode{\hat I}\else{\accent94I}\fi% Î
+        \else\ifx#1^^8f\ifmmode{\ddot I}\else{\accent"7FI}\fi% Ï
+        \else\ifx#1^^91\ifmmode{\tilde N}\else{\accent"7EN}\fi% Ñ
+        \else\ifx#1^^92\ifmmode\hbox{\tenit@\accent18O}\else{\accent18O}\fi% Ò
+        \else\ifx#1^^93\ifmmode{\acute O}\else{\accent19O}\fi% Ó
+        \else\ifx#1^^94\ifmmode{\hat O}\else{\accent94O}\fi% Ô
+        \else\ifx#1^^95\ifmmode{\tilde O}\else{\accent"7EO}\fi% Õ
+        \else\ifx#1^^96\ifmmode{\ddot O}\else{\accent"7FO}\fi% Ö
+        \else\ifx#1^^98\ifmmode\hbox{\tenit@\char"1F}\else\char"1F\fi% \O
+        \else\ifx#1^^99\ifmmode\hbox{\tenit@\accent18U}\else{\accent18U}\fi% Ù
+        \else\ifx#1^^9a\ifmmode{\acute U}\else{\accent19U}\fi% Ú
+        \else\ifx#1^^9b\ifmmode{\hat U}\else{\accent94U}\fi% Û
+        \else\ifx#1^^9c\ifmmode{\ddot U}\else{\accent"7FU}\fi% Ü
+        \else\ifx#1^^9d\ifmmode{\acute Y}\else{\accent19Y}\fi% Ý
+        \else\ifx#1^^a0\ifmmode\hbox{\tenit@\accent18a}\else{\accent18a}\fi% à
+        \else\ifx#1^^a1\ifmmode{\acute a}\else{\accent19a}\fi% á
+        \else\ifx#1^^a2\ifmmode{\hat a}\else{\accent94a}\fi% â
+        \else\ifx#1^^a3\ifmmode{\tilde a}\else{\accent"7Ea}\fi% ã
+        \else\ifx#1^^a4\ifmmode{\ddot a}\else{\accent"7Fa}\fi% ä
+        \else\ifx#1^^a5\ifmmode\hbot{\tenit@\aa}\else\aa{}\fi
+        \else\ifx#1^^a6\ifmmode\hbox{\tenit@\char"1A}\else\char"1A\fi%
+        \else\ifx#1^^a7\ifmmode\hbox{\tenit@\c c}\else\c c\fi
+        \else\ifx#1^^a8\ifmmode\hbox{\tenit@\accent18e}\else{\accent18e}\fi% è
+        \else\ifx#1^^a9\ifmmode{\acute e}\else{\accent19e}\fi% é
+        \else\ifx#1^^aa\ifmmode{\hat e}\else{\accent94e}\fi% ê
+        \else\ifx#1^^ab\ifmmode{\ddot e}\else{\accent"7Fe}\fi% ë
+        \else\ifx#1^^ac\ifmmode\hbox{\tenit@\accent18\i}\else{\accent18\i}\fi% ì
+        \else\ifx#1^^ad\ifmmode\hbox{\tenit@\accent19\i}\else{\accent19\i}\fi% í
+        \else\ifx#1^^ae\ifmmode\hbox{\tenit@\accent94\i}\else{\accent94\i}\fi% î
+        \else\ifx#1^^af\ifmmode\hbox{\tenit@\accent"7F\i}\else{\accent"7F\i}\fi% ï
+        \else\ifx#1^^b1\ifmmode{\tilde n}\else{\accent"7En}\fi% ñ
+        \else\ifx#1^^b2\ifmmode\hbox{\tenit@\accent18o}\else{\accent18o}\fi% ò
+        \else\ifx#1^^b3\ifmmode{\acute o}\else{\accent19o}\fi% ó
+        \else\ifx#1^^b4\ifmmode{\hat o}\else{\accent94o}\fi% ô
+        \else\ifx#1^^b5\ifmmode{\tilde o}\else{\accent"7Eo}\fi% õ
+        \else\ifx#1^^b6\ifmmode{\ddot o}\else{\accent"7Fo}\fi% ö
+        \else\ifx#1^^b8\ifmmode\hbox{\tenit@\char"1C}\else\char"1C\fi% \o
+        \else\ifx#1^^b9\ifmmode\hbox{\tenit@\accent18u}\else{\accent18u}\fi% ù
+        \else\ifx#1^^ba\ifmmode{\acute u}\else{\accent19u}\fi% ú
+        \else\ifx#1^^bb\ifmmode{\hat u}\else{\accent94u}\fi% û
+        \else\ifx#1^^bc\ifmmode{\ddot u}\else{\accent"7Fu}\fi% ü
+        \else\ifx#1^^bd\ifmmode{\acute y}\else{\accent19y}\fi% ý
+        \else\ifx#1^^bf\ifmmode{\ddot y}\else{\accent"7FY}\fi% ÿ
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
