@@ -376,7 +376,6 @@
 \pretolerance=100 % Tolerância da 1a tentativa de gerar parágrafo sem \-
 \tolerance=200    % Tolerância final de parágrafos.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -384,7 +383,6 @@
 % desenvolver                                                          %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 % To make the plain macros more efficient in time and space,
 % several constant values are declared here as control sequences.
@@ -550,10 +548,6 @@
 
 % We also define special registers that function like parameters:
 
-% Definitions for preloaded fonts
-
-\def\magstephalf{1095 }
-\def\magstep#1{\ifcase#1 \@m\or 1200\or 1440\or 1728\or 2074\or 2488\fi\relax}
 
 % Fonts assigned to \preloaded are not part of "plain TeX",
 % but they are preloaded so that other format packages can use them.
