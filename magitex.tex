@@ -621,12 +621,10 @@
 \def\quad{\hskip1em\relax}
 \def\qquad{\hskip2em\relax}
 
-
-\def\nointerlineskip{\prevdepth-1000\p@}
 \def\offinterlineskip{\baselineskip-1000\p@
   \lineskip\z@ \lineskiplimit\maxdimen}
 
-\def\topglue{\nointerlineskip\vglue-\topskip\vglue} % for top of page
+\def\topglue{\prevdepth-1000pt\vglue-\topskip\vglue} % for top of page
 \def\vglue{\afterassignment\vgl@\skip@=}
 \def\vgl@{\par \dimen@\prevdepth \hrule height\z@
   \nobreak\vskip\skip@ \prevdepth\dimen@}
@@ -863,7 +861,7 @@
 \mathchardef\bot="023F
 \def\angle{{\vbox{\ialign{$\m@th\scriptstyle##$\crcr
       \not\mathrel{\mkern14mu}\crcr
-      \noalign{\nointerlineskip}
+      \noalign{\prevdepth-1000pt}
       \mkern2.5mu\leaders\hrule height.34pt\hfill\mkern2.5mu\crcr}}}}
 \mathchardef\triangle="0234
 \mathchardef\forall="0238
@@ -1012,16 +1010,16 @@
 \def\widetilde{\mathaccent"0365 }
 \def\widehat{\mathaccent"0362 }
 \def\overrightarrow#1{\vbox{\m@th\ialign{##\crcr
-      \rightarrowfill\crcr\noalign{\kern-\p@\nointerlineskip}
+      \rightarrowfill\crcr\noalign{\kern-\p@\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}
 \def\overleftarrow#1{\vbox{\m@th\ialign{##\crcr
-      \leftarrowfill\crcr\noalign{\kern-\p@\nointerlineskip}
+      \leftarrowfill\crcr\noalign{\kern-\p@\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}
 \def\overbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3\p@}
-      \downbracefill\crcr\noalign{\kern3\p@\nointerlineskip}
+      \downbracefill\crcr\noalign{\kern3\p@\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
 \def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
-      $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3\p@\nointerlineskip}
+      $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3\p@\prevdepth-1000pt}
       \upbracefill\crcr\noalign{\kern3\p@}}}}\limits}
 \def\skew#1#2#3{{\muskip\z@#1mu\divide\muskip\z@2 \mkern\muskip\z@
     #2{\mkern-\muskip\z@{#3}\mkern\muskip\z@}\mkern-\muskip\z@}{}}
@@ -1265,7 +1263,7 @@
   \ifnum\outputpenalty>-\@MM \else\dosupereject\fi}
 \def\pagebody{\vbox to\vsize{\boxmaxdepth\maxdepth \pagecontents}}
 \def\makeheadline{\vbox to\z@{\vskip-22.5\p@
-  \hbox to\hsize{\vbox to8.5\p@{}\the\headline}\vss}\nointerlineskip}
+  \hbox to\hsize{\vbox to8.5\p@{}\the\headline}\vss}\prevdepth-1000pt}
 \def\makefootline{\baselineskip24\p@\lineskiplimit\z@\hbox to\hsize{\the\footline}}
 \def\dosupereject{\ifnum\insertpenalties>\z@ % something is being held over
   \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi}
