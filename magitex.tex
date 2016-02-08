@@ -373,7 +373,6 @@
 % To make the plain macros more efficient in time and space,
 % several constant values are declared here as control sequences.
 % If they were changed, anything could happen; so they are private symbols.
-\chardef\tw@=2
 \chardef\thr@@=3
 \chardef\sixt@@n=16
 \chardef\@cclv=255
@@ -564,7 +563,7 @@
 \textfont1=\teni@ \scriptfont1=\seveni@ \scriptscriptfont1=\fivei@
 \def\mit{\fam1} \def\oldstyle{\fam1\teni@}
 \textfont2=\tensy@ \scriptfont2=\sevensy@ \scriptscriptfont2=\fivesy@
-\def\cal{\fam\tw@}
+\def\cal{\fam2}
 \textfont3=\tenex@ \scriptfont3=\tenex@ \scriptscriptfont3=\tenex@
 \newfam\itfam % \it is family 4
 \textfont\itfam=\tenit@
@@ -1026,7 +1025,7 @@
 \def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
       $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3\p@\nointerlineskip}
       \upbracefill\crcr\noalign{\kern3\p@}}}}\limits}
-\def\skew#1#2#3{{\muskip\z@#1mu\divide\muskip\z@\tw@ \mkern\muskip\z@
+\def\skew#1#2#3{{\muskip\z@#1mu\divide\muskip\z@2 \mkern\muskip\z@
     #2{\mkern-\muskip\z@{#3}\mkern\muskip\z@}\mkern-\muskip\z@}{}}
 
 \def\lmoustache{\delimiter"437A340 } % top from (, bottom from )
@@ -1095,9 +1094,9 @@
   \else\let\next\makeph@nt\fi\next}
 \def\makeph@nt#1{\setbox\z@\hbox{#1}\finph@nt}
 \def\mathph@nt#1#2{\setbox\z@\hbox{$\m@th#1{#2}$}\finph@nt}
-\def\finph@nt{\setbox\tw@\null
-  \ifv@ \ht\tw@\ht\z@ \dp\tw@\dp\z@\fi
-  \ifh@ \wd\tw@\wd\z@\fi \box\tw@}
+\def\finph@nt{\setbox2\null
+  \ifv@ \ht2\ht\z@ \dp2\dp\z@\fi
+  \ifh@ \wd2\wd\z@\fi \box2}
 \def\mathstrut{\vphantom(}
 \def\smash{\relax % \relax, in case this comes first in \halign
   \ifmmode\def\next{\mathpalette\mathsm@sh}\else\let\next\makesm@sh
@@ -1171,12 +1170,12 @@
       &&\quad\hfil$##$\hfil\crcr
       \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
       #1\crcr\omit\strut\cr}}%
-  \setbox\tw@\vbox{\unvcopy\z@\global\setbox1\lastbox}%
-  \setbox\tw@\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
-  \setbox\tw@\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
+  \setbox2\vbox{\unvcopy\z@\global\setbox1\lastbox}%
+  \setbox2\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
+  \setbox2\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
     \global\setbox1\vbox{\box1\kern2\p@}%
     \vcenter{\kern-\ht1\unvbox\z@\kern-\baselineskip}\,\right)$}%
-  \null\;\vbox{\kern\ht1\box\tw@}\endgroup}
+  \null\;\vbox{\kern\ht1\box2}\endgroup}
 
 \def\openup{\afterassignment\@penup\dimen@=}
 \def\@penup{\advance\lineskip\dimen@
@@ -1286,9 +1285,9 @@
 
 \lefthyphenmin=2 \righthyphenmin=3 % disallow x- or -xx breaks
 
-\def\loggingall{\tracingcommands\tw@\tracingstats\tw@
+\def\loggingall{\tracingcommands2\tracingstats2
   \tracingpages1\tracingoutput1\tracinglostchars1
-  \tracingmacros\tw@\tracingparagraphs1\tracingrestores1
+  \tracingmacros2\tracingparagraphs1\tracingrestores1
   \showboxbreadth\maxdimen\showboxdepth\maxdimen}
 \def\tracingall{\tracingonline1\loggingall}
 
