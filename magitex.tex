@@ -389,7 +389,6 @@
 % To make the plain macros more efficient in time and space,
 % several constant values are declared here as control sequences.
 % If they were changed, anything could happen; so they are private symbols.
-\chardef\@cclv=255
 \mathchardef\@cclvi=256
 \mathchardef\@m=1000
 \mathchardef\@M=10000
@@ -1267,7 +1266,7 @@
   \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi}
 
 \def\pagecontents{\ifvoid\topins\else\unvbox\topins\fi
-  \dimen@=\dp\@cclv \unvbox\@cclv % open up \box255
+  \dimen@=\dp255 \unvbox255 % open up \box255
   \ifvoid\footins\else % footnote info is present
     \vskip\skip\footins
     \footnoterule
