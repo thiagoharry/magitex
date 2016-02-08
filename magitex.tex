@@ -339,6 +339,8 @@
 % Comandos de justificação e texto:
 \def\alinhaesquerda{\rightskip 0em plus 2em \leftskip 0pt \spaceskip.3333em%
      \xspaceskip.5em\relax}
+%\def\alinhaversoesquerdo{\obeylines\rightskip\hfil\leftskip0pt\xspaceskip0pt%
+%     \relax}
 \def\alinhadireita{\leftskip 0em plus 2em \rightskip0pt \spaceskip.3333em%
      \xspaceskip.5em\relax}
 \def\alinhacentro{\rightskip 0em plus 2em \leftskip 0em plus 2em%
@@ -371,6 +373,10 @@
 \baselineskip12pt % Distância ideal entre linhas 
 \lineskiplimit0pt % Distância mínima entre palavras de linhas diferentes
 
+\pretolerance=100 % Tolerância da 1a tentativa de gerar parágrafo sem \-
+\tolerance=200    % Tolerância final de parágrafos.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -383,7 +389,6 @@
 % To make the plain macros more efficient in time and space,
 % several constant values are declared here as control sequences.
 % If they were changed, anything could happen; so they are private symbols.
-\chardef\sixt@@n=16
 \chardef\@cclv=255
 \mathchardef\@cclvi=256
 \mathchardef\@m=1000
@@ -413,7 +418,6 @@
 % To find out which counter \foo is, you can look at \allocationnumber.
 % Since there's no \boxdef command, \chardef is used to define a \newbox,
 % \newinsert, \newfam, and so on.
-\outer\def\newfam{\alloc@8\fam\chardef\sixt@@n}
 \outer\def\newlanguage{\alloc@9\language\chardef\@cclvi}
 \def\alloc@#1#2#3#4#5{\global\advance\count1#1by1
   \ch@ck#1#4#2% make sure there's still room
@@ -453,8 +457,6 @@
 % but the code is commented out if no special value needs to be set.
 % INITEX makes all parameters zero except where noted.
 
-\pretolerance=100
-\tolerance=200 % INITEX sets this to 10000
 \hbadness=1000
 \vbadness=1000
 \linepenalty=10
@@ -574,15 +576,11 @@
 \textfont2=\tensy@ \scriptfont2=\sevensy@ \scriptscriptfont2=\fivesy@
 \def\cal{\fam2}
 \textfont3=\tenex@ \scriptfont3=\tenex@ \scriptscriptfont3=\tenex@
-\newfam\itfam % \it is family 4
-\textfont\itfam=\tenit@
-\newfam\slfam % \sl is family 5
-\textfont\slfam=\tensl@
-\newfam\bffam  % \bf is family 6
-\textfont\bffam=\tenbf@ \scriptfont\bffam=\sevenbf@
-\scriptscriptfont\bffam=\fivebf@
-\newfam\ttfam  % \tt is family 7
-\textfont\ttfam=\tentt@
+\textfont4=\tenit@
+\textfont5=\tensl@
+\textfont6=\tenbf@ \scriptfont6=\sevenbf@
+\scriptscriptfont6=\fivebf@
+\textfont7=\tentt@
 
 
 
