@@ -395,20 +395,12 @@
 \countdef\allocationnumber=21 % the most recent allocation
 \countdef\m@ne=22 \m@ne=-1 % a handy constant
 
-% Here are abbreviations for the names of scratch registers
-% that don't need to be allocated.
-
-
 
 % Now, we define \newcount, \newbox, etc. so that you can say \newcount\foo
 % and \foo will be defined (with \countdef) to be the next counter.
 % To find out which counter \foo is, you can look at \allocationnumber.
 % Since there's no \boxdef command, \chardef is used to define a \newbox,
 % \newinsert, \newfam, and so on.
-\def\alloc@#1#2#3#4#5{\global\advance\count1#1by1
-  \ch@ck#1#4#2% make sure there's still room
-  \allocationnumber=\count1#1%
-  \global#3#5=\allocationnumber}
 \outer\def\newinsert#1{\global\advance\insc@unt by\m@ne
   \ch@ck0\insc@unt\count
   \ch@ck1\insc@unt\dimen
