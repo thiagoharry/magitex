@@ -389,7 +389,6 @@
 % To make the plain macros more efficient in time and space,
 % several constant values are declared here as control sequences.
 % If they were changed, anything could happen; so they are private symbols.
-\mathchardef\@cclvi=256
 \mathchardef\@m=1000
 \mathchardef\@M=10000
 \mathchardef\@MM=20000
@@ -417,7 +416,7 @@
 % To find out which counter \foo is, you can look at \allocationnumber.
 % Since there's no \boxdef command, \chardef is used to define a \newbox,
 % \newinsert, \newfam, and so on.
-\outer\def\newlanguage{\alloc@9\language\chardef\@cclvi}
+\outer\def\newlanguage{\alloc@9\language\chardef256}
 \def\alloc@#1#2#3#4#5{\global\advance\count1#1by1
   \ch@ck#1#4#2% make sure there's still room
   \allocationnumber=\count1#1%
