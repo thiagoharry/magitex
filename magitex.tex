@@ -245,14 +245,16 @@
 % registradores sem especificar os números.
 
 % Os registradores de contagem de 0 à 9 são reservados. O 0 é o número
-% da página. Os demais só são usados em formatos que de alguma forma
-% precisam numerar sub-páginas e não serão usados. Depois deles nós
-% temos:
+% da página. O registrador 254 também é usado para o fator do quando
+% cada linha da inserção \footins@ afeta o espaço da página. Os demais
+% só são usados em formatos que de alguma forma precisam numerar
+% sub-páginas e não serão usados. Depois deles nós temos:
 \countdef\pageno@=0 \pageno@=1 % O número de página
 \countdef\interdisplaylinepenalty=10 \interdisplaylinepenalty=100
 \countdef\interfootnotelinepenalty=11 \interfootnotelinepenalty=100
 \countdef\mscount=12
 \countdef\count@=13
+% 254 reservado para \footins
 
 % Não há nenhum registrador de dimensão alocado pelas primitivas
 % TeX. Desta forma, temos todos à nossa disposição:
@@ -264,7 +266,7 @@
 \dimendef\dimen@=5
 \dimendef\dimen@i=6
 \dimendef\dimen@ii=7
-
+% 254 reservado para inserção \footins@
 
 % Os registradores de skip. Nenhum é reservado e todos estão à
 % disposição:
@@ -275,6 +277,7 @@
 \skipdef\medskipamount=4 \medskipamount=6pt plus 2pt minus 2pt
 \skipdef\bigskipamount=5 \bigskipamount=12pt plus 4pt minus 4pt
 \skipdef\skip@=6
+% 254 reservado para inserção \footins
 
 % Nenhum registrador de muskip é usado
 
@@ -287,10 +290,15 @@
 \def\tabsyet{3}
 \def\tabsdone{4}
 \def\rootbox{5}
+% 254 reservado para inserção \footins
 
 % Agora reservamos os registradores de sequências de tokens:
 \toksdef\headline=0 \headline={\hfil} % Cabeçalho padrão em branco
 \toksdef\footline=1 \footline={\hss\tenrm@\folio\hss} % Rodapé padrão
+
+% E definimos os nomes de inserções:
+\def\footins@{254}
+\def\topins@{253}
 
 % Comandos de espaçamento
 \def\espacito{\kern .16667em } % Equivalente ao \thinspace do Plain TeX
@@ -393,21 +401,6 @@
 \countdef\insc@unt=20 % the insertion counter
 \countdef\allocationnumber=21 % the most recent allocation
 \countdef\m@ne=22 \m@ne=-1 % a handy constant
-
-% Now, we define \newcount, \newbox, etc. so that you can say \newcount\foo
-% and \foo will be defined (with \countdef) to be the next counter.
-% To find out which counter \foo is, you can look at \allocationnumber.
-% Since there's no \boxdef command, \chardef is used to define a \newbox,
-% \newinsert, \newfam, and so on.
-\outer\def\newinsert#1{\global\advance\insc@unt by\m@ne
-  \ch@ck0\insc@unt\count
-  \ch@ck1\insc@unt\dimen
-  \ch@ck2\insc@unt\skip
-  \ch@ck4\insc@unt\box
-  \allocationnumber=\insc@unt
-  \global\chardef#1=\allocationnumber}
-\def\ch@ck#1#2#3{\ifnum\count1#1<#2%
-  \else\errmessage{No room for a new #3}\fi}
 
 % And here's a different sort of allocation:
 % For example, \newif\iffoo creates \footrue, \foofalse to go with \iffoo.
@@ -1178,11 +1171,11 @@
 \def\advancepageno{\ifnum\pageno@<\z@ \global\advance\pageno@\m@ne
   \else\global\advance\pageno@1 \fi} % increase |pageno|
 
-\newinsert\footins
+
 \def\footnote#1{\let\@sf\empty % parameter #2 (the text) is read later
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
   #1\@sf\vfootnote{#1}}
-\def\vfootnote#1{\insert\footins\bgroup
+\def\vfootnote#1{\insert\footins@\bgroup
   \interlinepenalty\interfootnotelinepenalty
   \splittopskip\ht\strutbox % top baseline for broken footnotes
   \splitmaxdepth\dp\strutbox \floatingpenalty20000
@@ -1194,25 +1187,24 @@
 \def\f@t#1{#1\@foot}
 \def\@foot{\strut\egroup}
 \def\footstrut{\vbox to\splittopskip{}}
-\skip\footins=\bigskipamount % space added when footnote is present
-\count\footins=1000 % footnote magnification factor (1 to 1)
-\dimen\footins=8in % maximum footnotes per page
+\skip\footins@=\bigskipamount % space added when footnote is present
+\count\footins@=1000 % footnote magnification factor (1 to 1)
+\dimen\footins@=8in % maximum footnotes per page
 
-\newinsert\topins
 \newif\ifp@ge \newif\if@mid
 \def\topinsert{\@midfalse\p@gefalse\@ins}
 \def\midinsert{\@midtrue\@ins}
 \def\pageinsert{\@midfalse\p@getrue\@ins}
-\skip\topins=\z@skip % no space added when a topinsert is present
-\count\topins=1000 % magnification factor (1 to 1)
-\dimen\topins=\maxdimen % no limit per page
+\skip\topins@=\z@skip % no space added when a topinsert is present
+\count\topins@=1000 % magnification factor (1 to 1)
+\dimen\topins@=\maxdimen % no limit per page
 \def\@ins{\par\begingroup\setbox\z@\vbox\bgroup} % start a \vbox
 \def\endinsert{\egroup % finish the \vbox
   \if@mid \dimen@\ht\z@ \advance\dimen@\dp\z@ \advance\dimen@12\p@
     \advance\dimen@\pagetotal \advance\dimen@-\pageshrink
     \ifdim\dimen@>\pagegoal\@midfalse\p@gefalse\fi\fi
   \if@mid \bigskip\box\z@\bigbreak
-  \else\insert\topins{\penalty100 % floating insertion
+  \else\insert\topins@{\penalty100 % floating insertion
     \splittopskip\z@skip
     \splitmaxdepth\maxdimen \floatingpenalty\z@
     \ifp@ge \dimen@\dp\z@
@@ -1232,12 +1224,12 @@
 \def\dosupereject{\ifnum\insertpenalties>\z@ % something is being held over
   \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi}
 
-\def\pagecontents{\ifvoid\topins\else\unvbox\topins\fi
+\def\pagecontents{\ifvoid\topins@\else\unvbox\topins@\fi
   \dimen@=\dp255 \unvbox255 % open up \box255
-  \ifvoid\footins\else % footnote info is present
-    \vskip\skip\footins
+  \ifvoid\footins@\else % footnote info is present
+    \vskip\skip\footins@
     \footnoterule
-    \unvbox\footins\fi
+    \unvbox\footins@\fi
   \ifr@ggedbottom \kern-\dimen@ \vfil \fi}
 \def\footnoterule{\kern-3\p@
   \hrule width 2truein \kern 2.6\p@} % the \hrule is .4pt high
