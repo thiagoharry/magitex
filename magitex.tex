@@ -373,7 +373,6 @@
 % To make the plain macros more efficient in time and space,
 % several constant values are declared here as control sequences.
 % If they were changed, anything could happen; so they are private symbols.
-\chardef\@ne=1
 \chardef\tw@=2
 \chardef\thr@@=3
 \chardef\sixt@@n=16
@@ -408,7 +407,7 @@
 % \newinsert, \newfam, and so on.
 \outer\def\newfam{\alloc@8\fam\chardef\sixt@@n}
 \outer\def\newlanguage{\alloc@9\language\chardef\@cclvi}
-\def\alloc@#1#2#3#4#5{\global\advance\count1#1by\@ne
+\def\alloc@#1#2#3#4#5{\global\advance\count1#1by1
   \ch@ck#1#4#2% make sure there's still room
   \allocationnumber=\count1#1%
   \global#3#5=\allocationnumber
@@ -563,7 +562,7 @@
 
 \textfont0=\tenrm@ \scriptfont0=\sevenrm@ \scriptscriptfont0=\fiverm@
 \textfont1=\teni@ \scriptfont1=\seveni@ \scriptscriptfont1=\fivei@
-\def\mit{\fam\@ne} \def\oldstyle{\fam\@ne\teni@}
+\def\mit{\fam1} \def\oldstyle{\fam1\teni@}
 \textfont2=\tensy@ \scriptfont2=\sevensy@ \scriptscriptfont2=\fivesy@
 \def\cal{\fam\tw@}
 \textfont3=\tenex@ \scriptfont3=\tenex@ \scriptscriptfont3=\tenex@
@@ -671,7 +670,7 @@
 \def\hidewidth{\hskip\hideskip} % for alignment entries that can stick out
 \def\ialign{\everycr{}\tabskip\z@skip\halign} % initialized \halign
 \def\multispan#1{\omit \mscount#1\relax
-  \loop\ifnum\mscount>\@ne \sp@n\repeat}
+  \loop\ifnum\mscount>1 \sp@n\repeat}
 \def\sp@n{\span\omit\advance\mscount\m@ne}
 
 \newif\ifus@ \newif\if@cr
@@ -703,10 +702,10 @@
 \def\t@bbox{\setbox\z@\hbox\bgroup}
 \def\t@bb@x{\if@cr\egroup % now \box\z@ holds the column
   \else\hss\egroup \global\setbox\tabsyet\hbox{\unhbox\tabsyet
-      \global\setbox\@ne\lastbox}% now \box\@ne holds its size
-    \ifvoid\@ne\global\setbox\@ne\hbox to\wd\z@{}%
-    \else\setbox\z@\hbox to\wd\@ne{\unhbox\z@}\fi
-    \global\setbox\tabsdone\hbox{\box\@ne\unhbox\tabsdone}\fi
+      \global\setbox1\lastbox}% now \box1 holds its size
+    \ifvoid1\global\setbox1\hbox to\wd\z@{}%
+    \else\setbox\z@\hbox to\wd1{\unhbox\z@}\fi
+    \global\setbox\tabsdone\hbox{\box1\unhbox\tabsdone}\fi
   \box\z@}
 
 \def\hang{\hangindent\parindent}
@@ -1172,12 +1171,12 @@
       &&\quad\hfil$##$\hfil\crcr
       \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
       #1\crcr\omit\strut\cr}}%
-  \setbox\tw@\vbox{\unvcopy\z@\global\setbox\@ne\lastbox}%
-  \setbox\tw@\hbox{\unhbox\@ne\unskip\global\setbox\@ne\lastbox}%
-  \setbox\tw@\hbox{$\kern\wd\@ne\kern-\p@renwd\left(\kern-\wd\@ne
-    \global\setbox\@ne\vbox{\box\@ne\kern2\p@}%
-    \vcenter{\kern-\ht\@ne\unvbox\z@\kern-\baselineskip}\,\right)$}%
-  \null\;\vbox{\kern\ht\@ne\box\tw@}\endgroup}
+  \setbox\tw@\vbox{\unvcopy\z@\global\setbox1\lastbox}%
+  \setbox\tw@\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
+  \setbox\tw@\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
+    \global\setbox1\vbox{\box1\kern2\p@}%
+    \vcenter{\kern-\ht1\unvbox\z@\kern-\baselineskip}\,\right)$}%
+  \null\;\vbox{\kern\ht1\box\tw@}\endgroup}
 
 \def\openup{\afterassignment\@penup\dimen@=}
 \def\@penup{\advance\lineskip\dimen@
@@ -1216,7 +1215,7 @@
 \def\folio{\ifnum\pageno@<\z@ \romannumeral-\pageno@ \else\number\pageno@ \fi}
 \def\nopagenumbers{\footline{\hfil}} % blank out the footline
 \def\advancepageno{\ifnum\pageno@<\z@ \global\advance\pageno@\m@ne
-  \else\global\advance\pageno@\@ne \fi} % increase |pageno|
+  \else\global\advance\pageno@1 \fi} % increase |pageno|
 
 \newinsert\footins
 \def\footnote#1{\let\@sf\empty % parameter #2 (the text) is read later
@@ -1288,10 +1287,10 @@
 \lefthyphenmin=2 \righthyphenmin=3 % disallow x- or -xx breaks
 
 \def\loggingall{\tracingcommands\tw@\tracingstats\tw@
-  \tracingpages\@ne\tracingoutput\@ne\tracinglostchars\@ne
-  \tracingmacros\tw@\tracingparagraphs\@ne\tracingrestores\@ne
+  \tracingpages1\tracingoutput1\tracinglostchars1
+  \tracingmacros\tw@\tracingparagraphs1\tracingrestores1
   \showboxbreadth\maxdimen\showboxdepth\maxdimen}
-\def\tracingall{\tracingonline\@ne\loggingall}
+\def\tracingall{\tracingonline1\loggingall}
 
 \def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize\maxdimen\tenrm@
   \pretolerance\m@ne\tolerance\m@ne\hbadness0\showboxdepth0\ #1}}
