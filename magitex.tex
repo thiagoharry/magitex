@@ -266,6 +266,7 @@
 \dimendef\dimen@=5
 \dimendef\dimen@i=6
 \dimendef\dimen@ii=7
+% 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
 % Os registradores de skip. Nenhum é reservado e todos estão à
@@ -277,7 +278,8 @@
 \skipdef\medskipamount=4 \medskipamount=6pt plus 2pt minus 2pt
 \skipdef\bigskipamount=5 \bigskipamount=12pt plus 4pt minus 4pt
 \skipdef\skip@=6
-% 254 reservado para inserção \footins
+% 253 reservado para inserção \topins@
+% 254 reservado para inserção \footins@
 
 % Nenhum registrador de muskip é usado
 
@@ -290,7 +292,8 @@
 \def\tabsyet{3}
 \def\tabsdone{4}
 \def\rootbox{5}
-% 254 reservado para inserção \footins
+% 253 reservado para inserção \topins@
+% 254 reservado para inserção \footins@
 
 % Agora reservamos os registradores de sequências de tokens:
 \toksdef\headline=0 \headline={\hfil} % Cabeçalho padrão em branco
@@ -376,13 +379,39 @@
 % Gera uma linha horizontal:
 \def\linha{{\hrule}}
 
-% Constantes usadas:
+% Constantes usadas por TeX:
 \lineskip1pt % Distância garantida entre palavras se limite for atingido
 \baselineskip12pt % Distância ideal entre linhas 
 \lineskiplimit0pt % Distância mínima entre palavras de linhas diferentes
 
 \pretolerance=100 % Tolerância da 1a tentativa de gerar parágrafo sem \-
 \tolerance=200    % Tolerância final de parágrafos.
+\hbadness=1000    % Badness com valor tão alto sempre é reportada
+\vbadness=1000    % Idem, mas no modo vertical
+
+\linepenalty=10     % Ampliar isso reduz o  número de linhas
+\hyphenpenalty=50   % Penalidade de separação silábica na quebra de linha
+\exhyphenpenalty=50 % Idem, mas no caso em que a palavra muda na quebra
+\binoppenalty=700   % Dificuldade de quebra de linha após operadores matemáticos
+\relpenalty=500     % Idem, mas após operadores de relação como >
+\clubpenalty=150    % Penalidade de quebra de página após 1a linha de parágrafo
+\widowpenalty=150   % Idem, mas antes da última linha de parágrafo
+\displaywidowpenalty=50 % Penalidade da penúltima linha antes de display
+\brokenpenalty=100  % Penalidade vertical de separação silábica na
+                    % penúltima linha
+\predisplaypenalty=10000 % Penalidade de quebra antes de equações em
+                        % display
+\postdisplaypenalty=0 % Penalidade após um display matemático
+\interlinepenalty=0   % Penalidade de quebra de página entre linhas
+                      % comuns
+\floatingpenalty=0  % Este valor é mudado em cada inserção
+\outputpenalty=0    % E este é ajustado em cada saída.
+\doublehyphendemerits=10000 % Deméritos adicionados se duas linhas
+                            % seguidas separam sílabas
+\finalhyphendemerits=5000 % Deméritos adicionais se penúltima linha
+                          % separa sílabas
+\adjdemerits=10000 % Deméritos adicionais se duas linhas seguidas são
+                   % visualmente incompatíveis
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -394,12 +423,6 @@
 
 % Allocation of registers
 
-\count16=-1 % allocates input streams 0, 1, ...
-\count17=-1 % allocates output streams 0, 1, ...
-\count19=0 % allocates \language codes 1, 2, ...
-\count20=255 % allocates insertions 254, 253, ...
-\countdef\insc@unt=20 % the insertion counter
-\countdef\allocationnumber=21 % the most recent allocation
 \countdef\m@ne=22 \m@ne=-1 % a handy constant
 
 % And here's a different sort of allocation:
@@ -421,25 +444,6 @@
 % but the code is commented out if no special value needs to be set.
 % INITEX makes all parameters zero except where noted.
 
-\hbadness=1000
-\vbadness=1000
-\linepenalty=10
-\hyphenpenalty=50
-\exhyphenpenalty=50
-\binoppenalty=700
-\relpenalty=500
-\clubpenalty=150
-\widowpenalty=150
-\displaywidowpenalty=50
-\brokenpenalty=100
-\predisplaypenalty=10000
-% \postdisplaypenalty=0
-% \interlinepenalty=0
-% \floatingpenalty=0, set during \insert
-% \outputpenalty=0, set before TeX enters \output
-\doublehyphendemerits=10000
-\finalhyphendemerits=5000
-\adjdemerits=10000
 % \looseness=0, cleared by TeX after each paragraph
 % \pausing=0
 % \holdinginserts=0
