@@ -86,7 +86,8 @@
 
 %TODO: ç e Ç sem \c
 \catcode`\^^c3=13
-\def^^c3#1{\ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
+\def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign (TeXbook)
+        \ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
         \else\ifx#1^^81\ifmmode{\acute A}\else{\accent19A}\fi% Á
         \else\ifx#1^^82\ifmmode{\hat A}\else{\accent94A}\fi% Â
         \else\ifx#1^^83\ifmmode{\tilde A}\else{\accent"7EA}\fi% Ã
