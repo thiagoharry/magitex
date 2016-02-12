@@ -414,6 +414,29 @@
 \adjdemerits=10000 % Deméritos adicionais se duas linhas seguidas são
                    % visualmente incompatíveis
 
+\looseness=0 % Ajustado para 0 depois de cada parágrafo. Tenta tornar
+             % o parágrafo atual o seu valor mais longo em número de
+             % linhas.
+\pausing=0   % Se precisamos pausar após ler cada linha de arquivo
+
+\holdinginserts=0 % Se maior que 0, as inserções feitas são
+                  % permanentes em cada página
+
+\tracingonline=0 % Se positivo, mensagens de depuração vão pro terminal
+\tracingmacros=0 % Se positivo, gera mensagem de depuração de macros
+\tracingstats=0 % Se positivo, gera depuração de quanta memória é usada
+\tracingparagraphs=0 % Se positivo, mostra depuração sobre tentativas
+                     % de gerar parágrafo
+\tracingpages=0 % Se positivo, mostra depuração sobre tentativas de
+                % quebrar página
+\tracingoutput=0 % Se positivo, gera depuração da caixa que vai pra \output
+\tracinglostchars=1 % Se positivo, gera avisos sobre caracteres não
+                    % encontrados na fonte atual
+\tracingcommands=0 % Se positivo, mostra os comandos que vão sendo
+                   % executados
+\tracingrestores=0 % Se positivo, mostra todas as variáveis que tem
+                   % seus valores restaurados no fim de um agrupamento
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -445,18 +468,6 @@
 % but the code is commented out if no special value needs to be set.
 % INITEX makes all parameters zero except where noted.
 
-% \looseness=0, cleared by TeX after each paragraph
-% \pausing=0
-% \holdinginserts=0
-% \tracingonline=0
-% \tracingmacros=0
-% \tracingstats=0
-% \tracingparagraphs=0
-% \tracingpages=0
-% \tracingoutput=0
-\tracinglostchars=1
-% \tracingcommands=0
-% \tracingrestores=0
 % \language=0
 \uchyph=1
 % \lefthyphenmin=2 \righthyphenmin=3 set below
