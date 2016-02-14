@@ -437,6 +437,28 @@
 \tracingrestores=0 % Se positivo, mostra todas as variáveis que tem
                    % seus valores restaurados no fim de um agrupamento
 
+\language=0 % A linguagem usada.
+\uchyph=1 % Positivo se deve-se separar silabicamente palavras que
+          % começam com letras maiúsculas
+\lefthyphenmin=2 % Menor fragmento esquerdo de palavras com separação
+                 % silábica.
+\righthyphenmin=3 % Idem, mas para fragmento direito
+
+\globaldefs=0 % Não-nulo para tornar toda atribuição \global
+
+\maxdeadcycles=25 % Número máximo de loops de geração de páginas sem
+                  % que nenhuma página seja gerada
+
+\hangafter=1 % Define que as linhas em que haverá
+             % identação \hangindent serão as linhas 2, 3, 4, ...
+
+\fam=0 % Fonte padrão de modo matemático
+
+\mag=1000 % Ampliação inicial
+
+\escapechar=`\\ % Caractere de escape
+\defaultskewchar=-1
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -468,16 +490,6 @@
 % but the code is commented out if no special value needs to be set.
 % INITEX makes all parameters zero except where noted.
 
-% \language=0
-\uchyph=1
-% \lefthyphenmin=2 \righthyphenmin=3 set below
-% \globaldefs=0
-% \maxdeadcycles=25 % INITEX does this
-% \hangafter=1 % INITEX does this, also TeX after each paragraph
-% \fam=0
-% \mag=1000 % INITEX does this
-% \escapechar=`\\ % INITEX does this
-\defaultskewchar=-1
 % \endlinechar=`\^^M % INITEX does this
 \newlinechar=-1
 \delimiterfactor=901
@@ -1252,8 +1264,6 @@
 
 % Hyphenation, miscellaneous macros, and initial values for standard layout
 \message{hyphenation}
-
-\lefthyphenmin=2 \righthyphenmin=3 % disallow x- or -xx breaks
 
 \def\loggingall{\tracingcommands2\tracingstats2
   \tracingpages1\tracingoutput1\tracinglostchars1
