@@ -302,8 +302,8 @@
    \ifvoid\topins@\else\unvbox\topins@\fi
    \dimen0=\dp255 \unvbox255 % open up \box255
    \ifvoid\footins@\else % footnote info is present
-     \vskip\skip\footins@
-     \footnoterule
+     \vskip\skip\footins@%
+     \kern-3pt\hrule width 2truein \kern 2.6pt % footnoterule
      \unvbox\footins@\fi
    \ifr@ggedbottom \kern-\dimen0 \vfil \fi}%
   % Rodapé:
@@ -364,7 +364,7 @@
 % 255:
 \def\voidb@x{0} % permanently void box register
 \def\strutbox{1} \setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt
-  width\z@}
+  width0pt}
 \def\tabs{2}
 \def\tabsyet{3}
 \def\tabsdone{4}
@@ -559,6 +559,84 @@
 % Gera uma linha horizontal:
 \def\linha{{\hrule}}
 
+% Definições matemáticas do Plain TeX:
+\def\lmoustache{\delimiter"437A340 } % top from (, bottom from )
+\def\rmoustache{\delimiter"537B341 } % top from ), bottom from (
+\def\lgroup{\delimiter"462833A } % extensible ( with sharper tips
+\def\rgroup{\delimiter"562933B } % extensible ) with sharper tips
+\def\arrowvert{\delimiter"26A33C } % arrow without arrowheads
+\def\Arrowvert{\delimiter"26B33D } % double arrow without arrowheads
+\def\bracevert{\delimiter"77C33E } % the vertical bar that extends braces
+\def\Vert{\delimiter"26B30D } \let\|=\Vert
+\def\vert{\delimiter"26A30C }
+\def\uparrow{\delimiter"3222378 }
+\def\downarrow{\delimiter"3223379 }
+\def\updownarrow{\delimiter"326C33F }
+\def\Uparrow{\delimiter"322A37E }
+\def\Downarrow{\delimiter"322B37F }
+\def\Updownarrow{\delimiter"326D377 }
+\def\backslash{\delimiter"26E30F } % for double coset G\backslash H
+\def\rangle{\delimiter"526930B }
+\def\langle{\delimiter"426830A }
+\def\rbrace{\delimiter"5267309 } \let\}=\rbrace
+\def\lbrace{\delimiter"4266308 } \let\{=\lbrace
+\def\rceil{\delimiter"5265307 }
+\def\lceil{\delimiter"4264306 }
+\def\rfloor{\delimiter"5263305 }
+\def\lfloor{\delimiter"4262304 }
+\def\bmod{\nonscript\mskip-\medmuskip\mkern5mu
+  \mathbin{\fam0\tenrm@ mod}\penalty900\mkern5mu\nonscript\mskip-\medmuskip}
+\def\pmod#1{\allowbreak\mkern18mu({\fam0\tenrm@ mod}\,\,#1)}
+\def\log{\mathop{\fam0\tenrm@ log}\nolimits}
+\def\lg{\mathop{\fam0\tenrm@ lg}\nolimits}
+\def\ln{\mathop{\fam0\tenrm@ ln}\nolimits}
+\def\lim{\mathop{\fam0\tenrm@ lim}}
+\def\limsup{\mathop{\fam0\tenrm@ lim\,sup}}
+\def\liminf{\mathop{\fam0\tenrm@ lim\,inf}}
+\def\sin{\mathop{\fam0\tenrm@ sin}\nolimits}
+\def\arcsin{\mathop{\fam0\tenrm@ arcsin}\nolimits}
+\def\sinh{\mathop{\fam0\tenrm@ sinh}\nolimits}
+\def\cos{\mathop{\fam0\tenrm@ cos}\nolimits}
+\def\arccos{\mathop{\fam0\tenrm@ arccos}\nolimits}
+\def\cosh{\mathop{\fam0\tenrm@ cosh}\nolimits}
+\def\tan{\mathop{\fam0\tenrm@ tan}\nolimits}
+\def\arctan{\mathop{\fam0\tenrm@ arctan}\nolimits}
+\def\tanh{\mathop{\fam0\tenrm@ tanh}\nolimits}
+\def\cot{\mathop{\fam0\tenrm@ cot}\nolimits}
+\def\coth{\mathop{\fam0\tenrm@ coth}\nolimits}
+\def\sec{\mathop{\fam0\tenrm@ sec}\nolimits}
+\def\csc{\mathop{\fam0\tenrm@ csc}\nolimits}
+\def\max{\mathop{\fam0\tenrm@ max}}
+\def\min{\mathop{\fam0\tenrm@ min}}
+\def\sup{\mathop{\fam0\tenrm@ sup}}
+\def\inf{\mathop{\fam0\tenrm@ inf}}
+\def\arg{\mathop{\fam0\tenrm@ arg}\nolimits}
+\def\ker{\mathop{\fam0\tenrm@ ker}\nolimits}
+\def\dim{\mathop{\fam0\tenrm@ dim}\nolimits}
+\def\hom{\mathop{\fam0\tenrm@ hom}\nolimits}
+\def\det{\mathop{\fam0\tenrm@ det}}
+\def\exp{\mathop{\fam0\tenrm@ exp}\nolimits}
+\def\Pr{\mathop{\fam0\tenrm@ Pr}}
+\def\gcd{\mathop{\fam0\tenrm@ gcd}}
+\def\deg{\mathop{\fam0\tenrm@ deg}\nolimits}
+\def\bigl{\mathopen\big}
+\def\bigm{\mathrel\big}
+\def\bigr{\mathclose\big}
+\def\Bigl{\mathopen\Big}
+\def\Bigm{\mathrel\Big}
+\def\Bigr{\mathclose\Big}
+\def\biggl{\mathopen\bigg}
+\def\biggm{\mathrel\bigg}
+\def\biggr{\mathclose\bigg}
+\def\Biggl{\mathopen\Bigg}
+\def\Biggm{\mathrel\Bigg}
+\def\Biggr{\mathclose\Bigg}
+\def\big#1{{\hbox{$\left#1\vbox to8.5pt{}\right.\n@space$}}}
+\def\Big#1{{\hbox{$\left#1\vbox to11.5pt{}\right.\n@space$}}}
+\def\bigg#1{{\hbox{$\left#1\vbox to14.5pt{}\right.\n@space$}}}
+\def\Bigg#1{{\hbox{$\left#1\vbox to17.5pt{}\right.\n@space$}}}
+\def\n@space{\nulldelimiterspace\z@ \m@th}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -599,7 +677,6 @@
 \textfont7=\tentt@
 
 
-
 % Macros for setting ordinary text
 
 \let\endgraf=\par \let\endline=\cr
@@ -630,28 +707,28 @@
 \def\qquad{\hskip2em\relax}
 
 \def\offinterlineskip{\baselineskip-1000pt
-  \lineskip\z@ \lineskiplimit16383.99999pt} % Dimensão máxima
+  \lineskip0pt \lineskiplimit16383.99999pt} % Dimensão máxima
 
 \def\topglue{\prevdepth-1000pt\vglue-\topskip\vglue} % for top of page
 \def\vglue{\afterassignment\vgl@\skip@=}
-\def\vgl@{\par \dimen@\prevdepth \hrule height\z@
+\def\vgl@{\par \dimen@\prevdepth \hrule height0pt
   \nobreak\vskip\skip@ \prevdepth\dimen@}
 \def\hglue{\afterassignment\hgl@\skip@=}
-\def\hgl@{\leavevmode \count@\spacefactor \vrule width\z@
+\def\hgl@{\leavevmode \count@\spacefactor \vrule width0pt
   \nobreak\hskip\skip@ \spacefactor\count@}
 
 \def\slash{/\penalty\exhyphenpenalty} % a `/' that acts like a `-'
 
 \def\break{\penalty-10000}
 \def\nobreak{\penalty 10000}
-\def\allowbreak{\penalty \z@}
+\def\allowbreak{\penalty 0}
 
 \def\filbreak{\par\vfil\penalty-200\vfilneg}
 \def\goodbreak{\par\penalty-500 }
 \def\eject{\par\break}
 \def\supereject{\par\penalty-20000}
 
-\def\removelastskip{\ifdim\lastskip=\z@\else\vskip-\lastskip\fi}
+\def\removelastskip{\ifdim\lastskip=0pt\else\vskip-\lastskip\fi}
 \def\smallbreak{\par\ifdim\lastskip<3pt plus 1pt minus 1pt
   \removelastskip\penalty-50\smallskip\fi}
 \def\medbreak{\par\ifdim\lastskip<6pt plus 2pt minus 2pt
@@ -659,12 +736,12 @@
 \def\bigbreak{\par\ifdim\lastskip<12pt plus 4pt minus 4pt
   \removelastskip\penalty-200\bigskip\fi}
 
-\def\rlap#1{\hbox to\z@{#1\hss}}
-\def\llap#1{\hbox to\z@{\hss#1}}
+\def\rlap#1{\hbox to0pt{#1\hss}}
+\def\llap#1{\hbox to0pt{\hss#1}}
 
-\def\m@th{\mathsurround\z@}
-\def\underbar#1{$\setbox\z@\hbox{#1}\dp\z@\z@
-  \m@th \underline{\box\z@}$}
+\def\m@th{\mathsurround0pt}
+\def\underbar#1{$\setbox0\hbox{#1}\dp0=0pt
+  \m@th \underline{\box0}$}
 
 
 \def\strut{\relax\ifmmode\copy\strutbox\else\unhcopy\strutbox\fi}
@@ -687,7 +764,7 @@
 \def\tabalign{\us@true\m@ketabbox} % non-\outer version of \+
 \outer\def\+{\tabalign}
 \def\s@tcols#1\columns{\count@#1\dimen@\hsize
-  \loop\ifnum\count@>\z@ \@nother \repeat}
+  \loop\ifnum\count@>0 \@nother \repeat}
 \def\@nother{\dimen@ii\dimen@ \divide\dimen@ii\count@
   \setbox\tabs\hbox{\hbox to\dimen@ii{}\unhbox\tabs}%
   \advance\dimen@-\dimen@ii \advance\count@-1}
@@ -696,19 +773,19 @@
   \global\setbox\tabsyet\copy\tabs
   \global\setbox\tabsdone\null
   \def\cr{\@crtrue\crcr\egroup\egroup
-    \ifus@\unvbox\z@\lastbox\fi\endgroup
+    \ifus@\unvbox0\lastbox\fi\endgroup
     \setbox\tabs\hbox{\unhbox\tabsyet\unhbox\tabsdone}}%
-  \setbox\z@\vbox\bgroup\@crfalse
+  \setbox0\vbox\bgroup\@crfalse
     \ialign\bgroup&\t@bbox##\t@bb@x\crcr}
 
-\def\t@bbox{\setbox\z@\hbox\bgroup}
-\def\t@bb@x{\if@cr\egroup % now \box\z@ holds the column
+\def\t@bbox{\setbox0\hbox\bgroup}
+\def\t@bb@x{\if@cr\egroup % now \box0 holds the column
   \else\hss\egroup \global\setbox\tabsyet\hbox{\unhbox\tabsyet
       \global\setbox1\lastbox}% now \box1 holds its size
-    \ifvoid1\global\setbox1\hbox to\wd\z@{}%
-    \else\setbox\z@\hbox to\wd1{\unhbox\z@}\fi
+    \ifvoid1\global\setbox1\hbox to\wd0{}%
+    \else\setbox0\hbox to\wd1{\unhbox0}\fi
     \global\setbox\tabsdone\hbox{\box1\unhbox\tabsdone}\fi
-  \box\z@}
+  \box0}
 
 \def\hang{\hangindent\parindent}
 \def\textindent#1{\indent\llap{#1\enspace}\ignorespaces}
@@ -717,15 +794,15 @@
 \def\narrower{\advance\leftskip\parindent
   \advance\rightskip\parindent}
 
-\outer\def\beginsection#1\par{\vskip\z@ plus.3\vsize\penalty-250
-  \vskip\z@ plus-.3\vsize\bigskip\vskip\parskip
+\outer\def\beginsection#1\par{\vskip0pt plus.3\vsize\penalty-250
+  \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
   \message{#1}\line{{\fam6\tenbf@#1}\hss}\nobreak\smallskip\noindent}
 \outer\def\proclaim #1. #2\par{\medbreak
   \noindent{\fam6\tenbf@#1.\enspace}{\fam5\tensl@#2\par}%
   \ifdim\lastskip<6pt plus 2pt minus 2pt \removelastskip\penalty55\medskip\fi}
 
-\def\raggedright{\rightskip\z@ plus2em \spaceskip.3333em \xspaceskip.5em\relax}
-\def\ttraggedright{\fam7\tentt@\rightskip\z@ plus2em\relax} % for use with \tt only
+\def\raggedright{\rightskip0pt plus2em \spaceskip.3333em \xspaceskip.5em\relax}
+\def\ttraggedright{\fam7\tentt@\rightskip0pt plus2em\relax} % for use with \tt only
 
 \chardef\%=`\%
 \chardef\&=`\&
@@ -753,7 +830,7 @@
 \def\Orb{\mathhexbox20D}
 
 \def\oalign#1{\leavevmode\vtop{\baselineskip\z@skip \lineskip.25ex%
-  \ialign{##\crcr#1\crcr}}} \def\o@lign{\lineskiplimit\z@ \oalign}
+  \ialign{##\crcr#1\crcr}}} \def\o@lign{\lineskiplimit0pt \oalign}
 \def\ooalign{\lineskiplimit-16383.99999pt \oalign} % chars over each
                                 % other (dimensão máxima)
 {\catcode`p=12 \catcode`t=12 \gdef\\#1pt{#1}} \let\getf@ctor=\\
@@ -762,8 +839,8 @@
 \def\d#1{{\o@lign{\relax#1\crcr\hidewidth\sh@ft{-1ex}.\hidewidth}}}
 \def\b#1{{\o@lign{\relax#1\crcr\hidewidth\sh@ft{-3ex}%
     \vbox to.2ex{\hbox{\char22}\vss}\hidewidth}}}
-\def\c#1{{\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent24 #1%
-  \else\ooalign{\unhbox\z@\crcr\hidewidth\char24\hidewidth}\fi}}
+\def\c#1{{\setbox0\hbox{#1}\ifdim\ht0=1ex\accent24 #1%
+  \else\ooalign{\unhbox0\crcr\hidewidth\char24\hidewidth}\fi}}
 \def\copyright{{\ooalign{\hfil\raise.07ex\hbox{c}\hfil\crcr\Orb}}}
 
 \def\dots{\relax\ifmmode\ldots\else$\m@th\ldots\,$\fi}
@@ -785,12 +862,12 @@
   \mkern-7mu\smash-$}
 \mathchardef\braceld="37A \mathchardef\bracerd="37B
 \mathchardef\bracelu="37C \mathchardef\braceru="37D
-\def\downbracefill{$\m@th \setbox\z@\hbox{$\braceld$}%
-  \braceld\leaders\vrule height\ht\z@ depth\z@\hfill\braceru
-  \bracelu\leaders\vrule height\ht\z@ depth\z@\hfill\bracerd$}
-\def\upbracefill{$\m@th \setbox\z@\hbox{$\braceld$}%
-  \bracelu\leaders\vrule height\ht\z@ depth\z@\hfill\bracerd
-  \braceld\leaders\vrule height\ht\z@ depth\z@\hfill\braceru$}
+\def\downbracefill{$\m@th \setbox0\hbox{$\braceld$}%
+  \braceld\leaders\vrule height\ht0 depth0pt\hfill\braceru
+  \bracelu\leaders\vrule height\ht0 depth0pt\hfill\bracerd$}
+\def\upbracefill{$\m@th \setbox0\hbox{$\braceld$}%
+  \bracelu\leaders\vrule height\ht0 depth0pt\hfill\bracerd
+  \braceld\leaders\vrule height\ht0 depth0pt\hfill\braceru$}
 
 % Macros for math setting
 \message{math definitions,}
@@ -1000,7 +1077,7 @@
 \mathchardef\colon="603A % colon as a punctuation mark
 \def\ldots{\mathinner{\ldotp\ldotp\ldotp}}
 \def\cdots{\mathinner{\cdotp\cdotp\cdotp}}
-\def\vdots{\vbox{\baselineskip4pt \lineskiplimit\z@
+\def\vdots{\vbox{\baselineskip4pt \lineskiplimit0pt
     \kern6pt\hbox{.}\hbox{.}\hbox{.}}}
 \def\ddots{\mathinner{\mkern1mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern2mu
     \raise4pt\hbox{.}\mkern2mu\raise1pt\hbox{.}\mkern1mu}}
@@ -1029,53 +1106,9 @@
 \def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
       $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3pt\prevdepth-1000pt}
       \upbracefill\crcr\noalign{\kern3pt}}}}\limits}
-\def\skew#1#2#3{{\muskip\z@#1mu\divide\muskip\z@2 \mkern\muskip\z@
+\def\skew#1#2#3{{\muskip0pt#1mu\divide\muskip\z@2 \mkern\muskip\z@
     #2{\mkern-\muskip\z@{#3}\mkern\muskip\z@}\mkern-\muskip\z@}{}}
 
-\def\lmoustache{\delimiter"437A340 } % top from (, bottom from )
-\def\rmoustache{\delimiter"537B341 } % top from ), bottom from (
-\def\lgroup{\delimiter"462833A } % extensible ( with sharper tips
-\def\rgroup{\delimiter"562933B } % extensible ) with sharper tips
-\def\arrowvert{\delimiter"26A33C } % arrow without arrowheads
-\def\Arrowvert{\delimiter"26B33D } % double arrow without arrowheads
-\def\bracevert{\delimiter"77C33E } % the vertical bar that extends braces
-\def\Vert{\delimiter"26B30D } \let\|=\Vert
-\def\vert{\delimiter"26A30C }
-\def\uparrow{\delimiter"3222378 }
-\def\downarrow{\delimiter"3223379 }
-\def\updownarrow{\delimiter"326C33F }
-\def\Uparrow{\delimiter"322A37E }
-\def\Downarrow{\delimiter"322B37F }
-\def\Updownarrow{\delimiter"326D377 }
-\def\backslash{\delimiter"26E30F } % for double coset G\backslash H
-\def\rangle{\delimiter"526930B }
-\def\langle{\delimiter"426830A }
-\def\rbrace{\delimiter"5267309 } \let\}=\rbrace
-\def\lbrace{\delimiter"4266308 } \let\{=\lbrace
-\def\rceil{\delimiter"5265307 }
-\def\lceil{\delimiter"4264306 }
-\def\rfloor{\delimiter"5263305 }
-\def\lfloor{\delimiter"4262304 }
-
-
-
-\def\bigl{\mathopen\big}
-\def\bigm{\mathrel\big}
-\def\bigr{\mathclose\big}
-\def\Bigl{\mathopen\Big}
-\def\Bigm{\mathrel\Big}
-\def\Bigr{\mathclose\Big}
-\def\biggl{\mathopen\bigg}
-\def\biggm{\mathrel\bigg}
-\def\biggr{\mathclose\bigg}
-\def\Biggl{\mathopen\Bigg}
-\def\Biggm{\mathrel\Bigg}
-\def\Biggr{\mathclose\Bigg}
-\def\big#1{{\hbox{$\left#1\vbox to8.5pt{}\right.\n@space$}}}
-\def\Big#1{{\hbox{$\left#1\vbox to11.5pt{}\right.\n@space$}}}
-\def\bigg#1{{\hbox{$\left#1\vbox to14.5pt{}\right.\n@space$}}}
-\def\Bigg#1{{\hbox{$\left#1\vbox to17.5pt{}\right.\n@space$}}}
-\def\n@space{\nulldelimiterspace\z@ \m@th}
 
 \def\choose{\atopwithdelims()}
 \def\brack{\atopwithdelims[]}
@@ -1120,45 +1153,6 @@
         $#1\leftharpoondown$}}}}
 \def\buildrel#1\over#2{\mathrel{\mathop{\kern\z@#2}\limits^{#1}}}
 \def\doteq{\buildrel\textstyle.\over=}
-
-\def\log{\mathop{\fam0\tenrm@ log}\nolimits}
-\def\lg{\mathop{\fam0\tenrm@ lg}\nolimits}
-\def\ln{\mathop{\fam0\tenrm@ ln}\nolimits}
-\def\lim{\mathop{\fam0\tenrm@ lim}}
-\def\limsup{\mathop{\fam0\tenrm@ lim\,sup}}
-\def\liminf{\mathop{\fam0\tenrm@ lim\,inf}}
-\def\sin{\mathop{\fam0\tenrm@ sin}\nolimits}
-\def\arcsin{\mathop{\fam0\tenrm@ arcsin}\nolimits}
-\def\sinh{\mathop{\fam0\tenrm@ sinh}\nolimits}
-\def\cos{\mathop{\fam0\tenrm@ cos}\nolimits}
-\def\arccos{\mathop{\fam0\tenrm@ arccos}\nolimits}
-\def\cosh{\mathop{\fam0\tenrm@ cosh}\nolimits}
-\def\tan{\mathop{\fam0\tenrm@ tan}\nolimits}
-\def\arctan{\mathop{\fam0\tenrm@ arctan}\nolimits}
-\def\tanh{\mathop{\fam0\tenrm@ tanh}\nolimits}
-\def\cot{\mathop{\fam0\tenrm@ cot}\nolimits}
-\def\coth{\mathop{\fam0\tenrm@ coth}\nolimits}
-\def\sec{\mathop{\fam0\tenrm@ sec}\nolimits}
-\def\csc{\mathop{\fam0\tenrm@ csc}\nolimits}
-\def\max{\mathop{\fam0\tenrm@ max}}
-\def\min{\mathop{\fam0\tenrm@ min}}
-\def\sup{\mathop{\fam0\tenrm@ sup}}
-\def\inf{\mathop{\fam0\tenrm@ inf}}
-\def\arg{\mathop{\fam0\tenrm@ arg}\nolimits}
-\def\ker{\mathop{\fam0\tenrm@ ker}\nolimits}
-\def\dim{\mathop{\fam0\tenrm@ dim}\nolimits}
-\def\hom{\mathop{\fam0\tenrm@ hom}\nolimits}
-\def\det{\mathop{\fam0\tenrm@ det}}
-\def\exp{\mathop{\fam0\tenrm@ exp}\nolimits}
-\def\Pr{\mathop{\fam0\tenrm@ Pr}}
-\def\gcd{\mathop{\fam0\tenrm@ gcd}}
-\def\deg{\mathop{\fam0\tenrm@ deg}\nolimits}
-
-\def\bmod{\nonscript\mskip-\medmuskip\mkern5mu
-  \mathbin{\fam0\tenrm@ mod}\penalty900\mkern5mu\nonscript\mskip-\medmuskip}
-\def\pmod#1{\allowbreak\mkern18mu({\fam0\tenrm@ mod}\,\,#1)}
-
-
 
 \def\cases#1{\left\{\,\vcenter{\lineskip1pt
   \baselineskip12pt \lineskiplimit0pt\m@th
@@ -1259,22 +1253,6 @@
     \ifp@ge \dimen@\dp\z@
     \vbox to\vsize{\unvbox\z@\kern-\dimen@}% depth is zero
     \else \box\z@\nobreak\bigskip\fi}\fi\endgroup}
-
-\def\footnoterule{\kern-3pt
-  \hrule width 2truein \kern 2.6pt} % the \hrule is .4pt high
-
-% Hyphenation, miscellaneous macros, and initial values for standard layout
-\message{hyphenation}
-
-\def\loggingall{\tracingcommands2\tracingstats2
-  \tracingpages1\tracingoutput1\tracinglostchars1
-  \tracingmacros2\tracingparagraphs1\tracingrestores1
-  \showboxbreadth16383.99999pt\showboxdepth16383.99999pt}%(max dimen)
-\def\tracingall{\tracingonline1\loggingall}
-
-\def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize16383.99999pt\tenrm@%(max
-                                %dimen)
-  \pretolerance-1\tolerance-1\hbadness0\showboxdepth0\ #1}}
 
 \fam0\tenrm@ % select roman font
 \catcode`@=12 % at signs are no longer letters
