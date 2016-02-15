@@ -316,24 +316,75 @@
     \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi%
   \fi}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               REGISTRADORES                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% magitex assume que registradores devem ser tratados apenas por
+% escritores de formato e pessoas que sabem bem o que estão fazendo. E
+% que cada formato deve documentar quais registradores usa. Comandos
+% do Plain TeX como \newcount podem ser abusados e podem exaurir o
+% espaço de registradores. Então será proposital não
+% declararmos \newcount, \newskip e outros comandos para dar nomes à
+% registradores sem especificar os números.
 
+% Os registradores de contagem de 0 à 9 são reservados. O 0 é o número
+% da página. O registrador 254 também é usado para o fator do quando
+% cada linha da inserção \footins@ afeta o espaço da página. Os demais
+% só são usados em formatos que de alguma forma precisam numerar
+% sub-páginas e não serão usados. Depois deles nós temos:
+\countdef\pageno@=0 \pageno@=1 % O número de página
+\countdef\interdisplaylinepenalty=10 \interdisplaylinepenalty=100
+\countdef\interfootnotelinepenalty=11 \interfootnotelinepenalty=100
+\countdef\mscount=12
+\countdef\count@=13
+% 254 reservado para \footins
 
+% Não há nenhum registrador de dimensão alocado pelas primitivas
+% TeX. Desta forma, temos todos à nossa disposição:
+\dimendef\maxdimen=0 \maxdimen=16383.99999pt % A dimensão máxima
+\dimendef\p@=1 \p@=1pt % this saves macro space and time
+\dimendef\z@=2 \z@=0pt % can be used both for 0pt and 0
+\dimendef\jot=3 \jot=3pt
+\dimendef\p@renwd=4
+\dimendef\dimen@=5
+\dimendef\dimen@i=6
+\dimendef\dimen@ii=7
+% 253 reservado para inserção \topins@
+% 254 reservado para inserção \footins@
+
+% Os registradores de skip. Nenhum é reservado e todos estão à
+% disposição:
+\skipdef\hideskip=0 \hideskip=-1000pt plus 1fill % negative but can grow
+\skipdef\centering=1 \centering=0pt plus 1000pt minus 1000pt
+\skipdef\z@skip=2 \z@skip=0pt plus0pt minus0pt
+\skipdef\skip@=3
+% 253 reservado para inserção \topins@
+% 254 reservado para inserção \footins@
+
+% Nenhum registrador de muskip é usado
+
+% Registradores de caixa estão todos à disposição, exceto o de número
+% 255:
+\def\voidb@x{0} % permanently void box register
+\def\strutbox{1} \setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt
+  width\z@}
+\def\tabs{2}
+\def\tabsyet{3}
+\def\tabsdone{4}
+\def\rootbox{5}
+% 253 reservado para inserção \topins@
+% 254 reservado para inserção \footins@
+
+% Agora reservamos os registradores de sequências de tokens:
+\toksdef\headline=0 \headline={\hfil} % Cabeçalho padrão em branco
+\toksdef\footline=1 \footline={\hss\tenrm@\folio\hss} % Rodapé padrão
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                ATRIBUIÇÕES                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Começamos com as sequências de controle que também são padrão no
+% Plain TeX:
 \def~{\penalty10000 \ }
-
-
-
-% Código que passa os padrões de separação silábica da língua
-% portuguesa:
-\patterns{1ba1 1be1 1bi1 1bo1 1bu1 1ca1 1ce1 1ci1 1co1 1cu1
-          1da1 1de1 1di1 1do1 1du1 1fa1 1fe1 1fi1 1fo1 1fu1
-          1ga1 1ge1 1gi1 1go1 1gu1 1ha1 1he1 1hi1 1ho1 1hu1
-          1ja1 1je1 1ji1 1jo1 1ju1 1ka1 1ke1 1ki1 1ko1 1ku1
-          1la1 1le1 1li1 1lo1 1lu1 1ma1 1me1 1mi1 1mo1 1mu1
-          1na1 1ne1 1ni1 1no1 1nu1 1pa1 1pe1 1pi1 1po1 1pu1
-          1qua1 1que1 1qui1 1quo1 1ra1 1re1 1ri1 1ro1 1ru1
-          1sa1 1se1 1si1 1so1 1su1 1ta1 1te1 1ti1 1to1 1tu1
-          1va1 1ve1 1vi1 1vo1 1vu1 1wa1 1we1 1wi1 1wo1 1wu1
-          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1}
 
 % Código para suportar os caracteres Computer Modern na fonte
 % UTF-8. Primeiro fazemos com que ^^c3 passe a ser um caractere ativo
@@ -404,6 +455,21 @@
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
+
+% Código que passa os padrões de separação silábica da língua
+% portuguesa:
+\patterns{1ba1 1be1 1bi1 1bo1 1bu1 1ca1 1ce1 1ci1 1co1 1cu1
+          1da1 1de1 1di1 1do1 1du1 1fa1 1fe1 1fi1 1fo1 1fu1
+          1ga1 1ge1 1gi1 1go1 1gu1 1ha1 1he1 1hi1 1ho1 1hu1
+          1ja1 1je1 1ji1 1jo1 1ju1 1ka1 1ke1 1ki1 1ko1 1ku1
+          1la1 1le1 1li1 1lo1 1lu1 1ma1 1me1 1mi1 1mo1 1mu1
+          1na1 1ne1 1ni1 1no1 1nu1 1pa1 1pe1 1pi1 1po1 1pu1
+          1qua1 1que1 1qui1 1quo1 1ra1 1re1 1ri1 1ro1 1ru1
+          1sa1 1se1 1si1 1so1 1su1 1ta1 1te1 1ti1 1to1 1tu1
+          1va1 1ve1 1vi1 1vo1 1vu1 1wa1 1we1 1wi1 1wo1 1wu1
+          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1}
+
+
 % Permitindo inserir acentos soltos, sem caracteres por meio
 % de \~, \^, etc. Estes comandos são diferentes do Plain TeX, pois não
 % receberão argumentos:
@@ -413,79 +479,15 @@
 % O comando para terminar um documento é \fim:
 \def\fim{\par\vfill\supereject\end}
 
-
-% magitex assume que registradores devem ser tratados apenas por
-% escritores de formato e pessoas que sabem bem o que estão fazendo. E
-% que cada formato deve documentar quais registradores usa. Comandos
-% do Plain TeX como \newcount podem ser abusados e podem exaurir o
-% espaço de registradores. Então será proposital não
-% declararmos \newcount, \newskip e outros comandos para dar nomes à
-% registradores sem especificar os números.
-
-% Os registradores de contagem de 0 à 9 são reservados. O 0 é o número
-% da página. O registrador 254 também é usado para o fator do quando
-% cada linha da inserção \footins@ afeta o espaço da página. Os demais
-% só são usados em formatos que de alguma forma precisam numerar
-% sub-páginas e não serão usados. Depois deles nós temos:
-\countdef\pageno@=0 \pageno@=1 % O número de página
-\countdef\interdisplaylinepenalty=10 \interdisplaylinepenalty=100
-\countdef\interfootnotelinepenalty=11 \interfootnotelinepenalty=100
-\countdef\mscount=12
-\countdef\count@=13
-% 254 reservado para \footins
-
-% Não há nenhum registrador de dimensão alocado pelas primitivas
-% TeX. Desta forma, temos todos à nossa disposição:
-\dimendef\maxdimen=0 \maxdimen=16383.99999pt % A dimensão máxima
-\dimendef\p@=1 \p@=1pt % this saves macro space and time
-\dimendef\z@=2 \z@=0pt % can be used both for 0pt and 0
-\dimendef\jot=3 \jot=3pt
-\dimendef\p@renwd=4
-\dimendef\dimen@=5
-\dimendef\dimen@i=6
-\dimendef\dimen@ii=7
-% 253 reservado para inserção \topins@
-% 254 reservado para inserção \footins@
-
-% Os registradores de skip. Nenhum é reservado e todos estão à
-% disposição:
-\skipdef\hideskip=0 \hideskip=-1000pt plus 1fill % negative but can grow
-\skipdef\centering=1 \centering=0pt plus 1000pt minus 1000pt
-\skipdef\z@skip=2 \z@skip=0pt plus0pt minus0pt
-\skipdef\smallskipamount=3 \smallskipamount=3pt plus 1pt minus 1pt
-\skipdef\medskipamount=4 \medskipamount=6pt plus 2pt minus 2pt
-\skipdef\bigskipamount=5 \bigskipamount=12pt plus 4pt minus 4pt
-\skipdef\skip@=6
-% 253 reservado para inserção \topins@
-% 254 reservado para inserção \footins@
-
-% Nenhum registrador de muskip é usado
-
-% Registradores de caixa estão todos à disposição, exceto o de número
-% 255:
-\def\voidb@x{0} % permanently void box register
-\def\strutbox{1} \setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt
-  width\z@}
-\def\tabs{2}
-\def\tabsyet{3}
-\def\tabsdone{4}
-\def\rootbox{5}
-% 253 reservado para inserção \topins@
-% 254 reservado para inserção \footins@
-
-% Agora reservamos os registradores de sequências de tokens:
-\toksdef\headline=0 \headline={\hfil} % Cabeçalho padrão em branco
-\toksdef\footline=1 \footline={\hss\tenrm@\folio\hss} % Rodapé padrão
-
 % E definimos os nomes de inserções:
 \def\footins@{254}
 \def\topins@{253}
 
 % Comandos de espaçamento
-\def\espacito{\kern .16667em } % Equivalente ao \thinspace do Plain TeX
-\def\espacinho{\vskip\smallskipamount}
-\def\espaco{\vskip\medskipamount}
-\def\espacao{\vskip\bigskipamount}
+\def\espacito{\kern .16667em} % Equivalente ao \thinspace do Plain TeX
+\def\espacinho{\vskip3pt plus 1pt minus 1pt}
+\def\espaco{\vskip6pt plus 2pt minus 2pt}
+\def\espacao{\vskip12pt plus 4pt minus 4pt}
 \def\espacoh#1{\hskip#1}
 \def\espacov#1{\vskip#1}
 
@@ -673,11 +675,11 @@
 \def\supereject{\par\penalty-20000}
 
 \def\removelastskip{\ifdim\lastskip=\z@\else\vskip-\lastskip\fi}
-\def\smallbreak{\par\ifdim\lastskip<\smallskipamount
+\def\smallbreak{\par\ifdim\lastskip<3pt plus 1pt minus 1pt
   \removelastskip\penalty-50\smallskip\fi}
-\def\medbreak{\par\ifdim\lastskip<\medskipamount
+\def\medbreak{\par\ifdim\lastskip<6pt plus 2pt minus 2pt
   \removelastskip\penalty-100\medskip\fi}
-\def\bigbreak{\par\ifdim\lastskip<\bigskipamount
+\def\bigbreak{\par\ifdim\lastskip<12pt plus 4pt minus 4pt
   \removelastskip\penalty-200\bigskip\fi}
 
 \def\rlap#1{\hbox to\z@{#1\hss}}
@@ -743,7 +745,7 @@
   \message{#1}\line{{\fam6\tenbf@#1}\hss}\nobreak\smallskip\noindent}
 \outer\def\proclaim #1. #2\par{\medbreak
   \noindent{\fam6\tenbf@#1.\enspace}{\fam5\tensl@#2\par}%
-  \ifdim\lastskip<\medskipamount \removelastskip\penalty55\medskip\fi}
+  \ifdim\lastskip<6pt plus 2pt minus 2pt \removelastskip\penalty55\medskip\fi}
 
 \def\raggedright{\rightskip\z@ plus2em \spaceskip.3333em \xspaceskip.5em\relax}
 \def\ttraggedright{\fam7\tentt@\rightskip\z@ plus2em\relax} % for use with \tt only
@@ -1256,7 +1258,7 @@
 \def\f@t#1{#1\@foot}
 \def\@foot{\strut\egroup}
 \def\footstrut{\vbox to\splittopskip{}}
-\skip\footins@=\bigskipamount % space added when footnote is present
+\skip\footins@=12pt plus 4pt minus 4pt % space added when footnote is present
 \count\footins@=1000 % footnote magnification factor (1 to 1)
 \dimen\footins@=8in % maximum footnotes per page
 
