@@ -285,9 +285,38 @@
 \medmuskip=4mu plus 2mu minus 4mu % Espaço médio em fórmulas matemáticas
 \thickmuskip=5mu plus 5mu % Espaço grande em fórmulas matemáticas
 % Parâmetros de lista de tokens:
-\output{\shipout\vbox{\makeheadline\pagebody\makefootline}%
-  \advancepageno
-  \ifnum\outputpenalty>-20000 \else\dosupereject\fi}
+\everypar{} % A ser executado em cada parágrafo
+\everymath{} % A ser executado em cada modo matemático
+\everydisplay{} % A ser executado em cada display
+\everyhbox{} % A ser executado em cada hbox
+\everyjob{} % A ser executado no preâmbulo de cada trabalho
+\everycr{} % A ser executado em cada \cr ou \crcr não-ignorado
+\errhelp{} % A ser executado após erros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% ROTINA DE SAÍDA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\output{\shipout\vbox{\vbox to 0pt{\vskip-22.5pt
+  \hbox to\hsize{% Início da headline
+  \vbox to 8.5pt{}\the\headline}\vss}\prevdepth-1000pt%
+  % Corpo:
+  \vbox to\vsize{\boxmaxdepth\maxdepth
+   \ifvoid\topins@\else\unvbox\topins@\fi
+   \dimen0=\dp255 \unvbox255 % open up \box255
+   \ifvoid\footins@\else % footnote info is present
+     \vskip\skip\footins@
+     \footnoterule
+     \unvbox\footins@\fi
+   \ifr@ggedbottom \kern-\dimen0 \vfil \fi}%
+  % Rodapé:
+  \baselineskip24pt\lineskiplimit\z@\hbox to\hsize{\the\footline}}%
+  % Lógica do número de página
+  \ifnum\pageno@<0 \global\advance\pageno@ by -1
+  \else\global\advance\pageno@ by 1 \fi
+  \ifnum\outputpenalty>-20000 \else%
+  % Supereject:
+  \ifnum\insertpenalties>0 % something is being held over
+    \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi%
+  \fi}
+
+
 
 \def~{\penalty10000 \ }
 
@@ -1210,8 +1239,6 @@
 \def\normalbottom{\topskip 10\p@ \r@ggedbottomfalse} % undoes \raggedbottom
 \def\folio{\ifnum\pageno@<\z@ \romannumeral-\pageno@ \else\number\pageno@ \fi}
 \def\nopagenumbers{\footline{\hfil}} % blank out the footline
-\def\advancepageno{\ifnum\pageno@<\z@ \global\advance\pageno@\m@ne
-  \else\global\advance\pageno@1 \fi} % increase |pageno|
 
 
 \def\footnote#1{\let\@sf\empty % parameter #2 (the text) is read later
@@ -1253,20 +1280,6 @@
     \vbox to\vsize{\unvbox\z@\kern-\dimen@}% depth is zero
     \else \box\z@\nobreak\bigskip\fi}\fi\endgroup}
 
-\def\pagebody{\vbox to\vsize{\boxmaxdepth\maxdepth \pagecontents}}
-\def\makeheadline{\vbox to\z@{\vskip-22.5\p@
-  \hbox to\hsize{\vbox to8.5\p@{}\the\headline}\vss}\prevdepth-1000pt}
-\def\makefootline{\baselineskip24\p@\lineskiplimit\z@\hbox to\hsize{\the\footline}}
-\def\dosupereject{\ifnum\insertpenalties>\z@ % something is being held over
-  \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi}
-
-\def\pagecontents{\ifvoid\topins@\else\unvbox\topins@\fi
-  \dimen@=\dp255 \unvbox255 % open up \box255
-  \ifvoid\footins@\else % footnote info is present
-    \vskip\skip\footins@
-    \footnoterule
-    \unvbox\footins@\fi
-  \ifr@ggedbottom \kern-\dimen@ \vfil \fi}
 \def\footnoterule{\kern-3\p@
   \hrule width 2truein \kern 2.6\p@} % the \hrule is .4pt high
 
