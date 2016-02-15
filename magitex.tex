@@ -559,7 +559,6 @@
 % Gera uma linha horizontal:
 \def\linha{{\hrule}}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -568,13 +567,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Allocation of registers
-
-\countdef\m@ne=22 \m@ne=-1 % a handy constant
-
 % And here's a different sort of allocation:
 % For example, \newif\iffoo creates \footrue, \foofalse to go with \iffoo.
-\outer\def\newif#1{\count@\escapechar \escapechar\m@ne
+\outer\def\newif#1{\count@\escapechar \escapechar-1
   \expandafter\expandafter\expandafter
    \def\@if#1{true}{\let#1=\iftrue}%
   \expandafter\expandafter\expandafter
@@ -582,18 +577,6 @@
   \@if#1{false}\escapechar\count@} % the condition starts out false
 \def\@if#1#2{\csname\expandafter\if@\string#1#2\endcsname}
 {\uccode`1=`i \uccode`2=`f \uppercase{\gdef\if@12{}}} % `if' is required
-
-% Assign initial values to TeX's parameters
-
-\message{parameters,}
-
-% We also define special registers that function like parameters:
-
-
-% Fonts assigned to \preloaded are not part of "plain TeX",
-% but they are preloaded so that other format packages can use them.
-% For example, if another set of macros says "\font\ninerm=cmr9",
-% TeX will not have to reload the font metric information for cmr9.
 
 
 \message{more fonts,}
@@ -696,7 +679,7 @@
 \def\ialign{\everycr{}\tabskip\z@skip\halign} % initialized \halign
 \def\multispan#1{\omit \mscount#1\relax
   \loop\ifnum\mscount>1 \sp@n\repeat}
-\def\sp@n{\span\omit\advance\mscount\m@ne}
+\def\sp@n{\span\omit\advance\mscount-1}
 
 \newif\ifus@ \newif\if@cr
 
@@ -713,7 +696,7 @@
   \loop\ifnum\count@>\z@ \@nother \repeat}
 \def\@nother{\dimen@ii\dimen@ \divide\dimen@ii\count@
   \setbox\tabs\hbox{\hbox to\dimen@ii{}\unhbox\tabs}%
-  \advance\dimen@-\dimen@ii \advance\count@\m@ne}
+  \advance\dimen@-\dimen@ii \advance\count@-1}
 
 \def\m@ketabbox{\begingroup
   \global\setbox\tabsyet\copy\tabs
@@ -1295,7 +1278,7 @@
 \def\tracingall{\tracingonline1\loggingall}
 
 \def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize\maxdimen\tenrm@
-  \pretolerance\m@ne\tolerance\m@ne\hbadness0\showboxdepth0\ #1}}
+  \pretolerance-1\tolerance-1\hbadness0\showboxdepth0\ #1}}
 
 \fam0\tenrm@ % select roman font
 \catcode`@=12 % at signs are no longer letters
