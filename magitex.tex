@@ -236,6 +236,7 @@
                   % mostradas
 \showboxdepth=3   % Nível máximo quando caixas são mostradas
 \errorcontextlines=0 % Contexto extra máximo mostrado quando erros são
+
                      % mostrados
 % Parâmetros de dimensões:
 \hfuzz=0.1pt % Tolerância à caixas superlotadas em modo horizontal
@@ -333,22 +334,18 @@
 % só são usados em formatos que de alguma forma precisam numerar
 % sub-páginas e não serão usados. Depois deles nós temos:
 \countdef\pageno@=0 \pageno@=1 % O número de página
-\countdef\interdisplaylinepenalty=10 \interdisplaylinepenalty=100
-\countdef\interfootnotelinepenalty=11 \interfootnotelinepenalty=100
-\countdef\mscount=12
-\countdef\count@=13
+\countdef\mscount=10
+\countdef\count@=11
 % 254 reservado para \footins
 
 % Não há nenhum registrador de dimensão alocado pelas primitivas
 % TeX. Desta forma, temos todos à nossa disposição:
-\dimendef\maxdimen=0 \maxdimen=16383.99999pt % A dimensão máxima
-\dimendef\p@=1 \p@=1pt % this saves macro space and time
-\dimendef\z@=2 \z@=0pt % can be used both for 0pt and 0
-\dimendef\jot=3 \jot=3pt
-\dimendef\p@renwd=4
-\dimendef\dimen@=5
-\dimendef\dimen@i=6
-\dimendef\dimen@ii=7
+\dimendef\z@=0 \z@=0pt % can be used both for 0pt and 0
+\dimendef\jot=1 \jot=3pt
+\dimendef\p@renwd=2
+\dimendef\dimen@=3
+\dimendef\dimen@i=4
+\dimendef\dimen@ii=5
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
@@ -475,6 +472,9 @@
 % receberão argumentos:
 \def\~{\accent"7E\ }\def\"{\accent"7F\ }\def\'{\accent19\ }
 \def\^{\accent94\ }\def\`{\accent18\ }
+% Enter e Tab serão espaços:
+\def\^^M{\ }
+\def\^^I{\ }
 
 % O comando para terminar um documento é \fim:
 \def\fim{\par\vfill\supereject\end}
@@ -601,12 +601,6 @@
 
 
 % Macros for setting ordinary text
-\message{macros,}
-
-\def\^^M{\ } % control <return> = control <space>
-\def\^^I{\ } % same for <tab>
-
-\def\lbrack{[} \def\rbrack{]}
 
 \let\endgraf=\par \let\endline=\cr
 
@@ -635,8 +629,8 @@
 \def\quad{\hskip1em\relax}
 \def\qquad{\hskip2em\relax}
 
-\def\offinterlineskip{\baselineskip-1000\p@
-  \lineskip\z@ \lineskiplimit\maxdimen}
+\def\offinterlineskip{\baselineskip-1000pt
+  \lineskip\z@ \lineskiplimit16383.99999pt} % Dimensão máxima
 
 \def\topglue{\prevdepth-1000pt\vglue-\topskip\vglue} % for top of page
 \def\vglue{\afterassignment\vgl@\skip@=}
@@ -760,7 +754,8 @@
 
 \def\oalign#1{\leavevmode\vtop{\baselineskip\z@skip \lineskip.25ex%
   \ialign{##\crcr#1\crcr}}} \def\o@lign{\lineskiplimit\z@ \oalign}
-\def\ooalign{\lineskiplimit-\maxdimen \oalign} % chars over each other
+\def\ooalign{\lineskiplimit-16383.99999pt \oalign} % chars over each
+                                % other (dimensão máxima)
 {\catcode`p=12 \catcode`t=12 \gdef\\#1pt{#1}} \let\getf@ctor=\\
 \def\sh@ft#1{\dimen@#1\kern\expandafter\getf@ctor\the\fontdimen1\font
   \dimen@} % kern by #1 times the current slant
@@ -1005,10 +1000,10 @@
 \mathchardef\colon="603A % colon as a punctuation mark
 \def\ldots{\mathinner{\ldotp\ldotp\ldotp}}
 \def\cdots{\mathinner{\cdotp\cdotp\cdotp}}
-\def\vdots{\vbox{\baselineskip4\p@ \lineskiplimit\z@
-    \kern6\p@\hbox{.}\hbox{.}\hbox{.}}}
-\def\ddots{\mathinner{\mkern1mu\raise7\p@\vbox{\kern7\p@\hbox{.}}\mkern2mu
-    \raise4\p@\hbox{.}\mkern2mu\raise\p@\hbox{.}\mkern1mu}}
+\def\vdots{\vbox{\baselineskip4pt \lineskiplimit\z@
+    \kern6pt\hbox{.}\hbox{.}\hbox{.}}}
+\def\ddots{\mathinner{\mkern1mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern2mu
+    \raise4pt\hbox{.}\mkern2mu\raise1pt\hbox{.}\mkern1mu}}
 
 \def\acute{\mathaccent"7013 }
 \def\grave{\mathaccent"7012 }
@@ -1023,17 +1018,17 @@
 \def\widetilde{\mathaccent"0365 }
 \def\widehat{\mathaccent"0362 }
 \def\overrightarrow#1{\vbox{\m@th\ialign{##\crcr
-      \rightarrowfill\crcr\noalign{\kern-\p@\prevdepth-1000pt}
+      \rightarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}
 \def\overleftarrow#1{\vbox{\m@th\ialign{##\crcr
-      \leftarrowfill\crcr\noalign{\kern-\p@\prevdepth-1000pt}
+      \leftarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}
-\def\overbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3\p@}
-      \downbracefill\crcr\noalign{\kern3\p@\prevdepth-1000pt}
+\def\overbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3pt}
+      \downbracefill\crcr\noalign{\kern3pt\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
 \def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
-      $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3\p@\prevdepth-1000pt}
-      \upbracefill\crcr\noalign{\kern3\p@}}}}\limits}
+      $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3pt\prevdepth-1000pt}
+      \upbracefill\crcr\noalign{\kern3pt}}}}\limits}
 \def\skew#1#2#3{{\muskip\z@#1mu\divide\muskip\z@2 \mkern\muskip\z@
     #2{\mkern-\muskip\z@{#3}\mkern\muskip\z@}\mkern-\muskip\z@}{}}
 
@@ -1076,10 +1071,10 @@
 \def\Biggl{\mathopen\Bigg}
 \def\Biggm{\mathrel\Bigg}
 \def\Biggr{\mathclose\Bigg}
-\def\big#1{{\hbox{$\left#1\vbox to8.5\p@{}\right.\n@space$}}}
-\def\Big#1{{\hbox{$\left#1\vbox to11.5\p@{}\right.\n@space$}}}
-\def\bigg#1{{\hbox{$\left#1\vbox to14.5\p@{}\right.\n@space$}}}
-\def\Bigg#1{{\hbox{$\left#1\vbox to17.5\p@{}\right.\n@space$}}}
+\def\big#1{{\hbox{$\left#1\vbox to8.5pt{}\right.\n@space$}}}
+\def\Big#1{{\hbox{$\left#1\vbox to11.5pt{}\right.\n@space$}}}
+\def\bigg#1{{\hbox{$\left#1\vbox to14.5pt{}\right.\n@space$}}}
+\def\Bigg#1{{\hbox{$\left#1\vbox to17.5pt{}\right.\n@space$}}}
 \def\n@space{\nulldelimiterspace\z@ \m@th}
 
 \def\choose{\atopwithdelims()}
@@ -1115,7 +1110,7 @@
 \def\finsm@sh{\ht\z@\z@ \dp\z@\z@ \box\z@}
 
 \def\cong{\mathrel{\mathpalette\@vereq\sim}} % congruence sign
-\def\@vereq#1#2{\lower.5\p@\vbox{\lineskiplimit\maxdimen\lineskip-.5\p@
+\def\@vereq#1#2{\lower.5pt\vbox{\lineskiplimit16383.99999pt\lineskip-.5pt% dimensão maxima
     \ialign{$\m@th#1\hfil##\hfil$\crcr#2\crcr=\crcr}}}
 \def\notin{\mathrel{\mathpalette\c@ncel\in}}
 \def\c@ncel#1#2{\m@th\ooalign{$\hfil#1\mkern1mu/\hfil$\crcr$#1#2$}}
@@ -1176,15 +1171,15 @@
 \def\pmatrix#1{\left(\matrix{#1}\right)}
 \setbox0=\hbox{\tenex@ B} \p@renwd=\wd0 % width of the big left (
 \def\bordermatrix#1{\begingroup \m@th
-  \setbox\z@\vbox{\def\cr{\crcr\noalign{\kern2\p@\global\let\cr\endline}}%
-    \ialign{$##$\hfil\kern2\p@\kern\p@renwd&\espacinho\hfil$##$\hfil
+  \setbox\z@\vbox{\def\cr{\crcr\noalign{\kern2pt\global\let\cr\endline}}%
+    \ialign{$##$\hfil\kern2pt\kern\p@renwd&\espacinho\hfil$##$\hfil
       &&\quad\hfil$##$\hfil\crcr
       \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
       #1\crcr\omit\strut\cr}}%
   \setbox2\vbox{\unvcopy\z@\global\setbox1\lastbox}%
   \setbox2\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
   \setbox2\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
-    \global\setbox1\vbox{\box1\kern2\p@}%
+    \global\setbox1\vbox{\box1\kern2pt}%
     \vcenter{\kern-\ht1\unvbox\z@\kern-\baselineskip}\,\right)$}%
   \null\;\vbox{\kern\ht1\box2}\endgroup}
 
@@ -1197,9 +1192,9 @@
       \crcr#1\crcr}}\,}
 \newif\ifdt@p
 \def\displ@y{\global\dt@ptrue\openup\jot\m@th
-  \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000\p@
+  \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000pt
       \vskip-\lineskiplimit \vskip0pt \fi
-      \else \penalty\interdisplaylinepenalty \fi}}}
+      \else \penalty100 \fi}}}
 \def\@lign{\tabskip\z@skip\everycr{}} % restore inside \displ@y
 \def\displaylines#1{\displ@y \tabskip\z@skip
   \halign{\hbox to\displaywidth{$\@lign\hfil\displaystyle##\hfil$}\crcr
@@ -1220,8 +1215,8 @@
 \message{output routines,}
 
 \newif\ifr@ggedbottom
-\def\raggedbottom{\topskip 10\p@ plus60\p@ \r@ggedbottomtrue}
-\def\normalbottom{\topskip 10\p@ \r@ggedbottomfalse} % undoes \raggedbottom
+\def\raggedbottom{\topskip 10pt plus60pt \r@ggedbottomtrue}
+\def\normalbottom{\topskip 10pt \r@ggedbottomfalse} % undoes \raggedbottom
 \def\folio{\ifnum\pageno@<\z@ \romannumeral-\pageno@ \else\number\pageno@ \fi}
 \def\nopagenumbers{\footline{\hfil}} % blank out the footline
 
@@ -1230,7 +1225,7 @@
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
   #1\@sf\vfootnote{#1}}
 \def\vfootnote#1{\insert\footins@\bgroup
-  \interlinepenalty\interfootnotelinepenalty
+  \interlinepenalty100
   \splittopskip\ht\strutbox % top baseline for broken footnotes
   \splitmaxdepth\dp\strutbox \floatingpenalty20000
   \leftskip\z@skip \rightskip\z@skip \spaceskip\z@skip \xspaceskip\z@skip
@@ -1251,22 +1246,22 @@
 \def\pageinsert{\@midfalse\p@getrue\@ins}
 \skip\topins@=\z@skip % no space added when a topinsert is present
 \count\topins@=1000 % magnification factor (1 to 1)
-\dimen\topins@=\maxdimen % no limit per page
+\dimen\topins@=16383.99999pt % (dimensão máxima) no limit per page
 \def\@ins{\par\begingroup\setbox\z@\vbox\bgroup} % start a \vbox
 \def\endinsert{\egroup % finish the \vbox
-  \if@mid \dimen@\ht\z@ \advance\dimen@\dp\z@ \advance\dimen@12\p@
+  \if@mid \dimen@\ht\z@ \advance\dimen@\dp\z@ \advance\dimen@12pt
     \advance\dimen@\pagetotal \advance\dimen@-\pageshrink
     \ifdim\dimen@>\pagegoal\@midfalse\p@gefalse\fi\fi
   \if@mid \bigskip\box\z@\bigbreak
   \else\insert\topins@{\penalty100 % floating insertion
     \splittopskip\z@skip
-    \splitmaxdepth\maxdimen \floatingpenalty\z@
+    \splitmaxdepth16383.99999pt \floatingpenalty\z@% (max dimen)
     \ifp@ge \dimen@\dp\z@
     \vbox to\vsize{\unvbox\z@\kern-\dimen@}% depth is zero
     \else \box\z@\nobreak\bigskip\fi}\fi\endgroup}
 
-\def\footnoterule{\kern-3\p@
-  \hrule width 2truein \kern 2.6\p@} % the \hrule is .4pt high
+\def\footnoterule{\kern-3pt
+  \hrule width 2truein \kern 2.6pt} % the \hrule is .4pt high
 
 % Hyphenation, miscellaneous macros, and initial values for standard layout
 \message{hyphenation}
@@ -1274,10 +1269,11 @@
 \def\loggingall{\tracingcommands2\tracingstats2
   \tracingpages1\tracingoutput1\tracinglostchars1
   \tracingmacros2\tracingparagraphs1\tracingrestores1
-  \showboxbreadth\maxdimen\showboxdepth\maxdimen}
+  \showboxbreadth16383.99999pt\showboxdepth16383.99999pt}%(max dimen)
 \def\tracingall{\tracingonline1\loggingall}
 
-\def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize\maxdimen\tenrm@
+\def\showhyphens#1{\setbox0\vbox{\parfillskip\z@skip\hsize16383.99999pt\tenrm@%(max
+                                %dimen)
   \pretolerance-1\tolerance-1\hbadness0\showboxdepth0\ #1}}
 
 \fam0\tenrm@ % select roman font
