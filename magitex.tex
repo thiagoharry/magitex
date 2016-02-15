@@ -1,8 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    ATRIBUIÇÃO DE CÓDIGOS À CARACTERES                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Nossos códigos de categoria são iguais aos do Plain TeX, exceto por
 % não suportarmos os caracteres ASCII de seta para cima e para baixo
 % como sobrescrito e subscrito. Atualmente não há teclados com tais
 % símbolos sendo encontrados por aí.
-
 \catcode`\{=1
 \catcode`\}=2
 \catcode`\$=3
@@ -12,14 +15,14 @@
 \catcode`\_=8
 \catcode`\^^I=10
 \catcode`\~=13
-\def~{\penalty10000 \ }
-
 % Assim como na definição do Plain TeX, vamos reservar o @ para atuar
 % temporariamente como letra e assim podermos reservar comandos
 % privados que terão '@' no nome e que não poderão ser geralmente
 % sobrescritos ou usados por um usuário. Depois faremos com que o @
 % volte a ser uma marca de pontuação.
 \catcode`@=11
+% O seguinte catcode nos ajuda a interpretar caracteres UTF-8:
+\catcode`\^^c3=13
 
 % Usamos as mesmas configurações do fator de espaço que o Plain TeX. O
 % espaço após o ')' é igual ao espaço do que vem antes dele, e o mesmo
@@ -63,99 +66,6 @@
 \lccode`^^9b=`^^bb\uccode`^^bb=`^^9b\lccode`^^bb=`^^bb\uccode`^^9b=`^^9b % Û - û
 \lccode`^^9c=`^^bc\uccode`^^bc=`^^9c\lccode`^^bc=`^^bc\uccode`^^9c=`^^9c % Ü - ü
 \lccode`^^9d=`^^bd\uccode`^^bd=`^^9d\lccode`^^bd=`^^bd\uccode`^^9d=`^^9d % Ý - ý
-
-% Código que passa os padrões de separação silábica da língua
-% portuguesa:
-\patterns{1ba1 1be1 1bi1 1bo1 1bu1 1ca1 1ce1 1ci1 1co1 1cu1
-          1da1 1de1 1di1 1do1 1du1 1fa1 1fe1 1fi1 1fo1 1fu1
-          1ga1 1ge1 1gi1 1go1 1gu1 1ha1 1he1 1hi1 1ho1 1hu1
-          1ja1 1je1 1ji1 1jo1 1ju1 1ka1 1ke1 1ki1 1ko1 1ku1
-          1la1 1le1 1li1 1lo1 1lu1 1ma1 1me1 1mi1 1mo1 1mu1
-          1na1 1ne1 1ni1 1no1 1nu1 1pa1 1pe1 1pi1 1po1 1pu1
-          1qua1 1que1 1qui1 1quo1 1ra1 1re1 1ri1 1ro1 1ru1
-          1sa1 1se1 1si1 1so1 1su1 1ta1 1te1 1ti1 1to1 1tu1
-          1va1 1ve1 1vi1 1vo1 1vu1 1wa1 1we1 1wi1 1wo1 1wu1
-          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1}
-
-% Código para suportar os caracteres Computer Modern na fonte
-% UTF-8. Primeiro fazemos com que ^^c3 passe a ser um caractere ativo
-% que passa a se comportar como um comando (tal como o ~). Este
-% caractere é o prefixo de tudo quanto é letra acentuada e Cs com
-% cedilhas. Em seguida, definimos o ``comando'' ^^c3 para olhar pelo
-% caractere seguinte e, baseado nele, inserir o caractere adequado.
-
-%TODO: ç e Ç sem \c
-\catcode`\^^c3=13
-\def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign (TeXbook)
-        \ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
-        \else\ifx#1^^81\ifmmode{\acute A}\else{\accent19A}\fi% Á
-        \else\ifx#1^^82\ifmmode{\hat A}\else{\accent94A}\fi% Â
-        \else\ifx#1^^83\ifmmode{\tilde A}\else{\accent"7EA}\fi% Ã
-        \else\ifx#1^^84\ifmmode{\ddot A}\else{\accent"7FA}\fi% Ä
-        \else\ifx#1^^85\ifmmode{\hbox{\tenit@\AA}}\else{\AA}\fi
-        \else\ifx#1^^86\ifmmode{\hbox{\tenit@\char"1D}}\else\char"1D\fi
-        \else\ifx#1^^87\ifmmode\hbox{\tenit@\c C}\else\c C{}\fi % TODO
-        \else\ifx#1^^88\ifmmode\hbox{\accent18E}\else{\accent18E}\fi%
-        \else\ifx#1^^89\ifmmode{\acute E}\else{\accent19E}\fi% É
-        \else\ifx#1^^8a\ifmmode{\hat E}\else{\accent94E}\fi% Ê
-        \else\ifx#1^^8b\ifmmode{\ddot E}\else{\accent"7FE}\fi% Ë
-        \else\ifx#1^^8c\ifmmode\hbox{\tenit@\accent18I}\else{\accent18I}\fi% Ì
-        \else\ifx#1^^8d\ifmmode{\acute I}\else{\accent19I}\fi% Í
-        \else\ifx#1^^8e\ifmmode{\hat I}\else{\accent94I}\fi% Î
-        \else\ifx#1^^8f\ifmmode{\ddot I}\else{\accent"7FI}\fi% Ï
-        \else\ifx#1^^91\ifmmode{\tilde N}\else{\accent"7EN}\fi% Ñ
-        \else\ifx#1^^92\ifmmode\hbox{\tenit@\accent18O}\else{\accent18O}\fi% Ò
-        \else\ifx#1^^93\ifmmode{\acute O}\else{\accent19O}\fi% Ó
-        \else\ifx#1^^94\ifmmode{\hat O}\else{\accent94O}\fi% Ô
-        \else\ifx#1^^95\ifmmode{\tilde O}\else{\accent"7EO}\fi% Õ
-        \else\ifx#1^^96\ifmmode{\ddot O}\else{\accent"7FO}\fi% Ö
-        \else\ifx#1^^98\ifmmode\hbox{\tenit@\char"1F}\else\char"1F\fi% \O
-        \else\ifx#1^^99\ifmmode\hbox{\tenit@\accent18U}\else{\accent18U}\fi% Ù
-        \else\ifx#1^^9a\ifmmode{\acute U}\else{\accent19U}\fi% Ú
-        \else\ifx#1^^9b\ifmmode{\hat U}\else{\accent94U}\fi% Û
-        \else\ifx#1^^9c\ifmmode{\ddot U}\else{\accent"7FU}\fi% Ü
-        \else\ifx#1^^9d\ifmmode{\acute Y}\else{\accent19Y}\fi% Ý
-        \else\ifx#1^^a0\ifmmode\hbox{\tenit@\accent18a}\else{\accent18a}\fi% à
-        \else\ifx#1^^a1\ifmmode{\acute a}\else{\accent19a}\fi% á
-        \else\ifx#1^^a2\ifmmode{\hat a}\else{\accent94a}\fi% â
-        \else\ifx#1^^a3\ifmmode{\tilde a}\else{\accent"7Ea}\fi% ã
-        \else\ifx#1^^a4\ifmmode{\ddot a}\else{\accent"7Fa}\fi% ä
-        \else\ifx#1^^a5\ifmmode\hbot{\tenit@\aa}\else\aa{}\fi
-        \else\ifx#1^^a6\ifmmode\hbox{\tenit@\char"1A}\else\char"1A\fi%
-        \else\ifx#1^^a7\ifmmode\hbox{\tenit@\c c}\else\c c\fi
-        \else\ifx#1^^a8\ifmmode\hbox{\tenit@\accent18e}\else{\accent18e}\fi% è
-        \else\ifx#1^^a9\ifmmode{\acute e}\else{\accent19e}\fi% é
-        \else\ifx#1^^aa\ifmmode{\hat e}\else{\accent94e}\fi% ê
-        \else\ifx#1^^ab\ifmmode{\ddot e}\else{\accent"7Fe}\fi% ë
-        \else\ifx#1^^ac\ifmmode\hbox{\tenit@\accent18\i}\else{\accent18\i}\fi% ì
-        \else\ifx#1^^ad\ifmmode\hbox{\tenit@\accent19\i}\else{\accent19\i}\fi% í
-        \else\ifx#1^^ae\ifmmode\hbox{\tenit@\accent94\i}\else{\accent94\i}\fi% î
-        \else\ifx#1^^af\ifmmode\hbox{\tenit@\accent"7F\i}\else{\accent"7F\i}\fi% ï
-        \else\ifx#1^^b1\ifmmode{\tilde n}\else{\accent"7En}\fi% ñ
-        \else\ifx#1^^b2\ifmmode\hbox{\tenit@\accent18o}\else{\accent18o}\fi% ò
-        \else\ifx#1^^b3\ifmmode{\acute o}\else{\accent19o}\fi% ó
-        \else\ifx#1^^b4\ifmmode{\hat o}\else{\accent94o}\fi% ô
-        \else\ifx#1^^b5\ifmmode{\tilde o}\else{\accent"7Eo}\fi% õ
-        \else\ifx#1^^b6\ifmmode{\ddot o}\else{\accent"7Fo}\fi% ö
-        \else\ifx#1^^b8\ifmmode\hbox{\tenit@\char"1C}\else\char"1C\fi% \o
-        \else\ifx#1^^b9\ifmmode\hbox{\tenit@\accent18u}\else{\accent18u}\fi% ù
-        \else\ifx#1^^ba\ifmmode{\acute u}\else{\accent19u}\fi% ú
-        \else\ifx#1^^bb\ifmmode{\hat u}\else{\accent94u}\fi% û
-        \else\ifx#1^^bc\ifmmode{\ddot u}\else{\accent"7Fu}\fi% ü
-        \else\ifx#1^^bd\ifmmode{\acute y}\else{\accent19y}\fi% ý
-        \else\ifx#1^^bf\ifmmode{\ddot y}\else{\accent"7FY}\fi% ÿ
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
-
-% Permitindo inserir acentos soltos, sem caracteres por meio
-% de \~, \^, etc. Estes comandos são diferentes do Plain TeX, pois não
-% receberão argumentos:
-\def\~{\accent"7E\ }\def\"{\accent"7F\ }\def\'{\accent19\ }
-\def\^{\accent94\ }\def\`{\accent18\ }
-
-% O comando para terminar um documento é \fim:
-\def\fim{\par\vfill\supereject\end}
 
 % Os códigos dos caracteres matemáticos não serão modificados. Como o
 % modo matemático do TeX e LaTeX são em si mesmo uma linguagem própria
@@ -236,6 +146,244 @@
 \delcode`\/="02F30E
 \delcode`\|="26A30C
 \delcode`\\="26E30F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    ATRIBUIÇÃO DE PARÂMETROS INTERNOS                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parâmetros inteiros
+\pretolerance=100 % Tolerância da 1a tentativa de gerar parágrafo sem \-
+\tolerance=200    % Tolerância final de parágrafos.
+\hbadness=1000    % Badness com valor tão alto sempre é reportada
+\vbadness=1000    % Idem, mas no modo vertical
+
+\linepenalty=10     % Ampliar isso reduz o  número de linhas
+\hyphenpenalty=50   % Penalidade de separação silábica na quebra de linha
+\exhyphenpenalty=50 % Idem, mas no caso em que a palavra muda na quebra
+\binoppenalty=700   % Dificuldade de quebra de linha após operadores matemáticos
+\relpenalty=500     % Idem, mas após operadores de relação como >
+\clubpenalty=150    % Penalidade de quebra de página após 1a linha de parágrafo
+\widowpenalty=150   % Idem, mas antes da última linha de parágrafo
+\displaywidowpenalty=50 % Penalidade da penúltima linha antes de display
+\brokenpenalty=100  % Penalidade vertical de separação silábica na
+                    % penúltima linha
+\predisplaypenalty=10000 % Penalidade de quebra antes de equações em
+                        % display
+\postdisplaypenalty=0 % Penalidade após um display matemático
+\interlinepenalty=0   % Penalidade de quebra de página entre linhas
+                      % comuns
+\floatingpenalty=0  % Este valor é mudado em cada inserção
+\outputpenalty=0    % E este é ajustado em cada saída.
+\doublehyphendemerits=10000 % Deméritos adicionados se duas linhas
+                            % seguidas separam sílabas
+\finalhyphendemerits=5000 % Deméritos adicionais se penúltima linha
+                          % separa sílabas
+\adjdemerits=10000 % Deméritos adicionais se duas linhas seguidas são
+                   % visualmente incompatíveis
+
+\looseness=0 % Ajustado para 0 depois de cada parágrafo. Tenta tornar
+             % o parágrafo atual o seu valor mais longo em número de
+             % linhas.
+\pausing=0   % Se precisamos pausar após ler cada linha de arquivo
+
+\holdinginserts=0 % Se maior que 0, as inserções feitas são
+                  % permanentes em cada página
+
+\tracingonline=0 % Se positivo, mensagens de depuração vão pro terminal
+\tracingmacros=0 % Se positivo, gera mensagem de depuração de macros
+\tracingstats=0 % Se positivo, gera depuração de quanta memória é usada
+\tracingparagraphs=0 % Se positivo, mostra depuração sobre tentativas
+                     % de gerar parágrafo
+\tracingpages=0 % Se positivo, mostra depuração sobre tentativas de
+                % quebrar página
+\tracingoutput=0 % Se positivo, gera depuração da caixa que vai pra \output
+\tracinglostchars=1 % Se positivo, gera avisos sobre caracteres não
+                    % encontrados na fonte atual
+\tracingcommands=0 % Se positivo, mostra os comandos que vão sendo
+                   % executados
+\tracingrestores=0 % Se positivo, mostra todas as variáveis que tem
+                   % seus valores restaurados no fim de um agrupamento
+
+\language=0 % A linguagem usada.
+\uchyph=1 % Positivo se deve-se separar silabicamente palavras que
+          % começam com letras maiúsculas
+\lefthyphenmin=2 % Menor fragmento esquerdo de palavras com separação
+                 % silábica.
+\righthyphenmin=3 % Idem, mas para fragmento direito
+
+\globaldefs=0 % Não-nulo para tornar toda atribuição \global
+
+\maxdeadcycles=25 % Número máximo de loops de geração de páginas sem
+                  % que nenhuma página seja gerada
+
+\hangafter=1 % Define que as linhas em que haverá
+             % identação \hangindent serão as linhas 2, 3, 4, ...
+
+\fam=0 % Fonte padrão de modo matemático
+
+\mag=1000 % Ampliação inicial
+
+\escapechar=`\\ % Caractere de escape
+\defaultskewchar=-1
+\endlinechar=`\^^M % Caractere de fim de linha
+\newlinechar=-1
+\delimiterfactor=901 % Para escolher tamanho de delimitadores grandes
+                     % em modo matemático
+%\time=now % TeX deve atribuir isso automaticamente
+%\day=now % TeX deve atribuir isso automaticamente
+%\month=now % TeX deve atribuir isso automaticamente
+%\year=now % TeX deve atribuir isso automaticamente
+\showboxbreadth=5 % Número máximo de itens exibidos quando caixas são
+                  % mostradas
+\showboxdepth=3   % Nível máximo quando caixas são mostradas
+\errorcontextlines=0 % Contexto extra máximo mostrado quando erros são
+                     % mostrados
+% Parâmetros de dimensões:
+\hfuzz=0.1pt % Tolerância à caixas superlotadas em modo horizontal
+\vfuzz=0.1pt % Idem no modo vertical
+\overfullrule=5pt % Largura das réguas adicionadas à caixas superlotadas
+\hsize=6.5in % Tamanho das linhas
+\vsize=8.9in % Altura de todas as linhas de uma página
+\maxdepth=4pt % profundidade máxima em páginas principais
+\splitmaxdepth=16383.99999pt % Idem em páginas quebradas (tamanho máximo)
+\boxmaxdepth=16383.99999pt % Idem em páginas explícitas (tamanho máximo)
+\lineskiplimit=0pt % Distância limítrofe entre duas linhas
+\delimitershortfall=5pt % Espaço máximo não coberto por um delimitador
+\nulldelimiterspace=1.2pt % Largura de um delimitador nulo
+\scriptspace=0.5pt % Espaço extra após sobrescritos e subscritos
+\mathsurround=0pt % Espaço antes e depois de modo matemático
+\predisplaysize=0pt % Largura de texto precedendo um display,
+                    % preenchido automaticamente
+\displaywidth=0pt % Altura de texto precedendo o display, preenchido
+                  % automaticamente
+\displayindent=0pt % Identação de linha de display, preenchido
+                   % automaticamente
+\parindent=20pt % Identação de parágrafo
+\hangindent=0pt % Identação pendente, zerada após cada parágrafo
+\hoffset=0pt % Deslocamento horizontal de texto da página
+\voffset=0pt % Deslocamento vertical de texto na página
+% Parâmetros de cola:
+\baselineskip=12pt % Distância ideal entre linhas
+\lineskip=1pt % Distância garantida entre linhas em distância
+              % limítrofe
+\parskip=0pt plus 1pt % Cola entre parágrafos
+\abovedisplayskip=12pt plus 3pt minus 9pt % Cola antes de displays
+\abovedisplayshortskip=0pt plus 3pt % Idem, mas após linhas curtas
+\belowdisplayskip=12pt plus 3pt minus 9pt % Cola após displays
+\belowdisplayshortskip=7pt plus 3pt minus 4pt % Idem, mas antes de
+                                % linha curta
+\leftskip=0pt % Cola à esquerda de linhas justificadas
+\rightskip=0pt % Cola à direita de linhas justificadas
+\topskip=10pt % Cola no topo de páginas
+\splittopskip=10pt % Cola no topo de páginas quebradas
+\tabskip=0pt % Cola entre &
+\spaceskip=0pt % Cola entre palavras, se não-nulo
+\xspaceskip=0pt % Cola entre frases, se não-nulo.
+\parfillskip=0pt plus 1fil % Cola à direita adicional na última linha
+                           % de parágrafos
+% Parâmetros de cola mu:
+\thinmuskip=3mu % Espaço pequeno em fórmulas matemáticas
+\medmuskip=4mu plus 2mu minus 4mu % Espaço médio em fórmulas matemáticas
+\thickmuskip=5mu plus 5mu % Espaço grande em fórmulas matemáticas
+% Parâmetros de lista de tokens:
+\output{\shipout\vbox{\makeheadline\pagebody\makefootline}%
+  \advancepageno
+  \ifnum\outputpenalty>-20000 \else\dosupereject\fi}
+
+\def~{\penalty10000 \ }
+
+
+
+% Código que passa os padrões de separação silábica da língua
+% portuguesa:
+\patterns{1ba1 1be1 1bi1 1bo1 1bu1 1ca1 1ce1 1ci1 1co1 1cu1
+          1da1 1de1 1di1 1do1 1du1 1fa1 1fe1 1fi1 1fo1 1fu1
+          1ga1 1ge1 1gi1 1go1 1gu1 1ha1 1he1 1hi1 1ho1 1hu1
+          1ja1 1je1 1ji1 1jo1 1ju1 1ka1 1ke1 1ki1 1ko1 1ku1
+          1la1 1le1 1li1 1lo1 1lu1 1ma1 1me1 1mi1 1mo1 1mu1
+          1na1 1ne1 1ni1 1no1 1nu1 1pa1 1pe1 1pi1 1po1 1pu1
+          1qua1 1que1 1qui1 1quo1 1ra1 1re1 1ri1 1ro1 1ru1
+          1sa1 1se1 1si1 1so1 1su1 1ta1 1te1 1ti1 1to1 1tu1
+          1va1 1ve1 1vi1 1vo1 1vu1 1wa1 1we1 1wi1 1wo1 1wu1
+          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1}
+
+% Código para suportar os caracteres Computer Modern na fonte
+% UTF-8. Primeiro fazemos com que ^^c3 passe a ser um caractere ativo
+% que passa a se comportar como um comando (tal como o ~). Este
+% caractere é o prefixo de tudo quanto é letra acentuada e Cs com
+% cedilhas. Em seguida, definimos o ``comando'' ^^c3 para olhar pelo
+% caractere seguinte e, baseado nele, inserir o caractere adequado.
+%TODO: ç e Ç sem \c
+\def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign (TeXbook)
+        \ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
+        \else\ifx#1^^81\ifmmode{\acute A}\else{\accent19A}\fi% Á
+        \else\ifx#1^^82\ifmmode{\hat A}\else{\accent94A}\fi% Â
+        \else\ifx#1^^83\ifmmode{\tilde A}\else{\accent"7EA}\fi% Ã
+        \else\ifx#1^^84\ifmmode{\ddot A}\else{\accent"7FA}\fi% Ä
+        \else\ifx#1^^85\ifmmode{\hbox{\tenit@\AA}}\else{\AA}\fi
+        \else\ifx#1^^86\ifmmode{\hbox{\tenit@\char"1D}}\else\char"1D\fi
+        \else\ifx#1^^87\ifmmode\hbox{\tenit@\c C}\else\c C{}\fi % TODO
+        \else\ifx#1^^88\ifmmode\hbox{\accent18E}\else{\accent18E}\fi%
+        \else\ifx#1^^89\ifmmode{\acute E}\else{\accent19E}\fi% É
+        \else\ifx#1^^8a\ifmmode{\hat E}\else{\accent94E}\fi% Ê
+        \else\ifx#1^^8b\ifmmode{\ddot E}\else{\accent"7FE}\fi% Ë
+        \else\ifx#1^^8c\ifmmode\hbox{\tenit@\accent18I}\else{\accent18I}\fi% Ì
+        \else\ifx#1^^8d\ifmmode{\acute I}\else{\accent19I}\fi% Í
+        \else\ifx#1^^8e\ifmmode{\hat I}\else{\accent94I}\fi% Î
+        \else\ifx#1^^8f\ifmmode{\ddot I}\else{\accent"7FI}\fi% Ï
+        \else\ifx#1^^91\ifmmode{\tilde N}\else{\accent"7EN}\fi% Ñ
+        \else\ifx#1^^92\ifmmode\hbox{\tenit@\accent18O}\else{\accent18O}\fi% Ò
+        \else\ifx#1^^93\ifmmode{\acute O}\else{\accent19O}\fi% Ó
+        \else\ifx#1^^94\ifmmode{\hat O}\else{\accent94O}\fi% Ô
+        \else\ifx#1^^95\ifmmode{\tilde O}\else{\accent"7EO}\fi% Õ
+        \else\ifx#1^^96\ifmmode{\ddot O}\else{\accent"7FO}\fi% Ö
+        \else\ifx#1^^98\ifmmode\hbox{\tenit@\char"1F}\else\char"1F\fi% \O
+        \else\ifx#1^^99\ifmmode\hbox{\tenit@\accent18U}\else{\accent18U}\fi% Ù
+        \else\ifx#1^^9a\ifmmode{\acute U}\else{\accent19U}\fi% Ú
+        \else\ifx#1^^9b\ifmmode{\hat U}\else{\accent94U}\fi% Û
+        \else\ifx#1^^9c\ifmmode{\ddot U}\else{\accent"7FU}\fi% Ü
+        \else\ifx#1^^9d\ifmmode{\acute Y}\else{\accent19Y}\fi% Ý
+        \else\ifx#1^^a0\ifmmode\hbox{\tenit@\accent18a}\else{\accent18a}\fi% à
+        \else\ifx#1^^a1\ifmmode{\acute a}\else{\accent19a}\fi% á
+        \else\ifx#1^^a2\ifmmode{\hat a}\else{\accent94a}\fi% â
+        \else\ifx#1^^a3\ifmmode{\tilde a}\else{\accent"7Ea}\fi% ã
+        \else\ifx#1^^a4\ifmmode{\ddot a}\else{\accent"7Fa}\fi% ä
+        \else\ifx#1^^a5\ifmmode\hbot{\tenit@\aa}\else\aa{}\fi
+        \else\ifx#1^^a6\ifmmode\hbox{\tenit@\char"1A}\else\char"1A\fi%
+        \else\ifx#1^^a7\ifmmode\hbox{\tenit@\c c}\else\c c\fi
+        \else\ifx#1^^a8\ifmmode\hbox{\tenit@\accent18e}\else{\accent18e}\fi% è
+        \else\ifx#1^^a9\ifmmode{\acute e}\else{\accent19e}\fi% é
+        \else\ifx#1^^aa\ifmmode{\hat e}\else{\accent94e}\fi% ê
+        \else\ifx#1^^ab\ifmmode{\ddot e}\else{\accent"7Fe}\fi% ë
+        \else\ifx#1^^ac\ifmmode\hbox{\tenit@\accent18\i}\else{\accent18\i}\fi% ì
+        \else\ifx#1^^ad\ifmmode\hbox{\tenit@\accent19\i}\else{\accent19\i}\fi% í
+        \else\ifx#1^^ae\ifmmode\hbox{\tenit@\accent94\i}\else{\accent94\i}\fi% î
+        \else\ifx#1^^af\ifmmode\hbox{\tenit@\accent"7F\i}\else{\accent"7F\i}\fi% ï
+        \else\ifx#1^^b1\ifmmode{\tilde n}\else{\accent"7En}\fi% ñ
+        \else\ifx#1^^b2\ifmmode\hbox{\tenit@\accent18o}\else{\accent18o}\fi% ò
+        \else\ifx#1^^b3\ifmmode{\acute o}\else{\accent19o}\fi% ó
+        \else\ifx#1^^b4\ifmmode{\hat o}\else{\accent94o}\fi% ô
+        \else\ifx#1^^b5\ifmmode{\tilde o}\else{\accent"7Eo}\fi% õ
+        \else\ifx#1^^b6\ifmmode{\ddot o}\else{\accent"7Fo}\fi% ö
+        \else\ifx#1^^b8\ifmmode\hbox{\tenit@\char"1C}\else\char"1C\fi% \o
+        \else\ifx#1^^b9\ifmmode\hbox{\tenit@\accent18u}\else{\accent18u}\fi% ù
+        \else\ifx#1^^ba\ifmmode{\acute u}\else{\accent19u}\fi% ú
+        \else\ifx#1^^bb\ifmmode{\hat u}\else{\accent94u}\fi% û
+        \else\ifx#1^^bc\ifmmode{\ddot u}\else{\accent"7Fu}\fi% ü
+        \else\ifx#1^^bd\ifmmode{\acute y}\else{\accent19y}\fi% ý
+        \else\ifx#1^^bf\ifmmode{\ddot y}\else{\accent"7FY}\fi% ÿ
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+
+% Permitindo inserir acentos soltos, sem caracteres por meio
+% de \~, \^, etc. Estes comandos são diferentes do Plain TeX, pois não
+% receberão argumentos:
+\def\~{\accent"7E\ }\def\"{\accent"7F\ }\def\'{\accent19\ }
+\def\^{\accent94\ }\def\`{\accent18\ }
+
+% O comando para terminar um documento é \fim:
+\def\fim{\par\vfill\supereject\end}
+
 
 % magitex assume que registradores devem ser tratados apenas por
 % escritores de formato e pessoas que sabem bem o que estão fazendo. E
@@ -380,94 +528,6 @@
 % Gera uma linha horizontal:
 \def\linha{{\hrule}}
 
-% Constantes usadas por TeX:
-\lineskip1pt % Distância garantida entre palavras se limite for atingido
-\baselineskip12pt % Distância ideal entre linhas 
-\lineskiplimit0pt % Distância mínima entre palavras de linhas diferentes
-
-\pretolerance=100 % Tolerância da 1a tentativa de gerar parágrafo sem \-
-\tolerance=200    % Tolerância final de parágrafos.
-\hbadness=1000    % Badness com valor tão alto sempre é reportada
-\vbadness=1000    % Idem, mas no modo vertical
-
-\linepenalty=10     % Ampliar isso reduz o  número de linhas
-\hyphenpenalty=50   % Penalidade de separação silábica na quebra de linha
-\exhyphenpenalty=50 % Idem, mas no caso em que a palavra muda na quebra
-\binoppenalty=700   % Dificuldade de quebra de linha após operadores matemáticos
-\relpenalty=500     % Idem, mas após operadores de relação como >
-\clubpenalty=150    % Penalidade de quebra de página após 1a linha de parágrafo
-\widowpenalty=150   % Idem, mas antes da última linha de parágrafo
-\displaywidowpenalty=50 % Penalidade da penúltima linha antes de display
-\brokenpenalty=100  % Penalidade vertical de separação silábica na
-                    % penúltima linha
-\predisplaypenalty=10000 % Penalidade de quebra antes de equações em
-                        % display
-\postdisplaypenalty=0 % Penalidade após um display matemático
-\interlinepenalty=0   % Penalidade de quebra de página entre linhas
-                      % comuns
-\floatingpenalty=0  % Este valor é mudado em cada inserção
-\outputpenalty=0    % E este é ajustado em cada saída.
-\doublehyphendemerits=10000 % Deméritos adicionados se duas linhas
-                            % seguidas separam sílabas
-\finalhyphendemerits=5000 % Deméritos adicionais se penúltima linha
-                          % separa sílabas
-\adjdemerits=10000 % Deméritos adicionais se duas linhas seguidas são
-                   % visualmente incompatíveis
-
-\looseness=0 % Ajustado para 0 depois de cada parágrafo. Tenta tornar
-             % o parágrafo atual o seu valor mais longo em número de
-             % linhas.
-\pausing=0   % Se precisamos pausar após ler cada linha de arquivo
-
-\holdinginserts=0 % Se maior que 0, as inserções feitas são
-                  % permanentes em cada página
-
-\tracingonline=0 % Se positivo, mensagens de depuração vão pro terminal
-\tracingmacros=0 % Se positivo, gera mensagem de depuração de macros
-\tracingstats=0 % Se positivo, gera depuração de quanta memória é usada
-\tracingparagraphs=0 % Se positivo, mostra depuração sobre tentativas
-                     % de gerar parágrafo
-\tracingpages=0 % Se positivo, mostra depuração sobre tentativas de
-                % quebrar página
-\tracingoutput=0 % Se positivo, gera depuração da caixa que vai pra \output
-\tracinglostchars=1 % Se positivo, gera avisos sobre caracteres não
-                    % encontrados na fonte atual
-\tracingcommands=0 % Se positivo, mostra os comandos que vão sendo
-                   % executados
-\tracingrestores=0 % Se positivo, mostra todas as variáveis que tem
-                   % seus valores restaurados no fim de um agrupamento
-
-\language=0 % A linguagem usada.
-\uchyph=1 % Positivo se deve-se separar silabicamente palavras que
-          % começam com letras maiúsculas
-\lefthyphenmin=2 % Menor fragmento esquerdo de palavras com separação
-                 % silábica.
-\righthyphenmin=3 % Idem, mas para fragmento direito
-
-\globaldefs=0 % Não-nulo para tornar toda atribuição \global
-
-\maxdeadcycles=25 % Número máximo de loops de geração de páginas sem
-                  % que nenhuma página seja gerada
-
-\hangafter=1 % Define que as linhas em que haverá
-             % identação \hangindent serão as linhas 2, 3, 4, ...
-
-\fam=0 % Fonte padrão de modo matemático
-
-\mag=1000 % Ampliação inicial
-
-\escapechar=`\\ % Caractere de escape
-\defaultskewchar=-1
-\endlinechar=`\^^M % Caractere de fim de linha
-\newlinechar=-1
-\delimiterfactor=901
-%\time=now % TeX does this at beginning of job
-%\day=now % TeX does this at beginning of job
-%\month=now % TeX does this at beginning of job
-%\year=now % TeX does this at beginning of job
-\showboxbreadth=5
-\showboxdepth=3
-\errorcontextlines=5
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -495,51 +555,6 @@
 % Assign initial values to TeX's parameters
 
 \message{parameters,}
-
-% All of TeX's numeric parameters are listed here,
-% but the code is commented out if no special value needs to be set.
-% INITEX makes all parameters zero except where noted.
-
-\hfuzz=0.1pt
-\vfuzz=0.1pt
-\overfullrule=5pt
-\hsize=6.5in
-\vsize=8.9in
-\maxdepth=4pt
-\splitmaxdepth=\maxdimen
-\boxmaxdepth=\maxdimen
-% \lineskiplimit=0pt, changed by \normalbaselines
-\delimitershortfall=5pt
-\nulldelimiterspace=1.2pt
-\scriptspace=0.5pt
-% \mathsurround=0pt
-% \predisplaysize=0pt, set before TeX enters $$
-% \displaywidth=0pt, set before TeX enters $$
-% \displayindent=0pt, set before TeX enters $$
-\parindent=20pt
-% \hangindent=0pt, zeroed by TeX after each paragraph
-% \hoffset=0pt
-% \voffset=0pt
-
-% \baselineskip=0pt, changed by \normalbaselines
-% \lineskip=0pt, changed by \normalbaselines
-\parskip=0pt plus 1pt
-\abovedisplayskip=12pt plus 3pt minus 9pt
-\abovedisplayshortskip=0pt plus 3pt
-\belowdisplayskip=12pt plus 3pt minus 9pt
-\belowdisplayshortskip=7pt plus 3pt minus 4pt
-% \leftskip=0pt
-% \rightskip=0pt
-\topskip=10pt
-\splittopskip=10pt
-% \tabskip=0pt
-% \spaceskip=0pt
-% \xspaceskip=0pt
-\parfillskip=0pt plus 1fil
-
-\thinmuskip=3mu
-\medmuskip=4mu plus 2mu minus 4mu
-\thickmuskip=5mu plus 5mu
 
 % We also define special registers that function like parameters:
 
@@ -1238,12 +1253,6 @@
     \vbox to\vsize{\unvbox\z@\kern-\dimen@}% depth is zero
     \else \box\z@\nobreak\bigskip\fi}\fi\endgroup}
 
-
-
-\output{\plainoutput}
-\def\plainoutput{\shipout\vbox{\makeheadline\pagebody\makefootline}%
-  \advancepageno
-  \ifnum\outputpenalty>-20000 \else\dosupereject\fi}
 \def\pagebody{\vbox to\vsize{\boxmaxdepth\maxdepth \pagecontents}}
 \def\makeheadline{\vbox to\z@{\vskip-22.5\p@
   \hbox to\hsize{\vbox to8.5\p@{}\the\headline}\vss}\prevdepth-1000pt}
