@@ -484,12 +484,17 @@
 \def\topins@{253}
 
 % Comandos de espaçamento
+\def\antiespacito{\kern-.16667em }
 \def\espacito{\kern .16667em} % Equivalente ao \thinspace do Plain TeX
+\def\espacote{\kern.5em }
 \def\espacinho{\vskip3pt plus 1pt minus 1pt}
 \def\espaco{\vskip6pt plus 2pt minus 2pt}
 \def\espacao{\vskip12pt plus 4pt minus 4pt}
-\def\espacoh#1{\hskip#1}
-\def\espacov#1{\vskip#1}
+\def\espacoh#1{\hskip#1\relax}
+\def\espacov#1{\vskip#1\relax}
+\def\meioquad{\hskip.5em\relax}
+\def\quad{\hskip1em\relax}
+\def\qquad{\hskip2em\relax}
 
 % Comandos \TeX e \MaGiTeX:
 \def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX}
@@ -636,6 +641,170 @@
 \def\bigg#1{{\hbox{$\left#1\vbox to14.5pt{}\right.\n@space$}}}
 \def\Bigg#1{{\hbox{$\left#1\vbox to17.5pt{}\right.\n@space$}}}
 \def\n@space{\nulldelimiterspace\z@ \m@th}
+\mathchardef\alpha="010B
+\mathchardef\beta="010C
+\mathchardef\gamma="010D
+\mathchardef\delta="010E
+\mathchardef\epsilon="010F
+\mathchardef\zeta="0110
+\mathchardef\eta="0111
+\mathchardef\theta="0112
+\mathchardef\iota="0113
+\mathchardef\kappa="0114
+\mathchardef\lambda="0115
+\mathchardef\mu="0116
+\mathchardef\nu="0117
+\mathchardef\xi="0118
+\mathchardef\pi="0119
+\mathchardef\rho="011A
+\mathchardef\sigma="011B
+\mathchardef\tau="011C
+\mathchardef\upsilon="011D
+\mathchardef\phi="011E
+\mathchardef\chi="011F
+\mathchardef\psi="0120
+\mathchardef\omega="0121
+\mathchardef\varepsilon="0122
+\mathchardef\vartheta="0123
+\mathchardef\varpi="0124
+\mathchardef\varrho="0125
+\mathchardef\varsigma="0126
+\mathchardef\varphi="0127
+\mathchardef\Gamma="7000
+\mathchardef\Delta="7001
+\mathchardef\Theta="7002
+\mathchardef\Lambda="7003
+\mathchardef\Xi="7004
+\mathchardef\Pi="7005
+\mathchardef\Sigma="7006
+\mathchardef\Upsilon="7007
+\mathchardef\Phi="7008
+\mathchardef\Psi="7009
+\mathchardef\Omega="700A
+\mathchardef\aleph="0240
+\def\hbar{{\mathchar'26\mkern-9muh}}
+\mathchardef\imath="017B
+\mathchardef\jmath="017C
+\mathchardef\ell="0160
+\mathchardef\wp="017D
+\mathchardef\Re="023C
+\mathchardef\Im="023D
+\mathchardef\partial="0140
+\mathchardef\infty="0231
+\mathchardef\prime="0230
+\mathchardef\emptyset="023B
+\mathchardef\nabla="0272
+\def\surd{{\mathchar"1270}}
+\mathchardef\top="023E
+\mathchardef\bot="023F
+\def\angle{{\vbox{\ialign{$\m@th\scriptstyle##$\crcr
+      \not\mathrel{\mkern14mu}\crcr
+      \noalign{\prevdepth-1000pt}
+      \mkern2.5mu\leaders\hrule height.34pt\hfill\mkern2.5mu\crcr}}}}
+\mathchardef\triangle="0234
+\mathchardef\forall="0238
+\mathchardef\exists="0239
+\mathchardef\neg="023A \let\lnot=\neg
+\mathchardef\flat="015B
+\mathchardef\natural="015C
+\mathchardef\sharp="015D
+\mathchardef\clubsuit="027C
+\mathchardef\diamondsuit="027D
+\mathchardef\heartsuit="027E
+\mathchardef\spadesuit="027F
+\mathchardef\coprod="1360
+\mathchardef\bigvee="1357
+\mathchardef\bigwedge="1356
+\mathchardef\biguplus="1355
+\mathchardef\bigcap="1354
+\mathchardef\bigcup="1353
+\mathchardef\intop="1352 \def\int{\intop\nolimits}
+\mathchardef\prod="1351
+\mathchardef\sum="1350
+\mathchardef\bigotimes="134E
+\mathchardef\bigoplus="134C
+\mathchardef\bigodot="134A
+\mathchardef\ointop="1348 \def\oint{\ointop\nolimits}
+\mathchardef\bigsqcup="1346
+\mathchardef\smallint="1273
+\mathchardef\triangleleft="212F
+\mathchardef\triangleright="212E
+\mathchardef\bigtriangleup="2234
+\mathchardef\bigtriangledown="2235
+\mathchardef\wedge="225E \let\land=\wedge
+\mathchardef\vee="225F \let\lor=\vee
+\mathchardef\cap="225C
+\mathchardef\cup="225B
+\mathchardef\ddagger="227A
+\mathchardef\dagger="2279
+\mathchardef\sqcap="2275
+\mathchardef\sqcup="2274
+\mathchardef\uplus="225D
+\mathchardef\amalg="2271
+\mathchardef\diamond="2205
+\mathchardef\bullet="220F
+\mathchardef\wr="226F
+\mathchardef\div="2204
+\mathchardef\odot="220C
+\mathchardef\oslash="220B
+\mathchardef\otimes="220A
+\mathchardef\ominus="2209
+\mathchardef\oplus="2208
+\mathchardef\mp="2207
+\mathchardef\pm="2206
+\mathchardef\circ="220E
+\mathchardef\bigcirc="220D
+\mathchardef\setminus="226E % for set difference A\setminus B
+\mathchardef\cdot="2201
+\mathchardef\ast="2203
+\mathchardef\times="2202
+\mathchardef\star="213F
+\mathchardef\propto="322F
+\mathchardef\sqsubseteq="3276
+\mathchardef\sqsupseteq="3277
+\mathchardef\parallel="326B
+\mathchardef\mid="326A
+\mathchardef\dashv="3261
+\mathchardef\vdash="3260
+\mathchardef\nearrow="3225
+\mathchardef\searrow="3226
+\mathchardef\nwarrow="322D
+\mathchardef\swarrow="322E
+\mathchardef\Leftrightarrow="322C
+\mathchardef\Leftarrow="3228
+\mathchardef\Rightarrow="3229
+\def\neq{\not=} \let\ne=\neq
+\mathchardef\leq="3214 \let\le=\leq
+\mathchardef\geq="3215 \let\ge=\geq
+\mathchardef\succ="321F
+\mathchardef\prec="321E
+\mathchardef\approx="3219
+\mathchardef\succeq="3217
+\mathchardef\preceq="3216
+\mathchardef\supset="321B
+\mathchardef\subset="321A
+\mathchardef\supseteq="3213
+\mathchardef\subseteq="3212
+\mathchardef\in="3232
+\mathchardef\ni="3233 \let\owns=\ni
+\mathchardef\gg="321D
+\mathchardef\ll="321C
+\mathchardef\not="3236
+\mathchardef\leftrightarrow="3224
+\mathchardef\leftarrow="3220 \let\gets=\leftarrow
+\mathchardef\rightarrow="3221 \let\to=\rightarrow
+\mathchardef\mapstochar="3237 \def\mapsto{\mapstochar\rightarrow}
+\mathchardef\sim="3218
+\mathchardef\simeq="3227
+\mathchardef\perp="323F
+\mathchardef\equiv="3211
+\mathchardef\asymp="3210
+\mathchardef\smile="315E
+\mathchardef\frown="315F
+\mathchardef\leftharpoonup="3128
+\mathchardef\leftharpoondown="3129
+\mathchardef\rightharpoonup="312A
+\mathchardef\rightharpoondown="312B
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -679,7 +848,7 @@
 
 % Macros for setting ordinary text
 
-\let\endgraf=\par \let\endline=\cr
+\let\endline=\cr
 
 \def\space{ }
 \def\empty{}
@@ -699,17 +868,10 @@
 \def\iterate{\body \let\next\iterate \else\let\next\relax\fi \next}
 \let\repeat=\fi % this makes \loop...\if...\repeat skippable
 
-\def\negthinspace{\kern-.16667em }
-\def\enspace{\kern.5em }
-
-\def\enskip{\hskip.5em\relax}
-\def\quad{\hskip1em\relax}
-\def\qquad{\hskip2em\relax}
 
 \def\offinterlineskip{\baselineskip-1000pt
   \lineskip0pt \lineskiplimit16383.99999pt} % Dimensão máxima
 
-\def\topglue{\prevdepth-1000pt\vglue-\topskip\vglue} % for top of page
 \def\vglue{\afterassignment\vgl@\skip@=}
 \def\vgl@{\par \dimen@\prevdepth \hrule height0pt
   \nobreak\vskip\skip@ \prevdepth\dimen@}
@@ -788,7 +950,7 @@
   \box0}
 
 \def\hang{\hangindent\parindent}
-\def\textindent#1{\indent\llap{#1\enspace}\ignorespaces}
+\def\textindent#1{\indent\llap{#1\espacote}\ignorespaces}
 \def\item{\par\hang\textindent}
 \def\itemitem{\par\indent \hangindent2\parindent \textindent}
 \def\narrower{\advance\leftskip\parindent
@@ -798,10 +960,9 @@
   \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
   \message{#1}\line{{\fam6\tenbf@#1}\hss}\nobreak\smallskip\noindent}
 \outer\def\proclaim #1. #2\par{\medbreak
-  \noindent{\fam6\tenbf@#1.\enspace}{\fam5\tensl@#2\par}%
+  \noindent{\fam6\tenbf@#1.\espacote}{\fam5\tensl@#2\par}%
   \ifdim\lastskip<6pt plus 2pt minus 2pt \removelastskip\penalty55\medskip\fi}
 
-\def\raggedright{\rightskip0pt plus2em \spaceskip.3333em \xspaceskip.5em\relax}
 \def\ttraggedright{\fam7\tentt@\rightskip0pt plus2em\relax} % for use with \tt only
 
 \chardef\%=`\%
@@ -887,174 +1048,6 @@
 
 {\catcode`\_=13 \global\let_=\_} % _ in math is either subscript or \_
 
-\mathchardef\alpha="010B
-\mathchardef\beta="010C
-\mathchardef\gamma="010D
-\mathchardef\delta="010E
-\mathchardef\epsilon="010F
-\mathchardef\zeta="0110
-\mathchardef\eta="0111
-\mathchardef\theta="0112
-\mathchardef\iota="0113
-\mathchardef\kappa="0114
-\mathchardef\lambda="0115
-\mathchardef\mu="0116
-\mathchardef\nu="0117
-\mathchardef\xi="0118
-\mathchardef\pi="0119
-\mathchardef\rho="011A
-\mathchardef\sigma="011B
-\mathchardef\tau="011C
-\mathchardef\upsilon="011D
-\mathchardef\phi="011E
-\mathchardef\chi="011F
-\mathchardef\psi="0120
-\mathchardef\omega="0121
-\mathchardef\varepsilon="0122
-\mathchardef\vartheta="0123
-\mathchardef\varpi="0124
-\mathchardef\varrho="0125
-\mathchardef\varsigma="0126
-\mathchardef\varphi="0127
-\mathchardef\Gamma="7000
-\mathchardef\Delta="7001
-\mathchardef\Theta="7002
-\mathchardef\Lambda="7003
-\mathchardef\Xi="7004
-\mathchardef\Pi="7005
-\mathchardef\Sigma="7006
-\mathchardef\Upsilon="7007
-\mathchardef\Phi="7008
-\mathchardef\Psi="7009
-\mathchardef\Omega="700A
-
-\mathchardef\aleph="0240
-\def\hbar{{\mathchar'26\mkern-9muh}}
-\mathchardef\imath="017B
-\mathchardef\jmath="017C
-\mathchardef\ell="0160
-\mathchardef\wp="017D
-\mathchardef\Re="023C
-\mathchardef\Im="023D
-\mathchardef\partial="0140
-\mathchardef\infty="0231
-\mathchardef\prime="0230
-\mathchardef\emptyset="023B
-\mathchardef\nabla="0272
-\def\surd{{\mathchar"1270}}
-\mathchardef\top="023E
-\mathchardef\bot="023F
-\def\angle{{\vbox{\ialign{$\m@th\scriptstyle##$\crcr
-      \not\mathrel{\mkern14mu}\crcr
-      \noalign{\prevdepth-1000pt}
-      \mkern2.5mu\leaders\hrule height.34pt\hfill\mkern2.5mu\crcr}}}}
-\mathchardef\triangle="0234
-\mathchardef\forall="0238
-\mathchardef\exists="0239
-\mathchardef\neg="023A \let\lnot=\neg
-\mathchardef\flat="015B
-\mathchardef\natural="015C
-\mathchardef\sharp="015D
-\mathchardef\clubsuit="027C
-\mathchardef\diamondsuit="027D
-\mathchardef\heartsuit="027E
-\mathchardef\spadesuit="027F
-
-\mathchardef\coprod="1360
-\mathchardef\bigvee="1357
-\mathchardef\bigwedge="1356
-\mathchardef\biguplus="1355
-\mathchardef\bigcap="1354
-\mathchardef\bigcup="1353
-\mathchardef\intop="1352 \def\int{\intop\nolimits}
-\mathchardef\prod="1351
-\mathchardef\sum="1350
-\mathchardef\bigotimes="134E
-\mathchardef\bigoplus="134C
-\mathchardef\bigodot="134A
-\mathchardef\ointop="1348 \def\oint{\ointop\nolimits}
-\mathchardef\bigsqcup="1346
-\mathchardef\smallint="1273
-
-\mathchardef\triangleleft="212F
-\mathchardef\triangleright="212E
-\mathchardef\bigtriangleup="2234
-\mathchardef\bigtriangledown="2235
-\mathchardef\wedge="225E \let\land=\wedge
-\mathchardef\vee="225F \let\lor=\vee
-\mathchardef\cap="225C
-\mathchardef\cup="225B
-\mathchardef\ddagger="227A
-\mathchardef\dagger="2279
-\mathchardef\sqcap="2275
-\mathchardef\sqcup="2274
-\mathchardef\uplus="225D
-\mathchardef\amalg="2271
-\mathchardef\diamond="2205
-\mathchardef\bullet="220F
-\mathchardef\wr="226F
-\mathchardef\div="2204
-\mathchardef\odot="220C
-\mathchardef\oslash="220B
-\mathchardef\otimes="220A
-\mathchardef\ominus="2209
-\mathchardef\oplus="2208
-\mathchardef\mp="2207
-\mathchardef\pm="2206
-\mathchardef\circ="220E
-\mathchardef\bigcirc="220D
-\mathchardef\setminus="226E % for set difference A\setminus B
-\mathchardef\cdot="2201
-\mathchardef\ast="2203
-\mathchardef\times="2202
-\mathchardef\star="213F
-
-\mathchardef\propto="322F
-\mathchardef\sqsubseteq="3276
-\mathchardef\sqsupseteq="3277
-\mathchardef\parallel="326B
-\mathchardef\mid="326A
-\mathchardef\dashv="3261
-\mathchardef\vdash="3260
-\mathchardef\nearrow="3225
-\mathchardef\searrow="3226
-\mathchardef\nwarrow="322D
-\mathchardef\swarrow="322E
-\mathchardef\Leftrightarrow="322C
-\mathchardef\Leftarrow="3228
-\mathchardef\Rightarrow="3229
-\def\neq{\not=} \let\ne=\neq
-\mathchardef\leq="3214 \let\le=\leq
-\mathchardef\geq="3215 \let\ge=\geq
-\mathchardef\succ="321F
-\mathchardef\prec="321E
-\mathchardef\approx="3219
-\mathchardef\succeq="3217
-\mathchardef\preceq="3216
-\mathchardef\supset="321B
-\mathchardef\subset="321A
-\mathchardef\supseteq="3213
-\mathchardef\subseteq="3212
-\mathchardef\in="3232
-\mathchardef\ni="3233 \let\owns=\ni
-\mathchardef\gg="321D
-\mathchardef\ll="321C
-\mathchardef\not="3236
-\mathchardef\leftrightarrow="3224
-\mathchardef\leftarrow="3220 \let\gets=\leftarrow
-\mathchardef\rightarrow="3221 \let\to=\rightarrow
-\mathchardef\mapstochar="3237 \def\mapsto{\mapstochar\rightarrow}
-\mathchardef\sim="3218
-\mathchardef\simeq="3227
-\mathchardef\perp="323F
-\mathchardef\equiv="3211
-\mathchardef\asymp="3210
-\mathchardef\smile="315E
-\mathchardef\frown="315F
-\mathchardef\leftharpoonup="3128
-\mathchardef\leftharpoondown="3129
-\mathchardef\rightharpoonup="312A
-\mathchardef\rightharpoondown="312B
 
 \def\joinrel{\mathrel{\mkern-3mu}}
 \def\relbar{\mathrel{\smash-}} % \smash, because - has the same height as +
