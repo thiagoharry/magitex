@@ -19,9 +19,7 @@ Ele ainda está em desenvolvimento. O que já foi implementado:
 * Comandos de datas: \ano, \mes e \dia.
 * Comando \pagina para inserir o número da página atual.
 * Comando \insere{ARQUIVO} para inserir o cnteúdo de arquivo.
-* Comandos de espaçamento: \lacuna{3cm} deixa uma lacuna de 3cm entre palavras e entre parágrafos. \espaco{3cm} deixa um espaço da mesma forma, mas o espaço pode ser ajustado pr TeX para ficar 33% maior ou menor.
-* Para um espaço horizontal de exatamente 1cm: \espacoh{1cm}
-* Para um espaço vertical de exatamente 5cm: \espacov{5cm}
+* Comandos de espaçamento: \lacuna{3cm} deixa uma lacuna de 3cm entre palavras e entre parágrafos. \espaco{3cm} deixa um espaço da mesma forma, mas o espaço pode ser ajustado pr TeX para ficar 33% maior ou menor. Mantidos os comandos \quad e \qquad.
 * O comando \fim, que é usado para finalizar o documento.
 
 Algumas melhorias em relação ao LaTeX:
