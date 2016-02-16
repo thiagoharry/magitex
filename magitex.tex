@@ -340,11 +340,10 @@
 
 % Não há nenhum registrador de dimensão alocado pelas primitivas
 % TeX. Desta forma, temos todos à nossa disposição:
-\dimendef\jot=0 \jot=3pt
-\dimendef\p@renwd=1
-\dimendef\dimen@=2
-\dimendef\dimen@i=3
-\dimendef\dimen@ii=4
+\dimendef\p@renwd=0
+\dimendef\dimen@=1
+\dimendef\dimen@i=2
+\dimendef\dimen@ii=3
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
@@ -1171,11 +1170,11 @@
 \def\@penup{\advance\lineskip\dimen@
   \advance\baselineskip\dimen@
   \advance\lineskiplimit\dimen@}
-\def\eqalign#1{\null\,\vcenter{\openup\jot\m@th
+\def\eqalign#1{\null\,\vcenter{\openup3pt\m@th
   \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
       \crcr#1\crcr}}\,}
 \newif\ifdt@p
-\def\displ@y{\global\dt@ptrue\openup\jot\m@th
+\def\displ@y{\global\dt@ptrue\openup3pt\m@th
   \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000pt
       \vskip-\lineskiplimit \vskip0pt \fi
       \else \penalty100 \fi}}}
