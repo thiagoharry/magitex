@@ -347,9 +347,7 @@
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
-% Os registradores de skip. Nenhum é reservado e todos estão à
-% disposição:
-\skipdef\skip@=0
+% Os registradores de skip.
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
@@ -864,13 +862,6 @@
 
 \def\offinterlineskip{\baselineskip-1000pt
   \lineskip0pt \lineskiplimit16383.99999pt} % Dimensão máxima
-
-\def\vglue{\afterassignment\vgl@\skip@=}
-\def\vgl@{\par \dimen@\prevdepth \hrule height0pt
-  \nobreak\vskip\skip@ \prevdepth\dimen@}
-\def\hglue{\afterassignment\hgl@\skip@=}
-\def\hgl@{\leavevmode \count@\spacefactor \vrule width0pt
-  \nobreak\hskip\skip@ \spacefactor\count@}
 
 \def\slash{/\penalty\exhyphenpenalty} % a `/' that acts like a `-'
 
