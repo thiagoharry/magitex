@@ -349,9 +349,7 @@
 
 % Os registradores de skip. Nenhum é reservado e todos estão à
 % disposição:
-\skipdef\centering=0 \centering=0pt plus 1000pt minus 1000pt
-\skipdef\z@skip=1 \z@skip=0pt plus0pt minus0pt
-\skipdef\skip@=2
+\skipdef\skip@=0
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
@@ -904,7 +902,7 @@
 \def\strut{\relax\ifmmode\copy\strutbox\else\unhcopy\strutbox\fi}
 
 \def\hidewidth{\hskip-1000pt plus 1fill} % for alignment entries that can stick out
-\def\ialign{\everycr{}\tabskip\z@skip\halign} % initialized \halign
+\def\ialign{\everycr{}\tabskip0pt plus0pt minus0pt\halign} % initialized \halign
 \def\multispan#1{\omit \mscount#1\relax
   \loop\ifnum\mscount>1 \sp@n\repeat}
 \def\sp@n{\span\omit\advance\mscount-1}
@@ -985,7 +983,7 @@
 \def\P{\mathhexbox27B}
 \def\Orb{\mathhexbox20D}
 
-\def\oalign#1{\leavevmode\vtop{\baselineskip\z@skip \lineskip.25ex%
+\def\oalign#1{\leavevmode\vtop{\baselineskip0pt plus0pt minus0pt \lineskip.25ex%
   \ialign{##\crcr#1\crcr}}} \def\o@lign{\lineskiplimit0pt \oalign}
 \def\ooalign{\lineskiplimit-16383.99999pt \oalign} % chars over each
                                 % other (dimensão máxima)
@@ -1177,18 +1175,20 @@
   \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000pt
       \vskip-\lineskiplimit \vskip0pt \fi
       \else \penalty100 \fi}}}
-\def\@lign{\tabskip\z@skip\everycr{}} % restore inside \displ@y
-\def\displaylines#1{\displ@y \tabskip\z@skip
+\def\@lign{\tabskip0pt plus0pt minus0pt\everycr{}} % restore inside \displ@y
+\def\displaylines#1{\displ@y \tabskip0pt plus0pt minus0pt
   \halign{\hbox to\displaywidth{$\@lign\hfil\displaystyle##\hfil$}\crcr
     #1\crcr}}
-\def\eqalignno#1{\displ@y \tabskip\centering
-  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip\z@skip
-    &$\@lign\displaystyle{{}##}$\hfil\tabskip\centering
-    &\llap{$\@lign##$}\tabskip\z@skip\crcr
+\def\eqalignno#1{\displ@y \tabskip0pt plus 1000pt minus 1000pt %Centraliza
+  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
+    &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
+    1000pt % Centraliza
+    &\llap{$\@lign##$}\tabskip0pt plus0pt minus0pt\crcr
     #1\crcr}}
-\def\leqalignno#1{\displ@y \tabskip\centering
-  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip\z@skip
-    &$\@lign\displaystyle{{}##}$\hfil\tabskip\centering
+\def\leqalignno#1{\displ@y \tabskip0pt plus 1000pt minus 1000pt % Centraliza
+  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
+    &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
+    1000pt % Centraliza
     &\kern-\displaywidth\rlap{$\@lign##$}\tabskip\displaywidth\crcr
     #1\crcr}}
 
@@ -1210,7 +1210,9 @@
   \interlinepenalty100
   \splittopskip\ht\strutbox % top baseline for broken footnotes
   \splitmaxdepth\dp\strutbox \floatingpenalty20000
-  \leftskip\z@skip \rightskip\z@skip \spaceskip\z@skip \xspaceskip\z@skip
+  \leftskip0pt plus0pt minus0pt \rightskip0pt plus0pt
+  minus0pt \spaceskip0pt plus0pt minus0pt \xspaceskip0pt plus0pt
+  minus0pt
   \textindent{#1}\footstrut\futurelet\next\fo@t}
 \def\fo@t{\ifcat\bgroup\noexpand\next \let\next\f@@t
   \else\let\next\f@t\fi \next}
@@ -1226,7 +1228,7 @@
 \def\topinsert{\@midfalse\p@gefalse\@ins}
 \def\midinsert{\@midtrue\@ins}
 \def\pageinsert{\@midfalse\p@getrue\@ins}
-\skip\topins@=\z@skip % no space added when a topinsert is present
+\skip\topins@=0pt plus0pt minus0pt % no space added when a topinsert is present
 \count\topins@=1000 % magnification factor (1 to 1)
 \dimen\topins@=16383.99999pt % (dimensão máxima) no limit per page
 \def\@ins{\par\begingroup\setbox0\vbox\bgroup} % start a \vbox
@@ -1236,7 +1238,7 @@
     \ifdim\dimen@>\pagegoal\@midfalse\p@gefalse\fi\fi
   \if@mid \bigskip\box0\bigbreak
   \else\insert\topins@{\penalty100 % floating insertion
-    \splittopskip\z@skip
+    \splittopskip0pt plus0pt minus0pt
     \splitmaxdepth16383.99999pt \floatingpenalty0% (max dimen)
     \ifp@ge \dimen@\dp0
     \vbox to\vsize{\unvbox0\kern-\dimen@}% depth is zero
