@@ -307,7 +307,7 @@
      \unvbox\footins@\fi
    \ifr@ggedbottom \kern-\dimen0 \vfil \fi}%
   % Rodapé:
-  \baselineskip24pt\lineskiplimit\z@\hbox to\hsize{\the\footline}}%
+  \baselineskip24pt\lineskiplimit0pt\hbox to\hsize{\the\footline}}%
   % Lógica do número de página
   \ifnum\pageno@<0 \global\advance\pageno@ by -1
   \else\global\advance\pageno@ by 1 \fi
@@ -340,12 +340,11 @@
 
 % Não há nenhum registrador de dimensão alocado pelas primitivas
 % TeX. Desta forma, temos todos à nossa disposição:
-\dimendef\z@=0 \z@=0pt % can be used both for 0pt and 0
-\dimendef\jot=1 \jot=3pt
-\dimendef\p@renwd=2
-\dimendef\dimen@=3
-\dimendef\dimen@i=4
-\dimendef\dimen@ii=5
+\dimendef\jot=0 \jot=3pt
+\dimendef\p@renwd=1
+\dimendef\dimen@=2
+\dimendef\dimen@i=3
+\dimendef\dimen@ii=4
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
@@ -521,7 +520,7 @@
 % Comandos de estilo de escrita. Colocando correção itálica
 % automaticamente se necessário.
 % TODO: #2 precisa ser mesmo opcional abaixo:
-\long\def\italico#1{\let\proxi=\}\def\func{\if\prox\}[VAZIO]\else[NAO-VAZIO]\fi}\futurelet\prox\func}
+\long\def\italico#1{\def\func{\catcode`*=2\ifcat\prox*[VAZIO]\else[N]\fi}\futurelet\prox\func}
 %{\def\func{\if\prox.\relax\else\if\prox,\relax\else\/\fi\fi}\fam4\tenit@#1\futurelet\prox\func#2\par}}
 \long\def\romano#1{{\fam0\tenrm@ #1}}
 \long\def\negrito#1{{\fam6\tenbf@ #1}}
@@ -639,7 +638,7 @@
 \def\Big#1{{\hbox{$\left#1\vbox to11.5pt{}\right.\n@space$}}}
 \def\bigg#1{{\hbox{$\left#1\vbox to14.5pt{}\right.\n@space$}}}
 \def\Bigg#1{{\hbox{$\left#1\vbox to17.5pt{}\right.\n@space$}}}
-\def\n@space{\nulldelimiterspace\z@ \m@th}
+\def\n@space{\nulldelimiterspace0pt \m@th}
 \mathchardef\alpha="010B
 \mathchardef\beta="010C
 \mathchardef\gamma="010D
@@ -1097,8 +1096,8 @@
 \def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
       $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3pt\prevdepth-1000pt}
       \upbracefill\crcr\noalign{\kern3pt}}}}\limits}
-\def\skew#1#2#3{{\muskip0pt#1mu\divide\muskip\z@2 \mkern\muskip\z@
-    #2{\mkern-\muskip\z@{#3}\mkern\muskip\z@}\mkern-\muskip\z@}{}}
+\def\skew#1#2#3{{\muskip0pt#1mu\divide\muskip0pt2 \mkern\muskip0pt
+    #2{\mkern-\muskip0pt{#3}\mkern\muskip0pt}\mkern-\muskip0pt}{}}
 
 
 \def\choose{\atopwithdelims()}
@@ -1111,27 +1110,27 @@
   {#1\textstyle{#2}}{#1\scriptstyle{#2}}{#1\scriptscriptstyle{#2}}}
 \def\root#1\of{\setbox\rootbox
   \hbox{$\m@th\scriptscriptstyle{#1}$}\mathpalette\r@@t}
-\def\r@@t#1#2{\setbox\z@\hbox{$\m@th#1\sqrt{#2}$}\dimen@\ht\z@
-  \advance\dimen@-\dp\z@
-  \mkern5mu\raise.6\dimen@\copy\rootbox \mkern-10mu\box\z@}
+\def\r@@t#1#2{\setbox0\hbox{$\m@th#1\sqrt{#2}$}\dimen@\ht0
+  \advance\dimen@-\dp0
+  \mkern5mu\raise.6\dimen@\copy\rootbox \mkern-10mu\box0}
 \newif\ifv@ \newif\ifh@
 \def\vphantom{\v@true\h@false\ph@nt}
 \def\hphantom{\v@false\h@true\ph@nt}
 \def\phantom{\v@true\h@true\ph@nt}
 \def\ph@nt{\ifmmode\def\next{\mathpalette\mathph@nt}%
   \else\let\next\makeph@nt\fi\next}
-\def\makeph@nt#1{\setbox\z@\hbox{#1}\finph@nt}
-\def\mathph@nt#1#2{\setbox\z@\hbox{$\m@th#1{#2}$}\finph@nt}
+\def\makeph@nt#1{\setbox0\hbox{#1}\finph@nt}
+\def\mathph@nt#1#2{\setbox0\hbox{$\m@th#1{#2}$}\finph@nt}
 \def\finph@nt{\setbox2\null
-  \ifv@ \ht2\ht\z@ \dp2\dp\z@\fi
-  \ifh@ \wd2\wd\z@\fi \box2}
+  \ifv@ \ht2\ht0 \dp2\dp0\fi
+  \ifh@ \wd2\wd0\fi \box2}
 \def\mathstrut{\vphantom(}
 \def\smash{\relax % \relax, in case this comes first in \halign
   \ifmmode\def\next{\mathpalette\mathsm@sh}\else\let\next\makesm@sh
   \fi\next}
-\def\makesm@sh#1{\setbox\z@\hbox{#1}\finsm@sh}
-\def\mathsm@sh#1#2{\setbox\z@\hbox{$\m@th#1{#2}$}\finsm@sh}
-\def\finsm@sh{\ht\z@\z@ \dp\z@\z@ \box\z@}
+\def\makesm@sh#1{\setbox0\hbox{#1}\finsm@sh}
+\def\mathsm@sh#1#2{\setbox0\hbox{$\m@th#1{#2}$}\finsm@sh}
+\def\finsm@sh{\ht0=0pt \dp0=0pt \box0}
 
 \def\cong{\mathrel{\mathpalette\@vereq\sim}} % congruence sign
 \def\@vereq#1#2{\lower.5pt\vbox{\lineskiplimit16383.99999pt\lineskip-.5pt% dimensão maxima
@@ -1142,7 +1141,7 @@
 \def\rlh@#1{\vcenter{\m@th\hbox{\ooalign{\raise2pt
           \hbox{$#1\rightharpoonup$}\crcr
         $#1\leftharpoondown$}}}}
-\def\buildrel#1\over#2{\mathrel{\mathop{\kern\z@#2}\limits^{#1}}}
+\def\buildrel#1\over#2{\mathrel{\mathop{\kern0pt#2}\limits^{#1}}}
 \def\doteq{\buildrel\textstyle.\over=}
 
 \def\cases#1{\left\{\,\vcenter{\lineskip1pt
@@ -1156,16 +1155,16 @@
 \def\pmatrix#1{\left(\matrix{#1}\right)}
 \setbox0=\hbox{\tenex@ B} \p@renwd=\wd0 % width of the big left (
 \def\bordermatrix#1{\begingroup \m@th
-  \setbox\z@\vbox{\def\cr{\crcr\noalign{\kern2pt\global\let\cr\endline}}%
+  \setbox0\vbox{\def\cr{\crcr\noalign{\kern2pt\global\let\cr\endline}}%
     \ialign{$##$\hfil\kern2pt\kern\p@renwd&\vskip3pt plus 1pt minus 1pt\hfil$##$\hfil
       &&\quad\hfil$##$\hfil\crcr
       \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
       #1\crcr\omit\strut\cr}}%
-  \setbox2\vbox{\unvcopy\z@\global\setbox1\lastbox}%
+  \setbox2\vbox{\unvcopy0\global\setbox1\lastbox}%
   \setbox2\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
   \setbox2\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
     \global\setbox1\vbox{\box1\kern2pt}%
-    \vcenter{\kern-\ht1\unvbox\z@\kern-\baselineskip}\,\right)$}%
+    \vcenter{\kern-\ht1\unvbox0\kern-\baselineskip}\,\right)$}%
   \null\;\vbox{\kern\ht1\box2}\endgroup}
 
 \def\openup{\afterassignment\@penup\dimen@=}
@@ -1202,7 +1201,7 @@
 \newif\ifr@ggedbottom
 \def\raggedbottom{\topskip 10pt plus60pt \r@ggedbottomtrue}
 \def\normalbottom{\topskip 10pt \r@ggedbottomfalse} % undoes \raggedbottom
-\def\folio{\ifnum\pageno@<\z@ \romannumeral-\pageno@ \else\number\pageno@ \fi}
+\def\folio{\ifnum\pageno@<0 \romannumeral-\pageno@ \else\number\pageno@ \fi}
 \def\nopagenumbers{\footline{\hfil}} % blank out the footline
 
 
@@ -1232,18 +1231,18 @@
 \skip\topins@=\z@skip % no space added when a topinsert is present
 \count\topins@=1000 % magnification factor (1 to 1)
 \dimen\topins@=16383.99999pt % (dimensão máxima) no limit per page
-\def\@ins{\par\begingroup\setbox\z@\vbox\bgroup} % start a \vbox
+\def\@ins{\par\begingroup\setbox0\vbox\bgroup} % start a \vbox
 \def\endinsert{\egroup % finish the \vbox
-  \if@mid \dimen@\ht\z@ \advance\dimen@\dp\z@ \advance\dimen@12pt
+  \if@mid \dimen@\ht0 \advance\dimen@\dp0 \advance\dimen@12pt
     \advance\dimen@\pagetotal \advance\dimen@-\pageshrink
     \ifdim\dimen@>\pagegoal\@midfalse\p@gefalse\fi\fi
-  \if@mid \bigskip\box\z@\bigbreak
+  \if@mid \bigskip\box0\bigbreak
   \else\insert\topins@{\penalty100 % floating insertion
     \splittopskip\z@skip
-    \splitmaxdepth16383.99999pt \floatingpenalty\z@% (max dimen)
-    \ifp@ge \dimen@\dp\z@
-    \vbox to\vsize{\unvbox\z@\kern-\dimen@}% depth is zero
-    \else \box\z@\nobreak\bigskip\fi}\fi\endgroup}
+    \splitmaxdepth16383.99999pt \floatingpenalty0% (max dimen)
+    \ifp@ge \dimen@\dp0
+    \vbox to\vsize{\unvbox0\kern-\dimen@}% depth is zero
+    \else \box0\nobreak\bigskip\fi}\fi\endgroup}
 
 \fam0\tenrm@ % select roman font
 \catcode`@=12 % at signs are no longer letters
