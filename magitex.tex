@@ -349,10 +349,9 @@
 
 % Os registradores de skip. Nenhum é reservado e todos estão à
 % disposição:
-\skipdef\hideskip=0 \hideskip=-1000pt plus 1fill % negative but can grow
-\skipdef\centering=1 \centering=0pt plus 1000pt minus 1000pt
-\skipdef\z@skip=2 \z@skip=0pt plus0pt minus0pt
-\skipdef\skip@=3
+\skipdef\centering=0 \centering=0pt plus 1000pt minus 1000pt
+\skipdef\z@skip=1 \z@skip=0pt plus0pt minus0pt
+\skipdef\skip@=2
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
@@ -904,7 +903,7 @@
 
 \def\strut{\relax\ifmmode\copy\strutbox\else\unhcopy\strutbox\fi}
 
-\def\hidewidth{\hskip\hideskip} % for alignment entries that can stick out
+\def\hidewidth{\hskip-1000pt plus 1fill} % for alignment entries that can stick out
 \def\ialign{\everycr{}\tabskip\z@skip\halign} % initialized \halign
 \def\multispan#1{\omit \mscount#1\relax
   \loop\ifnum\mscount>1 \sp@n\repeat}
