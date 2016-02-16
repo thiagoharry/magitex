@@ -484,15 +484,10 @@
 \def\topins@{253}
 
 % Comandos de espaçamento
-\def\antiespacito{\kern-.16667em }
-\def\espacito{\kern .16667em} % Equivalente ao \thinspace do Plain TeX
-\def\espacote{\kern.5em }
-\def\espacinho{\vskip3pt plus 1pt minus 1pt}
-\def\espaco{\vskip6pt plus 2pt minus 2pt}
-\def\espacao{\vskip12pt plus 4pt minus 4pt}
-\def\espacoh#1{\hskip#1\relax}
-\def\espacov#1{\vskip#1\relax}
-\def\meioquad{\hskip.5em\relax}
+\def\lacuna#1{\ifvmode\vskip#1\relax\else\hskip#1\relax\fi}
+\def\espaco#1{{\dimen0=#1\divide\dimen0 by 3\ifvmode\vskip#1
+          plus\dimen0 minus\dimen0\else\hskip#1 plus\dimen0
+          minus\dimen0\relax\fi}}
 \def\quad{\hskip1em\relax}
 \def\qquad{\hskip2em\relax}
 
@@ -526,7 +521,8 @@
 % Comandos de estilo de escrita. Colocando correção itálica
 % automaticamente se necessário.
 % TODO: #2 precisa ser mesmo opcional abaixo:
-\long\def\italico#1#2{{\fam4\tenit@ #1\ifx#2.#2\else\ifx#2,#2\else\/#2\fi\fi}}
+\long\def\italico#1{\let\proxi=\}\def\func{\if\prox\}[VAZIO]\else[NAO-VAZIO]\fi}\futurelet\prox\func}
+%{\def\func{\if\prox.\relax\else\if\prox,\relax\else\/\fi\fi}\fam4\tenit@#1\futurelet\prox\func#2\par}}
 \long\def\romano#1{{\fam0\tenrm@ #1}}
 \long\def\negrito#1{{\fam6\tenbf@ #1}}
 \long\def\inclinado#1#2{{\fam5\tensl@ #1\ifx#2.#2\else\ifx#2,#2\else\/#2\fi\fi}}
@@ -563,6 +559,9 @@
 
 % Gera uma linha horizontal:
 \def\linha{{\hrule}}
+
+% Útil para testarmos se algum argumento é vazio
+\def\vazio@{}
 
 % Definições matemáticas do Plain TeX:
 \def\lmoustache{\delimiter"437A340 } % top from (, bottom from )
@@ -851,7 +850,6 @@
 \let\endline=\cr
 
 \def\space{ }
-\def\empty{}
 \def\null{\hbox{}}
 
 \let\bgroup={ \let\egroup=}
@@ -950,7 +948,7 @@
   \box0}
 
 \def\hang{\hangindent\parindent}
-\def\textindent#1{\indent\llap{#1\espacote}\ignorespaces}
+\def\textindent#1{\indent\llap\kern.5em \ignorespaces}
 \def\item{\par\hang\textindent}
 \def\itemitem{\par\indent \hangindent2\parindent \textindent}
 \def\narrower{\advance\leftskip\parindent
@@ -960,7 +958,7 @@
   \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
   \message{#1}\line{{\fam6\tenbf@#1}\hss}\nobreak\smallskip\noindent}
 \outer\def\proclaim #1. #2\par{\medbreak
-  \noindent{\fam6\tenbf@#1.\espacote}{\fam5\tensl@#2\par}%
+  \noindent{\fam6\tenbf@#1.\kern.5em }{\fam5\tensl@#2\par}%
   \ifdim\lastskip<6pt plus 2pt minus 2pt \removelastskip\penalty55\medskip\fi}
 
 \def\ttraggedright{\fam7\tentt@\rightskip0pt plus2em\relax} % for use with \tt only
@@ -1038,7 +1036,7 @@
 \def\>{\mskip\medmuskip}
 \def\;{\mskip\thickmuskip}
 \def\!{\mskip-\thinmuskip}
-\def\*{\discretionary{\espacinho\the\textfont2\char2}{}{}}
+\def\*{\discretionary{\vskip3pt plus 1pt minus 1pt\the\textfont2\char2}{}{}}
 {\catcode`\'=13 \gdef'{^\bgroup\prim@s}}
 \def\prim@s{\prime\futurelet\next\pr@m@s}
 \def\pr@m@s{\ifx'\next\let\nxt\pr@@@s \else\ifx^\next\let\nxt\pr@@@t
@@ -1159,7 +1157,7 @@
 \setbox0=\hbox{\tenex@ B} \p@renwd=\wd0 % width of the big left (
 \def\bordermatrix#1{\begingroup \m@th
   \setbox\z@\vbox{\def\cr{\crcr\noalign{\kern2pt\global\let\cr\endline}}%
-    \ialign{$##$\hfil\kern2pt\kern\p@renwd&\espacinho\hfil$##$\hfil
+    \ialign{$##$\hfil\kern2pt\kern\p@renwd&\vskip3pt plus 1pt minus 1pt\hfil$##$\hfil
       &&\quad\hfil$##$\hfil\crcr
       \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
       #1\crcr\omit\strut\cr}}%
