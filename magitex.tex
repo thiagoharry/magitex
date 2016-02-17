@@ -798,17 +798,9 @@
 \mathchardef\rightharpoonup="312A
 \mathchardef\rightharpoondown="312B
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
-% substituído por código novo (ou não) à medida que o MAgiTeX se       %%%
-% desenvolver                                                          %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% And here's a different sort of allocation:
-% For example, \newif\iffoo creates \footrue, \foofalse to go with \iffoo.
-\outer\def\newif#1{\count@\escapechar \escapechar-1
+% O \newif é útil demais para ser descartado. Mas ele ficará
+% disponível para escritores de formato:
+\outer\def\newif@#1{\count@\escapechar \escapechar-1
   \expandafter\expandafter\expandafter
    \def\@if#1{true}{\let#1=\iftrue}%
   \expandafter\expandafter\expandafter
@@ -817,6 +809,14 @@
 \def\@if#1#2{\csname\expandafter\if@\string#1#2\endcsname}
 {\uccode`1=`i \uccode`2=`f \uppercase{\gdef\if@12{}}} % `if' is required
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
+% substituído por código novo (ou não) à medida que o MAgiTeX se       %%%
+% desenvolver                                                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \message{more fonts,}
 % Additional \preloaded fonts can be specified here.
@@ -898,7 +898,7 @@
   \loop\ifnum\mscount>1 \sp@n\repeat}
 \def\sp@n{\span\omit\advance\mscount-1}
 
-\newif\ifus@ \newif\if@cr
+\newif@\ifus@ \newif@\if@cr
 
 
 \def\cleartabs{\global\setbox\tabsyet\null \setbox\tabs\null}
@@ -1100,7 +1100,7 @@
 \def\r@@t#1#2{\setbox0\hbox{$\m@th#1\sqrt{#2}$}\dimen@\ht0
   \advance\dimen@-\dp0
   \mkern5mu\raise.6\dimen@\copy\rootbox \mkern-10mu\box0}
-\newif\ifv@ \newif\ifh@
+\newif@\ifv@ \newif@\ifh@
 \def\vphantom{\v@true\h@false\ph@nt}
 \def\hphantom{\v@false\h@true\ph@nt}
 \def\phantom{\v@true\h@true\ph@nt}
@@ -1161,7 +1161,7 @@
 \def\eqalign#1{\null\,\vcenter{\openup3pt\m@th
   \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
       \crcr#1\crcr}}\,}
-\newif\ifdt@p
+\newif@\ifdt@p
 \def\displ@y{\global\dt@ptrue\openup3pt\m@th
   \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000pt
       \vskip-\lineskiplimit \vskip0pt \fi
@@ -1187,7 +1187,7 @@
 
 \message{output routines,}
 
-\newif\ifr@ggedbottom
+\newif@\ifr@ggedbottom
 \def\raggedbottom{\topskip 10pt plus60pt \r@ggedbottomtrue}
 \def\normalbottom{\topskip 10pt \r@ggedbottomfalse} % undoes \raggedbottom
 \def\folio{\ifnum\pageno@<0 \romannumeral-\pageno@ \else\number\pageno@ \fi}
@@ -1215,7 +1215,7 @@
 \count\footins@=1000 % footnote magnification factor (1 to 1)
 \dimen\footins@=8in % maximum footnotes per page
 
-\newif\ifp@ge \newif\if@mid
+\newif@\ifp@ge \newif@\if@mid
 \def\topinsert{\@midfalse\p@gefalse\@ins}
 \def\midinsert{\@midtrue\@ins}
 \def\pageinsert{\@midfalse\p@getrue\@ins}
