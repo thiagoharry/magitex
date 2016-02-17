@@ -514,6 +514,23 @@
 \font\sevenbf@=cmbx7 % Subscritos negritos
 \font\fivebf@=cmbx5 % Subsubscritos negritos
 
+% Ajuste de espaçamento em sobrescritos para algumas fontes:
+\skewchar\teni@='177 \skewchar\seveni@='177 \skewchar\fivei@='177
+\skewchar\tensy@='60 \skewchar\sevensy@='60 \skewchar\fivesy@='60
+% Ajuste das fontes em famílias para o modo matemático:
+\textfont0=\tenrm@ \scriptfont0=\sevenrm@ \scriptscriptfont0=\fiverm@
+\textfont1=\teni@ \scriptfont1=\seveni@ \scriptscriptfont1=\fivei@
+\def\mit{\fam1} \def\oldstyle{\fam1\teni@}
+\textfont2=\tensy@ \scriptfont2=\sevensy@ \scriptscriptfont2=\fivesy@
+\def\cal{\fam2}
+\textfont3=\tenex@ \scriptfont3=\tenex@ \scriptscriptfont3=\tenex@
+\textfont4=\tenit@
+\textfont5=\tensl@
+\textfont6=\tenbf@ \scriptfont6=\sevenbf@
+\scriptscriptfont6=\fivebf@
+\textfont7=\tentt@
+
+
 % Comandos de justificação e texto:
 \def\alinhaesquerda{\rightskip 0em plus 2em \leftskip 0pt \spaceskip.3333em%
      \xspaceskip.5em\relax}
@@ -836,42 +853,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\message{more fonts,}
-% Additional \preloaded fonts can be specified here.
-% (And those that were \preloaded above can be eliminated.)
-
-\skewchar\teni@='177 \skewchar\seveni@='177 \skewchar\fivei@='177
-\skewchar\tensy@='60 \skewchar\sevensy@='60 \skewchar\fivesy@='60
-
-\textfont0=\tenrm@ \scriptfont0=\sevenrm@ \scriptscriptfont0=\fiverm@
-\textfont1=\teni@ \scriptfont1=\seveni@ \scriptscriptfont1=\fivei@
-\def\mit{\fam1} \def\oldstyle{\fam1\teni@}
-\textfont2=\tensy@ \scriptfont2=\sevensy@ \scriptscriptfont2=\fivesy@
-\def\cal{\fam2}
-\textfont3=\tenex@ \scriptfont3=\tenex@ \scriptscriptfont3=\tenex@
-\textfont4=\tenit@
-\textfont5=\tensl@
-\textfont6=\tenbf@ \scriptfont6=\sevenbf@
-\scriptscriptfont6=\fivebf@
-\textfont7=\tentt@
-
-
-% Macros for setting ordinary text
-
-\let\endline=\cr
-
-\def\space{ }
-\def\null{\hbox{}}
-
-\let\bgroup={ \let\egroup=}
-
 % In \obeylines, we say `\let^^M=\par' instead of `\def^^M{\par}'
 % since this allows, for example, `\let\par=\cr \obeylines \halign{...'
 {\catcode`\^^M=13 % these lines must end with %
   \gdef\obeylines{\catcode`\^^M13 \let^^M\par}%
   \global\let^^M\par} % this is in case ^^M appears in a \write
-\def\obeyspaces{\catcode`\ 13}
-{\obeyspaces\global\let =\space}
+
 
 \def\loop#1\repeat{\def\body{#1}\iterate}
 \def\iterate{\body \let\next\iterate \else\let\next\relax\fi \next}
@@ -916,8 +903,8 @@
 \newif@\ifus@ \newif@\if@cr
 
 
-\def\cleartabs{\global\setbox\tabsyet\null \setbox\tabs\null}
-\def\settabs{\setbox\tabs\null \futurelet\next\sett@b}
+\def\cleartabs{\global\setbox\tabsyet\hbox{} \setbox\tabs\hbox{}}
+\def\settabs{\setbox\tabs\hbox{} \futurelet\next\sett@b}
 \let\+=\relax % in case this file is being read in twice
 \def\sett@b{\ifx\next\+\def\nxt{\afterassignment\s@tt@b\let\nxt}%
   \else\let\nxt\s@tcols\fi \let\next\relax \nxt}
@@ -932,7 +919,7 @@
 
 \def\m@ketabbox{\begingroup
   \global\setbox\tabsyet\copy\tabs
-  \global\setbox\tabsdone\null
+  \global\setbox\tabsdone\hbox{}
   \def\cr{\@crtrue\crcr\egroup\egroup
     \ifus@\unvbox0\lastbox\fi\endgroup
     \setbox\tabs\hbox{\unhbox\tabsyet\unhbox\tabsdone}}%
@@ -1123,7 +1110,7 @@
   \else\let\next\makeph@nt\fi\next}
 \def\makeph@nt#1{\setbox0\hbox{#1}\finph@nt}
 \def\mathph@nt#1#2{\setbox0\hbox{$\m@th#1{#2}$}\finph@nt}
-\def\finph@nt{\setbox2\null
+\def\finph@nt{\setbox2\hbox{}
   \ifv@ \ht2\ht0 \dp2\dp0\fi
   \ifh@ \wd2\wd0\fi \box2}
 \def\mathstrut{\vphantom(}
@@ -1149,7 +1136,7 @@
 \def\cases#1{\left\{\,\vcenter{\lineskip1pt
   \baselineskip12pt \lineskiplimit0pt\m@th
     \ialign{$##\hfil$&\quad##\hfil\crcr#1\crcr}}\right.}
-\def\matrix#1{\null\,\vcenter{\lineskip1pt
+\def\matrix#1{\hbox{}\,\vcenter{\lineskip1pt
   \baselineskip12pt \lineskiplimit0pt\m@th
     \ialign{\hfil$##$\hfil&&\quad\hfil$##$\hfil\crcr
       \mathstrut\crcr\noalign{\kern-\baselineskip}
@@ -1167,13 +1154,13 @@
   \setbox2\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
     \global\setbox1\vbox{\box1\kern2pt}%
     \vcenter{\kern-\ht1\unvbox0\kern-\baselineskip}\,\right)$}%
-  \null\;\vbox{\kern\ht1\box2}\endgroup}
+  \hbox{}\;\vbox{\kern\ht1\box2}\endgroup}
 
 \def\openup{\afterassignment\@penup\dimen@=}
 \def\@penup{\advance\lineskip\dimen@
   \advance\baselineskip\dimen@
   \advance\lineskiplimit\dimen@}
-\def\eqalign#1{\null\,\vcenter{\openup3pt\m@th
+\def\eqalign#1{\hbox{}\,\vcenter{\openup3pt\m@th
   \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
       \crcr#1\crcr}}\,}
 \newif@\ifdt@p
