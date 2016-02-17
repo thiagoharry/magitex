@@ -495,10 +495,13 @@
 \defaulthyphenchar=`\- % O caractere de separação silábica deve ser
                        % setado antes.
 \font\tenit@=cmti10 % text italic
+\font\tennegit@=cmbxti10 % Negrito e itálico
+\font\tennegsl@=cmbxsl10 % Negrito e inclinado
 \font\tensl@=cmsl10 % slanted roman
-\font\tenrm@=cmr10 % roman text (mudar o nome \tenrm gera problemas)
+\font\tenrm@=cmr10 % roman text
 \font\tenbf@=cmbx10 % boldface extended
 \font\tentt@=cmtt10 % typewriter
+\font\tennegtt@=cmbtt10 % Negrito monoespaço?
 \font\teni@=cmmi10 % math italic
 \font\tensy@=cmsy10 % math symbols
 \font\tenex@=cmex10 % math extension
@@ -510,16 +513,6 @@
 \font\fivesy@=cmsy5 % Símbolos subsubscritos
 \font\sevenbf@=cmbx7 % Subscritos negritos
 \font\fivebf@=cmbx5 % Subsubscritos negritos
-
-% Comandos de estilo de escrita. Colocando correção itálica
-% automaticamente se necessário.
-% TODO: #2 precisa ser mesmo opcional abaixo:
-\long\def\italico#1{\def\func{\catcode`*=2\ifcat\prox*[VAZIO]\else[N]\fi}\futurelet\prox\func}
-%{\def\func{\if\prox.\relax\else\if\prox,\relax\else\/\fi\fi}\fam4\tenit@#1\futurelet\prox\func#2\par}}
-\long\def\romano#1{{\fam0\tenrm@ #1}}
-\long\def\negrito#1{{\fam6\tenbf@ #1}}
-\long\def\inclinado#1#2{{\fam5\tensl@ #1\ifx#2.#2\else\ifx#2,#2\else\/#2\fi\fi}}
-\long\def\monoespaco#1{{\fam7\tentt@ #1}}
 
 % Comandos de justificação e texto:
 \def\alinhaesquerda{\rightskip 0em plus 2em \leftskip 0pt \spaceskip.3333em%
@@ -800,6 +793,15 @@
 
 % O \newif é útil demais para ser descartado. Mas ele ficará
 % disponível para escritores de formato:
+\outer\def\newif#1{\count@\escapechar \escapechar-1
+  \expandafter\expandafter\expandafter
+   \def\@if#1{true}{\let#1=\iftrue}%
+  \expandafter\expandafter\expandafter
+   \def\@if#1{false}{\let#1=\iffalse}%
+  \@if#1{false}\escapechar\count@} % the condition starts out false
+\def\@if#1#2{\csname\expandafter\if@\string#1#2\endcsname}
+{\uccode`1=`i \uccode`2=`f \uppercase{\gdef\if@12{}}} % `if' is required
+
 \outer\def\newif@#1{\count@\escapechar \escapechar-1
   \expandafter\expandafter\expandafter
    \def\@if#1{true}{\let#1=\iftrue}%
@@ -809,6 +811,22 @@
 \def\@if#1#2{\csname\expandafter\if@\string#1#2\endcsname}
 {\uccode`1=`i \uccode`2=`f \uppercase{\gdef\if@12{}}} % `if' is required
 
+% Definamos agora a formatação de textos:
+\def\it@{0}\def\neg@{0}\def\sl@{0}\def\tt@{0}
+\def\italico#1{{\def\it@{1}\formata@{#1}}}
+\def\negrito#1{{\def\neg@{1}\formata@{#1}}}
+\def\monoespaco#1{{\def\tt@{1}\formata@{#1}}}
+\def\inclinado#1{{\def\sl@{1}\formata@{#1}}}
+\def\sublinhado#1{$\setbox0\hbox{#1}\dp0=0pt\m@th \underline{\box0}$}
+\def\formata@#1{\if\it@1\if\neg@1{\fam4\tennegit@#1\/}% Itálico e negrito
+\else{\fam4\tenit@#1\/}% Itálico
+\fi\else\if\neg@1\if\sl@1{\fam6\tennegsl@#1}% Negrito inclinado
+\else\if\tt@1{\fam6\tennegtt@#1}% Negrito monoespaço (sem fonte)
+\else{\fam6\tenbf@#1}% Negrito
+\fi\fi\else\if\sl@1{#1}% Inclinado
+\else\if\tt@1{(\fam7\tentt@#1)}% Monoespaço
+\else{#1}% Sem formatação
+\fi\fi\fi\fi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -886,9 +904,6 @@
 \def\llap#1{\hbox to0pt{\hss#1}}
 
 \def\m@th{\mathsurround0pt}
-\def\underbar#1{$\setbox0\hbox{#1}\dp0=0pt
-  \m@th \underline{\box0}$}
-
 
 \def\strut{\relax\ifmmode\copy\strutbox\else\unhcopy\strutbox\fi}
 
