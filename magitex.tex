@@ -23,6 +23,7 @@
 \catcode`@=11
 % O seguinte catcode nos ajuda a interpretar caracteres UTF-8:
 \catcode`\^^c3=13
+\catcode`\^^c2=13
 
 % Usamos as mesmas configurações do fator de espaço que o Plain TeX. O
 % espaço após o ')' é igual ao espaço do que vem antes dele, e o mesmo
@@ -385,15 +386,28 @@
 %TODO: ç e Ç sem \c
 \def\utf@#1{\ifmmode{\hbox{\tenrm@#1}}\else{#1}\fi}
 \def\ensuremath@#1{\ifmmode#1\else$#1$\fi}
+\def^^c2#1{\relax% Família a:   ¡ ¢ £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯
+       \ifx#1^^b0\ensuremath@{^{\hbox{\tenrm@ o}}}% °
+       \else\ifx#1^^b1\ensuremath@{\pm}% ±
+       \else\ifx#1^^b2\ensuremath@{^2}% ²
+       \else\ifx#1^^b3\ensuremath@{^3}% ³
+       \else\ifx#1^^b4\utf@{\'\hskip-0.4em}% ´
+       \else\ifx#1^^b5\ensuremath@{\mathchar"0116}% µ (b5)´
+       \else\ifx#1^^b6\ensuremath@{\mathchar"027B}% ¶
+       \else\ifx#1^^b7\ensuremath@{\cdot}% ·
+       \else\ifx#1^^b8{\c\ }% ¸ (b8)
+       \else\ifx#1^^b9\ensuremath@{^1}% ¹ (b9)
+       \else\ifx#1^^ba\ensuremath@{^0}% º (ba)
+       \else\ifx#1^^bb\ensuremath@{\mathchar"521D}% » (bb)
+       \else\ifx#1^^bc\ensuremath@{1 \over 4}% ¼
+       \else\ifx#1^^bd\ensuremath@{1 \over 2}% ½
+       \else\ifx#1^^be\ensuremath@{3 \over 4}% ¾
+       \else\ifx#1^^bf\utf@{\char'76}% ¿
+       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 \def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign
                  % (TeXbook)
-        \ifx#1^^bb\ensuremath{{\cal\char`35}}
-        \else\ifx#1^^bc\ensuremath@{{}^{\lower0.5ex\hbox{$\scriptstyle1$}}\!/\!_4}
-        \else\ifx#1^^bd\ensuremath@{{}^{\lower0.5ex\hbox{$\scriptstyle1$}}\!/\!_2}
-        \else\ifx#1^^be\ensuremath@{{}^{\lower0.5ex\hbox{$\scriptstyle3$}}\!/\!_4}
-        \else\ifx#1^^bf\utf@{\char`75}
-        \else\ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
-        \else\ifx#1^^81\ifmmode{\acute A}\else{\accent19A}\fi% Á
+        \ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
+        \else\ifx#1^^81\ifmmode{\acute A}\else{\accent19A}\fi% Á c1
         \else\ifx#1^^82\ifmmode{\hat A}\else{\accent94A}\fi% Â
         \else\ifx#1^^83\ifmmode{\tilde A}\else{\accent"7EA}\fi% Ã
         \else\ifx#1^^84\ifmmode{\ddot A}\else{\accent"7FA}\fi% Ä
@@ -451,7 +465,7 @@
         \else\ifx#1^^bf\ifmmode{\ddot y}\else{\accent"7FY}\fi% ÿ
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
 
 % Código que passa os padrões de separação silábica da língua
@@ -587,6 +601,18 @@
 
 % Útil para testarmos se algum argumento é vazio
 \def\vazio@{}
+
+% O \newif é útil demais para ser descartado. Mas ele ficará
+% disponível para escritores de formato:
+\outer\def\newif@#1{\count@\escapechar \escapechar-1
+  \expandafter\expandafter\expandafter
+   \def\@if#1{true}{\let#1=\iftrue}%
+  \expandafter\expandafter\expandafter
+   \def\@if#1{false}{\let#1=\iffalse}%
+  \@if#1{false}\escapechar\count@} % the condition starts out false
+\def\@if#1#2{\csname\expandafter\if@\string#1#2\endcsname}
+{\uccode`1=`i \uccode`2=`f \uppercase{\gdef\if@12{}}} % `if' is required
+
 
 % Definições matemáticas do Plain TeX:
 \def\lmoustache{\delimiter"437A340 } % top from (, bottom from )
@@ -829,26 +855,91 @@
 \mathchardef\leftharpoondown="3129
 \mathchardef\rightharpoonup="312A
 \mathchardef\rightharpoondown="312B
+\def\joinrel{\mathrel{\mkern-3mu}}
+\def\relbar{\mathrel{\smash-}} % \smash, because - has the same height as +
+\def\Relbar{\mathrel=}
+\mathchardef\lhook="312C \def\hookrightarrow{\lhook\joinrel\rightarrow}
+\mathchardef\rhook="312D \def\hookleftarrow{\leftarrow\joinrel\rhook}
+\def\bowtie{\mathrel\triangleright\joinrel\mathrel\triangleleft}
+\def\models{\mathrel|\joinrel=}
+\def\Longrightarrow{\Relbar\joinrel\Rightarrow}
+\def\longrightarrow{\relbar\joinrel\rightarrow}
+\def\longleftarrow{\leftarrow\joinrel\relbar}
+\def\Longleftarrow{\Leftarrow\joinrel\Relbar}
+\def\longmapsto{\mapstochar\longrightarrow}
+\def\longleftrightarrow{\leftarrow\joinrel\rightarrow}
+\def\Longleftrightarrow{\Leftarrow\joinrel\Rightarrow}
+\def\iff{\;\Longleftrightarrow\;}
 
-% O \newif é útil demais para ser descartado. Mas ele ficará
-% disponível para escritores de formato:
-\outer\def\newif#1{\count@\escapechar \escapechar-1
-  \expandafter\expandafter\expandafter
-   \def\@if#1{true}{\let#1=\iftrue}%
-  \expandafter\expandafter\expandafter
-   \def\@if#1{false}{\let#1=\iffalse}%
-  \@if#1{false}\escapechar\count@} % the condition starts out false
-\def\@if#1#2{\csname\expandafter\if@\string#1#2\endcsname}
-{\uccode`1=`i \uccode`2=`f \uppercase{\gdef\if@12{}}} % `if' is required
+\mathchardef\ldotp="613A % ldot as a punctuation mark
+\mathchardef\cdotp="6201 % cdot as a punctuation mark
+\mathchardef\colon="603A % colon as a punctuation mark
+\def\ldots{\mathinner{\ldotp\ldotp\ldotp}}
+\def\cdots{\mathinner{\cdotp\cdotp\cdotp}}
+\def\vdots{\vbox{\baselineskip4pt \lineskiplimit0pt
+    \kern6pt\hbox{.}\hbox{.}\hbox{.}}}
+\def\ddots{\mathinner{\mkern1mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern2mu
+    \raise4pt\hbox{.}\mkern2mu\raise1pt\hbox{.}\mkern1mu}}
 
-\outer\def\newif@#1{\count@\escapechar \escapechar-1
-  \expandafter\expandafter\expandafter
-   \def\@if#1{true}{\let#1=\iftrue}%
-  \expandafter\expandafter\expandafter
-   \def\@if#1{false}{\let#1=\iffalse}%
-  \@if#1{false}\escapechar\count@} % the condition starts out false
-\def\@if#1#2{\csname\expandafter\if@\string#1#2\endcsname}
-{\uccode`1=`i \uccode`2=`f \uppercase{\gdef\if@12{}}} % `if' is required
+\def\acute{\mathaccent"7013 }
+\def\grave{\mathaccent"7012 }
+\def\ddot{\mathaccent"707F }
+\def\tilde{\mathaccent"707E }
+\def\bar{\mathaccent"7016 }
+\def\breve{\mathaccent"7015 }
+\def\check{\mathaccent"7014 }
+\def\hat{\mathaccent"705E }
+\def\vec{\mathaccent"017E }
+\def\dot{\mathaccent"705F }
+\def\widetilde{\mathaccent"0365 }
+\def\widehat{\mathaccent"0362 }
+\def\overrightarrow#1{\vbox{\m@th\ialign{##\crcr
+      \rightarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}
+\def\overleftarrow#1{\vbox{\m@th\ialign{##\crcr
+      \leftarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}
+\def\overbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3pt}
+      \downbracefill\crcr\noalign{\kern3pt\prevdepth-1000pt}
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+\def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
+      $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3pt\prevdepth-1000pt}
+      \upbracefill\crcr\noalign{\kern3pt}}}}\limits}
+\def\skew#1#2#3{{\muskip0pt#1mu\divide\muskip0pt2 \mkern\muskip0pt
+    #2{\mkern-\muskip0pt{#3}\mkern\muskip0pt}\mkern-\muskip0pt}{}}
+
+
+\def\choose{\atopwithdelims()}
+\def\brack{\atopwithdelims[]}
+\def\brace{\atopwithdelims\{\}}
+
+\def\sqrt{\radical"270370 }
+
+\def\mathpalette#1#2{\mathchoice{#1\displaystyle{#2}}%
+  {#1\textstyle{#2}}{#1\scriptstyle{#2}}{#1\scriptscriptstyle{#2}}}
+\def\root#1\of{\setbox\rootbox
+  \hbox{$\m@th\scriptscriptstyle{#1}$}\mathpalette\r@@t}
+\def\r@@t#1#2{\setbox0\hbox{$\m@th#1\sqrt{#2}$}\dimen@\ht0
+  \advance\dimen@-\dp0
+  \mkern5mu\raise.6\dimen@\copy\rootbox \mkern-10mu\box0}
+\newif@\ifv@ \newif@\ifh@
+\def\vphantom{\v@true\h@false\ph@nt}
+\def\hphantom{\v@false\h@true\ph@nt}
+\def\phantom{\v@true\h@true\ph@nt}
+\def\ph@nt{\ifmmode\def\next{\mathpalette\mathph@nt}%
+  \else\let\next\makeph@nt\fi\next}
+\def\makeph@nt#1{\setbox0\hbox{#1}\finph@nt}
+\def\mathph@nt#1#2{\setbox0\hbox{$\m@th#1{#2}$}\finph@nt}
+\def\finph@nt{\setbox2\hbox{}
+  \ifv@ \ht2\ht0 \dp2\dp0\fi
+  \ifh@ \wd2\wd0\fi \box2}
+\def\mathstrut{\vphantom(}
+\def\smash{\relax % \relax, in case this comes first in \halign
+  \ifmmode\def\next{\mathpalette\mathsm@sh}\else\let\next\makesm@sh
+  \fi\next}
+\def\makesm@sh#1{\setbox0\hbox{#1}\finsm@sh}
+\def\mathsm@sh#1#2{\setbox0\hbox{$\m@th#1{#2}$}\finsm@sh}
+\def\finsm@sh{\ht0=0pt \dp0=0pt \box0}
 
 % Definamos agora a formatação de textos:
 \def\it@{0}\def\neg@{0}\def\sl@{0}\def\tt@{0}
@@ -943,8 +1034,6 @@
   \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
   \message{#1}\line{{\fam6\tenbf@#1}\hss}\naoquebra\smallskip\noindent}
 
-\def\ttraggedright{\fam7\tentt@\rightskip0pt plus2em\relax} % for use with \tt only
-
 \chardef\%=`\%
 \chardef\&=`\&
 \chardef\#=`\#
@@ -967,7 +1056,6 @@
 \def\dag{\mathhexbox279}
 \def\ddag{\mathhexbox27A}
 \def\S{\mathhexbox278}
-\def\P{\mathhexbox27B}
 \def\Orb{\mathhexbox20D}
 
 \def\oalign#1{\leavevmode\vtop{\baselineskip0pt plus0pt minus0pt \lineskip.25ex%
@@ -1029,91 +1117,6 @@
 {\catcode`\_=13 \global\let_=\_} % _ in math is either subscript or \_
 
 
-\def\joinrel{\mathrel{\mkern-3mu}}
-\def\relbar{\mathrel{\smash-}} % \smash, because - has the same height as +
-\def\Relbar{\mathrel=}
-\mathchardef\lhook="312C \def\hookrightarrow{\lhook\joinrel\rightarrow}
-\mathchardef\rhook="312D \def\hookleftarrow{\leftarrow\joinrel\rhook}
-\def\bowtie{\mathrel\triangleright\joinrel\mathrel\triangleleft}
-\def\models{\mathrel|\joinrel=}
-\def\Longrightarrow{\Relbar\joinrel\Rightarrow}
-\def\longrightarrow{\relbar\joinrel\rightarrow}
-\def\longleftarrow{\leftarrow\joinrel\relbar}
-\def\Longleftarrow{\Leftarrow\joinrel\Relbar}
-\def\longmapsto{\mapstochar\longrightarrow}
-\def\longleftrightarrow{\leftarrow\joinrel\rightarrow}
-\def\Longleftrightarrow{\Leftarrow\joinrel\Rightarrow}
-\def\iff{\;\Longleftrightarrow\;}
-
-\mathchardef\ldotp="613A % ldot as a punctuation mark
-\mathchardef\cdotp="6201 % cdot as a punctuation mark
-\mathchardef\colon="603A % colon as a punctuation mark
-\def\ldots{\mathinner{\ldotp\ldotp\ldotp}}
-\def\cdots{\mathinner{\cdotp\cdotp\cdotp}}
-\def\vdots{\vbox{\baselineskip4pt \lineskiplimit0pt
-    \kern6pt\hbox{.}\hbox{.}\hbox{.}}}
-\def\ddots{\mathinner{\mkern1mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern2mu
-    \raise4pt\hbox{.}\mkern2mu\raise1pt\hbox{.}\mkern1mu}}
-
-\def\acute{\mathaccent"7013 }
-\def\grave{\mathaccent"7012 }
-\def\ddot{\mathaccent"707F }
-\def\tilde{\mathaccent"707E }
-\def\bar{\mathaccent"7016 }
-\def\breve{\mathaccent"7015 }
-\def\check{\mathaccent"7014 }
-\def\hat{\mathaccent"705E }
-\def\vec{\mathaccent"017E }
-\def\dot{\mathaccent"705F }
-\def\widetilde{\mathaccent"0365 }
-\def\widehat{\mathaccent"0362 }
-\def\overrightarrow#1{\vbox{\m@th\ialign{##\crcr
-      \rightarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
-      $\hfil\displaystyle{#1}\hfil$\crcr}}}
-\def\overleftarrow#1{\vbox{\m@th\ialign{##\crcr
-      \leftarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
-      $\hfil\displaystyle{#1}\hfil$\crcr}}}
-\def\overbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3pt}
-      \downbracefill\crcr\noalign{\kern3pt\prevdepth-1000pt}
-      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
-\def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
-      $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3pt\prevdepth-1000pt}
-      \upbracefill\crcr\noalign{\kern3pt}}}}\limits}
-\def\skew#1#2#3{{\muskip0pt#1mu\divide\muskip0pt2 \mkern\muskip0pt
-    #2{\mkern-\muskip0pt{#3}\mkern\muskip0pt}\mkern-\muskip0pt}{}}
-
-
-\def\choose{\atopwithdelims()}
-\def\brack{\atopwithdelims[]}
-\def\brace{\atopwithdelims\{\}}
-
-\def\sqrt{\radical"270370 }
-
-\def\mathpalette#1#2{\mathchoice{#1\displaystyle{#2}}%
-  {#1\textstyle{#2}}{#1\scriptstyle{#2}}{#1\scriptscriptstyle{#2}}}
-\def\root#1\of{\setbox\rootbox
-  \hbox{$\m@th\scriptscriptstyle{#1}$}\mathpalette\r@@t}
-\def\r@@t#1#2{\setbox0\hbox{$\m@th#1\sqrt{#2}$}\dimen@\ht0
-  \advance\dimen@-\dp0
-  \mkern5mu\raise.6\dimen@\copy\rootbox \mkern-10mu\box0}
-\newif@\ifv@ \newif@\ifh@
-\def\vphantom{\v@true\h@false\ph@nt}
-\def\hphantom{\v@false\h@true\ph@nt}
-\def\phantom{\v@true\h@true\ph@nt}
-\def\ph@nt{\ifmmode\def\next{\mathpalette\mathph@nt}%
-  \else\let\next\makeph@nt\fi\next}
-\def\makeph@nt#1{\setbox0\hbox{#1}\finph@nt}
-\def\mathph@nt#1#2{\setbox0\hbox{$\m@th#1{#2}$}\finph@nt}
-\def\finph@nt{\setbox2\hbox{}
-  \ifv@ \ht2\ht0 \dp2\dp0\fi
-  \ifh@ \wd2\wd0\fi \box2}
-\def\mathstrut{\vphantom(}
-\def\smash{\relax % \relax, in case this comes first in \halign
-  \ifmmode\def\next{\mathpalette\mathsm@sh}\else\let\next\makesm@sh
-  \fi\next}
-\def\makesm@sh#1{\setbox0\hbox{#1}\finsm@sh}
-\def\mathsm@sh#1#2{\setbox0\hbox{$\m@th#1{#2}$}\finsm@sh}
-\def\finsm@sh{\ht0=0pt \dp0=0pt \box0}
 
 \def\cong{\mathrel{\mathpalette\@vereq\sim}} % congruence sign
 \def\@vereq#1#2{\lower.5pt\vbox{\lineskiplimit16383.99999pt\lineskip-.5pt% dimensão maxima
