@@ -386,9 +386,10 @@
 %TODO: ç e Ç sem \c
 \def\utf@#1{\ifmmode{\hbox{\tenrm@#1}}\else{#1}\fi}
 \def\ensuremath@#1{\ifmmode#1\else$#1$\fi}
-\def^^c2#1{\relax% Família a: ¡ ¢ £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯
-       \ifx#1^^a0\utf@{\_}%  
-       \else\ifx#1^^b0\ensuremath@{^{\hbox{\tenrm@ o}}}% °
+\def^^c2#1{\relax% Família a: ¢ £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯
+       \ifx#1^^a0\utf@{\vbox{\hrule width.3em}}%  
+       \else\ifx#1^^b0\utf@{\char'74}% ¡
+       \else\ifx#1^^b0\ensuremath@{^{\hbox{\tenrm@ o}}}% ° Não funciona?
        \else\ifx#1^^b1\ensuremath@{\pm}% ±
        \else\ifx#1^^b2\ensuremath@{^2}% ²
        \else\ifx#1^^b3\ensuremath@{^3}% ³
@@ -404,7 +405,7 @@
        \else\ifx#1^^bd\ensuremath@{1 \over 2}% ½
        \else\ifx#1^^be\ensuremath@{3 \over 4}% ¾
        \else\ifx#1^^bf\utf@{\char'76}% ¿
-       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 \def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign
                  % (TeXbook)
         \ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
@@ -423,18 +424,21 @@
         \else\ifx#1^^8d\ifmmode{\acute I}\else{\accent19I}\fi% Í
         \else\ifx#1^^8e\ifmmode{\hat I}\else{\accent94I}\fi% Î
         \else\ifx#1^^8f\ifmmode{\ddot I}\else{\accent"7FI}\fi% Ï
+% Falta o Ð
         \else\ifx#1^^91\ifmmode{\tilde N}\else{\accent"7EN}\fi% Ñ
         \else\ifx#1^^92\ifmmode\hbox{\tenit@\accent18O}\else{\accent18O}\fi% Ò
         \else\ifx#1^^93\ifmmode{\acute O}\else{\accent19O}\fi% Ó
         \else\ifx#1^^94\ifmmode{\hat O}\else{\accent94O}\fi% Ô
         \else\ifx#1^^95\ifmmode{\tilde O}\else{\accent"7EO}\fi% Õ
         \else\ifx#1^^96\ifmmode{\ddot O}\else{\accent"7FO}\fi% Ö
+% Falta o ×
         \else\ifx#1^^98\ifmmode\hbox{\tenit@\char"1F}\else\char"1F\fi% \O
         \else\ifx#1^^99\ifmmode\hbox{\tenit@\accent18U}\else{\accent18U}\fi% Ù
         \else\ifx#1^^9a\ifmmode{\acute U}\else{\accent19U}\fi% Ú
         \else\ifx#1^^9b\ifmmode{\hat U}\else{\accent94U}\fi% Û
         \else\ifx#1^^9c\ifmmode{\ddot U}\else{\accent"7FU}\fi% Ü
         \else\ifx#1^^9d\ifmmode{\acute Y}\else{\accent19Y}\fi% Ý
+% Faltam Þ e ß
         \else\ifx#1^^a0\ifmmode\hbox{\tenit@\accent18a}\else{\accent18a}\fi% à
         \else\ifx#1^^a1\ifmmode{\acute a}\else{\accent19a}\fi% á
         \else\ifx#1^^a2\ifmmode{\hat a}\else{\accent94a}\fi% â
@@ -451,6 +455,7 @@
         \else\ifx#1^^ad\ifmmode\hbox{\tenit@\accent19\i}\else{\accent19\i}\fi% í
         \else\ifx#1^^ae\ifmmode\hbox{\tenit@\accent94\i}\else{\accent94\i}\fi% î
         \else\ifx#1^^af\ifmmode\hbox{\tenit@\accent"7F\i}\else{\accent"7F\i}\fi% ï
+% Falta o ð
         \else\ifx#1^^b1\ifmmode{\tilde n}\else{\accent"7En}\fi% ñ
         \else\ifx#1^^b2\ifmmode\hbox{\tenit@\accent18o}\else{\accent18o}\fi% ò
         \else\ifx#1^^b3\ifmmode{\acute o}\else{\accent19o}\fi% ó
@@ -463,11 +468,11 @@
         \else\ifx#1^^bb\ifmmode{\hat u}\else{\accent94u}\fi% û
         \else\ifx#1^^bc\ifmmode{\ddot u}\else{\accent"7Fu}\fi% ü
         \else\ifx#1^^bd\ifmmode{\acute y}\else{\accent19y}\fi% ý
+% Falta o þ
         \else\ifx#1^^bf\ifmmode{\ddot y}\else{\accent"7FY}\fi% ÿ
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
-
 
 % Código que passa os padrões de separação silábica da língua
 % portuguesa:
@@ -976,54 +981,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\rlap#1{\hbox to0pt{#1\hss}}
-\def\llap#1{\hbox to0pt{\hss#1}}
-
-\def\strut{\relax\ifmmode\copy\strutbox\else\unhcopy\strutbox\fi}
-
-\def\hidewidth{\hskip-1000pt plus 1fill} % for alignment entries that can stick out
 \def\ialign{\everycr{}\tabskip0pt plus0pt minus0pt\halign} % initialized \halign
 \def\multispan#1{\omit \mscount#1\relax
   \loop@\ifnum\mscount>1 \sp@n\repeat@}
 \def\sp@n{\span\omit\advance\mscount-1}
 
-\newif@\ifus@ \newif@\if@cr
-
-
-\def\cleartabs{\global\setbox\tabsyet\hbox{} \setbox\tabs\hbox{}}
-\def\settabs{\setbox\tabs\hbox{} \futurelet\next\sett@b}
-\let\+=\relax % in case this file is being read in twice
-\def\sett@b{\ifx\next\+\def\nxt{\afterassignment\s@tt@b\let\nxt}%
-  \else\let\nxt\s@tcols\fi \let\next\relax \nxt}
-\def\s@tt@b{\let\nxt\relax \us@false\m@ketabbox}
-\def\tabalign{\us@true\m@ketabbox} % non-\outer version of \+
-\outer\def\+{\tabalign}
-\def\s@tcols#1\columns{\count@#1\dimen@\hsize
-  \loop@\ifnum\count@>0 \@nother \repeat@}
-\def\@nother{\dimen@ii\dimen@ \divide\dimen@ii\count@
-  \setbox\tabs\hbox{\hbox to\dimen@ii{}\unhbox\tabs}%
-  \advance\dimen@-\dimen@ii \advance\count@-1}
-
-\def\m@ketabbox{\begingroup
-  \global\setbox\tabsyet\copy\tabs
-  \global\setbox\tabsdone\hbox{}
-  \def\cr{\@crtrue\crcr\egroup\egroup
-    \ifus@\unvbox0\lastbox\fi\endgroup
-    \setbox\tabs\hbox{\unhbox\tabsyet\unhbox\tabsdone}}%
-  \setbox0\vbox\bgroup\@crfalse
-    \ialign\bgroup&\t@bbox##\t@bb@x\crcr}
-
-\def\t@bbox{\setbox0\hbox\bgroup}
-\def\t@bb@x{\if@cr\egroup % now \box0 holds the column
-  \else\hss\egroup \global\setbox\tabsyet\hbox{\unhbox\tabsyet
-      \global\setbox1\lastbox}% now \box1 holds its size
-    \ifvoid1\global\setbox1\hbox to\wd0{}%
-    \else\setbox0\hbox to\wd1{\unhbox0}\fi
-    \global\setbox\tabsdone\hbox{\box1\unhbox\tabsdone}\fi
-  \box0}
 
 \def\hang{\hangindent\parindent}
-\def\textindent#1{\indent\llap\kern.5em \ignorespaces}
+\def\textindent#1{\indent\hbox to0pt{\hss\kern.5em} \ignorespaces}
 \def\item{\par\hang\textindent}
 \def\itemitem{\par\indent \hangindent2\parindent \textindent}
 \def\narrower{\advance\leftskip\parindent
@@ -1048,7 +1013,7 @@
 \def\leavevmode{\unhbox\voidb@x} % begins a paragraph, if necessary
 \def\_{\leavevmode \kern.06em \vbox{\hrule width.3em}}
 \def\AA{\leavevmode\setbox0\hbox{!}\dimen@\ht0\advance\dimen@-1ex%
-  \rlap{\raise.67\dimen@\hbox{\char'27}}A}
+  \hbox to0pt{\raise.67\dimen@\hbox{\char'27}\hss}A}
 
 \def\mathhexbox#1#2#3{\leavevmode
   \hbox{$\mathsurround0pt \mathchar"#1#2#3$}}
@@ -1064,11 +1029,11 @@
 {\catcode`p=12 \catcode`t=12 \gdef\\#1pt{#1}} \let\getf@ctor=\\
 \def\sh@ft#1{\dimen@#1\kern\expandafter\getf@ctor\the\fontdimen1\font
   \dimen@} % kern by #1 times the current slant
-\def\d#1{{\o@lign{\relax#1\crcr\hidewidth\sh@ft{-1ex}.\hidewidth}}}
-\def\b#1{{\o@lign{\relax#1\crcr\hidewidth\sh@ft{-3ex}%
-    \vbox to.2ex{\hbox{\char22}\vss}\hidewidth}}}
+\def\d#1{{\o@lign{\relax#1\crcr\hskip-1000pt plus 1fill\sh@ft{-1ex}.\hskip-1000pt plus 1fill}}}
+\def\b#1{{\o@lign{\relax#1\crcr\hskip-1000pt plus 1fill\sh@ft{-3ex}%
+    \vbox to.2ex{\hbox{\char22}\vss}\hskip-1000pt plus 1fill}}}
 \def\c#1{{\setbox0\hbox{#1}\ifdim\ht0=1ex\accent24 #1%
-  \else\ooalign{\unhbox0\crcr\hidewidth\char24\hidewidth}\fi}}
+  \else\ooalign{\unhbox0\crcr\hskip-1000pt plus 1fill\char24\hskip-1000pt plus 1fill}\fi}}
 \def\copyright{{\ooalign{\hfil\raise.07ex\hbox{c}\hfil\crcr\Orb}}}
 
 \def\dots{\relax\ifmmode\ldots\else$\mathsurround0pt\ldots\,$\fi}
@@ -1143,8 +1108,8 @@
   \setbox0\vbox{\def\cr{\crcr\noalign{\kern2pt\global\let\cr\endline}}%
     \ialign{$##$\hfil\kern2pt\kern\p@renwd&\vskip3pt plus 1pt minus 1pt\hfil$##$\hfil
       &&\quad\hfil$##$\hfil\crcr
-      \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
-      #1\crcr\omit\strut\cr}}%
+      \omit\relax\ifmmode\copy1\else\unhcopy1\fi\hfil\crcr\noalign{\kern-\baselineskip}%
+      #1\crcr\omit\relax\ifmmode\copy1\else\unhcopy1\fi\cr}}%
   \setbox2\vbox{\unvcopy0\global\setbox1\lastbox}%
   \setbox2\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
   \setbox2\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
@@ -1157,7 +1122,7 @@
   \advance\baselineskip\dimen@
   \advance\lineskiplimit\dimen@}
 \def\eqalign#1{\hbox{}\,\vcenter{\openup3pt\mathsurround0pt
-  \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+  \ialign{\relax\ifmmode\copy1\else\unhcopy1\fi\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
       \crcr#1\crcr}}\,}
 \newif@\ifdt@p
 \def\displ@y{\global\dt@ptrue\openup3pt\mathsurround0pt
@@ -1172,13 +1137,13 @@
   \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
     &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
     1000pt % Centraliza
-    &\llap{$\@lign##$}\tabskip0pt plus0pt minus0pt\crcr
+    &\hbox to0pt{\hss$\@lign##$}\tabskip0pt plus0pt minus0pt\crcr
     #1\crcr}}
 \def\leqalignno#1{\displ@y \tabskip0pt plus 1000pt minus 1000pt % Centraliza
   \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
     &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
     1000pt % Centraliza
-    &\kern-\displaywidth\rlap{$\@lign##$}\tabskip\displaywidth\crcr
+    &\kern-\displaywidth\hbox to0pt{$\@lign##$\hss}\tabskip\displaywidth\crcr
     #1\crcr}}
 
 % Definitions related to output
@@ -1207,7 +1172,7 @@
   \else\let\next\f@t\fi \next}
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
-\def\@foot{\strut\egroup}
+\def\@foot{\relax\ifmmode\copy1\else\unhcopy1\fi\egroup}
 \def\footstrut{\vbox to\splittopskip{}}
 \skip\footins@=12pt plus 4pt minus 4pt % space added when footnote is present
 \count\footins@=1000 % footnote magnification factor (1 to 1)
