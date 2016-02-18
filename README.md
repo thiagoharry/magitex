@@ -14,6 +14,7 @@ Ele ainda está em desenvolvimento. O que já foi implementado:
 * Separação silábica em português, ainda primitiva e com poucos padrões
 * Comandos de formatação \negrito{...}, \italico{...}, \inclinado{...}, \sublinhado{...} e \monoespaco{...}
 * Comandos de alinhamento de texto \alinhaesquerda, \alinhadireita, \alinhacentro e \alinhanormal
+* Para alinhar não ignorando as quebras de linha do documento, usa-se \alinhaversoesquerdo \alinhaversodireito e \alinhaversocentro
 * Comandos de modo matemático idênticos aos do Plain TeX
 * Comandos de conversão maiúsculas/minúsculas: \maiusculo{...} e \minusculo{...}
 * Comandos de datas: \ano, \mes e \dia.

@@ -531,16 +531,30 @@
 \textfont7=\tentt@
 
 
+% \obeylines é útil para podermos alinhar as linhas à direita,
+% esquerda ou centro respeitando as quebras de linha digitadas pelo
+% usuário. Vamos usar isso
+% em \alinhaversoesquerdo, \alinhaversodireito e \alinhaversocentro.
+{\catcode`\^^M=13 %
+  \gdef\obeylines@{\catcode`\^^M13 \let^^M\par}%
+  \global\let^^M\par} % Se ^^M aparecer em um \write
+% E para cancelarmos o \obeylines usamos:
+\def\dontobeylines@{\catcode`\^^M10}
 % Comandos de justificação e texto:
-\def\alinhaesquerda{\rightskip 0em plus 2em \leftskip 0pt \spaceskip.3333em%
-     \xspaceskip.5em\relax}
-%\def\alinhaversoesquerdo{\obeylines\rightskip\hfil\leftskip0pt\xspaceskip0pt%
-%     \relax}
-\def\alinhadireita{\leftskip 0em plus 2em \rightskip0pt \spaceskip.3333em%
-     \xspaceskip.5em\relax}
-\def\alinhacentro{\rightskip 0em plus 2em \leftskip 0em plus 2em%
+\def\alinhaesquerda{\dontobeylines@\rightskip 0em plus 2em
+     \leftskip 0pt \spaceskip.3333em\xspaceskip.5em\relax}
+\def\alinhaversoesquerdo{\obeylines@\rightskip0pt plus 1fill\leftskip0pt%
+     \xspaceskip0pt\relax}
+\def\alinhadireita{\dontobeylines@\leftskip 0em plus 2em \rightskip0pt
+     \spaceskip.3333em\xspaceskip.5em\relax}
+\def\alinhaversodireito{\obeylines@\rightskip0pt\leftskip0pt plus 1fill%
+     \xspaceskip0pt\relax}
+\def\alinhacentro{\dontobeylines@\rightskip 0em plus 2em \leftskip 0em plus 2em%
                   \spaceskip.3333em \xspaceskip.5em\relax}
-\def\alinhanormal{\leftskip0pt\rightskip0pt\spaceskip0pt\xspaceskip0pt\relax}
+\def\alinhaversocentro{\obeylines@\rightskip0pt plus 1fill%
+       \leftskip0pt plus 1 fil\xspaceskip0pt\relax}
+\def\alinhanormal{\dontobeylines@\leftskip0pt\rightskip0pt\spaceskip0pt%
+                  \xspaceskip0pt\relax}
 
 % Magitex não interage com usuário via prompt em caso de erro:
 \nonstopmode
@@ -853,11 +867,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% In \obeylines, we say `\let^^M=\par' instead of `\def^^M{\par}'
-% since this allows, for example, `\let\par=\cr \obeylines \halign{...'
-{\catcode`\^^M=13 % these lines must end with %
-  \gdef\obeylines{\catcode`\^^M13 \let^^M\par}%
-  \global\let^^M\par} % this is in case ^^M appears in a \write
 
 
 \def\loop#1\repeat{\def\body{#1}\iterate}
