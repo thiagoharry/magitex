@@ -383,8 +383,16 @@
 % cedilhas. Em seguida, definimos o ``comando'' ^^c3 para olhar pelo
 % caractere seguinte e, baseado nele, inserir o caractere adequado.
 %TODO: ç e Ç sem \c
-\def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign (TeXbook)
-        \ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
+\def\utf@#1{\ifmmode{\hbox{\tenrm@#1}}\else{#1}\fi}
+\def\ensuremath@#1{\ifmmode#1\else$#1$\fi}
+\def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign
+                 % (TeXbook)
+        \ifx#1^^bb\ensuremath{{\cal\char`35}}
+        \else\ifx#1^^bc\ensuremath@{{}^{\lower0.5ex\hbox{$\scriptstyle1$}}\!/\!_4}
+        \else\ifx#1^^bd\ensuremath@{{}^{\lower0.5ex\hbox{$\scriptstyle1$}}\!/\!_2}
+        \else\ifx#1^^be\ensuremath@{{}^{\lower0.5ex\hbox{$\scriptstyle3$}}\!/\!_4}
+        \else\ifx#1^^bf\utf@{\char`75}
+        \else\ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
         \else\ifx#1^^81\ifmmode{\acute A}\else{\accent19A}\fi% Á
         \else\ifx#1^^82\ifmmode{\hat A}\else{\accent94A}\fi% Â
         \else\ifx#1^^83\ifmmode{\tilde A}\else{\accent"7EA}\fi% Ã
@@ -441,7 +449,7 @@
         \else\ifx#1^^bc\ifmmode{\ddot u}\else{\accent"7Fu}\fi% ü
         \else\ifx#1^^bd\ifmmode{\acute y}\else{\accent19y}\fi% ý
         \else\ifx#1^^bf\ifmmode{\ddot y}\else{\accent"7FY}\fi% ÿ
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
@@ -536,22 +544,22 @@
 % usuário. Vamos usar isso
 % em \alinhaversoesquerdo, \alinhaversodireito e \alinhaversocentro.
 {\catcode`\^^M=13 %
-  \gdef\obeylines@{\catcode`\^^M13 \let^^M\par}%
+  \gdef\obeylines@{\parfillskip=0pt\catcode`\^^M13 \let^^M\par}%
   \global\let^^M\par} % Se ^^M aparecer em um \write
 % E para cancelarmos o \obeylines usamos:
-\def\dontobeylines@{\catcode`\^^M10}
+\def\dontobeylines@{\parfillskip=0pt plus 1fil\catcode`\^^M=5}
 % Comandos de justificação e texto:
 \def\alinhaesquerda{\dontobeylines@\rightskip 0em plus 2em
      \leftskip 0pt \spaceskip.3333em\xspaceskip.5em\relax}
-\def\alinhaversoesquerdo{\obeylines@\rightskip0pt plus 1fill\leftskip0pt%
+\def\alinhaversoesquerdo{\obeylines@\rightskip0pt plus 1fil\leftskip0pt%
      \xspaceskip0pt\relax}
 \def\alinhadireita{\dontobeylines@\leftskip 0em plus 2em \rightskip0pt
      \spaceskip.3333em\xspaceskip.5em\relax}
-\def\alinhaversodireito{\obeylines@\rightskip0pt\leftskip0pt plus 1fill%
+\def\alinhaversodireito{\obeylines@\rightskip0pt\leftskip0pt plus 1fil%
      \xspaceskip0pt\relax}
 \def\alinhacentro{\dontobeylines@\rightskip 0em plus 2em \leftskip 0em plus 2em%
                   \spaceskip.3333em \xspaceskip.5em\relax}
-\def\alinhaversocentro{\obeylines@\rightskip0pt plus 1fill%
+\def\alinhaversocentro{\obeylines@\rightskip0pt plus 1fil%
        \leftskip0pt plus 1 fil\xspaceskip0pt\relax}
 \def\alinhanormal{\dontobeylines@\leftskip0pt\rightskip0pt\spaceskip0pt%
                   \xspaceskip0pt\relax}
@@ -565,7 +573,7 @@
 
 % Comandos de datas:
 \def\ano{\the\year}
-\def\mes{\the\month}
+\def\mes{\ifnum\month<10 0\fi\the\month}
 \def\dia{\the\day}
 
 % Inserção de novos arquivos:
@@ -876,14 +884,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\removelastskip{\ifdim\lastskip=0pt\else\vskip-\lastskip\fi}
-\def\smallbreak{\par\ifdim\lastskip<3pt plus 1pt minus 1pt
-  \removelastskip\penalty-50\smallskip\fi}
-\def\medbreak{\par\ifdim\lastskip<6pt plus 2pt minus 2pt
-  \removelastskip\penalty-100\medskip\fi}
-\def\bigbreak{\par\ifdim\lastskip<12pt plus 4pt minus 4pt
-  \removelastskip\penalty-200\bigskip\fi}
-
 \def\rlap#1{\hbox to0pt{#1\hss}}
 \def\llap#1{\hbox to0pt{\hss#1}}
 
@@ -942,9 +942,6 @@
 \outer\def\beginsection#1\par{\vskip0pt plus.3\vsize\penalty-250
   \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
   \message{#1}\line{{\fam6\tenbf@#1}\hss}\naoquebra\smallskip\noindent}
-\outer\def\proclaim #1. #2\par{\medbreak
-  \noindent{\fam6\tenbf@#1.\kern.5em }{\fam5\tensl@#2\par}%
-  \ifdim\lastskip<6pt plus 2pt minus 2pt \removelastskip\penalty55\medskip\fi}
 
 \def\ttraggedright{\fam7\tentt@\rightskip0pt plus2em\relax} % for use with \tt only
 
@@ -1226,7 +1223,8 @@
   \if@mid \dimen@\ht0 \advance\dimen@\dp0 \advance\dimen@12pt
     \advance\dimen@\pagetotal \advance\dimen@-\pageshrink
     \ifdim\dimen@>\pagegoal\@midfalse\p@gefalse\fi\fi
-  \if@mid \bigskip\box0\bigbreak
+  \if@mid \bigskip\box0\par\ifdim\lastskip<12pt plus 4pt minus 4pt
+  \ifdim\lastskip=0pt\else\vskip-\lastskip\fi\penalty-200\bigskip\fi
   \else\insert\topins@{\penalty100 % floating insertion
     \splittopskip0pt plus0pt minus0pt
     \splitmaxdepth16383.99999pt \floatingpenalty0% (max dimen)
