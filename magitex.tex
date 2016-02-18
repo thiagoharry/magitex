@@ -314,7 +314,7 @@
   \ifnum\outputpenalty>-20000 \else%
   % Supereject:
   \ifnum\insertpenalties>0 % something is being held over
-    \hbox to\hsize{}\kern-\topskip\nobreak\vfill\supereject\fi%
+    \hbox to\hsize{}\kern-\topskip\naoquebra\vfill\par\penalty-20000\fi%
   \fi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -470,7 +470,7 @@
 \def\^^I{\ }
 
 % O comando para terminar um documento é \fim:
-\def\fim{\par\vfill\supereject\end}
+\def\fim{\par\vfill\par\penalty-20000\end}
 
 % E definimos os nomes de inserções:
 \def\footins@{254}
@@ -607,7 +607,7 @@
 \def\lfloor{\delimiter"4262304 }
 \def\bmod{\nonscript\mskip-\medmuskip\mkern5mu
   \mathbin{\fam0\tenrm@ mod}\penalty900\mkern5mu\nonscript\mskip-\medmuskip}
-\def\pmod#1{\allowbreak\mkern18mu({\fam0\tenrm@ mod}\,\,#1)}
+\def\pmod#1{\penalty 0\mkern18mu({\fam0\tenrm@ mod}\,\,#1)}
 \def\log{\mathop{\fam0\tenrm@ log}\nolimits}
 \def\lg{\mathop{\fam0\tenrm@ lg}\nolimits}
 \def\ln{\mathop{\fam0\tenrm@ ln}\nolimits}
@@ -859,6 +859,15 @@
 \else{#1}% Sem formatação
 \fi\fi\fi\fi}
 
+% Comandos de loop são mantidos internamente:
+\def\loop@#1\repeat@{\def\body{#1}\iterate@}
+\def\iterate@{\body \let\next\iterate@ \else\let\next\relax\fi \next}
+\let\repeat@=\fi % this makes \loop...\if...\repeat skippable
+
+% Quebra de linha e de página:
+\def\quebra{\penalty-10000}
+\def\naoquebra{\penalty 10000}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -866,27 +875,6 @@
 % desenvolver                                                          %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\def\loop#1\repeat{\def\body{#1}\iterate}
-\def\iterate{\body \let\next\iterate \else\let\next\relax\fi \next}
-\let\repeat=\fi % this makes \loop...\if...\repeat skippable
-
-
-\def\offinterlineskip{\baselineskip-1000pt
-  \lineskip0pt \lineskiplimit16383.99999pt} % Dimensão máxima
-
-\def\slash{/\penalty\exhyphenpenalty} % a `/' that acts like a `-'
-
-\def\break{\penalty-10000}
-\def\nobreak{\penalty 10000}
-\def\allowbreak{\penalty 0}
-
-\def\filbreak{\par\vfil\penalty-200\vfilneg}
-\def\goodbreak{\par\penalty-500 }
-\def\eject{\par\break}
-\def\supereject{\par\penalty-20000}
 
 \def\removelastskip{\ifdim\lastskip=0pt\else\vskip-\lastskip\fi}
 \def\smallbreak{\par\ifdim\lastskip<3pt plus 1pt minus 1pt
@@ -906,7 +894,7 @@
 \def\hidewidth{\hskip-1000pt plus 1fill} % for alignment entries that can stick out
 \def\ialign{\everycr{}\tabskip0pt plus0pt minus0pt\halign} % initialized \halign
 \def\multispan#1{\omit \mscount#1\relax
-  \loop\ifnum\mscount>1 \sp@n\repeat}
+  \loop@\ifnum\mscount>1 \sp@n\repeat@}
 \def\sp@n{\span\omit\advance\mscount-1}
 
 \newif@\ifus@ \newif@\if@cr
@@ -921,7 +909,7 @@
 \def\tabalign{\us@true\m@ketabbox} % non-\outer version of \+
 \outer\def\+{\tabalign}
 \def\s@tcols#1\columns{\count@#1\dimen@\hsize
-  \loop\ifnum\count@>0 \@nother \repeat}
+  \loop@\ifnum\count@>0 \@nother \repeat@}
 \def\@nother{\dimen@ii\dimen@ \divide\dimen@ii\count@
   \setbox\tabs\hbox{\hbox to\dimen@ii{}\unhbox\tabs}%
   \advance\dimen@-\dimen@ii \advance\count@-1}
@@ -953,7 +941,7 @@
 
 \outer\def\beginsection#1\par{\vskip0pt plus.3\vsize\penalty-250
   \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
-  \message{#1}\line{{\fam6\tenbf@#1}\hss}\nobreak\smallskip\noindent}
+  \message{#1}\line{{\fam6\tenbf@#1}\hss}\naoquebra\smallskip\noindent}
 \outer\def\proclaim #1. #2\par{\medbreak
   \noindent{\fam6\tenbf@#1.\kern.5em }{\fam5\tensl@#2\par}%
   \ifdim\lastskip<6pt plus 2pt minus 2pt \removelastskip\penalty55\medskip\fi}
@@ -1244,7 +1232,7 @@
     \splitmaxdepth16383.99999pt \floatingpenalty0% (max dimen)
     \ifp@ge \dimen@\dp0
     \vbox to\vsize{\unvbox0\kern-\dimen@}% depth is zero
-    \else \box0\nobreak\bigskip\fi}\fi\endgroup}
+    \else \box0\naoquebra\bigskip\fi}\fi\endgroup}
 
 \fam0\tenrm@ % select roman font
 \catcode`@=12 % at signs are no longer letters
