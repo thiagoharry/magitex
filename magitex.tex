@@ -334,8 +334,7 @@
 % só são usados em formatos que de alguma forma precisam numerar
 % sub-páginas e não serão usados. Depois deles nós temos:
 \countdef\pageno@=0 \pageno@=1 % O número de página
-\countdef\mscount=10
-\countdef\count@=11
+\countdef\count@=10
 % 254 reservado para \footins
 
 % Não há nenhum registrador de dimensão alocado pelas primitivas
@@ -355,13 +354,13 @@
 
 % Registradores de caixa estão todos à disposição, exceto o de número
 % 255:
-\def\voidb@x{0} % permanently void box register
-\def\strutbox{1} \setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt
+\def\voidb@x{10} % permanently void box register
+\def\strutbox{11} \setbox\strutbox=\hbox{\vrule height8.5pt depth3.5pt
   width0pt}
-\def\tabs{2}
-\def\tabsyet{3}
-\def\tabsdone{4}
-\def\rootbox{5}
+\def\tabs{12}
+\def\tabsyet{13}
+\def\tabsdone{14}
+\def\rootbox{15}
 % 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
@@ -385,10 +384,14 @@
 % caractere é o prefixo de tudo quanto é letra acentuada e Cs com
 % cedilhas. Em seguida, definimos o ``comando'' ^^c3 para olhar pelo
 % caractere seguinte e, baseado nele, inserir o caractere adequado.
-%TODO: ç e Ç sem \c
+\def\cedilha@#1{{\setbox0\hbox{#1}\ifdim\ht0=1ex\accent24 #1%
+  \else\lineskiplimit-16383.99999pt 
+  \vtop{\baselineskip0pt plus0pt minus0pt \lineskip.25ex%
+  \everycr{}\tabskip0pt plus0pt minus0pt\halign{##\crcr\unhbox0\crcr\hskip-1000pt
+                    plus 1fill\char24\hskip-1000pt plus 1fill\crcr}}\fi}}
 \def\utf@#1{\ifmmode{\hbox{\tenrm@#1}}\else{#1}\fi}
 \def\ensuremath@#1{\ifmmode#1\else$#1$\fi}
-\def^^c2#1{\relax% Família a: £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯
+\def^^c2#1{\relax% Família a: ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯
        \ifx#1^^a0~%  
        \else\ifx#1^^a1\utf@{\char'74}% ¡
        \else\ifx#1^^a2{\hbox to 0pt{c\hss}\kern0.465ex\lower0.1em%
@@ -402,7 +405,7 @@
        \else\ifx#1^^b5\ensuremath@{\mathchar"0116}% µ (b5)´
        \else\ifx#1^^b6\ensuremath@{\mathchar"027B}% ¶
        \else\ifx#1^^b7\ensuremath@{\cdot}% ·
-       \else\ifx#1^^b8{\c\ }% ¸ (b8)
+       \else\ifx#1^^b8{\cedilha@\ }% ¸ (b8)
        \else\ifx#1^^b9\ensuremath@{^1}% ¹ (b9)
        \else\ifx#1^^ba\ensuremath@{^0}% º (ba)
        \else\ifx#1^^bb\ensuremath@{\mathchar"521D}% » (bb)
@@ -420,7 +423,7 @@
         \else\ifx#1^^84\ifmmode{\ddot A}\else{\accent"7FA}\fi% Ä
         \else\ifx#1^^85\ifmmode{\hbox{\tenit@\AA}}\else{\AA}\fi
         \else\ifx#1^^86\ifmmode{\hbox{\tenit@\char"1D}}\else\char"1D\fi
-        \else\ifx#1^^87\ifmmode\hbox{\tenit@\c C}\else\c C{}\fi % TODO
+        \else\ifx#1^^87\ifmmode\hbox{\tenit@\cedilha@ C}\else\cedilha@ C{}\fi %ç
         \else\ifx#1^^88\ifmmode\hbox{\accent18E}\else{\accent18E}\fi%
         \else\ifx#1^^89\ifmmode{\acute E}\else{\accent19E}\fi% É
         \else\ifx#1^^8a\ifmmode{\hat E}\else{\accent94E}\fi% Ê
@@ -451,15 +454,15 @@
         \else\ifx#1^^a4\ifmmode{\ddot a}\else{\accent"7Fa}\fi% ä
         \else\ifx#1^^a5\ifmmode\hbot{\tenit@\aa}\else\aa{}\fi
         \else\ifx#1^^a6\ifmmode\hbox{\tenit@\char"1A}\else\char"1A\fi%
-        \else\ifx#1^^a7\ifmmode\hbox{\tenit@\c c}\else\c c\fi
+        \else\ifx#1^^a7\ifmmode\hbox{\tenit@\cedilha@ c}\else\cedilha@ c\fi
         \else\ifx#1^^a8\ifmmode\hbox{\tenit@\accent18e}\else{\accent18e}\fi% è
         \else\ifx#1^^a9\ifmmode{\acute e}\else{\accent19e}\fi% é
         \else\ifx#1^^aa\ifmmode{\hat e}\else{\accent94e}\fi% ê
         \else\ifx#1^^ab\ifmmode{\ddot e}\else{\accent"7Fe}\fi% ë
-        \else\ifx#1^^ac\ifmmode\hbox{\tenit@\accent18\i}\else{\accent18\i}\fi% ì
-        \else\ifx#1^^ad\ifmmode\hbox{\tenit@\accent19\i}\else{\accent19\i}\fi% í
-        \else\ifx#1^^ae\ifmmode\hbox{\tenit@\accent94\i}\else{\accent94\i}\fi% î
-        \else\ifx#1^^af\ifmmode\hbox{\tenit@\accent"7F\i}\else{\accent"7F\i}\fi% ï
+        \else\ifx#1^^ac\ifmmode\hbox{\tenit@\accent18\char"10}\else{\accent18\char"10}\fi% ì
+        \else\ifx#1^^ad\ifmmode\hbox{\tenit@\accent19\char"10}\else{\accent19\char"10}\fi% í
+        \else\ifx#1^^ae\ifmmode\hbox{\tenit@\accent94\char"10}\else{\accent94\char"10}\fi% î
+        \else\ifx#1^^af\ifmmode\hbox{\tenit@\accent"7F\char"10}\else{\accent"7F\char"10}\fi% ï
 % Falta o ð
         \else\ifx#1^^b1\ifmmode{\tilde n}\else{\accent"7En}\fi% ñ
         \else\ifx#1^^b2\ifmmode\hbox{\tenit@\accent18o}\else{\accent18o}\fi% ò
@@ -758,7 +761,7 @@
 \def\surd{{\mathchar"1270}}
 \mathchardef\top="023E
 \mathchardef\bot="023F
-\def\angle{{\vbox{\ialign{$\mathsurround0pt\scriptstyle##$\crcr
+\def\angle{{\vbox{\everycr{}\tabskip0pt plus0pt minus0pt\halign{$\mathsurround0pt\scriptstyle##$\crcr
       \not\mathrel{\mkern14mu}\crcr
       \noalign{\prevdepth-1000pt}
       \mkern2.5mu\leaders\hrule height.34pt\hfill\mkern2.5mu\crcr}}}}
@@ -904,16 +907,16 @@
 \def\dot{\mathaccent"705F }
 \def\widetilde{\mathaccent"0365 }
 \def\widehat{\mathaccent"0362 }
-\def\overrightarrow#1{\vbox{\mathsurround0pt\ialign{##\crcr
+\def\overrightarrow#1{\vbox{\mathsurround0pt\everycr{}\tabskip0pt plus0pt minus0pt\halign{##\crcr
       \rightarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}
-\def\overleftarrow#1{\vbox{\mathsurround0pt\ialign{##\crcr
+\def\overleftarrow#1{\vbox{\mathsurround0pt\everycr{}\tabskip0pt plus0pt minus0pt\halign{##\crcr
       \leftarrowfill\crcr\noalign{\kern-1pt\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}
-\def\overbrace#1{\mathop{\vbox{\mathsurround0pt\ialign{##\crcr\noalign{\kern3pt}
+\def\overbrace#1{\mathop{\vbox{\mathsurround0pt\everycr{}\tabskip0pt plus0pt minus0pt\halign{##\crcr\noalign{\kern3pt}
       \downbracefill\crcr\noalign{\kern3pt\prevdepth-1000pt}
       $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
-\def\underbrace#1{\mathop{\vtop{\mathsurround0pt\ialign{##\crcr
+\def\underbrace#1{\mathop{\vtop{\mathsurround0pt\everycr{}\tabskip0pt plus0pt minus0pt\halign{##\crcr
       $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern3pt\prevdepth-1000pt}
       \upbracefill\crcr\noalign{\kern3pt}}}}\limits}
 \def\skew#1#2#3{{\muskip0pt#1mu\divide\muskip0pt2 \mkern\muskip0pt
@@ -951,6 +954,93 @@
 \def\makesm@sh#1{\setbox0\hbox{#1}\finsm@sh}
 \def\mathsm@sh#1#2{\setbox0\hbox{$\mathsurround0pt#1{#2}$}\finsm@sh}
 \def\finsm@sh{\ht0=0pt \dp0=0pt \box0}
+\def\matrix#1{\hbox{}\,\vcenter{\lineskip1pt
+  \baselineskip12pt \lineskiplimit0pt\mathsurround0pt
+    \everycr{}\tabskip0pt plus0pt minus0pt\halign{\hfil$##$\hfil&&\quad\hfil$##$\hfil\crcr
+      \mathstrut\crcr\noalign{\kern-\baselineskip}
+      #1\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}}}\,}
+\def\pmatrix#1{\left(\matrix{#1}\right)}
+\setbox0=\hbox{\tenex@ B} \p@renwd=\wd0 % width of the big left (
+\def\eqalignno#1{\displ@y \tabskip0pt plus 1000pt minus 1000pt %Centraliza
+  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
+    &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
+    1000pt % Centraliza
+    &\hbox to0pt{\hss$\@lign##$}\tabskip0pt plus0pt minus0pt\crcr
+    #1\crcr}}
+\def\leqalignno#1{\displ@y \tabskip0pt plus 1000pt minus 1000pt % Centraliza
+  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
+    &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
+    1000pt % Centraliza
+    &\kern-\displaywidth\hbox to0pt{$\@lign##$\hss}\tabskip\displaywidth\crcr
+    #1\crcr}}
+\def\,{\mskip\thinmuskip}
+\def\>{\mskip\medmuskip}
+\def\;{\mskip\thickmuskip}
+\def\!{\mskip-\thinmuskip}
+\def\*{\discretionary{\vskip3pt plus 1pt minus 1pt\the\textfont2\char2}{}{}}
+{\catcode`\'=13 \gdef'{^\bgroup\prim@s}}
+\def\prim@s{\prime\futurelet\next\pr@m@s}
+\def\pr@m@s{\ifx'\next\let\nxt\pr@@@s \else\ifx^\next\let\nxt\pr@@@t
+  \else\let\nxt\egroup\fi\fi \nxt}
+\def\pr@@@s#1{\prim@s} \def\pr@@@t#1#2{#2\egroup}
+{\catcode`\^^Z=13 \gdef^^Z{\not=}} % ^^Z is like \ne in math
+
+{\catcode`\_=13 \global\let_=\_} % _ in math is either subscript or \_
+
+
+
+\def\cong{\mathrel{\mathpalette\@vereq\sim}} % congruence sign
+\def\@vereq#1#2{\lower.5pt\vbox{\lineskiplimit16383.99999pt\lineskip-.5pt% dimensão maxima
+    \everycr{}\tabskip0pt plus0pt minus0pt\halign{$\mathsurround0pt#1\hfil##\hfil$\crcr#2\crcr=\crcr}}}
+\def\notin{\mathrel{\mathpalette\c@ncel\in}}
+\def\c@ncel#1#2{\mathsurround0pt\ooalign{$\hfil#1\mkern1mu/\hfil$\crcr$#1#2$}}
+\def\rightleftharpoons{\mathrel{\mathpalette\rlh@{}}}
+\def\rlh@#1{\vcenter{\mathsurround0pt\hbox{\ooalign{\raise2pt
+          \hbox{$#1\rightharpoonup$}\crcr
+        $#1\leftharpoondown$}}}}
+\def\buildrel#1\over#2{\mathrel{\mathop{\kern0pt#2}\limits^{#1}}}
+\def\doteq{\buildrel\textstyle.\over=}
+
+\def\cases#1{\left\{\,\vcenter{\lineskip1pt
+  \baselineskip12pt \lineskiplimit0pt\mathsurround0pt
+    \everycr{}\tabskip0pt plus0pt minus0pt\halign{$##\hfil$&\quad##\hfil\crcr#1\crcr}}\right.}
+\def\bordermatrix#1{\begingroup \mathsurround0pt
+  \setbox0\vbox{\def\cr{\crcr\noalign{\kern2pt\global\let\cr\endline}}%
+    \everycr{}\tabskip0pt plus0pt minus0pt\halign{$##$\hfil\kern2pt\kern\p@renwd&\vskip3pt plus 1pt minus 1pt\hfil$##$\hfil
+      &&\quad\hfil$##$\hfil\crcr
+      \omit\relax\ifmmode\copy1\else\unhcopy1\fi\hfil\crcr\noalign{\kern-\baselineskip}%
+      #1\crcr\omit\relax\ifmmode\copy1\else\unhcopy1\fi\cr}}%
+  \setbox2\vbox{\unvcopy0\global\setbox1\lastbox}%
+  \setbox2\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
+  \setbox2\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
+    \global\setbox1\vbox{\box1\kern2pt}%
+    \vcenter{\kern-\ht1\unvbox0\kern-\baselineskip}\,\right)$}%
+  \hbox{}\;\vbox{\kern\ht1\box2}\endgroup}
+
+\def\openup{\afterassignment\@penup\dimen@=}
+\def\@penup{\advance\lineskip\dimen@
+  \advance\baselineskip\dimen@
+  \advance\lineskiplimit\dimen@}
+\def\eqalign#1{\hbox{}\,\vcenter{\openup3pt\mathsurround0pt
+  \everycr{}\tabskip0pt plus0pt minus0pt\halign{\relax\ifmmode\copy1\else\unhcopy1\fi\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+      \crcr#1\crcr}}\,}
+\newif@\ifdt@p
+\def\displ@y{\global\dt@ptrue\openup3pt\mathsurround0pt
+  \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000pt
+      \vskip-\lineskiplimit \vskip0pt \fi
+      \else \penalty100 \fi}}}
+\def\@lign{\tabskip0pt plus0pt minus0pt\everycr{}} % restore inside \displ@y
+\def\displaylines#1{\displ@y \tabskip0pt plus0pt minus0pt
+  \halign{\hbox to\displaywidth{$\@lign\hfil\displaystyle##\hfil$}\crcr
+    #1\crcr}}
+\mathchardef\braceld="37A \mathchardef\bracerd="37B
+\mathchardef\bracelu="37C \mathchardef\braceru="37D
+\def\downbracefill{$\mathsurround0pt \setbox0\hbox{$\braceld$}%
+  \braceld\leaders\vrule height\ht0 depth0pt\hfill\braceru
+  \bracelu\leaders\vrule height\ht0 depth0pt\hfill\bracerd$}
+\def\upbracefill{$\mathsurround0pt \setbox0\hbox{$\braceld$}%
+  \bracelu\leaders\vrule height\ht0 depth0pt\hfill\bracerd
+  \braceld\leaders\vrule height\ht0 depth0pt\hfill\braceru$}
 
 % Definamos agora a formatação de textos:
 \def\it@{0}\def\neg@{0}\def\sl@{0}\def\tt@{0}
@@ -987,6 +1077,10 @@
 \chardef\&=`\&
 \chardef\#=`\#
 \chardef\$=`\$
+\def\_{\leavevmode@ \kern.06em \vbox{\hrule width.3em}}
+
+\def\leavevmode@{\unhbox\voidb@x} % Começa novo parágrafo só se está
+                                % no modo vertical
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -996,155 +1090,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\ialign{\everycr{}\tabskip0pt plus0pt minus0pt\halign} % initialized \halign
-
-\chardef\ss="19
-\chardef\oe="1B
-\chardef\OE="1E
-\chardef\i="10 \chardef\j="11 % dotless letters
-\def\aa{\accent23a}
-\def\l{\char32l}
-\def\L{\leavevmode\setbox0\hbox{L}\hbox to\wd0{\hss\char32L}}
-
-\def\leavevmode{\unhbox\voidb@x} % begins a paragraph, if necessary
-\def\_{\leavevmode \kern.06em \vbox{\hrule width.3em}}
-\def\AA{\leavevmode\setbox0\hbox{!}\dimen@\ht0\advance\dimen@-1ex%
-  \hbox to0pt{\raise.67\dimen@\hbox{\char'27}\hss}A}
-
-\def\mathhexbox#1#2#3{\leavevmode
-  \hbox{$\mathsurround0pt \mathchar"#1#2#3$}}
-\def\dag{\mathhexbox279}
-\def\ddag{\mathhexbox27A}
-\def\S{\mathhexbox278}
-\def\Orb{\mathhexbox20D}
-
-\def\oalign#1{\leavevmode\vtop{\baselineskip0pt plus0pt minus0pt \lineskip.25ex%
-  \ialign{##\crcr#1\crcr}}} \def\o@lign{\lineskiplimit0pt \oalign}
+\def\oalign#1{\leavevmode@\vtop{\baselineskip0pt plus0pt minus0pt
+      \lineskip.25ex\everycr{}\tabskip0pt plus0pt minus0pt%
+      \halign{##\crcr#1\crcr}}}
+\def\o@lign{\lineskiplimit0pt \oalign}
 \def\ooalign{\lineskiplimit-16383.99999pt \oalign} % chars over each
                                 % other (dimensão máxima)
-{\catcode`p=12 \catcode`t=12 \gdef\\#1pt{#1}} \let\getf@ctor=\\
-\def\sh@ft#1{\dimen@#1\kern\expandafter\getf@ctor\the\fontdimen1\font
-  \dimen@} % kern by #1 times the current slant
-\def\d#1{{\o@lign{\relax#1\crcr\hskip-1000pt plus 1fill\sh@ft{-1ex}.\hskip-1000pt plus 1fill}}}
-\def\b#1{{\o@lign{\relax#1\crcr\hskip-1000pt plus 1fill\sh@ft{-3ex}%
-    \vbox to.2ex{\hbox{\char22}\vss}\hskip-1000pt plus 1fill}}}
-\def\c#1{{\setbox0\hbox{#1}\ifdim\ht0=1ex\accent24 #1%
-  \else\ooalign{\unhbox0\crcr\hskip-1000pt plus 1fill\char24\hskip-1000pt plus 1fill}\fi}}
-\def\copyright{{\ooalign{\hfil\raise.07ex\hbox{c}\hfil\crcr\Orb}}}
-
-\def\v#1{{\accent20 #1}} \let\^^_=\v
-\def\u#1{{\accent21 #1}} \let\^^S=\u
-\def\=#1{{\accent22 #1}}
-\def\.#1{{\accent95 #1}}
-\def\H#1{{\accent"7D #1}}
-\def\t#1{{\edef\next{\the\font}\the\textfont1\accent"7F\next#1}}
-
-\def\hrulefill{\leaders\hrule\hfill}
-\def\dotfill{\cleaders\hbox{$\mathsurround0pt \mkern1.5mu.\mkern1.5mu$}\hfill}
-\def\rightarrowfill{$\mathsurround0pt\smash-\mkern-7mu%
-  \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
-  \mkern-7mu\mathord\rightarrow$}
-\def\leftarrowfill{$\mathsurround0pt\mathord\leftarrow\mkern-7mu%
-  \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
-  \mkern-7mu\smash-$}
-\mathchardef\braceld="37A \mathchardef\bracerd="37B
-\mathchardef\bracelu="37C \mathchardef\braceru="37D
-\def\downbracefill{$\mathsurround0pt \setbox0\hbox{$\braceld$}%
-  \braceld\leaders\vrule height\ht0 depth0pt\hfill\braceru
-  \bracelu\leaders\vrule height\ht0 depth0pt\hfill\bracerd$}
-\def\upbracefill{$\mathsurround0pt \setbox0\hbox{$\braceld$}%
-  \bracelu\leaders\vrule height\ht0 depth0pt\hfill\bracerd
-  \braceld\leaders\vrule height\ht0 depth0pt\hfill\braceru$}
-
-% Macros for math setting
-\message{math definitions,}
-
-\let\sp=^ \let\sb=_
-\def\,{\mskip\thinmuskip}
-\def\>{\mskip\medmuskip}
-\def\;{\mskip\thickmuskip}
-\def\!{\mskip-\thinmuskip}
-\def\*{\discretionary{\vskip3pt plus 1pt minus 1pt\the\textfont2\char2}{}{}}
-{\catcode`\'=13 \gdef'{^\bgroup\prim@s}}
-\def\prim@s{\prime\futurelet\next\pr@m@s}
-\def\pr@m@s{\ifx'\next\let\nxt\pr@@@s \else\ifx^\next\let\nxt\pr@@@t
-  \else\let\nxt\egroup\fi\fi \nxt}
-\def\pr@@@s#1{\prim@s} \def\pr@@@t#1#2{#2\egroup}
-{\catcode`\^^Z=13 \gdef^^Z{\not=}} % ^^Z is like \ne in math
-
-{\catcode`\_=13 \global\let_=\_} % _ in math is either subscript or \_
-
-
-
-\def\cong{\mathrel{\mathpalette\@vereq\sim}} % congruence sign
-\def\@vereq#1#2{\lower.5pt\vbox{\lineskiplimit16383.99999pt\lineskip-.5pt% dimensão maxima
-    \ialign{$\mathsurround0pt#1\hfil##\hfil$\crcr#2\crcr=\crcr}}}
-\def\notin{\mathrel{\mathpalette\c@ncel\in}}
-\def\c@ncel#1#2{\mathsurround0pt\ooalign{$\hfil#1\mkern1mu/\hfil$\crcr$#1#2$}}
-\def\rightleftharpoons{\mathrel{\mathpalette\rlh@{}}}
-\def\rlh@#1{\vcenter{\mathsurround0pt\hbox{\ooalign{\raise2pt
-          \hbox{$#1\rightharpoonup$}\crcr
-        $#1\leftharpoondown$}}}}
-\def\buildrel#1\over#2{\mathrel{\mathop{\kern0pt#2}\limits^{#1}}}
-\def\doteq{\buildrel\textstyle.\over=}
-
-\def\cases#1{\left\{\,\vcenter{\lineskip1pt
-  \baselineskip12pt \lineskiplimit0pt\mathsurround0pt
-    \ialign{$##\hfil$&\quad##\hfil\crcr#1\crcr}}\right.}
-\def\matrix#1{\hbox{}\,\vcenter{\lineskip1pt
-  \baselineskip12pt \lineskiplimit0pt\mathsurround0pt
-    \ialign{\hfil$##$\hfil&&\quad\hfil$##$\hfil\crcr
-      \mathstrut\crcr\noalign{\kern-\baselineskip}
-      #1\crcr\mathstrut\crcr\noalign{\kern-\baselineskip}}}\,}
-\def\pmatrix#1{\left(\matrix{#1}\right)}
-\setbox0=\hbox{\tenex@ B} \p@renwd=\wd0 % width of the big left (
-\def\bordermatrix#1{\begingroup \mathsurround0pt
-  \setbox0\vbox{\def\cr{\crcr\noalign{\kern2pt\global\let\cr\endline}}%
-    \ialign{$##$\hfil\kern2pt\kern\p@renwd&\vskip3pt plus 1pt minus 1pt\hfil$##$\hfil
-      &&\quad\hfil$##$\hfil\crcr
-      \omit\relax\ifmmode\copy1\else\unhcopy1\fi\hfil\crcr\noalign{\kern-\baselineskip}%
-      #1\crcr\omit\relax\ifmmode\copy1\else\unhcopy1\fi\cr}}%
-  \setbox2\vbox{\unvcopy0\global\setbox1\lastbox}%
-  \setbox2\hbox{\unhbox1\unskip\global\setbox1\lastbox}%
-  \setbox2\hbox{$\kern\wd1\kern-\p@renwd\left(\kern-\wd1
-    \global\setbox1\vbox{\box1\kern2pt}%
-    \vcenter{\kern-\ht1\unvbox0\kern-\baselineskip}\,\right)$}%
-  \hbox{}\;\vbox{\kern\ht1\box2}\endgroup}
-
-\def\openup{\afterassignment\@penup\dimen@=}
-\def\@penup{\advance\lineskip\dimen@
-  \advance\baselineskip\dimen@
-  \advance\lineskiplimit\dimen@}
-\def\eqalign#1{\hbox{}\,\vcenter{\openup3pt\mathsurround0pt
-  \ialign{\relax\ifmmode\copy1\else\unhcopy1\fi\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
-      \crcr#1\crcr}}\,}
-\newif@\ifdt@p
-\def\displ@y{\global\dt@ptrue\openup3pt\mathsurround0pt
-  \everycr{\noalign{\ifdt@p \global\dt@pfalse \ifdim\prevdepth>-1000pt
-      \vskip-\lineskiplimit \vskip0pt \fi
-      \else \penalty100 \fi}}}
-\def\@lign{\tabskip0pt plus0pt minus0pt\everycr{}} % restore inside \displ@y
-\def\displaylines#1{\displ@y \tabskip0pt plus0pt minus0pt
-  \halign{\hbox to\displaywidth{$\@lign\hfil\displaystyle##\hfil$}\crcr
-    #1\crcr}}
-\def\eqalignno#1{\displ@y \tabskip0pt plus 1000pt minus 1000pt %Centraliza
-  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
-    &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
-    1000pt % Centraliza
-    &\hbox to0pt{\hss$\@lign##$}\tabskip0pt plus0pt minus0pt\crcr
-    #1\crcr}}
-\def\leqalignno#1{\displ@y \tabskip0pt plus 1000pt minus 1000pt % Centraliza
-  \halign to\displaywidth{\hfil$\@lign\displaystyle{##}$\tabskip0pt plus0pt minus0pt
-    &$\@lign\displaystyle{{}##}$\hfil\tabskip0pt plus 1000pt minus
-    1000pt % Centraliza
-    &\kern-\displaywidth\hbox to0pt{$\@lign##$\hss}\tabskip\displaywidth\crcr
-    #1\crcr}}
 
 % Definitions related to output
 
 \message{output routines,}
 
-\def\footnote#1{\let\@sf\empty % parameter #2 (the text) is read later
+\def\footnote#1{\let\@sf\vazio@ % parameter #2 (the text) is read later
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
   #1\@sf\vfootnote{#1}}
 \def\vfootnote#1{\insert\footins@\bgroup
