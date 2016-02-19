@@ -305,8 +305,7 @@
    \ifvoid\footins@\else % footnote info is present
      \vskip\skip\footins@%
      \kern-3pt\hrule width 2truein \kern 2.6pt % footnoterule
-     \unvbox\footins@\fi
-   \ifr@ggedbottom \kern-\dimen0 \vfil \fi}%
+     \unvbox\footins@\fi}%
   % Rodapé:
   \baselineskip24pt\lineskiplimit0pt\hbox to\hsize{\the\footline}}%
   % Lógica do número de página
@@ -367,8 +366,11 @@
 % 254 reservado para inserção \footins@
 
 % Agora reservamos os registradores de sequências de tokens:
-\toksdef\headline=0 \headline={\hfil} % Cabeçalho padrão em branco
-\toksdef\footline=1 \footline={\hss\tenrm@\folio\hss} % Rodapé padrão
+\toksdef\headline=0 
+\headline={\hfil} % Cabeçalho padrão em branco
+\toksdef\footline=1
+\footline={\hss\tenrm@\ifnum\pageno@<0
+           \romannumeral-\pageno@ \else\number\pageno@ \fi\hss} % Rodapé padrão
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                ATRIBUIÇÕES                                  %
@@ -386,10 +388,13 @@
 %TODO: ç e Ç sem \c
 \def\utf@#1{\ifmmode{\hbox{\tenrm@#1}}\else{#1}\fi}
 \def\ensuremath@#1{\ifmmode#1\else$#1$\fi}
-\def^^c2#1{\relax% Família a: ¢ £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯
-       \ifx#1^^a0\utf@{\vbox{\hrule width.3em}}%  
-       \else\ifx#1^^b0\utf@{\char'74}% ¡
-       \else\ifx#1^^b0\ensuremath@{^{\hbox{\tenrm@ o}}}% ° Não funciona?
+\def^^c2#1{\relax% Família a: £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯
+       \ifx#1^^a0~%  
+       \else\ifx#1^^a1\utf@{\char'74}% ¡
+       \else\ifx#1^^a2{\hbox to 0pt{c\hss}\kern0.465ex\lower0.1em%
+             \hbox{\vrule height 1.5ex width 0.5pt}\kern0.45ex}% ¢
+       \else\ifx#1^^a3\utf@{{\tenit@ \char'44}}% £
+       \else\ifx#1^^b0\ensuremath@{^{\hbox{\tenrm@ o}}}% °
        \else\ifx#1^^b1\ensuremath@{\pm}% ±
        \else\ifx#1^^b2\ensuremath@{^2}% ²
        \else\ifx#1^^b3\ensuremath@{^3}% ³
@@ -405,7 +410,7 @@
        \else\ifx#1^^bd\ensuremath@{1 \over 2}% ½
        \else\ifx#1^^be\ensuremath@{3 \over 4}% ¾
        \else\ifx#1^^bf\utf@{\char'76}% ¿
-       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 \def^^c3#1{\relax% Este \relax é para evitar bugs se usado em \halign
                  % (TeXbook)
         \ifx#1^^80\ifmmode{\hbox{\tenit@\accent18A}}\else{\accent18A}\fi% À
@@ -973,6 +978,16 @@
 \def\quebra{\penalty-10000}
 \def\naoquebra{\penalty 10000}
 
+% Reticências:
+\def\reticencias{\relax\ifmmode\ldots\else$\mathsurround0pt\ldots\,$\fi}
+
+% Alguns caracteres que de outra forma não poderiam ser usados
+% diretamente:
+\chardef\%=`\%
+\chardef\&=`\&
+\chardef\#=`\#
+\chardef\$=`\$
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
@@ -982,26 +997,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \def\ialign{\everycr{}\tabskip0pt plus0pt minus0pt\halign} % initialized \halign
-\def\multispan#1{\omit \mscount#1\relax
-  \loop@\ifnum\mscount>1 \sp@n\repeat@}
-\def\sp@n{\span\omit\advance\mscount-1}
 
-
-\def\hang{\hangindent\parindent}
-\def\textindent#1{\indent\hbox to0pt{\hss\kern.5em} \ignorespaces}
-\def\item{\par\hang\textindent}
-\def\itemitem{\par\indent \hangindent2\parindent \textindent}
-\def\narrower{\advance\leftskip\parindent
-  \advance\rightskip\parindent}
-
-\outer\def\beginsection#1\par{\vskip0pt plus.3\vsize\penalty-250
-  \vskip0pt plus-.3\vsize\bigskip\vskip\parskip
-  \message{#1}\line{{\fam6\tenbf@#1}\hss}\naoquebra\smallskip\noindent}
-
-\chardef\%=`\%
-\chardef\&=`\&
-\chardef\#=`\#
-\chardef\$=`\$
 \chardef\ss="19
 \chardef\oe="1B
 \chardef\OE="1E
@@ -1035,8 +1031,6 @@
 \def\c#1{{\setbox0\hbox{#1}\ifdim\ht0=1ex\accent24 #1%
   \else\ooalign{\unhbox0\crcr\hskip-1000pt plus 1fill\char24\hskip-1000pt plus 1fill}\fi}}
 \def\copyright{{\ooalign{\hfil\raise.07ex\hbox{c}\hfil\crcr\Orb}}}
-
-\def\dots{\relax\ifmmode\ldots\else$\mathsurround0pt\ldots\,$\fi}
 
 \def\v#1{{\accent20 #1}} \let\^^_=\v
 \def\u#1{{\accent21 #1}} \let\^^S=\u
@@ -1150,13 +1144,6 @@
 
 \message{output routines,}
 
-\newif@\ifr@ggedbottom
-\def\raggedbottom{\topskip 10pt plus60pt \r@ggedbottomtrue}
-\def\normalbottom{\topskip 10pt \r@ggedbottomfalse} % undoes \raggedbottom
-\def\folio{\ifnum\pageno@<0 \romannumeral-\pageno@ \else\number\pageno@ \fi}
-\def\nopagenumbers{\footline{\hfil}} % blank out the footline
-
-
 \def\footnote#1{\let\@sf\empty % parameter #2 (the text) is read later
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
   #1\@sf\vfootnote{#1}}
@@ -1167,7 +1154,7 @@
   \leftskip0pt plus0pt minus0pt \rightskip0pt plus0pt
   minus0pt \spaceskip0pt plus0pt minus0pt \xspaceskip0pt plus0pt
   minus0pt
-  \textindent{#1}\footstrut\futurelet\next\fo@t}
+  \indent\hbox to0pt{\hss#1\kern.5em} \ignorespaces\footstrut\futurelet\next\fo@t}
 \def\fo@t{\ifcat\bgroup\noexpand\next \let\next\f@@t
   \else\let\next\f@t\fi \next}
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
