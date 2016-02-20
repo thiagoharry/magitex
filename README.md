@@ -22,6 +22,7 @@ Ele ainda está em desenvolvimento. O que já foi implementado:
 * Comando \insere{ARQUIVO} para inserir o cnteúdo de arquivo.
 * Comandos de espaçamento: \lacuna{3cm} deixa uma lacuna de 3cm entre palavras e entre parágrafos. \espaco{3cm} deixa um espaço da mesma forma, mas o espaço pode ser ajustado pr TeX para ficar 33% maior ou menor. Mantidos os comandos \quad e \qquad.
 * Pode-se quebrar uma linha com \quebra no parágrafo. E quebrar página com \quebra fora do parágrafo. Para impedir quebras, usa-se \naoquebra
+* O cmando \rodape{...} deixa uma nota de rodapé numerada.
 * O comando \fim, que é usado para finalizar o documento.
 
 Algumas melhorias em relação ao LaTeX:
