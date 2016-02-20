@@ -236,7 +236,7 @@
 \showboxbreadth=5 % Número máximo de itens exibidos quando caixas são
                   % mostradas
 \showboxdepth=3   % Nível máximo quando caixas são mostradas
-\errorcontextlines=0 % Contexto extra máximo mostrado quando erros são
+\errorcontextlines=3 % Contexto extra máximo mostrado quando erros são
 
                      % mostrados
 % Parâmetros de dimensões:
@@ -300,10 +300,9 @@
   \vbox to 8.5pt{}\the\headline}\vss}\prevdepth-1000pt%
   % Corpo:
   \vbox to\vsize{\boxmaxdepth\maxdepth
-   \ifvoid\topins@\else\unvbox\topins@\fi
    \dimen0=\dp255 \unvbox255 % open up \box255
    \ifvoid\footins@\else % footnote info is present
-     \vskip\skip\footins@%
+     \vskip12pt plus 4pt minus 4pt%
      \kern-3pt\hrule width 2truein \kern 2.6pt % footnoterule
      \unvbox\footins@\fi}%
   % Rodapé:
@@ -335,7 +334,9 @@
 % sub-páginas e não serão usados. Depois deles nós temos:
 \countdef\pageno@=0 \pageno@=1 % O número de página
 \countdef\count@=10
+\countdef\rodapenum@=11 \rodapenum@=0 % Contagem de rodapé
 % 254 reservado para \footins
+\count254=1000 % Fator de ampliação do rodapé
 
 % Não há nenhum registrador de dimensão alocado pelas primitivas
 % TeX. Desta forma, temos todos à nossa disposição:
@@ -343,12 +344,11 @@
 \dimendef\dimen@=1
 \dimendef\dimen@i=2
 \dimendef\dimen@ii=3
-% 253 reservado para inserção \topins@
-% 254 reservado para inserção \footins@
+\dimen254=8in % Máximo de espaço por página para rodapé
 
 % Os registradores de skip.
-% 253 reservado para inserção \topins@
-% 254 reservado para inserção \footins@
+\skip254=12pt plus 4pt minus 4pt % Espaço adicionado quando rodapé
+                                % está presente
 
 % Nenhum registrador de muskip é usado
 
@@ -361,7 +361,6 @@
 \def\tabsyet{13}
 \def\tabsdone{14}
 \def\rootbox{15}
-% 253 reservado para inserção \topins@
 % 254 reservado para inserção \footins@
 
 % Agora reservamos os registradores de sequências de tokens:
@@ -377,6 +376,9 @@
 % Começamos com as sequências de controle que também são padrão no
 % Plain TeX:
 \def~{\penalty10000 \ }
+
+% Útil em algumas construções
+\let\bgroup={ \let\egroup=}
 
 % Código para suportar os caracteres Computer Modern na fonte
 % UTF-8. Primeiro fazemos com que ^^c3 passe a ser um caractere ativo
@@ -987,15 +989,13 @@
 
 {\catcode`\_=13 \global\let_=\_} % _ in math is either subscript or \_
 
-
-
 \def\cong{\mathrel{\mathpalette\@vereq\sim}} % congruence sign
 \def\@vereq#1#2{\lower.5pt\vbox{\lineskiplimit16383.99999pt\lineskip-.5pt% dimensão maxima
     \everycr{}\tabskip0pt plus0pt minus0pt\halign{$\mathsurround0pt#1\hfil##\hfil$\crcr#2\crcr=\crcr}}}
 \def\notin{\mathrel{\mathpalette\c@ncel\in}}
-\def\c@ncel#1#2{\mathsurround0pt\ooalign{$\hfil#1\mkern1mu/\hfil$\crcr$#1#2$}}
+\def\c@ncel#1#2{\mathsurround0pt\ooalign@{$\hfil#1\mkern1mu/\hfil$\crcr$#1#2$}}
 \def\rightleftharpoons{\mathrel{\mathpalette\rlh@{}}}
-\def\rlh@#1{\vcenter{\mathsurround0pt\hbox{\ooalign{\raise2pt
+\def\rlh@#1{\vcenter{\mathsurround0pt\hbox{\ooalign@{\raise2pt
           \hbox{$#1\rightharpoonup$}\crcr
         $#1\leftharpoondown$}}}}
 \def\buildrel#1\over#2{\mathrel{\mathop{\kern0pt#2}\limits^{#1}}}
@@ -1041,6 +1041,12 @@
 \def\upbracefill{$\mathsurround0pt \setbox0\hbox{$\braceld$}%
   \bracelu\leaders\vrule height\ht0 depth0pt\hfill\bracerd
   \braceld\leaders\vrule height\ht0 depth0pt\hfill\braceru$}
+\def\oalign@#1{\leavevmode@\vtop{\baselineskip0pt plus0pt minus0pt
+      \lineskip.25ex\everycr{}\tabskip0pt plus0pt minus0pt%
+      \halign{##\crcr#1\crcr}}}
+\def\o@lign{\lineskiplimit0pt \oalign@}
+\def\ooalign@{\lineskiplimit-16383.99999pt \oalign@} % chars over each
+                                % other
 
 % Definamos agora a formatação de textos:
 \def\it@{0}\def\neg@{0}\def\sl@{0}\def\tt@{0}
@@ -1082,68 +1088,30 @@
 \def\leavevmode@{\unhbox\voidb@x} % Começa novo parágrafo só se está
                                 % no modo vertical
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% O código abaixo é do Plain TeX e está aqui como referência. Ele será %%%
-% substituído por código novo (ou não) à medida que o MAgiTeX se       %%%
-% desenvolver                                                          %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\def\oalign#1{\leavevmode@\vtop{\baselineskip0pt plus0pt minus0pt
-      \lineskip.25ex\everycr{}\tabskip0pt plus0pt minus0pt%
-      \halign{##\crcr#1\crcr}}}
-\def\o@lign{\lineskiplimit0pt \oalign}
-\def\ooalign{\lineskiplimit-16383.99999pt \oalign} % chars over each
-                                % other (dimensão máxima)
-
-% Definitions related to output
-
-\message{output routines,}
-
-\def\footnote#1{\let\@sf\vazio@ % parameter #2 (the text) is read later
+% Definições de rodapé:
+\def\rodape#1{\advance\rodapenum@ by 1\footnote@{\the\rodapenum@}{#1}}
+\def\footnote@#1{\let\@sf\vazio@ % parameter #2 (the text) is read later
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
-  #1\@sf\vfootnote{#1}}
-\def\vfootnote#1{\insert\footins@\bgroup
+  \ensuremath@{{}^{#1}}\@sf\vfootnote@{#1}}
+\def\vfootnote@#1{\insert\footins@\bgroup
   \interlinepenalty100
   \splittopskip\ht\strutbox % top baseline for broken footnotes
   \splitmaxdepth\dp\strutbox \floatingpenalty20000
   \leftskip0pt plus0pt minus0pt \rightskip0pt plus0pt
   minus0pt \spaceskip0pt plus0pt minus0pt \xspaceskip0pt plus0pt
   minus0pt
-  \indent\hbox to0pt{\hss#1\kern.5em} \ignorespaces\footstrut\futurelet\next\fo@t}
+  \indent\hbox to0pt{\hss#1\kern.5em}\ignorespaces\vbox to\splittopskip{}\futurelet\next\fo@t}
 \def\fo@t{\ifcat\bgroup\noexpand\next \let\next\f@@t
   \else\let\next\f@t\fi \next}
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
 \def\@foot{\relax\ifmmode\copy1\else\unhcopy1\fi\egroup}
-\def\footstrut{\vbox to\splittopskip{}}
-\skip\footins@=12pt plus 4pt minus 4pt % space added when footnote is present
-\count\footins@=1000 % footnote magnification factor (1 to 1)
-\dimen\footins@=8in % maximum footnotes per page
 
-\newif@\ifp@ge \newif@\if@mid
-\def\topinsert{\@midfalse\p@gefalse\@ins}
-\def\midinsert{\@midtrue\@ins}
-\def\pageinsert{\@midfalse\p@getrue\@ins}
-\skip\topins@=0pt plus0pt minus0pt % no space added when a topinsert is present
-\count\topins@=1000 % magnification factor (1 to 1)
-\dimen\topins@=16383.99999pt % (dimensão máxima) no limit per page
-\def\@ins{\par\begingroup\setbox0\vbox\bgroup} % start a \vbox
-\def\endinsert{\egroup % finish the \vbox
-  \if@mid \dimen@\ht0 \advance\dimen@\dp0 \advance\dimen@12pt
-    \advance\dimen@\pagetotal \advance\dimen@-\pageshrink
-    \ifdim\dimen@>\pagegoal\@midfalse\p@gefalse\fi\fi
-  \if@mid \bigskip\box0\par\ifdim\lastskip<12pt plus 4pt minus 4pt
-  \ifdim\lastskip=0pt\else\vskip-\lastskip\fi\penalty-200\bigskip\fi
-  \else\insert\topins@{\penalty100 % floating insertion
-    \splittopskip0pt plus0pt minus0pt
-    \splitmaxdepth16383.99999pt \floatingpenalty0% (max dimen)
-    \ifp@ge \dimen@\dp0
-    \vbox to\vsize{\unvbox0\kern-\dimen@}% depth is zero
-    \else \box0\naoquebra\bigskip\fi}\fi\endgroup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              CÓDIGO INICIAL                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\fam0\tenrm@ % select roman font
-\catcode`@=12 % at signs are no longer letters
+\fam0\tenrm@ % Usando a fonte romana
+\catcode`@=12 % @ não será mais usado em nomes de sequencias de controle
 
 \dump
