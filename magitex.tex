@@ -207,9 +207,9 @@
 \language=0 % A linguagem usada.
 \uchyph=1 % Positivo se deve-se separar silabicamente palavras que
           % começam com letras maiúsculas
-\lefthyphenmin=2 % Menor fragmento esquerdo de palavras com separação
+\lefthyphenmin=0 % Menor fragmento esquerdo de palavras com separação
                  % silábica.
-\righthyphenmin=3 % Idem, mas para fragmento direito
+\righthyphenmin=0 % Idem, mas para fragmento direito
 
 \globaldefs=0 % Não-nulo para tornar toda atribuição \global
 
@@ -344,7 +344,6 @@
 \dimendef\dimen@=1
 \dimendef\dimen@i=2
 \dimendef\dimen@ii=3
-\dimen254=8in % Máximo de espaço por página para rodapé
 
 % Os registradores de skip.
 \skip254=12pt plus 4pt minus 4pt % Espaço adicionado quando rodapé
@@ -361,7 +360,7 @@
 \def\tabsyet{13}
 \def\tabsdone{14}
 \def\rootbox{15}
-% 254 reservado para inserção \footins@
+\def\footins@{254} % Rodapé
 
 % Agora reservamos os registradores de sequências de tokens:
 \toksdef\headline=0 
@@ -495,7 +494,8 @@
           1qua1 1que1 1qui1 1quo1 1ra1 1re1 1ri1 1ro1 1ru1
           1sa1 1se1 1si1 1so1 1su1 1ta1 1te1 1ti1 1to1 1tu1
           1va1 1ve1 1vi1 1vo1 1vu1 1wa1 1we1 1wi1 1wo1 1wu1
-          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1}
+          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1
+          2n3t2 3v2o2u2 2n3v2}
 
 
 % Permitindo inserir acentos soltos, sem caracteres por meio
@@ -509,10 +509,6 @@
 
 % O comando para terminar um documento é \fim:
 \def\fim{\par\vfill\par\penalty-20000\end}
-
-% E definimos os nomes de inserções:
-\def\footins@{254}
-\def\topins@{253}
 
 % Comandos de espaçamento
 \def\lacuna#1{\ifvmode\vskip#1\relax\else\hskip#1\relax\fi}
