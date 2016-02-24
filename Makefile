@@ -1,10 +1,51 @@
-TEXPATH=/opt/texlive/bin
+DEST=$(shell kpsewhich -var-value TEXMFSYSVAR)
+BIN=$(shell kpsewhich --var-value=TEXMFROOT)/bin
+CORES=$(shell grep -c ^processor /proc/cpuinfo)
+SUPERUSER=root # Usuário com permissão de instalar o pacote
 
-all:
-	initex magitex.tex
+all: test_tex
+	@if [ -e .error ]; then	rm .error; \
+	else initex magitex.tex; fi
 test:
 	tex \&magitex teste.tex
 	dvipdf teste.dvi
 	xpdf teste.pdf
 clean:
 	rm -rf *~ *.log *.pdf *.dvi *.fmt
+install: test_kpsewhich test_mktexlsr
+	make --no-print-directory -j ${CORES} -f install.Makefile
+uninstall:
+	make --no-print-directory -j ${CORES} -f install.Makefile uninstall
+test_tex: .build/have_tex
+.build/have_tex:
+	@echo -n "Testing TeX..............."
+	@(which initex &> /dev/null && touch .build/have_tex) || true
+	@if [ -e .build/have_tex ]; then \
+	echo "OK";  \
+	else /bin/echo -e "\033[31mFAILED\033[m";\
+	touch .error;\
+	echo "ERROR: initex not found. Install TeX first and check if you can run initex.";\
+	fi
+test_kpsewhich: .build/have_kpsewhich
+.build/have_kpsewhich:
+	@echo -n "Testing kpsewhich..............."
+	@(which kpsewhich &> /dev/null && touch .build/have_kpsewhich) || true
+	@if [ -e .build/have_kpsewhich ]; then \
+	echo "OK";  \
+	else /bin/echo -e "\033[31mFAILED\033[m";\
+	touch .error;\
+	echo "ERROR: kpsewhich not found. Install it first from kpathsea or TeX packages.";\
+	fi
+test_mktexlsr: .build/have_mktexlsr
+.build/have_mktexlsr:
+	@echo -n "Testing mktexlsr................"
+	@(which mktexlsr &> /dev/null && touch .build/have_mktexlsr) || true
+	@if [ -e .build/have_mktexlsr ]; then \
+	echo "OK";  \
+	else /bin/echo -e "\033[31mFAILED\033[m";\
+	touch .error;\
+	echo "ERROR: mktexlsr not found. Install it first from kpathsea or TeX packages.";\
+	fi
+
+
+# kpsewhich -var-value TEXMFLOCAL
