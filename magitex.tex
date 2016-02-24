@@ -304,7 +304,7 @@
    \ifvoid\footins@\else % footnote info is present
      \vskip12pt plus 4pt minus 4pt%
      \kern-3pt\hrule width 2truein \kern 2.6pt % footnoterule
-     \unvbox\footins@\fi}%
+     {\unvbox\footins@}\fi}%
   % Rodapé:
   \baselineskip24pt\lineskiplimit0pt\hbox to\hsize{\the\footline}}%
   % Lógica do número de página
@@ -344,6 +344,7 @@
 \dimendef\dimen@=1
 \dimendef\dimen@i=2
 \dimendef\dimen@ii=3
+\dimen254=8in
 
 % Os registradores de skip.
 \skip254=12pt plus 4pt minus 4pt % Espaço adicionado quando rodapé
@@ -398,7 +399,7 @@
        \else\ifx#1^^a2{\hbox to 0pt{c\hss}\kern0.465ex\lower0.1em%
              \hbox{\vrule height 1.5ex width 0.5pt}\kern0.45ex}% ¢
        \else\ifx#1^^a3\utf@{{\tenit@ \char'44}}% £
-       \else\ifx#1^^b0\ensuremath@{^{\hbox{\tenrm@ o}}}% °
+       \else\ifx#1^^b0\ensuremath@{^{\hbox{\sevenrm@ o}}}% °
        \else\ifx#1^^b1\ensuremath@{\pm}% ±
        \else\ifx#1^^b2\ensuremath@{^2}% ²
        \else\ifx#1^^b3\ensuremath@{^3}% ³
@@ -1085,7 +1086,7 @@
                                 % no modo vertical
 
 % Definições de rodapé:
-\def\rodape#1{\advance\rodapenum@ by 1\footnote@{\the\rodapenum@}{#1}}
+\def\rodape#1{\advance\rodapenum@ by 1\footnote@{\sevenrm@\the\rodapenum@}{\sevenrm@#1}}
 \def\footnote@#1{\let\@sf\vazio@ % parameter #2 (the text) is read later
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
   \ensuremath@{{}^{#1}}\@sf\vfootnote@{#1}}
