@@ -332,7 +332,7 @@
 % cada linha da inserção \footins@ afeta o espaço da página. Os demais
 % só são usados em formatos que de alguma forma precisam numerar
 % sub-páginas e não serão usados. Depois deles nós temos:
-\countdef\pageno@=0 \pageno@=1 % O número de página
+\countdef\pageno@=0 \pageno@=0 % O número de página
 \countdef\count@=10
 \countdef\rodapenum@=11 \rodapenum@=0 % Contagem de rodapé
 % 254 reservado para \footins
@@ -1109,5 +1109,6 @@
 
 \fam0\tenrm@ % Usando a fonte romana
 \catcode`@=12 % @ não será mais usado em nomes de sequencias de controle
+\special{papersize=21cm,29.7cm} % Extensão para definir o papel como A4
 
 \dump
