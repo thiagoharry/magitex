@@ -630,6 +630,10 @@ i3o o3a o3e o3o r3r s3s u3a u3e u3o u3u}
 \def\ano{\the\year}
 \def\mes{\ifnum\month<10 0\fi\the\month}
 \def\dia{\the\day}
+\def\nomemes{\ifcase\month Mês Inexistente \or Janeiro \or
+Fevereiro \or Março \or Abril \or Maio \or Junho \or Julho \or
+Agosto \or Setembro \or Outubro \or Novembro \or Dezembro \else Mês
+Inexistente \fi}
 
 % Inserção de novos arquivos:
 \def\insere#1{\input #1}
@@ -1114,7 +1118,7 @@ i3o o3a o3e o3o r3r s3s u3a u3e u3o u3u}
                                 % no modo vertical
 
 % Definições de rodapé:
-\def\rodape#1{\advance\rodapenum@ by 1\footnote@{\sevenrm@\the\rodapenum@}{\sevenrm@#1}}
+\def\rodape#1{\global\advance\rodapenum@ by 1\footnote@{\sevenrm@\the\rodapenum@}{\alinhanormal\sevenrm@#1}}
 \def\footnote@#1{\let\@sf\vazio@ % parameter #2 (the text) is read later
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
   \ensuremath@{{}^{#1}}\@sf\vfootnote@{#1}}
