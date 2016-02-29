@@ -67,6 +67,7 @@
 \lccode`^^9b=`^^bb\uccode`^^bb=`^^9b\lccode`^^bb=`^^bb\uccode`^^9b=`^^9b % Û - û
 \lccode`^^9c=`^^bc\uccode`^^bc=`^^9c\lccode`^^bc=`^^bc\uccode`^^9c=`^^9c % Ü - ü
 \lccode`^^9d=`^^bd\uccode`^^bd=`^^9d\lccode`^^bd=`^^bd\uccode`^^9d=`^^9d % Ý - ý
+%\lccode`-=`-
 
 % Os códigos dos caracteres matemáticos não serão modificados. Como o
 % modo matemático do TeX e LaTeX são em si mesmo uma linguagem própria
@@ -243,8 +244,8 @@
 \hfuzz=0.1pt % Tolerância à caixas superlotadas em modo horizontal
 \vfuzz=0.1pt % Idem no modo vertical
 \overfullrule=5pt % Largura das réguas adicionadas à caixas superlotadas
-\hsize=6.5in % Tamanho das linhas
-\vsize=8.9in % Altura de todas as linhas de uma página
+\hsize=15cm % Tamanho das linhas (deixamos margem de 3cm)
+\vsize=23,7cm % Altura de todas as linhas de uma página (margem de 3 cm)
 \maxdepth=4pt % profundidade máxima em páginas principais
 \splitmaxdepth=16383.99999pt % Idem em páginas quebradas (tamanho máximo)
 \boxmaxdepth=16383.99999pt % Idem em páginas explícitas (tamanho máximo)
@@ -261,8 +262,10 @@
                    % automaticamente
 \parindent=20pt % Identação de parágrafo
 \hangindent=0pt % Identação pendente, zerada após cada parágrafo
-\hoffset=0pt % Deslocamento horizontal de texto da página
-\voffset=0pt % Deslocamento vertical de texto na página
+\hoffset=0,459994cm % Deslocamento horizontal de texto da página (para
+                    % dar 3cm)
+\voffset=0,459994cm % Deslocamento vertical de texto na página (para
+                    % dar 3cm)
 % Parâmetros de cola:
 \baselineskip=12pt % Distância ideal entre linhas
 \lineskip=1pt % Distância garantida entre linhas em distância
@@ -380,6 +383,11 @@
 % Útil em algumas construções
 \let\bgroup={ \let\egroup=}
 
+% Para momentos de emergência, quando queremos que uma palavra como
+% beija-flor que possui um hífen seja separada em sílabas
+% automaticamente, podemos escrever beija\=flor:
+\def\={\hskip0pt-\penalty0\hskip0pt\relax}
+
 % Código para suportar os caracteres Computer Modern na fonte
 % UTF-8. Primeiro fazemos com que ^^c3 passe a ser um caractere ativo
 % que passa a se comportar como um comando (tal como o ~). Este
@@ -486,17 +494,37 @@
 
 % Código que passa os padrões de separação silábica da língua
 % portuguesa:
-\patterns{1ba1 1be1 1bi1 1bo1 1bu1 1ca1 1ce1 1ci1 1co1 1cu1
-          1da1 1de1 1di1 1do1 1du1 1fa1 1fe1 1fi1 1fo1 1fu1
-          1ga1 1ge1 1gi1 1go1 1gu1 1ha1 1he1 1hi1 1ho1 1hu1
-          1ja1 1je1 1ji1 1jo1 1ju1 1ka1 1ke1 1ki1 1ko1 1ku1
-          1la1 1le1 1li1 1lo1 1lu1 1ma1 1me1 1mi1 1mo1 1mu1
-          1na1 1ne1 1ni1 1no1 1nu1 1pa1 1pe1 1pi1 1po1 1pu1
-          1qua1 1que1 1qui1 1quo1 1ra1 1re1 1ri1 1ro1 1ru1
-          1sa1 1se1 1si1 1so1 1su1 1ta1 1te1 1ti1 1to1 1tu1
-          1va1 1ve1 1vi1 1vo1 1vu1 1wa1 1we1 1wi1 1wo1 1wu1
-          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1
-          2n3t2 3v2o2u2 2n3v2 2l3v2}
+%\patterns{1ba1 1be1 1bi1 1bo1 1bu1 1ca1 1ce1 1ci1 1co1 1cu1
+%          1da1 1de1 1di1 1do1 1du1 1fa1 1fe1 1fi1 1fo1 1fu1
+%          1ga1 1ge1 1gi1 1go1 1gu1 1ha1 1he1 1hi1 1ho1 1hu1
+%          1ja1 1je1 1ji1 1jo1 1ju1 1ka1 1ke1 1ki1 1ko1 1ku1
+%          1la1 1le1 1li1 1lo1 1lu1 1ma1 1me1 1mi1 1mo1 1mu1
+%          1na1 1ne1 1ni1 1no1 1nu1 1pa1 1pe1 1pi1 1po1 1pu1
+%          1qua1 1que1 1qui1 1quo1 1ra1 1re1 1ri1 1ro1 1ru1
+%          1sa1 1se1 1si1 1so1 1su1 1ta1 1te1 1ti1 1to1 1tu1
+%          1va1 1ve1 1vi1 1vo1 1vu1 1wa1 1we1 1wi1 1wo1 1wu1
+%          1xa1 1xe1 1xi1 1xo1 1xu1 1za1 1ze1 1zi1 1zo1 1zu1
+%          2n3t2 3v2o2u2 2n3v2 2l3v2 3d2e2i3 3r2a2i2s3 3-3}
+\patterns{1b2l 1b2r 1ba 1be 1bi 1bo 1bu  1c2h 1c2l 1c2r 1ca 1ce 1ci 1co 1cu
+1d2l 1d2r 1da 1de 1di 1do 1du 1f2l 1f2r 1fa 1fe 1fi 1fo 1fu 1g2l 1g2r
+1ga 1ge 1gi 1go 1gu 1gu4a 1gu4e 1gu4i 1gu4o 1ja 1je 1ji 1jo 1ju 1k2l
+1k2r 1ka 1ke 1ki 1ko 1ku 1l2h 1la 1le 1li 1lo 1lu 1ma 1me 1mi 1mo 1mu
+1n2h 1na 1ne 1ni 1no 1nu 1p2l 1p2r 1pa 1pe 1pi 1po 1pu 1qu4a 1qu4e
+1qu4i 1qu4o 1ra 1re 1ri 1ro 1ru 1sa 1se 1si 1so 1su 1t2l 1t2r 1ta 1te
+1ti 1to 1tu 1v2l 1v2r 1va 1ve 1vi 1vo 1vu 1w2l 1w2r 1xa 1xe 1xi 1xo
+1xu 1za 1ze 1zi 1zo 1zu a3a a3e a3o c3c e3a e3e e3o i3a i3e i3i
+i3o o3a o3e o3o r3r s3s u3a u3e u3o u3u}
+% 1- 1bá 1bâ 1bã 1bé 1bí 1bó 1bú 1bê 1bõ 1cá 1câ 1cã 1cé 1cí 1có 1cú 1cê
+%1cõ 1ça 1çe 1çi 1ço 1çu 1çá 1çâ 1çã 1çé 1çí 1çó 1çú 1çê 1çõ 1dá 1dâ
+%1dã 1dé 1dí 1dó 1dú 1dê 1dõ 1fá 1fâ 1fã 1fé 1fí 1fó 1fú 1fê 1fõ 1gá
+%1gâ 1gã 1gé 1gí 1gó 1gú 1gê 1gõ 1já 1jâ 1jã 1jé 1jí 1jó 1jú 1jê 1jõ
+%1ká 1kâ 1kã 1ké 1kí 1kó 1kú 1kê 1kõ 1lá 1lâ 1lã 1lé 1lí 1ló 1lú 1lê
+%1lõ 1má 1mâ 1mã 1mé 1mí 1mó 1mú 1mê 1mõ 1ná 1nâ 1nã 1né 1ní 1nó 1nú
+%1nê 1nõ 1pá 1pâ 1pã 1pé 1pí 1pó 1pú 1pê 1põ 1rá 1râ 1rã 1ré 1rí 1ró
+%1rú 1rê 1rõ 1sá 1sâ 1sã 1sé 1sí 1só 1sú 1sê 1sõ 1tá 1tâ 1tã 1té 1tí
+%1tó 1tú 1tê 1tõ 1vá 1vâ 1vã 1vé 1ví 1vó 1vú 1vê 1võ 1xá 1xâ 1xã 1xé
+%1xí 1xó 1xú 1xê 1xõ 1zá 1zâ 1zã 1zé 1zí 1zó 1zú 1zê 1zõ i3â i3ê i3ô}
+\hyphenation{hard-ware soft-ware}
 
 
 % Permitindo inserir acentos soltos, sem caracteres por meio
