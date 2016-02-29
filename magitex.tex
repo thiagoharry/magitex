@@ -309,7 +309,7 @@
      \kern-3pt\hrule width 2truein \kern 2.6pt % footnoterule
      {\unvbox\footins@}\fi}%
   % Rodapé:
-  \baselineskip24pt\lineskiplimit0pt\hbox to\hsize{\the\footline}}%
+  {\baselineskip24pt\lineskiplimit0pt\hbox to\hsize{\the\footline}}}%
   % Lógica do número de página
   \ifnum\pageno@<0 \global\advance\pageno@ by -1
   \else\global\advance\pageno@ by 1 \fi
@@ -1118,7 +1118,7 @@ Inexistente \fi}
                                 % no modo vertical
 
 % Definições de rodapé:
-\def\rodape#1{\global\advance\rodapenum@ by 1\footnote@{\sevenrm@\the\rodapenum@}{\alinhanormal\sevenrm@#1}}
+\def\rodape#1{\global\advance\rodapenum@ by 1\footnote@{\sevenrm@\the\rodapenum@}{\sevenrm@#1\hfill\hfill}}
 \def\footnote@#1{\let\@sf\vazio@ % parameter #2 (the text) is read later
   \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
   \ensuremath@{{}^{#1}}\@sf\vfootnote@{#1}}
