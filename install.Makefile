@@ -11,6 +11,7 @@ else
 	DEST=$(shell kpsewhich -var-value TEXMFHOME)
 endif
 TEX=$(shell which tex)
+PDFTEX=$(shell which pdftex)
 INSTALLDIR=$(dir ${TEX})
 
 install:
@@ -18,9 +19,11 @@ install:
 	install -D -t ${DEST}/web2c/pdftex/ magitex.fmt
 ifeq ($(WHO),$(SUPERUSER))
 	ln -sf ${TEX} ${INSTALLDIR}/magitex
+	ln -sf ${PDFTEX} ${INSTALLDIR}/pdfmagitex
 	mktexlsr
 else
 	ln -sf ${TEX} magitex
+	ln -sf ${PDFTEX} pdfmagitex
 	@echo
 	@echo "Executável 'magitex' gerado. Coloque-o onde poderá ser executado."
 endif
