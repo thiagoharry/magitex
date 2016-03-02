@@ -5,11 +5,7 @@ SUPERUSER=root # Usuário com permissão de instalar o pacote
 
 all: test_tex
 	@if [ -e .error ]; then	rm .error; \
-	else initex magitex.tex; fi
-test:
-	tex \&magitex teste.tex
-	dvipdf teste.dvi
-	xpdf teste.pdf
+	else initex "\\input magitex \\dump"; fi
 clean:
 	rm -rf *~ *.log *.pdf *.dvi *.fmt
 install: test_kpsewhich test_mktexlsr
