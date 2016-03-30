@@ -5,9 +5,14 @@ SUPERUSER=root # Usuário com permissão de instalar o pacote
 
 all: test_tex
 	@if [ -e .error ]; then	rm .error; \
-	else initex "\\input magitex \\dump"; fi
+	else initex "\\input magitex \\dump";\
+	initex \&magitex "\\input magitex-relatoria \\dump"; fi
 clean:
 	rm -rf *~ *.log *.pdf *.dvi *.fmt
+test:
+	tex \&magitex-relatoria teste.tex
+	dvipdf teste.dvi
+	xpdf teste.pdf
 install: test_kpsewhich test_mktexlsr
 	make --no-print-directory -j ${CORES} -f install.Makefile
 uninstall:

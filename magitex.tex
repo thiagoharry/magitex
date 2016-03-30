@@ -1136,6 +1136,9 @@ Inexistente \fi}
 \def\f@t#1{#1\@foot}
 \def\@foot{\relax\ifmmode\copy1\else\unhcopy1\fi\egroup}
 
+% Suporte a texto colorido:
+\def\cor#1#2{\special{color push rgb #1}#2\special{color pop}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                              CÓDIGO INICIAL                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
