@@ -33,5 +33,5 @@ Algumas melhorias em relação ao LaTeX:
 
 * Acentos funcionam e podem ser usados em modo matemático
 * Suporta de maneira imediata alguns caracteres UTF-8 não-suportados no LaTeX
-* Muito menos comandos, mais velocidade de compilação, menos verboso
+* Muito menos comandos, mais velocidade de compilação, menos verboso. Como no Plain TeX você pode começar direto a escrever, sem precisar de um preâmbulo.
 * Comandos e outros estilos de formatação são suportados no modo verbatim
