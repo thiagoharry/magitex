@@ -14,7 +14,7 @@ Ele é um formato bastante básico o qual servirá de construção para outros. 
 * Separação silábica em português
 * Comandos de formatação \negrito{...}, \italico{...}, \inclinado{...}, \sublinhado{...} e \monoespaco{...}
 * Comandos de alinhamento de texto \alinhaesquerda, \alinhadireita, \alinhacentro e \alinhanormal
-* Há também um \alinhaverbatim que é parecido com o ambiente verbatim do laTeX. A diferença é que aqui você pode usar comandos dentro dele. Caso queira escrever uma contrabarra no modo verbatim, use \\.
+* Há também um \alinhaverbatim que é parecido com o ambiente verbatim do laTeX. A diferença é que aqui você pode usar comandos dentro dele. Caso queira escrever uma contrabarra no modo verbatim, use \\\\.
 * Para alinhar não ignorando as quebras de linha do documento, usa-se \alinhaversoesquerdo \alinhaversodireito e \alinhaversocentro
 * Comandos de modo matemático idênticos aos do Plain TeX
 * Comandos de conversão maiúsculas/minúsculas: \maiusculo{...} e \minusculo{...}
@@ -26,7 +26,7 @@ Ele é um formato bastante básico o qual servirá de construção para outros. 
 * O cmando \rodape{...} deixa uma nota de rodapé numerada.
 * Quando em caso de emergência quisermos que seja feita a separação silábica de palavras com traço ("sub-desenvolvido") podemos escrevê-la com \= ("sub\=desenvolvido")
 * Pode-se escrever texto colorido como em \cor{1 0 0}{TEXTO VERMELHO} ou \cor{0.5 0.5 0.5}{TEXTO CINZA}.
-* O comando \\ escreve uma contrabarra.
+* O comando \\\\ escreve uma contrabarra.
 * O comando \fim, que é usado para finalizar o documento.
 
 Algumas melhorias em relação ao LaTeX:
