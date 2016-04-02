@@ -14,7 +14,7 @@ Ele é um formato bastante básico o qual servirá de construção para outros. 
 * Separação silábica em português
 * Comandos de formatação \negrito{...}, \italico{...}, \inclinado{...}, \sublinhado{...} e \monoespaco{...}
 * Comandos de alinhamento de texto \alinhaesquerda, \alinhadireita, \alinhacentro e \alinhanormal
-* Há também um \alinhaverbatim que é parecido com o ambiente verbatim do laTeX. A diferença é que aqui você pode usar comandos dentro dele. Caso queira escrever uma contrabarra no modo verbatim, use \\\\.
+* Há também um \alinhaverbatim que é parecido com o ambiente verbatim do LaTeX. A diferença é que aqui você pode usar comandos dentro dele. Caso queira escrever uma contrabarra no modo verbatim, use \\\\. Para sair do alinhamento verbatim, ou de qualquer outro alinhamento diferente, use \\alinhanormal.
 * Para alinhar não ignorando as quebras de linha do documento, usa-se \alinhaversoesquerdo \alinhaversodireito e \alinhaversocentro
 * Comandos de modo matemático idênticos aos do Plain TeX
 * Comandos de conversão maiúsculas/minúsculas: \maiusculo{...} e \minusculo{...}
