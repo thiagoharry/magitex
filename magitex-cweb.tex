@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    ATRIBUIÇÃO DE CÓDIGOS À CARACTERES                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\catcode`&=11
+\catcode`@=13
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    ATRIBUIÇÃO DE PARÂMETROS INTERNOS                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% ROTINA DE SAÍDA %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               REGISTRADORES                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\countdef\parte&=12 \parte&=0
+\countdef\capitulo&=13 \capitulo&=0
+\countdef\secao&=14 \secao&=0
+\countdef\subsecao&=15 \subsecao&=0
+\countdef\ss&=16 \ss&=0
+\countdef\sss&=17 \sss&=0
+\countdef\ssss&=18 \ssss&=0
+\countdef\sssss&=19 \sssss&=0
+\countdef\ssssss&=20 \ssssss&=0
+\countdef\sssssss&=21 \sssssss&=0
+\countdef\ssssssss&=22 \ssssssss&=0
+
+% Fontes
+\font\twentyone&=cmr17 scaled 1200  % Para @**
+\font\twenty&=cmr17 scaled 1176     % Para @  e @*0
+\font\nineteen&=cmr17 scaled 1118   % Para @*1
+\font\eighteen&=cmr17 scaled 1059   % Para @*2
+\font\seventeen&=cmr17              % Para @*3
+\font\sixteen&=cmr17 scaled 941     % Para @*4
+\font\fifteen&=cmr12 scaled 1250   % Para @*5
+\font\fourteen&=cmr12 scaled 1167  % Para @*6
+\font\thirteen&=cmr12 scaled 1083  % Para @*7
+\font\twelve&=cmr12              % Para @*8
+\font\eleven&=cmr12 scaled 917     % Para @*9
+\font\tenrm&=cmr10                  % Para voltar ao normal.
+
+% Definições
+\gdef\naparte&{0}
+\gdef\big&{0}
+{\catcode`.=13\gdef.{\if\naparte&1\vskip5mm\else\if\big&1\vskip5mm\else
+        \vskip3mm\fi\fi\tenrm&
+        \catcode`.=12\par\alinhanormal\if\naparte&1\vfill\quebra\fi
+        \gdef\naparte&{0}\gdef\big&{0}}}
+\def@*#1{\catcode`.=13
+        \if#1*\quebra\ \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
+              \twentyone&\advance\parte& by 1  % @**
+              \gdef\naparte&{1}\noindent Parte \the\parte&:\else
+        \if#10\vfil\quebra\twenty&\vskip5mm\advance\capitulo& by 1 % @*0
+             \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
+             \gdef\big&{1}\noindent Capítulo \the\capitulo&:\else
+         \if#11\nineteen&\vskip5mm\advance\secao& by 1 % @*1
+              \gdef\big&{1}\noindent\the\capitulo&.\the\secao&\ - \else
+         \if#12\eighteen&\vskip3mm\advance\subsecao& by 1 % @*2
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&-\else
+         \if#13\seventeen&\vskip3mm\advance\ss& by 1 % @*3
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&-\else
+         \if#14\sixteen&\vskip3mm\advance\sss& by 1 % @*4
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&.%
+               \the\sss&-\else
+         \if#15\fifteen&\vskip3mm\advance\ssss& by 1 % @*5
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&.%
+               \the\sss&.\the\ssss&-\else
+         \if#16\fourteen&\vskip3mm\advance\sssss& by 1 % @*6
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&.%
+               \the\sss&.\the\ssss&.\the\sssss&-\else
+         \if#17\thirteen&\vskip3mm\advance\ssssss& by 1 % @*6
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&.%
+               \the\sss&.\the\ssss&.\the\sssss&.\the\ssssss&-\else
+         \if#18\twelve&\vskip3mm\advance\sssssss& by 1 % @*6
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&.%
+               \the\sss&.\the\ssss&.\the\sssss&.\the\ssssss&.\the\sssssss&-\else
+         \if#19\eleven&\vskip3mm\advance\ssssssss& by 1 % @*6
+               \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&.%
+               \the\sss&.\the\ssss&.\the\sssss&.\the\ssssss&.\the\sssssss&.%
+               \the\ssssssss&-\else
+
+         \vfil\quebra\twenty&\vskip5mm\advance\capitulo& by 1 % @*
+         \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
+         \noindent Capítulo \the\capitulo&: #1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              CÓDIGO INICIAL                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\catcode`&=4 % @ não será mais usado em nomes de sequencias de controle
