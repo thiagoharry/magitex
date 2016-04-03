@@ -2,7 +2,7 @@
 %                    ATRIBUIÇÃO DE CÓDIGOS À CARACTERES                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \catcode`&=11
-\catcode`@=13
+\catcode`@=0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                    ATRIBUIÇÃO DE PARÂMETROS INTERNOS                        %
@@ -82,6 +82,9 @@
          \vfil\quebra\twenty&\vskip5mm\advance\capitulo& by 1 % @*
          \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
          \noindent Capítulo \the\capitulo&: #1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+
+% O @ agora precisa ser usado como comando
+\def@@{\char"40}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
