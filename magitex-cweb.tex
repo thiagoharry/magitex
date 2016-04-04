@@ -40,13 +40,14 @@
 \font\tenrm&=cmr10                  % Para voltar ao normal.
 
 % Definições
-\gdef\naparte&{0}
-\gdef\big&{0}
+\gdef\naparte&{0} % Estamos formatando o título de uma parte?
+\gdef\big&{0}     % Estamos formatando o título de um capítulo ou seção?
+\gdef\c&{0}       % Estamos formatando código C?
 {\catcode`.=13\gdef.{\if\naparte&1\vskip5mm\else\if\big&1\vskip5mm\else
         \vskip3mm\fi\fi\tenrm&
         \catcode`.=12\par\alinhanormal\if\naparte&1\vfill\quebra\fi
         \gdef\naparte&{0}\gdef\big&{0}}}
-\def@*#1{\catcode`.=13
+\def@*#1{\catcode`.=13\if\c&1@catcode`\=0@alinhanormal\fi
         \if#1*\quebra\ \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
               \twentyone&\advance\parte& by 1  % @**
               \gdef\naparte&{1}\noindent Parte \the\parte&:\else
@@ -85,6 +86,12 @@
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
+
+% A região de código C funcionará de modo semelhante ao modo
+% verbatim. A diferença é que o '\' passará a ser considerado
+% caractere comum. Desta forma, comandos só poderão ser digitados com
+% o '@.
+\def\alinhacodigo{\alinhaverbatim\gdef\c&{1}\catcode`\=12}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
