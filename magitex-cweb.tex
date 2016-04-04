@@ -47,7 +47,7 @@
         \vskip3mm\fi\fi\tenrm&
         \catcode`.=12\par\alinhanormal\if\naparte&1\vfill\quebra\fi
         \gdef\naparte&{0}\gdef\big&{0}}}
-\def@*#1{\catcode`.=13\if\c&1@catcode`\=0@alinhanormal\fi
+\def@*#1{\catcode`.=13\fimcodigo&
         \if#1*\quebra\ \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
               \twentyone&\advance\parte& by 1  % @**
               \gdef\naparte&{1}\noindent Parte \the\parte&:\else
@@ -84,14 +84,22 @@
          \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
          \noindent Capítulo \the\capitulo&: #1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
+% Esta macro é usada em todos os comandos conhecidos por encerrarem
+% código C:
+\def\fimcodigo&{\if\c&1@catcode`\=0@alinhanormal\linha\vskip1mm\fi}
+
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
+
+% Um espaço agora pode terminar a região de código C:
+\def\space&{ } 
+\def@ {\fimcodigo&\space&}
 
 % A região de código C funcionará de modo semelhante ao modo
 % verbatim. A diferença é que o '\' passará a ser considerado
 % caractere comum. Desta forma, comandos só poderão ser digitados com
 % o '@.
-\def\alinhacodigo{\alinhaverbatim\gdef\c&{1}\catcode`\=12}
+\def\alinhacodigo{\linha\alinhaverbatim\gdef\c&{1}\catcode`\=12}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
