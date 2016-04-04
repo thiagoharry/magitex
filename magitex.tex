@@ -606,54 +606,66 @@ i3o o3a o3e o3o r3r s3s u3a u3e u3o u3u}
   \global\let^^M\par} % Se ^^M aparecer em um \write
 % E para cancelarmos o \obeylines usamos:
 \def\dontobeylines@{\tenrm@\parfillskip=0pt plus 1fil\catcode`\^^M=5}
+% Obedece espaços:
+\def\obeyspaces@{\catcode`\ 13}
+\def\space@{\ }
+{\obeyspaces@\global\let =\space@}
 % Comandos de justificação e texto:
 \def\alinhaesquerda{\tenrm@\dontobeylines@\rightskip 0em plus 2em
      \leftskip 0pt \spaceskip.3333em\xspaceskip.5em\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
      \sfcode`\,1250
      \catcode`\{=1\catcode`\}=2\catcode`\$=3\catcode`\&=4\catcode`\#=6
-     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14}
+     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14
+     \catcode`\ =10}
 \def\alinhaversoesquerdo{\tenrm@\obeylines@\rightskip0pt plus 1fil\leftskip0pt%
      \xspaceskip0pt\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
      \sfcode`\,1250
      \catcode`\{=1\catcode`\}=2\catcode`\$=3\catcode`\&=4\catcode`\#=6
-     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14}
+     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14
+     \catcode`\ =10}
 \def\alinhadireita{\tenrm@\dontobeylines@\leftskip 0em plus 2em \rightskip0pt
      \spaceskip.3333em\xspaceskip.5em\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
      \sfcode`\,1250
      \catcode`\{=1\catcode`\}=2\catcode`\$=3\catcode`\&=4\catcode`\#=6
-     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14}
+     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14
+     \catcode`\ =10}
 \def\alinhaversodireito{\tenrm@\obeylines@\rightskip0pt\leftskip0pt plus 1fil%
      \xspaceskip0pt\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
      \sfcode`\,1250
      \catcode`\{=1\catcode`\}=2\catcode`\$=3\catcode`\&=4\catcode`\#=6
-     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14}
+     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14
+     \catcode`\ =10}
 \def\alinhacentro{\tenrm@\dontobeylines@\rightskip 0em plus 2em \leftskip 0em plus 2em%
                   \spaceskip.3333em \xspaceskip.5em\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
      \sfcode`\,1250
      \catcode`\{=1\catcode`\}=2\catcode`\$=3\catcode`\&=4\catcode`\#=6
-     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14}
+     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14
+     \catcode`\ =10}
 \def\alinhaversocentro{\tenrm@\obeylines@\rightskip0pt plus 1fil%
        \leftskip0pt plus 1 fil\xspaceskip0pt\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
      \sfcode`\,1250
      \catcode`\{=1\catcode`\}=2\catcode`\$=3\catcode`\&=4\catcode`\#=6
-     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14}
+     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14
+     \catcode`\ =10}
 \def\alinhaverbatim{\alinhaversoesquerdo\parindent=0pt\tentt@
      \sfcode`\.0 \sfcode`\?0 \sfcode`\!0 \sfcode`\:0 \sfcode`\;0
      \sfcode`\,0
      \catcode`\{=12\catcode`\}=12\catcode`\$=12\catcode`\&=12\catcode`\#=12
-     \catcode`\^=12\catcode`\_=12\catcode`\^^I=12\catcode`\~=12\catcode`\%=12}
+     \catcode`\^=12\catcode`\_=12\catcode`\^^I=12\catcode`\~=12\catcode`\%=12
+     \obeyspaces@}
 \def\alinhanormal{\tenrm@\dontobeylines@\leftskip0pt\rightskip0pt\spaceskip0pt%
                   \xspaceskip0pt\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
      \sfcode`\,1250
      \catcode`\{=1\catcode`\}=2\catcode`\$=3\catcode`\&=4\catcode`\#=6
-     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14}
+     \catcode`\^=7\catcode`\_=8\catcode`\^^I=10\catcode`\~=13\catcode`\%=14
+     \catcode`\ =10}
 
 % Magitex não interage com usuário via prompt em caso de erro:
 \nonstopmode
