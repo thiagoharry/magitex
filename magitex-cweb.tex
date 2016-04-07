@@ -86,7 +86,31 @@
 
 % Esta macro é usada em todos os comandos conhecidos por encerrarem
 % código C:
-\def\fimcodigo&{\if\c&1@catcode`\=0@alinhanormal\linha\vskip1mm\fi}
+\def\fimcodigo&{\fimsh&\if\c&1@catcode`\=0@alinhanormal\linha\vskip1mm\fi}
+
+\gdef\space&{\hskip 0.5em\sh&}
+
+% Ativa syntax hightlight:
+\def\iniciosh&{\everypar{\sh&}
+\gdef\sh&##1##2##3##4{
+  \if##1a
+    \if##2u
+      \if##3t
+        \if##4o
+          \cor{0 0.5 0.5}{auto}%
+        \else
+          aut\expandafter##4
+        \fi
+      \else
+        au\expandafter##3\expandafter##4%
+      \fi
+    \else
+      a\expandafter##2\expandafter##3\expandafter##4%
+    \fi
+  \else
+    \expandafter##1\expandafter##2\expandafter##3\expandafter##4%
+  \fi}}
+\def\fimsh&{\gdef\sh&{}\everypar{}}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
@@ -99,7 +123,7 @@
 % verbatim. A diferença é que o '\' passará a ser considerado
 % caractere comum. Desta forma, comandos só poderão ser digitados com
 % o '@.
-\def\alinhacodigo{\linha\alinhaverbatim\gdef\c&{1}\catcode`\=12}
+\def\alinhacodigo{\linha\alinhaverbatim\gdef\c&{1}\catcode`\=12\iniciosh&}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
