@@ -124,7 +124,19 @@
           br@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
         @fi
       @else
-        b@expandafter@expandafter@expandafter##2@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
+        @if##2o
+          @if##3o
+            @if##4l
+              @cor{0 0.5 0}{bool} %
+            @else
+              boo@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
+            @fi
+          @else
+            bo@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
+          @fi
+        @else
+          b@expandafter@expandafter@expandafter##2@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
+        @fi
       @fi
     @else
       @expandafter@expandafter@expandafter##1@expandafter@expandafter@expandafter##2@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
