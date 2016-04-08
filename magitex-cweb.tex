@@ -92,56 +92,7 @@
 
 % Ativa syntax hightlight:
 \def\iniciosh&{@everypar{@sh&}
-@gdef@sh&##1##2##3##4##5{
-  @if##1a
-    @if##2u
-      @if##3t
-        @if##4o
-          @cor{0 0.5 0.5}{auto} %
-        @else
-          aut@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-        @fi
-      @else
-        au@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-      @fi
-    @else
-      a@expandafter@expandafter@expandafter##2@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-    @fi
-  @else
-    @if##1b
-      @if##2r
-        @if##3e
-          @if##4a
-            @if##5k
-              @cor{0 0.5 0.5}{break}%
-            @else
-              brea@expandafter@expandafter@expandafter##5%
-            @fi
-          @else
-            bre@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-          @fi
-        @else
-          br@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-        @fi
-      @else
-        @if##2o
-          @if##3o
-            @if##4l
-              @cor{0 0.5 0}{bool} %
-            @else
-              boo@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-            @fi
-          @else
-            bo@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-          @fi
-        @else
-          b@expandafter@expandafter@expandafter##2@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-        @fi
-      @fi
-    @else
-      @expandafter@expandafter@expandafter##1@expandafter@expandafter@expandafter##2@expandafter@expandafter@expandafter##3@expandafter@expandafter@expandafter##4@expandafter@expandafter@expandafter##5%
-    @fi
-  @fi}}
+@gdef@sh&##1{##1}}
 \def\fimsh&{@gdef@sh&{}@everypar{}}
 
 % O @ agora precisa ser usado como comando
