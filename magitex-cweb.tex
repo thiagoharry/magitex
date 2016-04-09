@@ -118,7 +118,46 @@
   @if##1r%
     @expandafter@expandafter@expandafter@letrabr&%
   @else%
-    b##1%    
+    @if##1o%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrabo&%
+    @else%
+      b##1%
+    @fi%    
+  @fi%
+}%
+@gdef@letrabo&##1{% Temos 'bo'
+  @ifcat##1a%
+    @letraBO&##1%
+  @else%
+    bo@expandafter##1%    
+  @fi%
+}%
+@gdef@letraBO&##1{% Temos 'bo'+letra
+  @if##1o%
+    @expandafter@expandafter@expandafter@letraboo&%
+  @else%
+    bo##1%
+  @fi%
+}%
+@gdef@letraboo&##1{% Temos 'boo'
+  @ifcat##1a%
+    @letraBOO&##1%
+  @else%
+    boo@expandafter##1%    
+  @fi%
+}%
+@gdef@letraBOO&##1{% Temos 'boo'+letra
+  @if##1l%
+    @expandafter@expandafter@expandafter@letrabool&%
+  @else%
+    boo##1%
+  @fi%
+}%
+@gdef@letrabool&##1{% Temos 'bool'
+  @ifcat##1a%
+    bool##1%
+  @else%
+    @cor{0 0.5 0}{bool}@expandafter##1%
   @fi%
 }%
 @gdef@letrabr&##1{% Temos 'br'
