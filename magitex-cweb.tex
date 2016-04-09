@@ -99,10 +99,77 @@
   @else%
     @if##1a%
       @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letraa&%
-    @else
-      ##1%
+    @else%
+      @if##1b%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrab&%
+      @else%
+        ##1%
+      @fi%
     @fi%
   @fi}%
+@gdef@letrab&##1{% Temos a letra 'b'
+  @ifcat##1a%
+    @letraB&##1%
+  @else%
+    b@expandafter##1%    
+  @fi%
+}%
+@gdef@letraB&##1{% Temos a letra 'b'+letra
+  @if##1r%
+    @expandafter@expandafter@expandafter@letrabr&%
+  @else%
+    b##1%    
+  @fi%
+}%
+@gdef@letrabr&##1{% Temos 'br'
+  @ifcat##1a%
+    @letraBR&##1%
+  @else%
+    br@expandafter##1%    
+  @fi%
+}%
+@gdef@letraBR&##1{% Temos 'br'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letrabre&%
+  @else%
+    br##1%
+  @fi%
+}%
+@gdef@letrabre&##1{% Temos 'bre'
+  @ifcat##1a%
+    @letraBRE&##1%
+  @else%
+    bre@expandafter##1%    
+  @fi%
+}%
+@gdef@letraBRE&##1{% Temos 'bre'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letrabrea&%
+  @else%
+    bre##1%
+  @fi%
+}%
+@gdef@letrabrea&##1{% Temos 'brea'
+  @ifcat##1a%
+    @letraBREA&##1%
+  @else%
+    brea@expandafter##1%    
+  @fi%
+}%
+@gdef@letraBREA&##1{% Temos 'brea'+letra
+  @if##1k%
+    @expandafter@expandafter@expandafter@letrabreak&%
+  @else%
+    brea##1%
+  @fi%
+}%
+@gdef@letrabreak&##1{% Temos 'break'
+  @ifcat##1a%
+    break##1%
+  @else%
+    @cor{0 0.5 0.5}{break}@expandafter##1%    
+  @fi%
+}%
 @gdef@letraa&##1{% Temos a letra 'a'
   @ifcat##1a%
     @letraA&##1%
