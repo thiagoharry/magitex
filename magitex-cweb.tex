@@ -91,30 +91,50 @@
 \gdef\space&{\hskip 0.5em\sh&}
 
 % Ativa syntax hightlight:
-\def\iniciosh&{@everypar{@sh&}
+\def\iniciosh&{@everypar{@sh&}%
 @gdef@sh&##1{@ifcat##1a@letra&##1@else\expandafter##1@fi}
 @gdef@letra&##1{% Invocada quando temos a 1a letra de palavra
-  @if##1i
+  @if##1i%
     @expandafter@expandafter@expandafter@letrai&%
-  @else
+  @else%
     ##1%
-  @fi}
-@gdef@letrai&##1{% Invocada quando a 1a letra é if
-  @ifcat##1a
-    @if##1f
+  @fi}%
+@gdef@letrai&##1{% Invocada quando a 1a letra é i
+  @ifcat##1a%
+    @if##1f%
       @expandafter@expandafter@expandafter@letraif&%
-    @else
-      i##1%
-    @fi
-  @else
-    i@expandafter##1
-  @fi}
+    @else%
+      @if##1n%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrain&%
+      @else%
+        i##1%
+      @fi%
+    @fi%
+  @else%
+    i@expandafter##1%
+  @fi}%
 @gdef@letraif&##1{% Lemos um 'if' e checamos se palavra terminou
-  @ifcat##1a
-    if##1
-  @else
+  @ifcat##1a%
+    if##1%
+  @else%
     @cor{0 0.5 0.5}{if}@expandafter##1%
-}
+  @fi}%
+@gdef@letrain&##1{% Lemos um 'in'
+  @ifcat##1a%
+    @if##1t%
+      @expandafter@expandafter@expandafter@letraint&%
+    @else%
+      in##1%
+    @fi%
+  @else%
+    in@expandafter##1%
+  @fi}%
+@gdef@letraint&##1{% Lemos um 'int'
+  @ifcat##1a%
+    int##1%
+  @else%
+    @cor{0 0.5 0}{int}@expandafter##1%
+  @fi}%
 }
 \def\fimsh&{@gdef@sh&{}@everypar{}}
 
