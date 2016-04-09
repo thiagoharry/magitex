@@ -97,22 +97,78 @@
   @if##1i%
     @expandafter@expandafter@expandafter@letrai&%
   @else%
-    ##1%
+    @if##1a%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letraa&%
+    @else
+      ##1%
+    @fi%
   @fi}%
+@gdef@letraa&##1{% Temos a letra 'a'
+  @ifcat##1a%
+    @letraA&##1%
+  @else%
+    a@expandafter##1%    
+  @fi%
+}%
+@gdef@letraA&##1{% Temos a letra 'a'+letra
+  @if##1u%
+    @expandafter@expandafter@expandafter@letraau&%
+  @else%
+    a##1%
+  @fi%
+}%
+@gdef@letraau&##1{% Temos 'au'
+  @ifcat##1a%
+    @letraAU&##1%
+  @else%
+    au@expandafter##1%    
+  @fi%
+}%
+@gdef@letraAU&##1{% Temos 'au'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letraaut&%
+  @else%
+    au##1%
+  @fi%
+}%
+@gdef@letraaut&##1{% Temos 'aut'
+  @ifcat##1a%
+    @letraAUT&##1%
+  @else%
+    aut@expandafter##1%
+  @fi%
+}%
+@gdef@letraAUT&##1{% Temos 'aut+letra'
+  @if##1o%
+    @expandafter@expandafter@expandafter@letraauto&%
+  @else%
+    aut##1%
+  @fi%
+}%
+@gdef@letraauto&##1{% Temos 'auto'
+  @ifcat##1a%
+    auto##1%
+  @else%
+    @cor{0 0.5 0.5}{auto}@expandafter##1%
+  @fi%
+}%
 @gdef@letrai&##1{% Invocada quando a 1a letra é i
   @ifcat##1a%
-    @if##1f%
-      @expandafter@expandafter@expandafter@letraif&%
-    @else%
-      @if##1n%
-        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrain&%
-      @else%
-        i##1%
-      @fi%
-    @fi%
+    @letraI&##1%
   @else%
     i@expandafter##1%
   @fi}%
+@gdef@letraI&##1{% Invocada quando a 1a letra é i+letra
+  @if##1f%
+    @expandafter@expandafter@expandafter@letraif&%
+  @else%
+    @if##1n%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrain&%
+    @else%
+      i##1%
+    @fi%
+  @fi%
+}%
 @gdef@letraif&##1{% Lemos um 'if' e checamos se palavra terminou
   @ifcat##1a%
     if##1%
@@ -121,14 +177,17 @@
   @fi}%
 @gdef@letrain&##1{% Lemos um 'in'
   @ifcat##1a%
-    @if##1t%
-      @expandafter@expandafter@expandafter@letraint&%
-    @else%
-      in##1%
-    @fi%
+    @letraIN&##1%
   @else%
     in@expandafter##1%
   @fi}%
+@gdef@letraIN&##1{% Lemos um 'in'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letraint&%
+  @else%
+    in##1%
+  @fi%
+}%
 @gdef@letraint&##1{% Lemos um 'int'
   @ifcat##1a%
     int##1%
