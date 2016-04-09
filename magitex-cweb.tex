@@ -92,7 +92,30 @@
 
 % Ativa syntax hightlight:
 \def\iniciosh&{@everypar{@sh&}
-@gdef@sh&##1{##1}}
+@gdef@sh&##1{@ifcat##1a@letra&##1@else\expandafter##1@fi}
+@gdef@letra&##1{% Invocada quando temos a 1a letra de palavra
+  @if##1i
+    @expandafter@expandafter@expandafter@letrai&%
+  @else
+    ##1%
+  @fi}
+@gdef@letrai&##1{% Invocada quando a 1a letra é if
+  @ifcat##1a
+    @if##1f
+      @expandafter@expandafter@expandafter@letraif&%
+    @else
+      i##1%
+    @fi
+  @else
+    i@expandafter##1
+  @fi}
+@gdef@letraif&##1{% Lemos um 'if' e checamos se palavra terminou
+  @ifcat##1a
+    if##1
+  @else
+    @cor{0 0.5 0.5}{if}@expandafter##1%
+}
+}
 \def\fimsh&{@gdef@sh&{}@everypar{}}
 
 % O @ agora precisa ser usado como comando
