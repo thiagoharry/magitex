@@ -98,19 +98,135 @@
     @expandafter@expandafter@expandafter@letrai&%
   @else%
     @if##1a%
-      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letraa&%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letraa&%
     @else%
       @if##1b%
-        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrab&%
+        @expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@letrab&%
       @else%
         @if##1c%
-          @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrac&%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@letrac&%
         @else%
-          ##1%
+          @if##1d%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@expandafter@expandafter%
+            @expandafter@expandafter@expandafter@letrad&%
+          @else%
+            ##1%
+          @fi
         @fi%
       @fi%
     @fi%
   @fi}%
+@gdef@letrad&##1{% Temos 'd'
+  @ifcat##1a%
+    @letraD&##1%
+  @else%
+    d@expandafter##1%    
+  @fi%
+}%
+@gdef@letraD&##1{% Temos 'd'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letrade&%
+  @else%
+    d##1%
+  @fi%
+}%
+@gdef@letrade&##1{% Temos 'de'
+  @ifcat##1a%
+    @letraDE&##1%
+  @else%
+    de@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDE&##1{% Temos 'de'+letra
+  @if##1f%
+    @expandafter@expandafter@expandafter@letradef&%
+  @else%
+    de##1%
+  @fi%
+}%
+@gdef@letradef&##1{% Temos 'def'
+  @ifcat##1a%
+    @letraDEF&##1%
+  @else%
+    def@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDEF&##1{% Temos 'def'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letradefa&%
+  @else%
+    def##1%
+  @fi%
+}%
+@gdef@letradefa&##1{% Temos 'defa'
+  @ifcat##1a%
+    @letraDEFA&##1%
+  @else%
+    defa@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDEFA&##1{% Temos 'defa'+letra
+  @if##1u%
+    @expandafter@expandafter@expandafter@letradefau&%
+  @else%
+    defa##1%
+  @fi%
+}%
+@gdef@letradefau&##1{% Temos 'defau'
+  @ifcat##1a%
+    @letraDEFAU&##1%
+  @else%
+    defau@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDEFAU&##1{% Temos 'defau'+letra
+  @if##1l%
+    @expandafter@expandafter@expandafter@letradefaul&%
+  @else%
+    defau##1%
+  @fi%
+}%
+@gdef@letradefaul&##1{% Temos 'defaul'
+  @ifcat##1a%
+    @letraDEFAUL&##1%
+  @else%
+    defaul@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDEFAUL&##1{% Temos 'defaul'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letradefault&%
+  @else%
+    defaul##1%
+  @fi%
+}%
+@gdef@letradefault&##1{% Temos 'default'
+  @ifcat##1a%
+    default##1%
+  @else%
+    @cor{0 0.5 0.5}{default}@expandafter##1%    
+  @fi%
+}%
 @gdef@letrac&##1{% Temos a letra 'c'
   @ifcat##1a%
     @letraC&##1%
