@@ -239,10 +239,13 @@
     @expandafter@expandafter@expandafter@letraca&%
   @else%
     @if##1h%
-      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrach&%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrach&%
     @else%
       @if##1o%
-        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letraco&
+        @expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@letraco&%
       @else%
         c##1%
       @fi
@@ -260,7 +263,75 @@
   @if##1n%
     @expandafter@expandafter@expandafter@letracon&%
   @else%
-    co##1%
+    @if##1m%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letracom&%
+    @else%
+      co##1%
+    @fi
+  @fi%
+}%
+@gdef@letracom&##1{% Temos 'com'
+  @ifcat##1a%
+    @letraCOM&##1%
+  @else%
+    com@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCOM&##1{% Temos 'com'+letra
+  @if##1p%
+    @expandafter@expandafter@expandafter@letracomp&%
+  @else%
+    com##1%
+  @fi%
+}%
+@gdef@letracomp&##1{% Temos 'comp'
+  @ifcat##1a%
+    @letraCOMP&##1%
+  @else%
+    comp@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCOMP&##1{% Temos 'comp'+letra
+  @if##1l%
+    @expandafter@expandafter@expandafter@letracompl&%
+  @else%
+    comp##1%
+  @fi%
+}%
+@gdef@letracompl&##1{% Temos 'compl'
+  @ifcat##1a%
+    @letraCOMPL&##1%
+  @else%
+    compl@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCOMPL&##1{% Temos 'compl'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letracomple&%
+  @else%
+    compl##1%
+  @fi%
+}%
+@gdef@letracomple&##1{% Temos 'comple'
+  @ifcat##1a%
+    @letraCOMPLE&##1%
+  @else%
+    comple@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCOMPLE&##1{% Temos 'comple'+letra
+  @if##1x%
+    @expandafter@expandafter@expandafter@letracomplex&%
+  @else%
+    comple##1%
+  @fi%
+}%
+@gdef@letracomplex&##1{% Temos 'complex'
+  @ifcat##1a%
+    complex##1%
+  @else%
+    @cor{0 0.5 0}{complex}@expandafter##1%    
   @fi%
 }%
 @gdef@letracon&##1{% Temos 'con'
