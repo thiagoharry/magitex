@@ -122,7 +122,46 @@
   @if##1a%
     @expandafter@expandafter@expandafter@letraca&%
   @else%
-    c##1%
+    @if##1h%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrach&%
+    @else%
+      c##1%
+    @fi%
+  @fi%
+}%
+@gdef@letrach&##1{% Temos 'ch'
+  @ifcat##1a%
+    @letraCH&##1%
+  @else%
+    ch@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCH&##1{% Temos 'ch'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letracha&%
+  @else%
+    ch##1%
+  @fi%
+}%
+@gdef@letracha&##1{% Temos 'cha'
+  @ifcat##1a%
+    @letraCHA&##1%
+  @else%
+    cha@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCHA&##1{% Temos 'cha'+letra
+  @if##1r%
+    @expandafter@expandafter@expandafter@letrachar&%
+  @else%
+    cha##1%
+  @fi%
+}%
+@gdef@letrachar&##1{% Temos 'char'
+  @ifcat##1a%
+    char##1%
+  @else%
+    @cor{0 0.5 0}{char}@expandafter##1%
   @fi%
 }%
 @gdef@letraca&##1{% Temos a letra 'ca'
