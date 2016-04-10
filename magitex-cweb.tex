@@ -125,8 +125,61 @@
     @if##1h%
       @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrach&%
     @else%
-      c##1%
+      @if##1o%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letraco&
+      @else%
+        c##1%
+      @fi
     @fi%
+  @fi%
+}%
+@gdef@letraco&##1{% Temos 'co'
+  @ifcat##1a%
+    @letraCO&##1%
+  @else%
+    co@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCO&##1{% Temos 'co'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letracon&%
+  @else%
+    co##1%
+  @fi%
+}%
+@gdef@letracon&##1{% Temos 'con'
+  @ifcat##1a%
+    @letraCON&##1%
+  @else%
+    con@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCON&##1{% Temos 'con'+letra
+  @if##1s%
+    @expandafter@expandafter@expandafter@letracons&%
+  @else%
+    con##1%
+  @fi%
+}%
+@gdef@letracons&##1{% Temos 'cons'
+  @ifcat##1a%
+    @letraCONS&##1%
+  @else%
+    cons@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCONS&##1{% Temos 'cons'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letraconst&%
+  @else%
+    cons##1%
+  @fi%
+}%
+@gdef@letraconst&##1{% Temos 'const'
+  @ifcat##1a%
+    const##1%
+  @else%
+    @cor{0 0.5 0.5}{const}@expandafter##1%    
   @fi%
 }%
 @gdef@letrach&##1{% Temos 'ch'
