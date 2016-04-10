@@ -158,7 +158,11 @@
   @if##1s%
     @expandafter@expandafter@expandafter@letracons&%
   @else%
-    con##1%
+    @if##1t%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letracont&%
+    @else%
+      con##1%
+    @fi%
   @fi%
 }%
 @gdef@letracons&##1{% Temos 'cons'
@@ -173,6 +177,69 @@
     @expandafter@expandafter@expandafter@letraconst&%
   @else%
     cons##1%
+  @fi%
+}%
+@gdef@letracont&##1{% Temos 'cont'
+  @ifcat##1a%
+    @letraCONT&##1%
+  @else%
+    cont@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCONT&##1{% Temos 'cont'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letraconti&%
+  @else%
+    cont##1%
+  @fi%
+}%
+@gdef@letraconti&##1{% Temos 'conti'
+  @ifcat##1a%
+    @letraCONTI&##1%
+  @else%
+    conti@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCONTI&##1{% Temos 'conti'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letracontin&%
+  @else%
+    conti##1%
+  @fi%
+}%
+@gdef@letracontin&##1{% Temos 'contin'
+  @ifcat##1a%
+    @letraCONTIN&##1%
+  @else%
+    contin@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCONTIN&##1{% Temos 'contin'+letra
+  @if##1u%
+    @expandafter@expandafter@expandafter@letracontinu&%
+  @else%
+    contin##1%
+  @fi%
+}%
+@gdef@letracontinu&##1{% Temos 'continu'
+  @ifcat##1a%
+    @letraCONTINU&##1%
+  @else%
+    continu@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCONTINU&##1{% Temos 'continu'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letracontinue&%
+  @else%
+    continu##1%
+  @fi%
+}%
+@gdef@letracontinue&##1{% Temos 'continue'
+  @ifcat##1a%
+    continue##1%
+  @else%
+    @cor{0 0.5 0.5}{continue}@expandafter##1%    
   @fi%
 }%
 @gdef@letraconst&##1{% Temos 'const'
