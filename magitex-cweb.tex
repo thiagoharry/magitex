@@ -103,10 +103,63 @@
       @if##1b%
         @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrab&%
       @else%
-        ##1%
+        @if##1c%
+          @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrac&%
+        @else%
+          ##1%
+        @fi%
       @fi%
     @fi%
   @fi}%
+@gdef@letrac&##1{% Temos a letra 'c'
+  @ifcat##1a%
+    @letraC&##1%
+  @else%
+    c@expandafter##1%    
+  @fi%
+}%
+@gdef@letraC&##1{% Temos a letra 'c'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letraca&%
+  @else%
+    c##1%
+  @fi%
+}%
+@gdef@letraca&##1{% Temos a letra 'ca'
+  @ifcat##1a%
+    @letraCA&##1%
+  @else%
+    ca@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCA&##1{% Temos a letra 'ca'+letra
+  @if##1s%
+    @expandafter@expandafter@expandafter@letracas&%
+  @else%
+    ca##1%
+  @fi%
+}%
+@gdef@letracas&##1{% Temos 'cas'
+  @ifcat##1a%
+    @letraCAS&##1%
+  @else%
+    cas@expandafter##1%    
+  @fi%
+}%
+@gdef@letraCAS&##1{% Temos a letra 'cas'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letracase&%
+  @else%
+    cas##1%
+  @fi%
+}%
+@gdef@letracase&##1{% Temos 'case'
+  @ifcat##1a%
+    case##1%
+  @else%
+    @cor{0 0.5 0.5}{case}@expandafter##1%
+  @fi%
+}%
 @gdef@letrab&##1{% Temos a letra 'b'
   @ifcat##1a%
     @letraB&##1%
