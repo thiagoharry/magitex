@@ -147,7 +147,19 @@
   @if##1e%
     @expandafter@expandafter@expandafter@letrade&%
   @else%
-    d##1%
+    @if##1o%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrado&%
+    @else%
+      d##1%
+    @fi%
+  @fi%
+}%
+@gdef@letrado&##1{% Temos 'do'
+  @ifcat##1a%
+    do##1%
+  @else%
+    @cor{0 0.5 0.5}{do}@expandafter##1%    
   @fi%
 }%
 @gdef@letrade&##1{% Temos 'de'
