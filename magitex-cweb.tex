@@ -157,9 +157,65 @@
 }%
 @gdef@letrado&##1{% Temos 'do'
   @ifcat##1a%
-    do##1%
+    @letraDO&##1%
   @else%
     @cor{0 0.5 0.5}{do}@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDO&##1{% Temos 'do'+letra
+  @if##1u%
+    @expandafter@expandafter@expandafter@letradou&%
+  @else%
+    do##1%
+  @fi%
+}%
+@gdef@letradou&##1{% Temos 'dou'
+  @ifcat##1a%
+    @letraDOU&##1%
+  @else%
+    dou@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDOU&##1{% Temos 'dou'+letra
+  @if##1b%
+    @expandafter@expandafter@expandafter@letradoub&%
+  @else%
+    dou##1%
+  @fi%
+}%
+@gdef@letradoub&##1{% Temos 'doub'
+  @ifcat##1a%
+    @letraDOUB&##1%
+  @else%
+    doub@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDOUB&##1{% Temos 'doub'+letra
+  @if##1l%
+    @expandafter@expandafter@expandafter@letradoubl&%
+  @else%
+    doub##1%
+  @fi%
+}%
+@gdef@letradoubl&##1{% Temos 'doubl'
+  @ifcat##1a%
+    @letraDOUBL&##1%
+  @else%
+    doubl@expandafter##1%    
+  @fi%
+}%
+@gdef@letraDOUBL&##1{% Temos 'doubl'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letradouble&%
+  @else%
+    doubl##1%
+  @fi%
+}%
+@gdef@letradouble&##1{% Temos 'double'
+  @ifcat##1a%
+    double##1%
+  @else%
+    @cor{0 0.5 0}{double}@expandafter##1%    
   @fi%
 }%
 @gdef@letrade&##1{% Temos 'de'
