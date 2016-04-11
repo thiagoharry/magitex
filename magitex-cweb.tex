@@ -176,7 +176,47 @@
   @if##1l%
     @expandafter@expandafter@expandafter@letrael&%
   @else%
-    e##1%
+    @if##1n%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letraen&%
+    @else%
+      e##1%
+    @fi
+  @fi%
+}%
+@gdef@letraen&##1{% Temos 'en'
+  @ifcat##1a%
+    @letraEN&##1%
+  @else%
+    en@expandafter##1%    
+  @fi%
+}%
+@gdef@letraEN&##1{% Temos 'en'+letra
+  @if##1u%
+    @expandafter@expandafter@expandafter@letraenu&%
+  @else%
+    en##1%
+  @fi%
+}%
+@gdef@letraenu&##1{% Temos 'enu'
+  @ifcat##1a%
+    @letraENU&##1%
+  @else%
+    enu@expandafter##1%    
+  @fi%
+}%
+@gdef@letraENU&##1{% Temos 'enu'+letra
+  @if##1m%
+    @expandafter@expandafter@expandafter@letraenum&%
+  @else%
+    enu##1%
+  @fi%
+}%
+@gdef@letraenum&##1{% Temos 'enum'
+  @ifcat##1a%
+    enum##1%
+  @else%
+    @cor{0 0.5 0.5}{enum}@expandafter##1%    
   @fi%
 }%
 @gdef@letrael&##1{% Temos 'el'
