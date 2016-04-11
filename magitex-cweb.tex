@@ -231,7 +231,33 @@
   @if##1l%
     @expandafter@expandafter@expandafter@letrafl&%
   @else%
-    f##1%
+    @if##1o%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrafo&%
+    @else%
+      f##1%
+    @fi%
+  @fi%
+}%
+@gdef@letrafo&##1{% Temos 'fo'
+  @ifcat##1a%
+    @letraFO&##1%
+  @else%
+    fo@expandafter##1%    
+  @fi%
+}%
+@gdef@letraFO&##1{% Temos 'fo'+letra
+  @if##1r%
+    @expandafter@expandafter@expandafter@letrafor&%
+  @else%
+    fo##1%
+  @fi%
+}%
+@gdef@letrafor&##1{% Temos 'for'
+  @ifcat##1a%
+    for##1%
+  @else%
+    @cor{0 0.5 0.5}{for}@expandafter##1%    
   @fi%
 }%
 @gdef@letrafl&##1{% Temos 'fl'
