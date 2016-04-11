@@ -180,8 +180,77 @@
       @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
       @expandafter@letraen&%
     @else%
-      e##1%
+      @if##1x%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@letraex&%
+      @else%
+        e##1%
+      @fi
     @fi
+  @fi%
+}%
+@gdef@letraex&##1{% Temos 'ex'
+  @ifcat##1a%
+    @letraEX&##1%
+  @else%
+    ex@expandafter##1%    
+  @fi%
+}%
+@gdef@letraEX&##1{% Temos 'ex'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letraext&%
+  @else%
+    ex##1%
+  @fi%
+}%
+@gdef@letraext&##1{% Temos 'ext'
+  @ifcat##1a%
+    @letraEXT&##1%
+  @else%
+    ext@expandafter##1%    
+  @fi%
+}%
+@gdef@letraEXT&##1{% Temos 'ext'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letraexte&%
+  @else%
+    ext##1%
+  @fi%
+}%
+@gdef@letraexte&##1{% Temos 'exte'
+  @ifcat##1a%
+    @letraEXTE&##1%
+  @else%
+    exte@expandafter##1%    
+  @fi%
+}%
+@gdef@letraEXTE&##1{% Temos 'exte'+letra
+  @if##1r%
+    @expandafter@expandafter@expandafter@letraexter&%
+  @else%
+    exte##1%
+  @fi%
+}%
+@gdef@letraexter&##1{% Temos 'exter'
+  @ifcat##1a%
+    @letraEXTER&##1%
+  @else%
+    exter@expandafter##1%    
+  @fi%
+}%
+@gdef@letraEXTER&##1{% Temos 'exter'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letraextern&%
+  @else%
+    exter##1%
+  @fi%
+}%
+@gdef@letraextern&##1{% Temos 'extern'
+  @ifcat##1a%
+    extern##1%
+  @else%
+    @cor{0 0.5 0.5}{extern}@expandafter##1%    
   @fi%
 }%
 @gdef@letraen&##1{% Temos 'en'
