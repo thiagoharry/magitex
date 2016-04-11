@@ -157,14 +157,132 @@
               @expandafter@expandafter@expandafter@expandafter@expandafter%
               @expandafter@expandafter@expandafter@expandafter@expandafter%
               @expandafter@expandafter@letrae&%
-            @else
-              ##1%
+            @else%
+              @if##1f%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @expandafter@expandafter@expandafter@expandafter@expandafter%
+                @letraf&%
+              @else
+                ##1%
+              @fi
             @fi
           @fi
         @fi%
       @fi%
     @fi%
   @fi}%
+@gdef@letraf&##1{% Temos 'f'
+  @ifcat##1a%
+    @letraF&##1%
+  @else%
+    f@expandafter##1%    
+  @fi%
+}%
+@gdef@letraF&##1{% Temos 'f'+letra
+  @if##1l%
+    @expandafter@expandafter@expandafter@letrafl&%
+  @else%
+    f##1%
+  @fi%
+}%
+@gdef@letrafl&##1{% Temos 'fl'
+  @ifcat##1a%
+    @letraFL&##1%
+  @else%
+    fl@expandafter##1%    
+  @fi%
+}%
+@gdef@letraFL&##1{% Temos 'fl'+letra
+  @if##1o%
+    @expandafter@expandafter@expandafter@letraflo&%
+  @else%
+    fl##1%
+  @fi%
+}%
+@gdef@letraflo&##1{% Temos 'flo'
+  @ifcat##1a%
+    @letraFLO&##1%
+  @else%
+    flo@expandafter##1%    
+  @fi%
+}%
+@gdef@letraFLO&##1{% Temos 'flo'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letrafloa&%
+  @else%
+    flo##1%
+  @fi%
+}%
+@gdef@letrafloa&##1{% Temos 'floa'
+  @ifcat##1a%
+    @letraFLOA&##1%
+  @else%
+    floa@expandafter##1%    
+  @fi%
+}%
+@gdef@letraFLOA&##1{% Temos 'floa'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letrafloat&%
+  @else%
+    floa##1%
+  @fi%
+}%
+@gdef@letrafloat&##1{% Temos 'float'
+  @ifcat##1a%
+    float##1%
+  @else%
+    @cor{0 0.5 0}{float}@expandafter##1%    
+  @fi%
+}%
 @gdef@letrae&##1{% Temos 'e'
   @ifcat##1a%
     @letraE&##1%
