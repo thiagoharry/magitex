@@ -1244,9 +1244,59 @@
   @if##1t%
     @expandafter@expandafter@expandafter@letraint&%
   @else%
-    in##1%
+    @if##1l%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrainl&%
+    @else%
+      in##1%
+    @fi
   @fi%
 }%
+@gdef@letrainl&##1{% Lemos um 'inl'
+  @ifcat##1a%
+    @letraINL&##1%
+  @else%
+    inl@expandafter##1%
+  @fi}%
+@gdef@letraINL&##1{% Lemos um 'inl'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letrainli&%
+  @else%
+    inl##1%
+  @fi%
+}%
+@gdef@letrainli&##1{% Lemos um 'inli'
+  @ifcat##1a%
+    @letraINLI&##1%
+  @else%
+    inli@expandafter##1%
+  @fi}%
+@gdef@letraINLI&##1{% Lemos um 'inli'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letrainlin&%
+  @else%
+    inli##1%
+  @fi%
+}%
+@gdef@letrainlin&##1{% Lemos um 'inlin'
+  @ifcat##1a%
+    @letraINLIN&##1%
+  @else%
+    inlin@expandafter##1%
+  @fi}%
+@gdef@letraINLIN&##1{% Lemos um 'inlin'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letrainline&%
+  @else%
+    inlin##1%
+  @fi%
+}%
+@gdef@letrainline&##1{% Lemos um 'inline'
+  @ifcat##1a%
+    inline##1%
+  @else%
+    @cor{0 0.5 0.5}{inline}@expandafter##1%
+  @fi}%
 @gdef@letraint&##1{% Lemos um 'int'
   @ifcat##1a%
     int##1%
