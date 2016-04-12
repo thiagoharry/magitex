@@ -986,7 +986,89 @@
   @if##1g%
     @expandafter@expandafter@expandafter@letrareg&%
   @else%
-    re##1%
+    @if##1s%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrares&%
+    @else%
+      re##1%
+    @fi
+  @fi%
+}%
+@gdef@letrares&##1{% Temos 'res'
+  @ifcat##1a%
+    @letraRES&##1%
+  @else%
+    res@expandafter##1%    
+  @fi%
+}%
+@gdef@letraRES&##1{% Temos 'res'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letrarest&%
+  @else%
+    res##1%
+  @fi%
+}%
+@gdef@letrarest&##1{% Temos 'rest'
+  @ifcat##1a%
+    @letraREST&##1%
+  @else%
+    rest@expandafter##1%    
+  @fi%
+}%
+@gdef@letraREST&##1{% Temos 'rest'+letra
+  @if##1r%
+    @expandafter@expandafter@expandafter@letrarestr&%
+  @else%
+    rest##1%
+  @fi%
+}%
+@gdef@letrarestr&##1{% Temos 'restr'
+  @ifcat##1a%
+    @letraRESTR&##1%
+  @else%
+    restr@expandafter##1%    
+  @fi%
+}%
+@gdef@letraRESTR&##1{% Temos 'restr'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letrarestri&%
+  @else%
+    restr##1%
+  @fi%
+}%
+@gdef@letrarestri&##1{% Temos 'restri'
+  @ifcat##1a%
+    @letraRESTRI&##1%
+  @else%
+    restri@expandafter##1%    
+  @fi%
+}%
+@gdef@letraRESTRI&##1{% Temos 'restri'+letra
+  @if##1c%
+    @expandafter@expandafter@expandafter@letrarestric&%
+  @else%
+    restri##1%
+  @fi%
+}%
+@gdef@letrarestric&##1{% Temos 'restric'
+  @ifcat##1a%
+    @letraRESTRIC&##1%
+  @else%
+    restric@expandafter##1%    
+  @fi%
+}%
+@gdef@letraRESTRIC&##1{% Temos 'restric'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letrarestrict&%
+  @else%
+    restric##1%
+  @fi%
+}%
+@gdef@letrarestrict&##1{% Temos 'restrict'
+  @ifcat##1a%
+    restrict&##1%
+  @else%
+    @cor{0 0.5 0.5}{restrict}@expandafter##1%    
   @fi%
 }%
 @gdef@letrareg&##1{% Temos 'reg'
