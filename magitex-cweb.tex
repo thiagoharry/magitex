@@ -1814,7 +1814,61 @@
   @if##1g%
     @expandafter@expandafter@expandafter@letrasig&%
   @else%
-    si##1%
+    @if##1z%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrasiz&%
+    @else%
+      si##1%
+    @fi%
+  @fi%
+}%
+@gdef@letrasiz&##1{% Temos 'siz'
+  @ifcat##1a%
+    @letraSIZ&##1%
+  @else%
+    siz@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSIZ&##1{% Temos 'siz'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letrasize&%
+  @else%
+    siz##1%
+  @fi%
+}%
+@gdef@letrasize&##1{% Temos 'size'
+  @ifcat##1a%
+    @letraSIZE&##1%
+  @else%
+    size@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSIZE&##1{% Temos 'size'+letra
+  @if##1o%
+    @expandafter@expandafter@expandafter@letrasizeo&%
+  @else%
+    size##1%
+  @fi%
+}%
+@gdef@letrasizeo&##1{% Temos 'sizeo'
+  @ifcat##1a%
+    @letraSIZEO&##1%
+  @else%
+    sizeo@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSIZEO&##1{% Temos 'sizeo'+letra
+  @if##1f%
+    @expandafter@expandafter@expandafter@letrasizeof&%
+  @else%
+    sizeo##1%
+  @fi%
+}%
+@gdef@letrasizeof&##1{% Temos 'sizeof'
+  @ifcat##1a%
+    sizeof##1%
+  @else%
+    @cor{0 0.5 0.5}{sizeof}@expandafter##1%    
   @fi%
 }%
 @gdef@letrasig&##1{% Temos 'sig'
