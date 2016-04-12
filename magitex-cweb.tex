@@ -1795,7 +1795,75 @@
   @if##1h%
     @expandafter@expandafter@expandafter@letrash&%
   @else%
-    s##1%
+    @if##1i%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrasi&%
+    @else%
+      s##1%
+    @fi%
+  @fi%
+}%
+@gdef@letrasi&##1{% Temos 'si'
+  @ifcat##1a%
+    @letraSI&##1%
+  @else%
+    si@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSI&##1{% Temos 'si'+letra
+  @if##1g%
+    @expandafter@expandafter@expandafter@letrasig&%
+  @else%
+    si##1%
+  @fi%
+}%
+@gdef@letrasig&##1{% Temos 'sig'
+  @ifcat##1a%
+    @letraSIG&##1%
+  @else%
+    sig@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSIG&##1{% Temos 'sig'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letrasign&%
+  @else%
+    sig##1%
+  @fi%
+}%
+@gdef@letrasign&##1{% Temos 'sign'
+  @ifcat##1a%
+    @letraSIGN&##1%
+  @else%
+    sign@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSIGN&##1{% Temos 'sign'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letrasigne&%
+  @else%
+    sign##1%
+  @fi%
+}%
+@gdef@letrasigne&##1{% Temos 'signe'
+  @ifcat##1a%
+    @letraSIGNE&##1%
+  @else%
+    signe@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSIGNE&##1{% Temos 'signe'+letra
+  @if##1d%
+    @expandafter@expandafter@expandafter@letrasigned&%
+  @else%
+    signe##1%
+  @fi%
+}%
+@gdef@letrasigned&##1{% Temos 'signed'
+  @ifcat##1a%
+    signed##1%
+  @else%
+    @cor{0 0.5 0}{signed}@expandafter##1%    
   @fi%
 }%
 @gdef@letrash&##1{% Temos 'sh'
