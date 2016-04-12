@@ -1799,8 +1799,77 @@
       @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
       @expandafter@letrasi&%
     @else%
-      s##1%
+      @if##1t%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@letrast&%
+      @else%
+        s##1%
+      @fi%
     @fi%
+  @fi%
+}%
+@gdef@letrast&##1{% Temos 'st'
+  @ifcat##1a%
+    @letraST&##1%
+  @else%
+    st@expandafter##1%    
+  @fi%
+}%
+@gdef@letraST&##1{% Temos 'st'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letrasta&%
+  @else%
+    st##1%
+  @fi%
+}%
+@gdef@letrasta&##1{% Temos 'sta'
+  @ifcat##1a%
+    @letraSTA&##1%
+  @else%
+    sta@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSTA&##1{% Temos 'sta'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letrastat&%
+  @else%
+    sta##1%
+  @fi%
+}%
+@gdef@letrastat&##1{% Temos 'stat'
+  @ifcat##1a%
+    @letraSTAT&##1%
+  @else%
+    stat@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSTAT&##1{% Temos 'stat'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letrastati&%
+  @else%
+    stat##1%
+  @fi%
+}%
+@gdef@letrastati&##1{% Temos 'stati'
+  @ifcat##1a%
+    @letraSTATI&##1%
+  @else%
+    stati@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSTATI&##1{% Temos 'stati'+letra
+  @if##1c%
+    @expandafter@expandafter@expandafter@letrastatic&%
+  @else%
+    stati##1%
+  @fi%
+}%
+@gdef@letrastatic&##1{% Temos 'static'
+  @ifcat##1a%
+    static##1%
+  @else%
+    @cor{0 0.5 0.5}{static}@expandafter##1%    
   @fi%
 }%
 @gdef@letrasi&##1{% Temos 'si'
