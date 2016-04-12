@@ -990,8 +990,63 @@
       @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
       @expandafter@letrares&%
     @else%
-      re##1%
+      @if##1t%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@letraret&
+      @else%
+        re##1%
+      @fi%
     @fi
+  @fi%
+}%
+@gdef@letraret&##1{% Temos 'ret'
+  @ifcat##1a%
+    @letraRET&##1%
+  @else%
+    ret@expandafter##1%    
+  @fi%
+}%
+@gdef@letraRET&##1{% Temos 'ret'+letra
+  @if##1u%
+    @expandafter@expandafter@expandafter@letraretu&%
+  @else%
+    ret##1%
+  @fi%
+}%
+@gdef@letraretu&##1{% Temos 'retu'
+  @ifcat##1a%
+    @letraRETU&##1%
+  @else%
+    retu@expandafter##1%    
+  @fi%
+}%
+@gdef@letraRETU&##1{% Temos 'retu'+letra
+  @if##1r%
+    @expandafter@expandafter@expandafter@letraretur&%
+  @else%
+    retu##1%
+  @fi%
+}%
+@gdef@letraretur&##1{% Temos 'retur'
+  @ifcat##1a%
+    @letraRETUR&##1%
+  @else%
+    retur@expandafter##1%    
+  @fi%
+}%
+@gdef@letraRETUR&##1{% Temos 'retur'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letrareturn&%
+  @else%
+    retur##1%
+  @fi%
+}%
+@gdef@letrareturn&##1{% Temos 'retur'
+  @ifcat##1a%
+    return##1%
+  @else%
+    @cor{0 0.5 0.5}{return}@expandafter##1%    
   @fi%
 }%
 @gdef@letrares&##1{% Temos 'res'
