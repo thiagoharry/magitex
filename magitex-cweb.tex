@@ -1804,9 +1804,82 @@
         @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
         @expandafter@expandafter@expandafter@letrast&%
       @else%
-        s##1%
+        @if##1w%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@expandafter@expandafter@expandafter@expandafter%
+          @expandafter@letrasw&%
+        @else%
+          s##1%
+        @fi
       @fi%
     @fi%
+  @fi%
+}%
+@gdef@letrasw&##1{% Temos 'sw'
+  @ifcat##1a%
+    @letraSW&##1%
+  @else%
+    sw@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSW&##1{% Temos 'sw'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letraswi&%
+  @else%
+    sw##1%
+  @fi%
+}%
+@gdef@letraswi&##1{% Temos 'swi'
+  @ifcat##1a%
+    @letraSWI&##1%
+  @else%
+    swi@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSWI&##1{% Temos 'sw'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letraswit&%
+  @else%
+    swi##1%
+  @fi%
+}%
+@gdef@letraswit&##1{% Temos 'swit'
+  @ifcat##1a%
+    @letraSWIT&##1%
+  @else%
+    swit@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSWIT&##1{% Temos 'sw'+letra
+  @if##1c%
+    @expandafter@expandafter@expandafter@letraswitc&%
+  @else%
+    swit##1%
+  @fi%
+}%
+@gdef@letraswitc&##1{% Temos 'switc'
+  @ifcat##1a%
+    @letraSWITC&##1%
+  @else%
+    switc@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSWITC&##1{% Temos 'sw'+letra
+  @if##1h%
+    @expandafter@expandafter@expandafter@letraswitch&%
+  @else%
+    switc##1%
+  @fi%
+}%
+@gdef@letraswitch&##1{% Temos 'switch'
+  @ifcat##1a%
+    switch##1%
+  @else%
+    @cor{0 0.5 0.5}{switch}@expandafter##1%    
   @fi%
 }%
 @gdef@letrast&##1{% Temos 'st'
