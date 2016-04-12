@@ -1820,7 +1820,61 @@
   @if##1a%
     @expandafter@expandafter@expandafter@letrasta&%
   @else%
-    st##1%
+    @if##1r%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrastr&%
+    @else%
+      st##1%
+    @fi%
+  @fi%
+}%
+@gdef@letrastr&##1{% Temos 'str'
+  @ifcat##1a%
+    @letraSTR&##1%
+  @else%
+    str@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSTR&##1{% Temos 'str'+letra
+  @if##1u%
+    @expandafter@expandafter@expandafter@letrastru&%
+  @else%
+    str##1%
+  @fi%
+}%
+@gdef@letrastru&##1{% Temos 'stru'
+  @ifcat##1a%
+    @letraSTRU&##1%
+  @else%
+    stru@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSTRU&##1{% Temos 'stru'+letra
+  @if##1c%
+    @expandafter@expandafter@expandafter@letrastruc&%
+  @else%
+    stru##1%
+  @fi%
+}%
+@gdef@letrastruc&##1{% Temos 'struc'
+  @ifcat##1a%
+    @letraSTRUC&##1%
+  @else%
+    struc@expandafter##1%    
+  @fi%
+}%
+@gdef@letraSTRUC&##1{% Temos 'struc'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letrastruct&%
+  @else%
+    struc##1%
+  @fi%
+}%
+@gdef@letrastruct&##1{% Temos 'struct'
+  @ifcat##1a%
+    struct##1%
+  @else%
+    @cor{0 0.5 0}{struct}@expandafter##1%    
   @fi%
 }%
 @gdef@letrasta&##1{% Temos 'sta'
