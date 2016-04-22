@@ -195,7 +195,89 @@
   @if##1i%
     @expandafter@expandafter@expandafter@letravoi&%
   @else%
-    vo##1%
+    @if##1l%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letravol&%
+    @else%
+      vo##1%
+    @fi%
+  @fi%
+}%
+@gdef@letravol&##1{% Temos 'vol'
+  @ifcat##1a%
+    @letraVOL&##1%
+  @else%
+    vol@expandafter##1%    
+  @fi%
+}%
+@gdef@letraVOL&##1{% Temos 'vol'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letravola&%
+  @else%
+    vol##1%
+  @fi%
+}%
+@gdef@letravola&##1{% Temos 'vola'
+  @ifcat##1a%
+    @letraVOLA&##1%
+  @else%
+    vola@expandafter##1%    
+  @fi%
+}%
+@gdef@letraVOLA&##1{% Temos 'vola'+letra
+  @if##1t%
+    @expandafter@expandafter@expandafter@letravolat&%
+  @else%
+    vola##1%
+  @fi%
+}%
+@gdef@letravolat&##1{% Temos 'volat'
+  @ifcat##1a%
+    @letraVOLAT&##1%
+  @else%
+    volat@expandafter##1%    
+  @fi%
+}%
+@gdef@letraVOLAT&##1{% Temos 'volat'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letravolati&%
+  @else%
+    volat##1%
+  @fi%
+}%
+@gdef@letravolati&##1{% Temos 'volati'
+  @ifcat##1a%
+    @letraVOLATI&##1%
+  @else%
+    volati@expandafter##1%    
+  @fi%
+}%
+@gdef@letraVOLATI&##1{% Temos 'volati'+letra
+  @if##1l%
+    @expandafter@expandafter@expandafter@letravolatil&%
+  @else%
+    volati##1%
+  @fi%
+}%
+@gdef@letravolatil&##1{% Temos 'volatil'
+  @ifcat##1a%
+    @letraVOLATIL&##1%
+  @else%
+    volatil@expandafter##1%    
+  @fi%
+}%
+@gdef@letraVOLATIL&##1{% Temos 'volatil'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letravolatile&%
+  @else%
+    volatil##1%
+  @fi%
+}%
+@gdef@letravolatile&##1{% Temos 'volatile'
+  @ifcat##1a%
+    volatile##1%
+  @else%
+    @cor{0 0.5 0.5}{volatile}@expandafter##1%    
   @fi%
 }%
 @gdef@letravoi&##1{% Temos 'voi'
