@@ -191,7 +191,12 @@
   @if##1i%
     @expandafter@expandafter@expandafter@letrauni&%
   @else%
-    un##1%
+    @if##1s%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrauns&%
+    @else%
+      un##1%
+    @fi%
   @fi%
 }%
 @gdef@letrauni&##1{% Temos 'uni'
@@ -206,6 +211,83 @@
     @expandafter@expandafter@expandafter@letraunio&%
   @else%
     uni##1%
+  @fi%
+}%
+@gdef@letrauns&##1{% Temos 'uns'
+  @ifcat##1a%
+    @letraUNS&##1%
+  @else%
+    uns@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUNS&##1{% Temos 'uns'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letraunsi&%
+  @else%
+    uns##1%
+  @fi%
+}%
+@gdef@letraunsi&##1{% Temos 'unsi'
+  @ifcat##1a%
+    @letraUNSI&##1%
+  @else%
+    unsi@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUNSI&##1{% Temos 'unsi'+letra
+  @if##1g%
+    @expandafter@expandafter@expandafter@letraunsig&%
+  @else%
+    unsi##1%
+  @fi%
+}%
+@gdef@letraunsig&##1{% Temos 'unsig'
+  @ifcat##1a%
+    @letraUNSIG&##1%
+  @else%
+    unsig@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUNSIG&##1{% Temos 'unsig'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letraunsign&%
+  @else%
+    unsig##1%
+  @fi%
+}%
+@gdef@letraunsign&##1{% Temos 'unsign'
+  @ifcat##1a%
+    @letraUNSIGN&##1%
+  @else%
+    unsign@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUNSIGN&##1{% Temos 'unsign'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letraunsigne&%
+  @else%
+    unsign##1%
+  @fi%
+}%
+@gdef@letraunsigne&##1{% Temos 'unsigne'
+  @ifcat##1a%
+    @letraUNSIGNE&##1%
+  @else%
+    unsigne@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUNSIGNE&##1{% Temos 'unsigne'+letra
+  @if##1d%
+    @expandafter@expandafter@expandafter@letraunsigned&%
+  @else%
+    unsigne##1%
+  @fi%
+}%
+@gdef@letraunsigned&##1{% Temos 'unsigned'
+  @ifcat##1a%
+    unsigned##1%
+  @else%
+    @cor{0 0.5 0}{unsigned}@expandafter##1%    
   @fi%
 }%
 @gdef@letraunio&##1{% Temos 'unio'
