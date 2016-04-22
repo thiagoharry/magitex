@@ -135,7 +135,11 @@
                         @if##1t%
                           @let@next&@letrat&%
                         @else%
-                          ##1@let@next&@relax%
+                          @if##1u%
+                            @let@next&@letrau&
+                          @else%
+                            ##1@let@next&@relax%
+                          @fi%
                         @fi%
                       @fi
                     @fi
@@ -160,6 +164,69 @@
     @expandafter@expandafter@expandafter@letrago&%
   @else%
     g##1%
+  @fi%
+}%
+@gdef@letrau&##1{% Temos 'u'
+  @ifcat##1a%
+    @letraU&##1%
+  @else%
+    u@expandafter##1%    
+  @fi%
+}%
+@gdef@letraU&##1{% Temos 'u'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letraun&%
+  @else%
+    u##1%
+  @fi%
+}%
+@gdef@letraun&##1{% Temos 'un'
+  @ifcat##1a%
+    @letraUN&##1%
+  @else%
+    un@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUN&##1{% Temos 'un'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letrauni&%
+  @else%
+    un##1%
+  @fi%
+}%
+@gdef@letrauni&##1{% Temos 'uni'
+  @ifcat##1a%
+    @letraUNI&##1%
+  @else%
+    uni@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUNI&##1{% Temos 'uni'+letra
+  @if##1o%
+    @expandafter@expandafter@expandafter@letraunio&%
+  @else%
+    uni##1%
+  @fi%
+}%
+@gdef@letraunio&##1{% Temos 'unio'
+  @ifcat##1a%
+    @letraUNIO&##1%
+  @else%
+    unio@expandafter##1%    
+  @fi%
+}%
+@gdef@letraUNIO&##1{% Temos 'unio'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letraunion&%
+  @else%
+    unio##1%
+  @fi%
+}%
+@gdef@letraunion&##1{% Temos 'union'
+  @ifcat##1a%
+    union##1%
+  @else%
+    @cor{0 0.5 0}{union}@expandafter##1%    
   @fi%
 }%
 @gdef@letrat&##1{% Temos 't'
