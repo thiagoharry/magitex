@@ -136,9 +136,13 @@
                           @let@next&@letrat&%
                         @else%
                           @if##1u%
-                            @let@next&@letrau&
+                            @let@next&@letrau&%
                           @else%
-                            ##1@let@next&@relax%
+                            @if##1v%
+                              @let@next&@letrav&%
+                            @else%
+                              ##1@let@next&@relax%
+                            @fi%
                           @fi%
                         @fi%
                       @fi
@@ -164,6 +168,55 @@
     @expandafter@expandafter@expandafter@letrago&%
   @else%
     g##1%
+  @fi%
+}%
+@gdef@letrav&##1{% Temos 'v'
+  @ifcat##1a%
+    @letraV&##1%
+  @else%
+    v@expandafter##1%    
+  @fi%
+}%
+@gdef@letraV&##1{% Temos 'v'+letra
+  @if##1o%
+    @expandafter@expandafter@expandafter@letravo&%
+  @else%
+    v##1%
+  @fi%
+}%
+@gdef@letravo&##1{% Temos 'vo'
+  @ifcat##1a%
+    @letraVO&##1%
+  @else%
+    vo@expandafter##1%    
+  @fi%
+}%
+@gdef@letraVO&##1{% Temos 'vo'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letravoi&%
+  @else%
+    vo##1%
+  @fi%
+}%
+@gdef@letravoi&##1{% Temos 'voi'
+  @ifcat##1a%
+    @letraVOI&##1%
+  @else%
+    voi@expandafter##1%    
+  @fi%
+}%
+@gdef@letraVOI&##1{% Temos 'voi'+letra
+  @if##1d%
+    @expandafter@expandafter@expandafter@letravoid&%
+  @else%
+    voi##1%
+  @fi%
+}%
+@gdef@letravoid&##1{% Temos 'void'
+  @ifcat##1a%
+    void##1%
+  @else%
+    @cor{0 0.5 0}{void}@expandafter##1%    
   @fi%
 }%
 @gdef@letrau&##1{% Temos 'u'
