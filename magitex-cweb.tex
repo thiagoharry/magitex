@@ -141,7 +141,11 @@
                             @if##1v%
                               @let@next&@letrav&%
                             @else%
-                              ##1@let@next&@relax%
+                              @if##1w%
+                                @let@next&@letraw&%
+                              @else%
+                                ##1@let@next&@relax%
+                              @fi%
                             @fi%
                           @fi%
                         @fi%
@@ -168,6 +172,69 @@
     @expandafter@expandafter@expandafter@letrago&%
   @else%
     g##1%
+  @fi%
+}%
+@gdef@letraw&##1{% Temos 'w'
+  @ifcat##1a%
+    @letraW&##1%
+  @else%
+    w@expandafter##1%    
+  @fi%
+}%
+@gdef@letraW&##1{% Temos 'w'+letra
+  @if##1h%
+    @expandafter@expandafter@expandafter@letrawh&%
+  @else%
+    w##1%
+  @fi%
+}%
+@gdef@letrawh&##1{% Temos 'wh'
+  @ifcat##1a%
+    @letraWH&##1%
+  @else%
+    wh@expandafter##1%    
+  @fi%
+}%
+@gdef@letraWH&##1{% Temos 'wh'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letrawhi&%
+  @else%
+    wh##1%
+  @fi%
+}%
+@gdef@letrawhi&##1{% Temos 'whi'
+  @ifcat##1a%
+    @letraWHI&##1%
+  @else%
+    whi@expandafter##1%    
+  @fi%
+}%
+@gdef@letraWHI&##1{% Temos 'whi'+letra
+  @if##1l%
+    @expandafter@expandafter@expandafter@letrawhil&%
+  @else%
+    whi##1%
+  @fi%
+}%
+@gdef@letrawhil&##1{% Temos 'whil'
+  @ifcat##1a%
+    @letraWHIL&##1%
+  @else%
+    whil@expandafter##1%    
+  @fi%
+}%
+@gdef@letraWHIL&##1{% Temos 'whil'+letra
+  @if##1e%
+    @expandafter@expandafter@expandafter@letrawhile&%
+  @else%
+    whil##1%
+  @fi%
+}%
+@gdef@letrawhile&##1{% Temos 'while'
+  @ifcat##1a%
+    while##1%
+  @else%
+    @cor{0 0.5 0.5}{while}@expandafter##1%    
   @fi%
 }%
 @gdef@letrav&##1{% Temos 'v'
