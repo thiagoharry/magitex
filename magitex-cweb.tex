@@ -91,7 +91,7 @@
 \gdef\space&{\hskip 0.5em\sh&}
 
 % Ativa syntax hightlight:
-\def\iniciosh&{@everypar{@sh&}%
+\def\iniciosh&{@everypar{@sh&}@catcode`_=11%
 @gdef@sh&##1{%
   @ifcat##1a
     @let@prox&@letra&%
@@ -2345,7 +2345,7 @@
     @cor{0 0.5 0}{int}@expandafter##1%
   @fi}%
 }
-\def\fimsh&{@gdef@sh&{}@everypar{}}
+\def\fimsh&{@gdef@sh&{}@everypar{}@catcode`_=8}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
