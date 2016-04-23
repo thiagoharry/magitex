@@ -2158,9 +2158,17 @@
     @expandafter@expandafter@expandafter@letraif&%
   @else%
     @if##1n%
-      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@expandafter@letrain&%
+      @expandafter@expandafter@expandafter@expandafter@expandafter@expandafter%
+      @expandafter@letrain&%
     @else%
-      i##1%
+      @if##1m%
+        @expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter%
+        @expandafter@expandafter@expandafter@expandafter@expandafter%
+        @letraim&%
+      @else%
+        i##1%
+      @fi%
     @fi%
   @fi%
 }%
@@ -2169,6 +2177,103 @@
     if##1%
   @else%
     @cor{0 0.5 0.5}{if}@expandafter##1%
+  @fi}%
+@gdef@letraim&##1{% Lemos um 'im'
+  @ifcat##1a%
+    @letraIM&##1%
+  @else%
+    im@expandafter##1%
+  @fi}%
+@gdef@letraIM&##1{% Lemos um 'im'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letraima&%
+  @else%
+    im##1%
+  @fi%
+}%
+@gdef@letraima&##1{% Lemos um 'ima'
+  @ifcat##1a%
+    @letraIMA&##1%
+  @else%
+    ima@expandafter##1%
+  @fi}%
+@gdef@letraIMA&##1{% Lemos um 'ima'+letra
+  @if##1g%
+    @expandafter@expandafter@expandafter@letraimag&%
+  @else%
+    ima##1%
+  @fi%
+}%
+@gdef@letraimag&##1{% Lemos um 'imag'
+  @ifcat##1a%
+    @letraIMAG&##1%
+  @else%
+    imag@expandafter##1%
+  @fi}%
+@gdef@letraIMAG&##1{% Lemos um 'imag'+letra
+  @if##1i%
+    @expandafter@expandafter@expandafter@letraimagi&%
+  @else%
+    imag##1%
+  @fi%
+}%
+@gdef@letraimagi&##1{% Lemos um 'imagi'
+  @ifcat##1a%
+    @letraIMAGI&##1%
+  @else%
+    imagi@expandafter##1%
+  @fi}%
+@gdef@letraIMAGI&##1{% Lemos um 'imagi'+letra
+  @if##1n%
+    @expandafter@expandafter@expandafter@letraimagin&%
+  @else%
+    imagi##1%
+  @fi%
+}%
+@gdef@letraimagin&##1{% Lemos um 'imagin'
+  @ifcat##1a%
+    @letraIMAGIN&##1%
+  @else%
+    imagin@expandafter##1%
+  @fi}%
+@gdef@letraIMAGIN&##1{% Lemos um 'imagin'+letra
+  @if##1a%
+    @expandafter@expandafter@expandafter@letraimagina&%
+  @else%
+    imagin##1%
+  @fi%
+}%
+@gdef@letraimagina&##1{% Lemos um 'imagina'
+  @ifcat##1a%
+    @letraIMAGINA&##1%
+  @else%
+    imagina@expandafter##1%
+  @fi}%
+@gdef@letraIMAGINA&##1{% Lemos um 'imagina'+letra
+  @if##1r%
+    @expandafter@expandafter@expandafter@letraimaginar&%
+  @else%
+    imagina##1%
+  @fi%
+}%
+@gdef@letraimaginar&##1{% Lemos um 'imaginar'
+  @ifcat##1a%
+    @letraIMAGINAR&##1%
+  @else%
+    imaginar@expandafter##1%
+  @fi}%
+@gdef@letraIMAGINAR&##1{% Lemos um 'imaginar'+letra
+  @if##1y%
+    @expandafter@expandafter@expandafter@letraimaginary&%
+  @else%
+    imaginar##1%
+  @fi%
+}%
+@gdef@letraimaginary&##1{% Lemos um 'imaginary'
+  @ifcat##1a%
+    imaginary##1%
+  @else%
+    @cor{0 0.5 0}{imaginary}@expandafter##1%
   @fi}%
 @gdef@letrain&##1{% Lemos um 'in'
   @ifcat##1a%
