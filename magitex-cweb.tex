@@ -91,7 +91,9 @@
 \gdef\space&{\hskip 0.5em\sh&}
 
 % Ativa syntax hightlight:
-\def\iniciosh&{@everypar{@sh&}@catcode`_=11%
+\def\iniciosh&{@everypar{@sh&}@catcode`_=11@catcode`0=11@catcode`1=11%
+@catcode`2=11@catcode`3=11@catcode`4=11@catcode`5=11@catcode`6=11%
+@catcode`7=11@catcode`8=11@catcode`9=11%
 @gdef@sh&##1{%
   @ifcat##1a
     @let@prox&@letra&%
@@ -2345,13 +2347,15 @@
     @cor{0 0.5 0}{int}@expandafter##1%
   @fi}%
 }
-\def\fimsh&{@gdef@sh&{}@everypar{}@catcode`_=8}
+\def\fimsh&{@gdef@sh&{}@everypar{}@catcode`_=8@catcode`0=12@catcode`1=12%
+  @catcode`2=12@catcode`3=12@catcode`4=12@catcode`5=12@catcode`6=12%
+  @catcode`7=12@catcode`8=12@catcode`9=12}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
 
 % Um espaço agora pode terminar a região de código C:
-\def\space&{ } 
+\def\space&{ }
 \def@ {\fimcodigo&\space&}
 
 % A região de código C funcionará de modo semelhante ao modo
