@@ -93,8 +93,8 @@
 @gdef@string&{0}
 @gdef@comentario&{0}
 {\catcode`"=13@gdef"{%
-  @if@comentario& 0%
-    @if@string& 0%
+  @if@comentario&0%
+    @if@string&0%
       @gdef@string&{1}@special{color push rgb 0.2 0.8 0.2}@char'42%
     @else%
       @gdef@string&{0}@char'42@special{color pop}%
@@ -104,15 +104,24 @@
   @fi}}
 {\catcode`(=13@gdef({@char'50@sh&}}
 % Ativa syntax hightlight:
-\def\iniciosh&{@everypar{@sh&}@catcode`_=11@catcode`0=11@catcode`1=11%
+\def\iniciosh&{%
+@everypar{%
+  @if@comentario& 1%
+    @gdef@comentario&{0}@special{color pop}%
+  @fi@sh&}%
+@catcode`_=11@catcode`0=11@catcode`1=11%
 @catcode`2=11@catcode`3=11@catcode`4=11@catcode`5=11@catcode`6=11%
 @catcode`7=11@catcode`8=11@catcode`9=11@catcode`"=13@catcode`(=13%
 @gdef@sh&##1{%
-  @if@string& 0%
+  @if@string&0%
     @ifcat##1a%
       @let@prox&@letra&%
     @else%
-      @let@prox&@relax%
+      @if##1/%
+        @let@prox&@lecomentario&%
+      @else%
+        @let@prox&@relax%
+      @fi%
     @fi%
   @else%
     @let@prox&@relax%
@@ -179,6 +188,13 @@
       @fi%
     @fi%
   @fi@next&}%
+@gdef@lecomentario&##1##2{%
+  @if##2/%
+    @gdef@comentario&{1}@special{color push rgb 0.5 0.5 0.5}//%
+  @else%
+    /@expandafter##2%
+  @fi%
+}%
 @gdef@letrag&##1{% Temos 'g'
   @ifcat##1a%
     @letraG&##1%
