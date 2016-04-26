@@ -114,13 +114,21 @@
 @catcode`7=11@catcode`8=11@catcode`9=11@catcode`"=13@catcode`(=13%
 @gdef@sh&##1{%
   @if@string&0%
-    @ifcat##1a%
-      @let@prox&@letra&%
-    @else%
-      @if##1/%
-        @let@prox&@lecomentario&%
+    @if@comentario&2%
+      @if##1*%
+        @let@prox&@terminacomentario&%
       @else%
         @let@prox&@relax%
+      @fi%
+    @else%
+      @ifcat##1a%
+        @let@prox&@letra&%
+      @else%
+        @if##1/%
+          @let@prox&@lecomentario&%
+        @else%
+          @let@prox&@relax%
+        @fi%
       @fi%
     @fi%
   @else%
@@ -188,11 +196,22 @@
       @fi%
     @fi%
   @fi@next&}%
+@gdef@terminacomentario&##1##2{%
+  @if##2/%
+    */@gdef@comentario&{0}@special{color pop}%
+  @else%
+    *@expandafter##2%
+  @fi%
+}%
 @gdef@lecomentario&##1##2{%
   @if##2/%
     @gdef@comentario&{1}@special{color push rgb 0.5 0.5 0.5}//%
   @else%
-    /@expandafter##2%
+    @if##2*%
+      @gdef@comentario&{2}@special{color push rgb 0.5 0.5 0.5}/*%
+    @else%
+      /@expandafter##2%
+    @fi
   @fi%
 }%
 @gdef@letrag&##1{% Temos 'g'
