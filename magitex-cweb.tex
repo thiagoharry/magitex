@@ -89,6 +89,9 @@
 \def\fimcodigo&{@fimsh&@if@c&1@catcode`\\=0@alinhanormal@linha@vskip1mm@fi}
 
 \gdef\space&{\hskip 0.5em\sh&}
+% Cor especial para macros:
+
+@gdef@macro&{0}
 % Preparando cor especial para strings:
 @gdef@string&{0}
 @gdef@comentario&{0}
@@ -113,6 +116,7 @@
 @catcode`2=11@catcode`3=11@catcode`4=11@catcode`5=11@catcode`6=11%
 @catcode`7=11@catcode`8=11@catcode`9=11@catcode`"=13@catcode`(=13%
 @gdef@sh&##1{%
+  @if@macro&1@special{color pop}@fi%
   @if@string&0%
     @if@comentario&2%
       @if##1*%
@@ -127,7 +131,11 @@
         @if##1/%
           @let@prox&@lecomentario&%
         @else%
-          @let@prox&@relax%
+          @if##1####%
+            @gdef@macro&{1}@special{color push rgb 0 0 0.5}@let@prox&@relax%
+          @else%
+            @let@prox&@relax%
+          @fi%
         @fi%
       @fi%
     @fi%
@@ -2401,7 +2409,7 @@
 }
 \def\fimsh&{@gdef@sh&{}@everypar{}@catcode`_=8@catcode`0=12@catcode`1=12%
   @catcode`2=12@catcode`3=12@catcode`4=12@catcode`5=12@catcode`6=12%
-  @catcode`7=12@catcode`8=12@catcode`9=12@catcode`"=12}
+  @catcode`7=12@catcode`8=12@catcode`9=12@catcode`"=12@catcode`(=12}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
