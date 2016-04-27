@@ -85,7 +85,7 @@
          \noindent Capítulo \the\capitulo&: #1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
 \def\chomp&#1{\relax}
-\def\<#1@>#2{%
+\gdef\<#1@>#2{%
   \linha\espaco{1mm}\noindent\negrito{Seção: #1%
   \if#2+
     (continuação)%
@@ -2425,7 +2425,13 @@
 }
 \def\fimsh&{@gdef@sh&{}@everypar{}@catcode`_=8@catcode`0=12@catcode`1=12%
   @catcode`2=12@catcode`3=12@catcode`4=12@catcode`5=12@catcode`6=12%
-  @catcode`7=12@catcode`8=12@catcode`9=12@catcode`"=12@catcode`(=12}
+  @catcode`7=12@catcode`8=12@catcode`9=12@catcode`"=12@catcode`(=12%
+  @gdef@<##1@>##2{%
+  @linha@espaco{1mm}@noindent@negrito{Seção: ##1%
+  @if##2+
+    (continuação)%
+  @fi:}%
+  @alinhacodigo@vskip1mm@chomp&}}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
