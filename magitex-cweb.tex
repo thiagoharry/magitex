@@ -84,6 +84,14 @@
          \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
          \noindent Capítulo \the\capitulo&: #1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
+\def\chomp&#1{\relax}
+\def\<#1@>#2{%
+  \linha\espaco{1mm}\noindent\negrito{#1%
+  \if#2+
+    (continuação)%
+  \fi:}%
+  \alinhacodigo\vskip1mm\chomp&}
+
 % Esta macro é usada em todos os comandos conhecidos por encerrarem
 % código C:
 \def\fimcodigo&{@fimsh&@if@c&1@catcode`\\=0@alinhanormal@linha@vskip1mm@fi}
