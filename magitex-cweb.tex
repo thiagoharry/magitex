@@ -86,11 +86,19 @@
 
 \def\chomp&#1{\relax}
 \def\<#1@>#2{%
-  \linha\espaco{1mm}\noindent\negrito{#1%
+  \linha\espaco{1mm}\noindent\negrito{Seção: #1%
   \if#2+
     (continuação)%
   \fi:}%
   \alinhacodigo\vskip1mm\chomp&}
+\def\(#1@>#2{%
+  \linha\espaco{1mm}\noindent\negrito{Arquivo:} \monoespaco{#1}%
+  \if#2+
+    \negrito{(continuação)}%
+  \fi\negrito{:}%
+  \alinhacodigo\vskip1mm\chomp&}
+
+
 
 % Esta macro é usada em todos os comandos conhecidos por encerrarem
 % código C:
