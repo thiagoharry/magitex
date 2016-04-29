@@ -1188,7 +1188,11 @@ Inexistente \fi}
 
 % Suporte a texto colorido:
 \def\cor#1#2{\special{color push rgb #1}#2\special{color pop}}
-
+% Texto colorido em caixa colorida:
+\def\caixacor#1#2#3{{\setbox0=\hbox{#3}\skip0=\ht0%
+        \advance\skip0 by 0.5ex%
+        \hbox{\cor{#1}{\vrule height \skip0 width \wd0 depth \dp0}%
+        \hskip-\wd0\box0}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                              CÓDIGO INICIAL                                 %

@@ -26,6 +26,7 @@ Ele é um formato bastante básico o qual servirá de construção para outros. 
 * O cmando \rodape{...} deixa uma nota de rodapé numerada.
 * Quando em caso de emergência quisermos que seja feita a separação silábica de palavras com traço ("sub-desenvolvido") podemos escrevê-la com \= ("sub\=desenvolvido")
 * Pode-se escrever texto colorido como em \cor{1 0 0}{TEXTO VERMELHO} ou \cor{0.5 0.5 0.5}{TEXTO CINZA}.
+* Pode-se escrever um texto com alguma cor dentro de uma caixa com outra cor: \caixacor{1 0 0}{0 0 1}{Texto azul em caixa vermelha.}
 * O comando \\\\ escreve uma contrabarra.
 * O comando \fim, que é usado para finalizar o documento.
 
