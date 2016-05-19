@@ -2,6 +2,7 @@
 %                    ATRIBUIÇÃO DE CÓDIGOS À CARACTERES                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \catcode`&=11
+\catcode`@=11
 \catcode`@=0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -24,6 +25,7 @@
 \countdef\ssssss&=20 \ssssss&=0
 \countdef\sssssss&=21 \sssssss&=0
 \countdef\ssssssss&=22 \ssssssss&=0
+\countdef\aux&=23 \aux&=0
 
 % Fontes
 \font\twentyone&=cmr17 scaled 1200  % Para @**
@@ -38,6 +40,8 @@
 \font\twelve&=cmr12              % Para @*8
 \font\eleven&=cmr12 scaled 917     % Para @*9
 \font\tenrm&=cmr10                  % Para voltar ao normal.
+\font\tenbf&=cmbx10 % boldface extended
+\font\tentt&=cmtt10 % typewriter
 
 % Definições
 \gdef\naparte&{0} % Estamos formatando o título de uma parte?
@@ -98,8 +102,6 @@
   \fi\negrito{:}%
   \alinhacodigo\vskip1mm\chomp&}
 
-
-
 % Esta macro é usada em todos os comandos conhecidos por encerrarem
 % código C:
 \def\fimcodigo&{@fimsh&@if@c&1@catcode`\\=0@alinhanormal@linha@vskip1mm@fi}
@@ -131,8 +133,9 @@
 @catcode`_=11@catcode`0=11@catcode`1=11%
 @catcode`2=11@catcode`3=11@catcode`4=11@catcode`5=11@catcode`6=11%
 @catcode`7=11@catcode`8=11@catcode`9=11@catcode`"=13@catcode`(=13%
-@gdef@<{@relax @negrito{Insere Seção}: @begingroup}%
-@gdef@>{@endgroup@relax}%
+@gdef@<{@hskip0ptplus1fil@relax@negrito{$<$Seção a ser Inserida:} %
+        @special{color push rgb 1 0 0}@tenbf&@begingroup}%
+@gdef@>{@special{color pop}$>$@endgroup@tentt&@relax}%
 @gdef@sh&##1{%
   @if@macro& 1@special{color pop}@gdef@macro&{0}@fi%
   @if@string& 0%
