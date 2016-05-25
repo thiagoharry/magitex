@@ -104,7 +104,8 @@
 
 % Esta macro é usada em todos os comandos conhecidos por encerrarem
 % código C:
-\def\fimcodigo&{@fimsh&@if@c&1@catcode`\\=0@alinhanormal@linha@vskip1mm@fi}
+\def\fimcodigo&{@fimsh&@if@c&1@catcode`\\=0@alinhanormal@linha@vskip1mm%
+        @gdef@c&{0}@fi}
 
 \gdef\space&{\hskip 0.5em\sh&}
 % Cor especial para macros:
