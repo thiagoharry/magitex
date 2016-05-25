@@ -10,6 +10,11 @@ all: test_tex
 	initex \&magitex "\\input magitex-cweb \\dump"; fi
 clean:
 	rm -rf *~ *.log *.pdf *.dvi *.fmt
+test:
+	cp exemplos/magitex.tex teste.tex
+	tex \&magitex teste.tex
+	dvipdf teste.dvi
+	xpdf teste.pdf
 test-cweb:
 	cp exemplos/magitex-cweb.tex teste.tex
 	tex \&magitex-cweb teste.tex
