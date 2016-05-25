@@ -11,6 +11,7 @@ all: test_tex
 clean:
 	rm -rf *~ *.log *.pdf *.dvi *.fmt
 test:
+	cp exemplos/magitex-cweb.tex teste.tex
 	tex \&magitex-cweb teste.tex
 	dvipdf teste.dvi
 	xpdf teste.pdf

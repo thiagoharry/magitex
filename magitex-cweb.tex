@@ -136,6 +136,7 @@
 @gdef@<{@hskip0ptplus1fil@relax@negrito{$<$Seção a ser Inserida:} %
         @special{color push rgb 1 0 0}@tenbf&@begingroup}%
 @gdef@>{@special{color pop}$>$@endgroup@tentt&@relax}%
+@gdef@ {@fimcodigo&@space&}
 @gdef@sh&##1{%
   @if@macro& 1@special{color pop}@gdef@macro&{0}@fi%
   @if@string& 0%
@@ -2436,14 +2437,14 @@
   @if##2+
     (continuação)%
   @fi:}%
-  @alinhacodigo@vskip1mm@chomp&}}
+  @alinhacodigo@vskip1mm@chomp&}@gdef@ {@space&}}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
 
 % Um espaço agora pode terminar a região de código C:
 \def\space&{ }
-\def@ {\fimcodigo&\space&}
+
 
 % A região de código C funcionará de modo semelhante ao modo
 % verbatim. A diferença é que o '\' passará a ser considerado
