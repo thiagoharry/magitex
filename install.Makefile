@@ -19,21 +19,26 @@ install:
 	install -D -t ${DEST}/web2c/pdftex/ magitex.fmt
 	install -D -t ${DEST}/web2c/tex/ magitex-relatoria.fmt
 	install -D -t ${DEST}/web2c/pdftex/ magitex-relatoria.fmt
+	install -D -t ${DEST}/web2c/tex/ magitex-cweb.fmt
+	install -D -t ${DEST}/web2c/pdftex/ magitex-cweb.fmt
 ifeq ($(WHO),$(SUPERUSER))
 	ln -sf ${TEX} ${INSTALLDIR}/magitex
 	ln -sf ${PDFTEX} ${INSTALLDIR}/pdfmagitex
 	ln -sf ${TEX} ${INSTALLDIR}/magitex-relatoria
 	ln -sf ${PDFTEX} ${INSTALLDIR}/pdfmagitex-relatoria
+	ln -sf ${TEX} ${INSTALLDIR}/magitex-cweb
+	ln -sf ${PDFTEX} ${INSTALLDIR}/pdfmagitex-cweb
 	mktexlsr
 else
 	ln -sf ${TEX} magitex-relatoria
 	ln -sf ${PDFTEX} pdfmagitex-relatoria
+	ln -sf ${PDFTEX} pdfmagitex-cweb
 	@echo
 	@echo "Executável 'magitex' gerado. Coloque-o onde poderá ser executado."
 endif
 uninstall:
-	rm ${DEST}/web2c/tex/magitex.fmt
-	rm ${DEST}/web2c/pdftex/magitex.fmt
+	rm ${DEST}/web2c/tex/magitex*
+	rm ${DEST}/web2c/pdftex/magitex*
 ifeq ($(WHO),$(SUPERUSER))
 	rm ${INSTALLDIR}/magitex
 endif
