@@ -173,12 +173,12 @@ int matchstar(int c, char *regexp, char *text){
 }
 @
 
-A função \monoespaco{match(regexp, text)} testa se há uma ocorrência
+A função |match(regexp, text)| testa se há uma ocorrência
 da expressão regular em qualquer lugar dentro do texto; ela retorna 1
 se um casamento é encontrado e 0 caso contrário. Se há mais de um
 casamento, ela encontra o mais à esquerda e menor.
 
-A operação básica de \monoespaco{match} é direta. Se o primeiro
+A operação básica de |match| é direta. Se o primeiro
 caractere da expressão regular é \^, qualquer casamento possível deve
 ocorrer no começo da cadeia de caracteres. Isto é, se a expressão
 regular é \^xyz, ela deve casar ``xyz'' só se ``xyz'' ocorrer no
@@ -191,58 +191,56 @@ de caractere do texto. Se há múltiplos casamentos, somente o primeiro
 será identificado.
 
 Note que avançar na cadeia de caracteres de entrada é feito com um
-laço \monoespaco{do-while}, algo relativamente incomum na construção
-de programas em C.A ocorrência de um \monoespaco{do-while} deve sempre
+laço |do-while|, algo relativamente incomum na construção
+de programas em C.A ocorrência de um |do-while| deve sempre
 levantar uma questão: porque a condição de terminar o laço não é
 testada no começo do laço, antes que seja tarde demais? Mas o teste
 está correto aqui: como o operador * permite casar cadeias de
 caractere vazias, nós primeiro temos que testar se um casamento vazio
 é possível.
 
-O grosso do trabalho é feito na função \monoespaco{matchhere(regexp,
-  text)}, a qual testa se a expressão regular casa com o texto que
-começa logo ali. A função opera tentando casar o primeiro caractere da
-expressão regular com o primeiro caractere de texto. Se o casamento
-falhar, não pode haver casamento nesta posição do texto e
-\monoespaco{matchhere} retorna 0. Se o casamento for bem-sucedido,
-contudo, é possível avançar para o próximo caractere da expressão
-regular e o próximo caractere do texto. Isso é feito chamando
-\monoespaco{matchhere} recursivamente.
+O grosso do trabalho é feito na função |matchhere(regexp, text)|, a
+ qual testa se a expressão regular casa com o texto que começa logo
+ ali. A função opera tentando casar o primeiro caractere da expressão
+ regular com o primeiro caractere de texto. Se o casamento falhar, não
+ pode haver casamento nesta posição do texto e |matchhere| retorna
+ 0. Se o casamento for bem-sucedido, contudo, é possível avançar para
+ o próximo caractere da expressão regular e o próximo caractere do
+ texto. Isso é feito chamando |matchhere| recursivamente.
 
 A situação é um pouco mais complicada por causa de alguns casos
 especiais, e é claro, a necessidade de interromper a recursão. O caso
-mais fácil é quando a expressão regular está no seu fim
-(\monoespaco{regexp[0] == '\\ 0'}), então todos os testes anteriores
-foram bem-sucedidos, e assim a expressão regular casa com o texto.
+mais fácil é quando a expressão regular está no seu fim (|regexp[0] ==
+'\\ 0'|), então todos os testes anteriores foram bem-sucedidos, e
+assim a expressão regular casa com o texto.
 
-Se uma expressão regular é um caracere seguido por *,
-\monoespaco{matchstar} é chamada para ver se a palavra casa com o
-fechamento. A função \monoespaco{matchstar(c, regexp, text)} tenta
-casar repetições do caractere ``c'', começando com zero repetições e
-contando atéque consiga casar com o restante do texto ou falhe e
-conclua não ser possível um casamento. Isso identifica um ``menor
-casamento'', o que é bom para simples casamentos de padrões como em
-``grep'', onde tudo o que importa é encontrar o casamento o mais
-rápido possível. Um ``maior casamento'' é mais intuitivo e quase
-certamente melhor para umeditor de textos onde o texto casado será
-substituído. A maioria das bibliotecas de expressões regulares fornece
-ambas as alternativas, e o nosso exemplo apresenta uma simples
-variante de \monoespaco{matchstar} para este caso, mostrada depois.
+Se uma expressão regular é um caracere seguido por *, |matchstar| é
+chamada para ver se a palavra casa com o fechamento. A
+função |matchstar(c, regexp, text)| tenta casar repetições
+do caractere ``c'', começando com zero repetições e contando atéque
+consiga casar com o restante do texto ou falhe e conclua não ser
+possível um casamento. Isso identifica um ``menor casamento'', o que é
+bom para simples casamentos de padrões como em ``grep'', onde tudo o
+que importa é encontrar o casamento o mais rápido possível. Um ``maior
+casamento'' é mais intuitivo e quase certamente melhor para umeditor
+de textos onde o texto casado será substituído. A maioria das
+bibliotecas de expressões regulares fornece ambas as alternativas, e o
+nosso exemplo apresenta uma simples variante de |matchstar|
+para este caso, mostrada depois.
 
 Se a expressão regular é um \$ no im da expressão, então o texto casa
 somente se estiver no fim.
 
-Cso contrário, se nós não esamos no fim da cadeia de caracteres e se o
-primeiro caractere do texto casa com o primeiro caractere da expressão
-regular, tudo continua seguindo bem e iremos então testar se o próximo
-caractere de texto também casa com o próximo caractere da expressão
-regular fazendo uma chamada recursiva para
-\monoespaco{matchhere}. Esta chamada recursiva é o coração do
-algoritmo e o por quê do código ser tão compacto e limpo.
+Caso contrário, se nós não esamos no fim da cadeia de caracteres e se
+o primeiro caractere do texto casa com o primeiro caractere da
+expressão regular, tudo continua seguindo bem e iremos então testar se
+o próximo caractere de texto também casa com o próximo caractere da
+expressão regular fazendo uma chamada recursiva para |matchhere|. Esta
+chamada recursiva é o coração do algoritmo e o por quê do código ser
+tão compacto e limpo.
 
 Se todas estas tentativas falharem, então não pode haver um casamento
-neste ponto na expressão regular, e então \monoespaco{matchhere}
-retorna 0.
+neste ponto na expressão regular, e então |matchhere| retorna 0.
 
 Este código definitivamente usa ponteiros de C. Em cada estágio da
 recursão, se alguma coisa casa, a chamada recursiva que se segue usar
@@ -256,12 +254,12 @@ esgotarmos todo o espaço da pilha.
 
 Esta é uma porção de código muito elegante e bem-escrita, mas não é
 perfeita. O que pode ser feito diferente? Pode-se reorganizar
-\monoespaco{matchhere} para lidar primeiro com \$ antes de *. Embora
-não faça diferença aqui, me parece mais natural, e uma boa regra é
-cuidar dos casos simples antes dos mais difíceis.
+|matchhere| para lidar primeiro com \$ antes de *. Embora não faça
+diferença aqui, me parece mais natural, e uma boa regra é cuidar dos
+casos simples antes dos mais difíceis.
 
 Mas via de regra, contudo, a ordem dos testes é crítica. Por exemplo,
-neste teste de \monoespaco{matchstar}:
+neste teste de |matchstar|:
 
 @<Trecho de matchstar@>=
     } while (*text != '\0' && (*text++ == c || c == '.'));
@@ -269,7 +267,7 @@ neste teste de \monoespaco{matchstar}:
 
 não importa o que aconteça, nós devemos sempre avançar para o próximo
 caractere da cadeia de caracteres, então o incremento em
-\monoespaco{text++} deve sempre ser feito.
+|text++| deve sempre ser feito.
 
 Este código é cuidadoso com as condições de término. Geralmente, o
 sucesso de um casamento é determinado quando terminamos de percorrer a
@@ -284,12 +282,12 @@ casamento. Isso é talvez mais óbvio em uma linha como:
 
 mas condições de parada mais sutis aparecem em outros lugares também.
 
-Esta versão de \monoespaco{matchstar} que implementa o maior casamento
-mais à esquerda começa identificando uma sequencia máxima de
-ocorrências do caractere de entrada ``c''. Então, ela usa
-\monoespaco{matchhere} para tentar extender o casamento para o resto
-dos padrões e o resto do texto. Cada falha reduz o número de ``c''s em
-um e tenta-se novamente, incluindo o caso de zero ocorrências.
+Esta versão de |matchstar| que implementa o maior casamento mais à
+esquerda começa identificando uma sequencia máxima de ocorrências do
+caractere de entrada ``c''. Então, ela usa |matchhere| para tentar
+extender o casamento para o resto dos padrões e o resto do texto. Cada
+falha reduz o número de ``c''s em um e tenta-se novamente, incluindo o
+caso de zero ocorrências.
 
 @<Implementação alternativa de matchhere@>=
 /* matchstar: leftmost longest search for c*regexp */
@@ -377,7 +375,7 @@ regular é usada em um grande número de linhas de entrada.
 (3) Adicione classes de caractere como [abc] e [0-9], as quais na
 notação convencional de ``grep'' casam ``a'' ou ``b'' ou ``c'' e um
 dígito respectivamente. Isso pode ser feito de muitas formas, a mais
-natural seria substituir os \monoespaco{char *}s do código original
+natural seria substituir os |char *|s do código original
 por uma estrutura:
 
 @<Estrutura de Token de Expressão Regular@>=
@@ -405,13 +403,12 @@ frequentemente peço para as abreviações de Perl como \\\/d para dígito
 e \\\/D para não-dígito ao invés da notação de intervalos entre
 colchetes.
 
-(4) Use algum tipo opaco para esconder a estrutura \monoespaco{RE} e
-todos os detalhes de implementação. Esta é uma boa forma de mostrar
-programação orientada à objetos em C, que não suporta muito mais além
-dissos. De fato, na prática usa-se uma classe para expressões
-regulares mas com nomes de funções tais como \monoespaco{RE\_new()} e
-\monoespaco{RE\_match()} para os métodos ao invés do açúcar sintático
-de linguagens orientadas à objeto.
+(4) Use algum tipo opaco para esconder a estrutura |RE| e todos os
+detalhes de implementação. Esta é uma boa forma de mostrar programação
+orientada à objetos em C, que não suporta muito mais além dissos. De
+fato, na prática usa-se uma classe para expressões regulares mas com
+nomes de funções tais como |RE_new()| e |RE_match()| para os métodos
+ao invés do açúcar sintático de linguagens orientadas à objeto.
 
 (5) Modifique a classe de expressões regulares para funcionarem como
 os asteriscos de vários shells: os casamentos precisam ocorrer em todo
@@ -421,13 +418,13 @@ entrada no algoritmo existente.
 
 (6) Converta o código para Java. O código original usa ponteiros de C
 muito bem, mas é uma boa prática encontrar alternativas em uma
-linguagem diferente. As versões em java usam ou
-\monoespaco{String.charAt} (indexando ao invés de usar ponteiros) ou
-\monoespaco{String.substring} (mais próxima da versão com
-ponteiros). Nenhuma delas é tão clara como o código em C, e nenhuma é
-tão compacta. Embora performance não seja mesmo parte do exercício, é
-interessante notar que a implementação em Java executacerca de seis ou
-sete vezes mais devagar que as versões em C.
+linguagem diferente. As versões em java usam ou |String.charAt|
+(indexando ao invés de usar ponteiros) ou |String.substring| (mais
+próxima da versão com ponteiros). Nenhuma delas é tão clara como o
+código em C, e nenhuma é tão compacta. Embora performance não seja
+mesmo parte do exercício, é interessante notar que a implementação em
+Java executacerca de seis ou sete vezes mais devagar que as versões em
+C.
 
 (7) Escreva uma classe que encapsule tudo e converta internamente de
 expressões regulares para as classes de casamento de padrão do Java,
@@ -474,7 +471,7 @@ mais interessante e útil.
 Rob me disse que a recursão não era tanto uma decisão explícita de
 projeto, mas uma consequência de como ele lidou com o problema: dado
 um padrão e um texto, escreva uma função que procure um casamento; o
-que por sua vez gerou uma função \monoespaco{matchhere}; e assim por
+que por sua vez gerou uma função |matchhere|; e assim por
 diante.
 
 ``Eu tenho memórias vívidas de assistir o código quase se escrever
