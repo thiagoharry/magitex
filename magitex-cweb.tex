@@ -98,9 +98,9 @@
     (continuação)%
   \fi:}%
   \alinhacodigo\vskip1mm\chomp&}
-\def\(#1@>#2{%
-  @catcode`_=11%
-  \linha\espaco{1mm}\noindent\negrito{Arquivo:} \monoespaco{#1}%
+\def@({@global@catcode`_=11\linha\espaco{1mm}\noindent\negrito{Arquivo:} \apar&}
+\def\apar&#1@>#2{%
+  \monoespaco{#1}%
   \if#2+
     \negrito{(continuação)}%
   \fi\negrito{:}%
