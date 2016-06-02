@@ -118,6 +118,7 @@
 % Preparando cor especial para strings:
 @gdef@string&{0}
 @gdef@comentario&{0}
+@gdef@insercao&{0}
 {\catcode`"=13@gdef"{%
   @if@comentario&0%
     @if@string&0%
@@ -142,8 +143,8 @@
 @catcode`2=11@catcode`3=11@catcode`4=11@catcode`5=11@catcode`6=11%
 @catcode`7=11@catcode`8=11@catcode`9=11@catcode`"=13@catcode`(=13%
 @gdef@<{@hskip0ptplus1fil@relax@negrito{$<$Seção a ser Inserida:} %
-        @special{color push rgb 1 0 0}@tenbf&@begingroup}%
-@gdef@>{@special{color pop}$>$@endgroup@tentt&@relax}%
+        @special{color push rgb 1 0 0}@tenbf&@gdef@insercao&{1}}%
+@gdef@>{@special{color pop}$>$@gdef@insercao&{0}@tentt&@relax}%
 @gdef@ {@fimcodigo&@space&}
 @gdef@sh&##1{%
   @if@macro& 1@special{color pop}@gdef@macro&{0}@fi%
@@ -155,16 +156,20 @@
         @let@prox&@relax%
       @fi%
     @else%
-      @ifcat##1a%
-        @let@prox&@letra&%
+      @if@insercao& 1%
+        @let@prox&@relax%
       @else%
-        @if##1/%
-          @let@prox&@lecomentario&%
+        @ifcat##1a%
+          @let@prox&@letra&%
         @else%
-          @if##1####%
-            @gdef@macro&{1}@special{color push rgb 0 0 0.5}@let@prox&@relax%
+          @if##1/%
+            @let@prox&@lecomentario&%
           @else%
-            @let@prox&@relax%
+            @if##1####%
+              @gdef@macro&{1}@special{color push rgb 0 0 0.5}@let@prox&@relax%
+            @else%
+              @let@prox&@relax%
+            @fi%
           @fi%
         @fi%
       @fi%
@@ -2441,6 +2446,7 @@
   @catcode`2=12@catcode`3=12@catcode`4=12@catcode`5=12@catcode`6=12%
   @catcode`7=12@catcode`8=12@catcode`9=12@catcode`"=12@catcode`(=12%
   @catcode`|=13%
+  @if@comentario& 1@special{color pop}@gdef@comentario&{0}@fi
   @gdef@<##1@>##2{%
   @linha@espaco{1mm}@noindent@negrito{Seção: ##1%
   @if##2+
