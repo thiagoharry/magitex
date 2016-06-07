@@ -602,10 +602,10 @@ i3o o3a o3e o3o r3r s3s u3a u3e u3o u3u}
 % usuário. Vamos usar isso
 % em \alinhaversoesquerdo, \alinhaversodireito e \alinhaversocentro.
 {\catcode`\^^M=13 %
-  \gdef\obeylines@{\parfillskip=0pt\catcode`\^^M13 \let^^M\par}%
+  \gdef\obeylines@{\parfillskip=0pt\catcode`\^^M13 \gdef^^M{\hbox{}\par}}%
   \global\let^^M\par} % Se ^^M aparecer em um \write
 % E para cancelarmos o \obeylines usamos:
-\def\dontobeylines@{\tenrm@\parfillskip=0pt plus 1fil\catcode`\^^M=5}
+\def\dontobeylines@{\tenrm@\parfillskip=0pt plus 1fil\catcode`\^^M=5\everypar{}}
 % Obedece espaços:
 \def\obeyspaces@{\catcode`\ 13}
 {\catcode`&=11\gdef\sh&{}
@@ -660,7 +660,7 @@ i3o o3a o3e o3o r3r s3s u3a u3e u3o u3u}
      \sfcode`\,0
      \catcode`\{=12\catcode`\}=12\catcode`\$=12\catcode`\&=12\catcode`\#=12
      \catcode`\^=12\catcode`\_=12\catcode`\^^I=12\catcode`\~=12\catcode`\%=12
-     \obeyspaces@}
+     \obeyspaces@\obeylines@}
 \def\alinhanormal{\tenrm@\dontobeylines@\leftskip0pt\rightskip0pt\spaceskip0pt%
                   \xspaceskip0pt\parindent=20pt
      \sfcode`\.3000 \sfcode`\?3000 \sfcode`\!3000 \sfcode`\:2000 \sfcode`\;1500
