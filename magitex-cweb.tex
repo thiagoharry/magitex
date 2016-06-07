@@ -50,11 +50,24 @@
 \gdef\big&{0}     % Estamos formatando o título de um capítulo ou seção?
 \gdef\c&{0}       % Estamos formatando código C?
 \gdef\cm&{0}      % Estamos em códig C inline?
-{\catcode`.=13\gdef.{\if\naparte&1\vskip5mm\else\if\big&1\vskip5mm\else
-        \vskip3mm\fi\fi\tenrm&
-        \catcode`.=12\par\alinhanormal\if\naparte&1\vfill\quebra\fi
-        \gdef\naparte&{0}\gdef\big&{0}}}
-\def@*#1{\catcode`.=13\fimcodigo&
+{\catcode`.=13\gdef.{\if\naparte&1%
+                       \vskip5mm%
+                     \else%
+                       \if\big&1%
+                         \vskip5mm%
+                       \else%
+                         \if\c&1%
+                           \char"2E%
+                         \else%
+                            \vskip3mm%
+                         \fi%
+                       \fi%
+                     \fi\tenrm&%
+                     \if\c&0%
+                       \catcode`.=12\par\alinhanormal%
+                     \fi\if\naparte&1\vfill\quebra\fi%
+        \if\c&0\gdef\naparte&{0}\gdef\big&{0}\fi\sh&}}
+\def@*#1{\fimcodigo&\catcode`.=13
         \if#1*\quebra\ \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
               \twentyone&\advance\parte& by 1  % @**
               \gdef\naparte&{1}\noindent Parte \the\parte&:\else
@@ -142,6 +155,7 @@
 @catcode`_=11@catcode`0=11@catcode`1=11%
 @catcode`2=11@catcode`3=11@catcode`4=11@catcode`5=11@catcode`6=11%
 @catcode`7=11@catcode`8=11@catcode`9=11@catcode`"=13@catcode`(=13%
+@catcode`.=13%
 @gdef@<{@hskip0ptplus1fil@relax@negrito{$<$Seção a ser Inserida:} %
         @special{color push rgb 1 0 0}@tenbf&@gdef@insercao&{1}}%
 @gdef@>{@special{color pop}$>$@gdef@insercao&{0}@tentt&@relax}%
@@ -2445,7 +2459,7 @@
 \def\fimsh&{@gdef@sh&{}@everypar{}@catcode`_=8@catcode`0=12@catcode`1=12%
   @catcode`2=12@catcode`3=12@catcode`4=12@catcode`5=12@catcode`6=12%
   @catcode`7=12@catcode`8=12@catcode`9=12@catcode`"=12@catcode`(=12%
-  @catcode`|=13%
+  @catcode`|=13@catcode`.=12%
   @if@comentario& 1@special{color pop}@gdef@comentario&{0}@fi
   @gdef@<##1@>##2{%
   @linha@espaco{1mm}@noindent@negrito{Seção: ##1%
