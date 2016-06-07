@@ -148,7 +148,10 @@
 @everypar{%
   @if@comentario& 1%
     @gdef@comentario&{0}@special{color pop}%
-  @fi@sh&}%
+  @fi%
+  @hbox{@cor{0.92 0.92 0.92}{@vrule height 2ex width @hsize depth @maxdepth}}%
+  @hskip-@hsize@tentt&@sh&%
+  }%
   @if@cm& 0%
     @catcode`|=11%
   @fi%

@@ -1187,14 +1187,14 @@ Inexistente \fi}
 \def\@foot{\relax\ifmmode\copy1\else\unhcopy1\fi\egroup}
 
 % Suporte a texto colorido:
-\def\usoucor&{0}
-\def\cor#1#2{\if\usoucor&0\special{color push rgb 0 0 0}\fi%
-           \gdef\usoucor&{1}%
+\def\usoucor@{0}
+\def\cor#1#2{\if\usoucor@0\special{color push rgb 0 0 0}\fi%
+           \gdef\usoucor@{1}%w
            \special{color push rgb #1}#2\special{color pop}}
 % Texto colorido em caixa colorida:
 \def\caixacor#1#2#3{%
-        \if\usoucor&0\special{color push rgb 0 0 0}\fi%
-        \gdef\usoucor&{1}%
+        \if\usoucor@0\special{color push rgb 0 0 0}\fi%
+        \gdef\usoucor@{1}%
         {\setbox0=\hbox{#3}\skip0=\ht0%
         \advance\skip0 by 0.5ex%
         \hbox{\cor{#1}{\vrule height \skip0 width \wd0 depth \dp0}%
