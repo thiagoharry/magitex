@@ -692,7 +692,7 @@ Inexistente \fi}
 \def\pagina{\the\pageno@}
 
 % Gera uma linha horizontal:
-\def\linha{{\vskip1pt\hrule\vskip1pt}}
+\def\linha{{\hrule\vskip1pt}}
 
 % Útil para testarmos se algum argumento é vazio
 \def\vazio@{}
@@ -1150,7 +1150,7 @@ Inexistente \fi}
 \let\repeat@=\fi % this makes \loop...\if...\repeat skippable
 
 % Quebra de linha e de página:
-\def\quebra{\penalty-10000}
+\def\quebra{\ifvmode\vfill\fi\ifhmode\hfill\fi\penalty-10000}
 \def\naoquebra{\penalty 10000}
 
 % Reticências:
