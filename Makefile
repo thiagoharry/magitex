@@ -14,12 +14,12 @@ test:
 	cp exemplos/magitex.tex teste.tex
 	tex \&magitex teste.tex
 	dvipdf teste.dvi
-	xpdf teste.pdf
+	xpdf teste.pdf || evince teste.pdf
 test-cweb:
 	cp exemplos/magitex-cweb.tex teste.tex
 	tex \&magitex-cweb teste.tex
 	dvipdf teste.dvi
-	xpdf teste.pdf
+	xpdf teste.pdf || evince teste.pdf
 install: test_kpsewhich test_mktexlsr
 	make --no-print-directory -j ${CORES} -f install.Makefile
 uninstall:
