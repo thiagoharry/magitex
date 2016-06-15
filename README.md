@@ -28,6 +28,7 @@ Ele é um formato bastante básico o qual servirá de construção para outros. 
 * Pode-se escrever texto colorido como em \cor{1 0 0}{TEXTO VERMELHO} ou \cor{0.5 0.5 0.5}{TEXTO CINZA}.
 * Pode-se escrever um texto com alguma cor dentro de uma caixa com outra cor: \caixacor{1 0 0}{0 0 1}{Texto azul em caixa vermelha.}
 * O comando \\\\ escreve uma contrabarra.
+* O comando \imagem{figura.eps} insere uma figura EPS no documento.
 * O comando \fim, que é usado para finalizar o documento.
 
 Algumas melhorias em relação ao LaTeX:

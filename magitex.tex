@@ -350,6 +350,13 @@
 \dimendef\dimen@=1
 \dimendef\dimen@i=2
 \dimendef\dimen@ii=3
+\dimendef\epsfrsize@=4
+\dimendef\pspoints@=5
+\dimendef\epsftsize@=6
+\dimendef\epsfxsize@=7    % horizontal size after scaling
+\dimendef\epsfysize@=8    % vertical size after scaling
+\dimendef\epsftmp@=9
+
 \dimen254=8in
 
 % Os registradores de skip.
@@ -1204,76 +1211,9 @@ Inexistente \fi}
         \hskip-\wd0\box0}}}
 
 % Inserção de imagens
-\def\erro@#1{\write16{!!!!!!!!!! ERRO: #1 !!!!!!!!!!}}
-\gdef\epsfileok@{0}
-\gdef\epsfatend@{0}
-\gdef\epsfbbfound@{0}
-\def\epsfempty@{}%
-\def \epsfgrab@ #1 #2 #3 #4 #5\\{%
-   \global\llx@=#1%
-   \ifx\llx@\epsfempty@%
-      \epsfgrab@ #2 #3 #4 #5 .\\
-   \else%
-     \global\lly@=#2%
-     \global\urx@=#3%
-     \global\ury@=#4%
-   \fi%
-}%
-{\catcode`\%=12 \global \let \epsfpercent@=%\global \def \epsfbblit@ {%BoundingBox}}
-\long\def\epsfaux@#1#2:#3\\%
-{%
-   \def \testit {#2}%           % save second character up to just before colon
-   \ifx#1\epsfpercent@           % then first char is percent (quick test)
-       \ifx \testit \epsfbblit@  % then (slow test) we have %%BoundingBox
-            \epsfgrab@ #3 . . . \\%
-            \ifx \llx@\epsfatend@ % then ignore %%BoundingBox: (atend)
-                \gdef\epsfatend@{1}
-            \else               % else found %%BoundingBox: llx lly urx ury
-                \if\epsfatend@0%
-                    \gdef\epsffileok@{0}
-                \fi
-                \gdef\epsfbbfound@{1}
-            \fi
-       \fi
-   \fi
-}%
-\def\imagem#1{%
-  % Valores padronizados para tamanho da imagem se não conseguirmos
-  % descobrir lendo o arquivo:
-  \llx@=72% Coordenada x do canto inferior esquerdo
-  \lly@=72% Coordenada y do canto inferior esquerdo
-  \urx@=540% Coordenada x do canto superior direito
-  \ury@=720% Coordenada y do canto superior direito
-  \openin0=#1
-  \ifeof0%
-    \erro@{Arquivo #1 inexistente}%
-  \else{% Vamos procurar por informação sobre o tamanho da imagem
-        % dentro do arquivo. Para isso temos que ativar um modo verbatim
-        % que deixe quase todos os caracteres sem significados especiais
-       \catcode`\\=12\catcode`\{=12\catcode`\}=12\catcode`\$=12%
-       \catcode`&=12\catcode`\#=12\catcode`\^=12\catcode`\^^K=12\catcode`\_=12%
-       \catcode`\^^A=12\catcode`\%=12\catcode`\~=12\catcode`\ =10
-       \gdef\epsfileok@{1}\gdef\epsfatend@{0}%
-       \loop@
-         \read0 to \linha
-         \ifeof0
-           \gdef\epsfileok@{0}
-         \else
-           \expandafter\epsfaux@\linha :. \\%
-         \fi
-         \ifx\epsfileok@1
-         \repeat@}%
-         \closein0
-  \fi%
-  % Calculando tamanho da imagem:
-  \altura@=\ury@\advance\altura@ by -\lly@%
-  \largura@=\urx@\advance\largura@ by -\llx@%
-  \ifvmode\noindent\fi % Sair do modo vertical
-  \hbox{{\vbox to \altura@ bp{\vfil\hbox to \largura@ bp{%
-     \llx@ \lly@ \urx@ \ury@
-     %\special{PSfile=#1 llx=\llx@ lly=\lly@ urx=\urx@ ury=\ury@ rwi=10bp rhi=10bp}%
-  \hfil}}}}}
-                                          
+\input epsf.tex
+\def\imagem#1{\epsfbox@{#1}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                              CÓDIGO INICIAL                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
