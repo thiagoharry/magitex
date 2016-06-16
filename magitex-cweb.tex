@@ -68,7 +68,8 @@
 
 % Definições
 \gdef|{\gdef|{\fimsh&@alinhanormal@catcode`\\=0@gdef@cm&{0}@gdef@c&{0} }%
-       \alinhaverbatim\gdef\c&{1}\catcode`\\=12@gdef@cm&{1}\iniciosh&}
+       \ifvmode\indent\fi\alinhaverbatim\gdef\c&{1}\catcode`\\=12@gdef@cm&{1}%
+       \iniciosh&}
 \gdef\naparte&{0} % Estamos formatando o título de uma parte?
 \gdef\big&{0}     % Estamos formatando o título de um capítulo ou seção?
 \gdef\c&{0}       % Estamos formatando código C?
@@ -2508,7 +2509,7 @@
   @fi:}%
   @alinhacodigo@vskip1mm@chomp&}@gdef@ {@space&}%
   @gdef|{@gdef|{@fimsh&@alinhanormal@catcode`\\=0@gdef@cm&{0}@gdef@c&{0} }%
-  @alinhaverbatim@gdef@c&{1}@catcode`\\=12@gdef@cm&{1}@iniciosh&}}
+  @ifvmode@indent@fi@alinhaverbatim@gdef@c&{1}@catcode`\\=12@gdef@cm&{1}@iniciosh&}}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
