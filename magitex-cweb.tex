@@ -212,19 +212,23 @@
         @let@prox&@relax%
       @fi%
     @else%
-      @if@insercao& 1%
+      @if@comentario& 1%
         @let@prox&@relax%
       @else%
-        @ifcat##1a%
-          @let@prox&@letra&%
+        @if@insercao& 1%
+          @let@prox&@relax%
         @else%
-          @if##1/%
-            @let@prox&@lecomentario&%
+          @ifcat##1a%
+            @let@prox&@letra&%
           @else%
-            @if##1####%
-              @gdef@macro&{1}@special{color push rgb 0 0 0.5}@let@prox&@relax%
+            @if##1/%
+              @let@prox&@lecomentario&%
             @else%
-              @let@prox&@relax%
+              @if##1####%
+                @gdef@macro&{1}@special{color push rgb 0 0 0.5}@let@prox&@relax%
+              @else%
+                @let@prox&@relax%
+              @fi%
             @fi%
           @fi%
         @fi%
