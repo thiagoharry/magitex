@@ -67,10 +67,19 @@
 \font\tentt&=cmtt10 % typewriter
 
 % Definições
-\gdef\.{.} % O . é redefinido como comando em alguns contextos. Pode ser útil então
-           % poder usar \. para inserir um ponto.
-\gdef|{\gdef|{\fimsh&@alinhanormal@catcode`\\=0@gdef@cm&{0}@gdef@c&{0} }%
-       \ifvmode\indent\fi\alinhaverbatim\gdef\c&{1}\catcode`\\=12@gdef@cm&{1}%
+\gdef\.{.} % O . é redefinido como comando em alguns contextos. Pode
+           % ser útil então poder usar \. para inserir um ponto.
+
+% Redefinindo o alinha verbatim para podermos usar os caracteres
+% especiais como '|' dentro dele:
+\let\alinhaverbatim&\alinhaverbatim
+\let\alinhanormal&\alinhanormal
+
+\gdef\alinhaverbatim{\alinhaverbatim&\catcode`|=12}
+\gdef\alinhanormal{\alinhanormal&\catcode`|=13}
+
+\gdef|{\gdef|{\fimsh&@alinhanormal&@catcode`\\=0@gdef@cm&{0}@gdef@c&{0} }%
+       \ifvmode\indent\fi\alinhaverbatim&\gdef\c&{1}\catcode`\\=12@gdef@cm&{1}%
        \iniciosh&}
 \gdef\naparte&{0} % Estamos formatando o título de uma parte?
 \gdef\big&{0}     % Estamos formatando o título de um capítulo ou seção?
@@ -91,7 +100,7 @@
                      \fi\if\c& 1\tentt&\else\tenrm&\fi%
                      \if\c&0%
                        \let\monoespaco=\monoespaco&%
-                       \catcode`.=12\par\alinhanormal%
+                       \catcode`.=12\par\alinhanormal&%
                      \fi\if\naparte&1\vfill\quebra\fi%
         \if\c&0\gdef\naparte&{0}\gdef\big&{0}\fi\sh&}}
 \let\monoespaco&=\monoespaco
@@ -160,7 +169,7 @@
 
 % Esta macro é usada em todos os comandos conhecidos por encerrarem
 % código C:
-\def\fimcodigo&{@fimsh&@if@c&1@catcode`\\=0@alinhanormal@linha@vskip1mm%
+\def\fimcodigo&{@fimsh&@if@c&1@catcode`\\=0@alinhanormal&@linha@vskip1mm%
         @gdef@c&{0}@fi}
 
 \gdef\space&{\hskip 0.5em\sh&}
@@ -2514,8 +2523,8 @@
     (continuação)%
   @fi:}%
   @alinhacodigo@vskip1mm@chomp&}@gdef@ {@space&}%
-  @gdef|{@gdef|{@fimsh&@alinhanormal@catcode`\\=0@gdef@cm&{0}@gdef@c&{0} }%
-  @ifvmode@indent@fi@alinhaverbatim@gdef@c&{1}@catcode`\\=12@gdef@cm&{1}@iniciosh&}}
+  @gdef|{@gdef|{@fimsh&@alinhanormal&@catcode`\\=0@gdef@cm&{0}@gdef@c&{0} }%
+  @ifvmode@indent@fi@alinhaverbatim&@gdef@c&{1}@catcode`\\=12@gdef@cm&{1}@iniciosh&}}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}
@@ -2528,7 +2537,7 @@
 % verbatim. A diferença é que o '\' passará a ser considerado
 % caractere comum. Desta forma, comandos só poderão ser digitados com
 % o '@.
-\def\alinhacodigo{\linha\alinhaverbatim\gdef\c&{1}\catcode`\\=12@iniciosh&}
+\def\alinhacodigo{\linha\alinhaverbatim&\gdef\c&{1}\catcode`\\=12@iniciosh&}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
