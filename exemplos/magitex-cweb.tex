@@ -139,7 +139,7 @@ ferramentas Unix.
 Este é o código de casamento:
 
 @<Casador de Expressões Regulares@>=
-/* match: search for regexp anywhere in text */
+/* match: search for regexp anywhere in text:*/
 int match(char *regexp, char *text){
   if(regexp[0] == '^')
     return matchhere(regexp+1, text);

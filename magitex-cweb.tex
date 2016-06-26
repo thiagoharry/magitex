@@ -204,6 +204,7 @@
     @char'42%
   @fi}}
 {\catcode`(=13@gdef({@char'50@sh&}}
+{\catcode`:=13@gdef:{@char'72@sh&}}
 % Ativa syntax hightlight:
 \def\iniciosh&{%
 @everypar{%
@@ -219,7 +220,7 @@
 @catcode`_=11@catcode`0=11@catcode`1=11%
 @catcode`2=11@catcode`3=11@catcode`4=11@catcode`5=11@catcode`6=11%
 @catcode`7=11@catcode`8=11@catcode`9=11@catcode`"=13@catcode`(=13%
-@catcode`.=13%
+@catcode`:=13@catcode`.=13%
 @gdef@<{@hskip0ptplus1fil@relax@negrito{$<$Seção a ser Inserida:} %
         @special{color push rgb 1 0 0}@tenbf&@gdef@insercao&{1}}%
 @gdef@>{@special{color pop}$>$@gdef@insercao&{0}@tentt&@relax}%
@@ -2527,7 +2528,7 @@
 \def\fimsh&{@gdef@sh&{}@everypar{}@catcode`_=8@catcode`0=12@catcode`1=12%
   @catcode`2=12@catcode`3=12@catcode`4=12@catcode`5=12@catcode`6=12%
   @catcode`7=12@catcode`8=12@catcode`9=12@catcode`"=12@catcode`(=12%
-  @catcode`|=13@catcode`.=12%
+  @catcode`:=12  @catcode`|=13@catcode`.=12%
   @if@comentario& 1@special{color pop}@gdef@comentario&{0}@fi%
   @if@macro& 1@special{color pop}@gdef@macro&{0}@fi%
   @gdef@<##1@>##2{%
