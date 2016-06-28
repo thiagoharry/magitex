@@ -380,8 +380,9 @@
 \toksdef\headline=0 
 \headline={\hfil} % Cabeçalho padrão em branco
 \toksdef\footline=1
-\footline={\hss\tenrm@\ifnum\pageno@<0
-           \romannumeral-\pageno@ \else\number\pageno@ \fi\hss} % Rodapé padrão
+\footline={\hss\tenrm@\special{color push rgb 0 0 0}\ifnum\pageno@<0
+           \romannumeral-\pageno@ \else\number\pageno@ \fi%
+           \special{color pop}\hss} % Rodapé padrão
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                ATRIBUIÇÕES                                  %
