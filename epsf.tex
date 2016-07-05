@@ -319,7 +319,6 @@
 %   PostScript file, if possible.
 %
     \openin0=#1
-    \immediate \write16 {(#1}%
     \ifeof0
         \errmessage{Could not open file #1, ignoring it}%
     \else                       %process the file
@@ -349,7 +348,6 @@
         \closein0
     \fi                         %end of file processing
     \epsfsetsize@                %compute size parameters
-    \immediate \write16 {)}%
 }%
 %
 % Clipping control:
