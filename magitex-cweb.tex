@@ -109,12 +109,12 @@
               \twentyone&\advance\parte& by 1  % @**
               \def\monoespaco##1{{\twentyonett& ##1}}%
               \ssssssss&=0\sssssss&=0\ssssss&=0\sssss&=0\ssss&=0\sss&=0\ss&=0%
-              \subsecao&=0\secao&=0\capitulo&=0%
+              \subsecao&=0\secao&=0%
               \gdef\naparte&{1}\noindent Parte \the\parte&:\else
         \if#10\vfil\quebra\twenty&\vskip5mm\advance\capitulo& by 1 % @*0
              \def\monoespaco##1{{\twentytt& ##1}}%
               \ssssssss&=0\sssssss&=0\ssssss&=0\sssss&=0\ssss&=0\sss&=0\ss&=0%
-              \subsecao&=0\secao&=0%
+              \global\subsecao&=0\global\secao&=0%
              \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
              \gdef\big&{1}\noindent Capítulo \the\capitulo&:\else
          \if#11\nineteen&\vskip5mm\advance\secao& by 1 % @*1
@@ -160,10 +160,13 @@
                \noindent\the\capitulo&.\the\secao&.\the\subsecao&.\the\ss&.%
                \the\sss&.\the\ssss&.\the\sssss&.\the\ssssss&.\the\sssssss&.%
                \the\ssssssss&-\else
-
-         \vfil\quebra\twenty&\vskip5mm\advance\capitulo& by 1 % @*
-         \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
-         \noindent Capítulo \the\capitulo&: #1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+\vfil\quebra\twenty&\vskip5mm\advance\capitulo& by 1 % @*0
+             \def\monoespaco##1{{\twentytt& ##1}}%
+              \ssssssss&=0\sssssss&=0\ssssss&=0\sssss&=0\ssss&=0\sss&=0\ss&=0%
+              \global\subsecao&=0\global\secao&=0%
+             \vfill\rightskip 0em plus 1fil \leftskip 0em plus 2fil
+             \gdef\big&{1}\noindent Capítulo \the\capitulo&: #1%
+             \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
 
 \def\chomp&#1{\relax}
 \gdef\<#1@>#2{%
