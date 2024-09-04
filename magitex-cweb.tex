@@ -170,6 +170,7 @@
 
 \def\chomp&#1{\relax}
 \gdef\<#1@>#2{%
+  \lineskip=0pt\parskip=0pt(P)%
   \linha\espaco{1mm}\noindent\negrito{Seção: #1%
   \if#2+
     (continuação)%
@@ -2535,13 +2536,14 @@
   @if@comentario& 1@special{color pop}@gdef@comentario&{0}@fi%
   @if@macro& 1@special{color pop}@gdef@macro&{0}@fi%
   @gdef@<##1@>##2{%
+  @lineskip=0pt@parskip=0pt%
   @linha@espaco{1mm}@noindent@negrito{Seção: ##1%
   @if##2+
     (continuação)%
   @fi:}%
   @alinhacodigo@vskip1mm@chomp&}@gdef@ {@space&}%
   @gdef|{@gdef|{@fimsh&@alinhanormal&@catcode`\\=0@gdef@cm&{0}@gdef@c&{0} }%
-  @ifvmode@indent@fi@alinhaverbatim&@gdef@c&{1}@catcode`\\=12@gdef@cm&{1}@iniciosh&}}
+  @ifvmode@indent@fi@alinhaverbatim&@gdef@c&{1}@catcode`\\=12@gdef@cm&{1}@iniciosh&}@twelve&@parskip=0pt plus 1pt@lineskip=1pt}
 
 % O @ agora precisa ser usado como comando
 \def@@{\char"40}

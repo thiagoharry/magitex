@@ -53,6 +53,3 @@ test_mktexlsr: .build/have_mktexlsr
 	touch .error;\
 	echo "ERROR: mktexlsr not found. Install it first from kpathsea or TeX packages.";\
 	fi
-
-
-# kpsewhich -var-value TEXMFLOCAL
