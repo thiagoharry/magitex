@@ -37,3 +37,30 @@ Algumas melhorias em relação ao LaTeX:
 * Suporta de maneira imediata alguns caracteres UTF-8 não-suportados no LaTeX
 * Muito menos comandos, mais velocidade de compilação, menos verboso. Como no Plain TeX você pode começar direto a escrever, sem precisar de um preâmbulo.
 * Comandos e outros estilos de formatação são suportados no modo verbatim
+
+## magitex-cweb
+
+O formato `magitex-cweb` é derivado do `magitex` e permite programação
+literária em C. Ele interpreta código em C, usando cores para
+representar elementos de sintaxe, sem a necessidade de executar
+comandos intermediários como `tangle` ou `ctangle`. Um arquivo comuum
+em formato WEB ou CWEB em princípio pode ser interpretado, talvez
+precisando de mudanças mínimas. Isso simplifica o uso de programação
+literária.
+
+## Instalando
+
+Você deve ter o `texlive` já instalado. Depois, basta executar `make`
+e `make install`. Não é necessário ser root.
+
+Se você executar `make install` como root, os formatos serão
+instalados em seu sistema para todos os usuários em diretório indicado
+por `kpsewhich -var-value TEXMFLOCAL` e o comando `magitex`, bem como
+`magitex-cweb` serão instalados no mesmo local em que eestá o
+executável `tex`.
+
+Se você executar `make install` como usuário não-priivilegiado, os
+formatos serão instalados em seu diretório pessoal em local indicado
+por `kpsewhich -var-value TEXMFHOME` e os executáveis serão gerados no
+diretório atual. Você deve movê-los para algum lugar previsto pelo seu
+PATH.

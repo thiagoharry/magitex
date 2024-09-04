@@ -6,7 +6,6 @@ SUPERUSER=root # Usuário com permissão de instalar o pacote
 all: test_tex
 	@if [ -e .error ]; then	rm .error; \
 	else initex "\\input magitex \\dump";\
-	initex \&magitex "\\input magitex-relatoria \\dump";\
 	initex \&magitex "\\input magitex-cweb \\dump"; fi
 clean:
 	rm -rf *~ *.log *.pdf *.dvi *.fmt
