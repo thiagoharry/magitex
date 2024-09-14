@@ -176,7 +176,9 @@
     (continuação)%
   \fi:}%
   \alinhacodigo\vskip1mm\chomp&}
-\def@({@global@catcode`_=11\linha\espaco{1mm}\noindent\negrito{Arquivo:} \apar&}
+\def@({%
+        \lineskip=0pt\parskip=0pt(P)%
+        @global@catcode`_=11\linha\espaco{1mm}\noindent\negrito{Arquivo:} \apar&}
 \def\apar&#1@>#2{%
   \monoespaco{#1}%
   \if#2+
