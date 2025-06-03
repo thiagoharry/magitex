@@ -25,6 +25,7 @@ uninstall:
 	make --no-print-directory -j ${CORES} -f install.Makefile uninstall
 test_tex: .build/have_tex
 .build/have_tex:
+	@mkdir -p .build
 	@echo -n "Testing TeX..............."
 	@(which initex &> /dev/null && touch .build/have_tex) || true
 	@if [ -e .build/have_tex ]; then \
