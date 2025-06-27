@@ -170,14 +170,14 @@
 
 \def\chomp&#1{\relax}
 \gdef\<#1@>#2{%
-  \lineskip=0pt\parskip=0pt(P)%
+  \lineskip=0pt\parskip=0pt%
   \linha\espaco{1mm}\noindent\negrito{Seção: #1%
   \if#2+
     (continuação)%
   \fi:}%
   \alinhacodigo\vskip1mm\chomp&}
 \def@({%
-        \lineskip=0pt\parskip=0pt(P)%
+        \lineskip=0pt\parskip=0pt%
         @global@catcode`_=11\linha\espaco{1mm}\noindent\negrito{Arquivo:} \apar&}
 \def\apar&#1@>#2{%
   \monoespaco{#1}%
